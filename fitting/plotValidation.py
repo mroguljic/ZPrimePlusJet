@@ -20,27 +20,32 @@ def main(options, args):
     tfile = rt.TFile.Open(options.idir+'/validation.root')
     
     bkgs = ['wqq','zqq','tqq']
-    sigs = ['hqq125','tthqq125','whqq125','zhqq125','vbfhqq125']
+    sigs = ['zqq100','zqq125','zqq150','zqq200','zqq250']
     procdict = {}
     procdict['tqq'] = 't#bar{t}'
     procdict['wqq'] = 'W(qq)'
     procdict['zqq'] = 'Z(qq)'
-    procdict['hqq125'] = 'ggH(b#bar{b})'
-    procdict['tthqq125'] = 'ttH(b#bar{b})'
-    procdict['whqq125'] = 'WH(b#bar{b})'
-    procdict['zhqq125'] = 'ZH(b#bar{b})'
-    procdict['vbfhqq125'] = 'VBF H(b#bar{b})'
-    boxes = ['pass_cat1','pass_cat2','pass_cat3','pass_cat4','pass_cat5','pass_cat6',
-             'fail_cat1','fail_cat2','fail_cat3','fail_cat4','fail_cat5','fail_cat6']
+    procdict['zqq50'] = "Z'(q#bar{q}), m = 50 GeV"
+    procdict['zqq75'] = "Z'(q#bar{q}), m = 75 GeV"
+    procdict['zqq80'] = "Z'(q#bar{q}), m = 80 GeV"
+    procdict['zqq100'] = "Z'(q#bar{q}), m = 100 GeV"
+    procdict['zqq125'] = "Z'(q#bar{q}), m = 125 GeV"
+    procdict['zqq145'] = "Z'(q#bar{q}), m = 145 GeV"
+    procdict['zqq150'] = "Z'(q#bar{q}), m = 150 GeV"
+    procdict['zqq200'] = "Z'(q#bar{q}), m = 200 GeV"
+    procdict['zqq250'] = "Z'(q#bar{q}), m = 250 GeV"
+    procdict['zqq300'] = "Z'(q#bar{q}), m = 300 GeV"
+    boxes = ['pass_cat1','pass_cat2','pass_cat3','pass_cat4','pass_cat5',
+             'fail_cat1','fail_cat2','fail_cat3','fail_cat4','fail_cat5']
     #systs = ['JER','JES','scale','smear','trigger','Pu']
-    systs = ['scale','smear']
+    systs = ['smear'] #'scale']
     
-    numberOfMassBins = 23    
-    numberOfPtBins = 6
-    for box in boxes:
-        for proc in (bkgs+sigs):
-            for i in range(1,numberOfMassBins+1):
-                systs.append('%s%s%s%i'%(proc,box.replace('_',''),'mcstat',i))        
+    #numberOfMassBins = 23    
+    #numberOfPtBins = 6
+    #for box in boxes:
+    #    for proc in (bkgs+sigs):
+    #        for i in range(1,numberOfMassBins+1):
+    #            systs.append('%s%s%s%i'%(proc,box.replace('_',''),'mcstat',i))        
 
     shapes = {}
     
@@ -84,15 +89,18 @@ def main(options, args):
                 tLeg.AddEntry(tmph,"%s, %s"%(procdict[proc],box.replace('_',', ')),"l")
                 nsigma = 1
                 if syst in ['scale']:
-                    nsigma = 10         
+                    #nsigma = 30 # 2016 v1 
+                    nsigma = 10 # 2017 v4 
                 if syst in ['smear']:
-                    nsigma = 2                     
+                    #nsigma = 4 # 2016 v1        
+                    nsigma = 5 # 2017 v4
                 tLeg.AddEntry(tmphUp,"%s +%i#sigma"%(syst,nsigma),"l")
                 tLeg.AddEntry(tmphDown,"%s -%i#sigma"%(syst,nsigma),"l")
                 tLeg.Draw('same')
-                c.Print('%s/%s_%s_%s.pdf'%(options.odir,proc,box,syst))
-                c.Print('%s/%s_%s_%s.C'%(options.odir,proc,box,syst))
-                c.Print('%s/png/%s_%s_%s.png'%(options.odir,proc,box,syst))
+                #c.Print('%s/%s_%s_%s.pdf'%(options.odir,proc,box,syst))
+                #c.Print('%s/%s_%s_%s.C'%(options.odir,proc,box,syst))
+                #c.Print('%s/%s_%s_%s.gif'%(options.odir,proc,box,syst))
+                c.Print('%s/%s_%s_%s.png'%(options.odir,proc,box,syst))
             
     
 if __name__ == '__main__':
