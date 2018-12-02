@@ -18,42 +18,49 @@ from tools import *
 from hist import *
 
 MASSBINS,MASSLO,MASSHI = {},{},{}
-MASSBINS['AK8'] = 60
+MASSBINS['AK8'] = 60 # 5 GeV mass resolution                                                                                                                
 MASSLO['AK8'] = 30
 MASSHI['AK8'] = 330
 MASSBINS['CA15'] = 80
-MASSLO['CA15'] = 40
-MASSHI['CA15'] = 600
+MASSLO['CA15'] = 60
+MASSHI['CA15'] = 500
 
-MASS_SF,MASS_SF_ERR = {},{}
-MASS_SF['AK8'] = 0.983 # 1.001
-MASS_SF_ERR['AK8'] = 0.003
-MASS_SF['CA15'] = 1.001
-MASS_SF_ERR['CA15'] = 0.03
+MASS_SF,MASS_SF_ERR,MASS_SIGMA = {},{},{}
+MASS_SF['AK8'] = 0.989 #0.983 # 1.001
+MASS_SF_ERR['AK8'] = 0.006 #0.003
+MASS_SIGMA['AK8'] = 10 #20
+MASS_SF['AK8'] = 0.988 #0.989 # 1.001
+MASS_SF_ERR['CA15'] = 0.007
+MASS_SIGMA['CA15'] = 4
 
-RES_SF,RES_SF_ERR = {},{}
-RES_SF['AK8'] = 1.030 #1.114
-RES_SF_ERR['AK8'] = 0.029 #0.067
-RES_SF['CA15'] = 1.114
-RES_SF_ERR['CA15'] = 0.067
+RES_SF,RES_SF_ERR,RES_SIGMA = {},{},{}
+RES_SF['AK8'] = 1.082 #1.030 #1.114
+RES_SF_ERR['AK8'] = 0.067 #0.029 #0.067
+RES_SIGMA['AK8'] = 3 #7
+RES_SF['CA15'] = 1.126 #1.092
+RES_SF_ERR['CA15'] = 0.084 #0.067
+RES_SIGMA['CA15'] = 2 #1.
 
 TT_SF,TT_PT = {},{}
-TT_SF['AK8'] = 0.93*0.91
-TT_PT['AK8'] = [1.0,1.0,0.9,0.9,0.8,0.7,0.5]
-TT_SF['CA15'] = 1.09
-TT_PT['CA15'] = [1.0,0.8,0.75,0.7,0.6,0.5,0.5]
+TT_SF['AK8'] = 1 #0.93*0.91
+TT_PT['AK8'] = [1.0,1.0,1.0,1.0,1.0,1.0,1.0] #[1.0,1.0,0.9,0.9,0.8,0.7,0.5]
+TT_SF['CA15'] = 1 #1.09*1.09
+TT_PT['CA15'] = [1.0,1.0,1.0,1.0,1.0,1.0,1.0]
 
 V_SF,V_SF_ERR = {},{}
-V_SF['AK8'] = 0.837
-V_SF_ERR['AK8'] = 0.043
-V_SF['CA15'] = 0.89
-V_SF_ERR['CA15'] = 0.066
+V_SF['AK8'] = 0.896 #0.837
+V_SF_ERR['AK8'] = 0.088 #0.043
+V_SF['CA15'] = 1.022 #0.864
+V_SF_ERR['CA15'] = 0.064 #0.063
 
 RHO_RANGE,MASSES = {},{}
-RHO_RANGE['AK8'] = [-5.5,-2.1]
-RHO_RANGE['CA15'] = [-4.7,-1]
+RHO_RANGE['AK8'] = [-5.5,-2.1] #  [-5.2,-2.1]  
+RHO_RANGE['CA15'] = [-4.391,-1] #[-4.2,-0.8] 
 MASSES['AK8'] = []
 MASSES['CA15'] = []
+
+# 2017 signals produced up to 1 jet
+KFACTORJET = 1.5
 
 fHists=[]
 
@@ -72,7 +79,7 @@ def scaleHists(iHist,iType,iPassId,iJet='AK8'):
         log.info("Scaling by TT_PT")
         for i0 in range(1,iHist.GetNbinsX()+1):
             for i1 in range(1,iHist.GetNbinsY()+1):
-                #log.info("Scaling %s in bins %i %i, by TT_PT = %f"%(iHist.GetName(),i0,i1,TT_PT[iJet][i1]))
+                log.info("Scaling %s in bins %i %i, by TT_PT = %f"%(iHist.GetName(),i0,i1,TT_PT[iJet][i1]))
                 iHist.SetBinContent(i0,i1,iHist.GetBinContent(i0,i1)*TT_PT[iJet][i1])
         if iPassId == 1:
             log.info("Scaling %ss by TT_SF = %f"%(iHist.GetName(),TT_SF[iJet]))
@@ -85,35 +92,55 @@ def removeRho(iHists,iPt=0,iPtCat=0,iJet='AK8'):
     if iPt == 0:
         for lH in iHists.values():
             log.info('Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName()))
+            '''
+            if "zqq_pass" in lH.GetName():
+                print 'Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName())
+                for i0 in range(1,MASSBINS[iJet]+1):
+                    print i0,lH.GetBinContent(i0, 2, 0);
+                    '''
             for i0 in range(1,MASSBINS[iJet]+1):
                 lmass = lH.GetXaxis().GetBinCenter(i0)
                 for i1 in range(1,lH.GetNbinsY()+1):
                     lpt = lH.GetYaxis().GetBinLowEdge(i1) + lH.GetYaxis().GetBinWidth(i1) * 0.3
                     lrho = r.TMath.Log(lmass*lmass/lpt/lpt)
                     if lrho < RHO_RANGE[iJet][0] or lrho > RHO_RANGE[iJet][1]:
-                        log.info("2D HISTO: Removing rho = %.2f for %s, pt bin [%i, %i], mass bin [%i,%i]" % (
-                                lrho, lH.GetName(), lH.GetYaxis().GetBinLowEdge(i1), lH.GetYaxis().GetBinUpEdge(i1),
-                                lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0)))
+                        log.info("2D HISTO: Removing rho = %.2f for %s, pt bin [%i, %i] and %f, mass bin [%i,%i] and %f" % (
+                                lrho, lH.GetName(), lH.GetYaxis().GetBinLowEdge(i1), lH.GetYaxis().GetBinUpEdge(i1), lpt,
+                                lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0), lmass))
                         lH.SetBinContent(i0, i1, 0);
+                        #if "zqq_pass" in lH.GetName() and i1 == 2:
+                        #    print 'Bin removed ',i0,i1,lrho,lpt,lmass
             lH.SetDirectory(0);
     else:
         for lH in iHists:
             log.info('Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName()))
-            for i0 in range(1,MASSBINS[iJet]+1):
+            if "zqq_pass" in lH.GetName() and iPtCat == 2:
+                #print 'Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetTitle())
+                #print 'iH %s ipt %f iptcat %f ijet %s'%(lH.GetTitle(),iPt,iPtCat,iJet)
+                for i0 in range(1, lH.GetNbinsX()+1):
+                    lmass = lH.GetXaxis().GetBinCenter(i0)
+                    lpt = iPt
+                    lrho = r.TMath.Log(lmass*lmass/lpt/lpt)
+                    #print i0,lH.GetBinContent(i0, 0),lmass,lrho
+
+            #for i0 in range(1,MASSBINS[iJet]+1):
+            for i0 in range(1, lH.GetNbinsX()+1):
                 lmass = lH.GetXaxis().GetBinCenter(i0)
                 lpt = iPt
                 pPt = iPtCat
                 lrho = r.TMath.Log(lmass*lmass/lpt/lpt)
                 if lrho < RHO_RANGE[iJet][0] or lrho > RHO_RANGE[iJet][1]:
-                    log.info("1D HISTO: Removing rho = %.2f for %s, pt %f, mass bin [%i,%i]" % ( 
-                            lrho, lH.GetName(), lpt, 
-                            lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0))) 
+                    log.info("1D HISTO: Removing rho = %.2f for %s, pt %f and cat %f, mass bin [%i,%i] and %f" % ( 
+                            lrho, lH.GetName(), lpt, pPt,
+                            lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0),lmass)) 
+                    #if "zqq_pass" in lH.GetName() and iPtCat == 2:
+                    #    print 'Bin removed ',i0,lrho,lpt,lmass
                     lH.SetBinContent(i0, 0);
             lH.SetDirectory(0);
 
 class dazsleRhalphabetBuilder: 
 
-        def __init__( self, hpass, hfail, inputfile, inputsigfile, inputrfile, nr=4, np=3, onlyRhalph = False, freeze_poly = False, mcstat = False, syst = False, interpol = True, jet = 'AK8'): 
+        def __init__( self, hpass, hfail, inputfile, inputsigfile, inputrfile, nr=4, np=3, onlyRhalph = False, freeze_poly = False, mcstat = False, syst = False, interpol = True, jet = 'AK8', comb = False, smooth = False, is2016 = False): 
 
 		self._hpass = hpass;
 		self._hfail = hfail;
@@ -122,13 +149,19 @@ class dazsleRhalphabetBuilder:
                 self._inputrfile = inputrfile;
                 self._onlyRhalph = onlyRhalph;
                 self._onlyInputs = False;
+                self._bernstein = True;
+                self._is2016 = is2016;
                 self._freeze = freeze_poly;
                 self._mcstat = mcstat;
                 self._syst = syst;
                 self._interpol = interpol;
                 self._jet = jet;
+                self._comb = comb;
+                self._smooth = smooth;
 
 		self._outputName = "base.root";
+                if self._comb:
+                    self._outputName = "base_2017.root";
 		self._outfile_validation = r.TFile("validation.root","RECREATE");
 
 		# mass bins
@@ -159,7 +192,7 @@ class dazsleRhalphabetBuilder:
 		self._lRho    = r.RooFormulaVar("rho","log(x*x/pt/pt)",r.RooArgList(self._lMSD,self._lPt));
 
 		self._lEff    = r.RooRealVar("veff"      ,"veff"      ,0.5 ,0.,1.0);
-		self._lEffQCD = r.RooRealVar("qcdeff"    ,"qcdeff"    ,0.01 ,0.,10);
+                self._lEffQCD = r.RooRealVar("qcd2017eff"    ,"qcd2017eff"    ,0.01 ,0.,10);
 
 		# set qcdeff
 		qcd_pass_integral = 0;
@@ -176,8 +209,13 @@ class dazsleRhalphabetBuilder:
 
                 # define PolyVar with n = (order in pt)*(order in rho)-1 parameters
                 self._lpolyArray = []
-                #self.buildPolynomialArray(self._lpolyArray,self._poly_lNR,self._poly_lNP,"r","p",-1.0,1.0)
-                self.buildPolynomialArray(self._lpolyArray,self._poly_lNR,self._poly_lNP,"r","p",-1.0,1.0)
+                lTagr = "r"; lTagp = "p";
+                if self._comb: 
+                    lTagr = "r2017"; lTagp = "p2017";
+                if self._bernstein:
+                    self.buildPolynomialArray(self._lpolyArray,self._poly_lNR,self._poly_lNP,lTagr,lTagp,-5.0,5.0)
+                else:
+                    self.buildPolynomialArray(self._lpolyArray,self._poly_lNR,self._poly_lNP,lTagr,lTagp,-1.0,1.0)
                 log.info("polynomial variables")
                 log.info(self._lpolyArray)
 
@@ -198,7 +236,7 @@ class dazsleRhalphabetBuilder:
 		log.info("Number of pt bins = %f"%self._nptbins);
 		for ipt in range(1,self._nptbins+1):
                         # approximate pT bin value
-			print "------- pT bin number ",ipt	      
+                        #print "------- pT bin number ",ipt	      
                         pPt = self._hpass["data_obs"].GetYaxis().GetBinLowEdge(ipt)+self._hpass["data_obs"].GetYaxis().GetBinWidth(ipt)*0.3;
 
 			# 1d histograms in each pT bin (in the order... data, w, z, qcd, top, signals)
@@ -207,7 +245,14 @@ class dazsleRhalphabetBuilder:
                         for ih, h in self._hpass.iteritems():
                             lpass_inPtBin = proj("cat",str(ipt),h,self._mass_nbins,self._mass_lo,self._mass_hi)
                             removeRho([lpass_inPtBin],pPt,ipt,self._jet)
+                            for mass in MASSES:
+                                lName = "zqq%s"%str(mass)
+                                '''
+                                if lName in h.GetName():
+                                    self.signalScalePass(lpass_inPtBin,ipt,h.GetName())
+                                    '''
                             hpass_inPtBin[ih] = lpass_inPtBin
+
                         for ih, h in self._hfail.iteritems():
                             lfail_inPtBin = proj("cat",str(ipt),h,self._mass_nbins,self._mass_lo,self._mass_hi); 
                             removeRho([lfail_inPtBin],pPt,ipt,self._jet)
@@ -253,6 +298,8 @@ class dazsleRhalphabetBuilder:
 		print "---- [makeRhalphabet]"	
 
 		lName ="qcd";
+                if self._comb:
+                    lName ="qcd2017";
 		lUnity = r.RooConstVar("unity","unity",1.);
 		lZero  = r.RooConstVar("lZero","lZero",0.);
 
@@ -267,9 +314,12 @@ class dazsleRhalphabetBuilder:
 		for i0 in range(1,self._mass_nbins+1):
 			self._lMSD.setVal(iHs[0].GetXaxis().GetBinCenter(i0)) 
 
-			lroopoly = self.buildRooPolyArray(self._lPt.getVal(),self._lRho.getVal(),lUnity,lZero,self._lpolyArray)                        
-			log.info("RooPolyArray: ")
-			lroopoly.Print()
+                        if self._bernstein:
+                            lroopoly = self.buildRooPolyRhoArrayBernstein(self._lPt.getVal(),self._lRho.getVal(),lUnity,lZero,self._lpolyArray)
+                        else:
+                            lroopoly = self.buildRooPolyArray(self._lPt.getVal(),self._lRho.getVal(),lUnity,lZero,self._lpolyArray)
+			#print 'RooPolyArray:'
+			#lroopoly.Print()
 
 			pSum = 0
 			pRes = 0
@@ -277,31 +327,33 @@ class dazsleRhalphabetBuilder:
 			for i1 in range(0,len(iHs)):
 				pSum = pSum + iHs[i1].GetBinContent(i0) if i1 == 0 else pSum - iHs[i1].GetBinContent(i0); # subtract W/Z from data
 				if i1 > 0 : pRes += iHs[i1].GetBinContent(i0)
-			if pSum < 0: pSum = 0.01
+			if pSum < 0: pSum = 0.
 
 			# 10 sigma range + ~ 50 events
-                        pUnc = math.sqrt(pSum)*30.+50
+                        pUnc = math.sqrt(pSum)*50.+10
+                        #pUnc = math.sqrt(pSum)*10.+50
 			pUnc += pRes
 			# define the failing category
 			pFail = r.RooRealVar(lName+"_fail_"+iCat+"_Bin"+str(i0),lName+"_fail_"+iCat+"_Bin"+str(i0),pSum,max(pSum-pUnc,0),max(pSum+pUnc,0))
 			log.info("Fail_bin_var: ")
-			pFail.Print()
+			#pFail.Print()
 
 			# now define the passing cateogry based on the failing (make sure it can't go negative)
                         log.info("QCD EFF: ")
-                        self._lEffQCD.Print()
+                        #self._lEffQCD.Print()
 			lArg = r.RooArgList(pFail,lroopoly,self._lEffQCD)
 			pPass = r.RooFormulaVar(lName+"_pass_"+iCat+"_Bin"+str(i0),lName+"_pass_"+iCat+"_Bin"+str(i0),"@0*max(@1,0)*@2",lArg)
 			log.info("Pass=fail*poly*eff RooFormulaVar: ")
-			pPass.Print()
+			#pPass.Print()
 
 			pSumP = 0
 			for i1 in range(0,len(iHPs)):
 			        pSumP = pSumP + iHPs[i1].GetBinContent(i0) if i1 == 0 else pSumP - iHPs[i1].GetBinContent(i0); # subtract W/Z from data 
-			if pSumP < 0: pSumP = 0.01
+                        #if pSumP < 0: pSumP = 0.01
+                        if pSumP < 0: pSumP = 0.
 
-			if pSum < 5:
-                            print 'Too small number on fail %f'%pSum 
+			if pSum < 6: # or pSumP < 6:
+                            #print 'Too small number on fail %f'%pSum 
                             pFail.setConstant(True)
                             pPass = r.RooRealVar(lName+"_pass_"+iCat+"_Bin"+str(i0),lName+"_pass_"+iCat+"_Bin"+str(i0),0.,0.,0.)
                             pPass.setConstant(True)
@@ -315,13 +367,13 @@ class dazsleRhalphabetBuilder:
 		lPass  = r.RooParametricHist(lName+"_pass_"+iCat,lName+"_pass_"+iCat,self._lMSD,lPassBins,iHs[0])
 		lFail  = r.RooParametricHist(lName+"_fail_"+iCat,lName+"_fail_"+iCat,self._lMSD,lFailBins,iHs[0])
 		log.info("Print pass and fail RooParametricHists")
-		lPass.Print()
-		lFail.Print()
+		#lPass.Print()
+		#lFail.Print()
 		lNPass = r.RooAddition(lName+"_pass_"+iCat+"_norm",lName+"_pass_"+iCat+"_norm",lPassBins)
 		lNFail = r.RooAddition(lName+"_fail_"+iCat+"_norm",lName+"_fail_"+iCat+"_norm",lFailBins)
 		log.info("Printing NPass and NFail variables:")
-		lNPass.Print()
-		lNFail.Print()
+		#lNPass.Print()
+		#lNFail.Print()
 		self._allShapes.extend([lPass,lFail,lNPass,lNFail])
 		
 		# now write the workspace with the rooparamhist
@@ -331,13 +383,15 @@ class dazsleRhalphabetBuilder:
 		getattr(lWPass,'import')(lNPass,r.RooFit.RecycleConflictNodes())
 		getattr(lWFail,'import')(lFail,r.RooFit.RecycleConflictNodes())
 		getattr(lWFail,'import')(lNFail,r.RooFit.RecycleConflictNodes())
-		log.info("Printing rhalphabet workspace:")
-		lWPass.Print()
+		#log.info("Printing rhalphabet workspace:")
+		#lWPass.Print()
+                lTagWorkspace = ".root"
+                if self._comb: lTagWorkspace = "_2017.root"
 		if iCat.find("1") > -1:
-			lWPass.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"))
+                    lWPass.writeToFile("ralpha"+self._outputName.replace(lTagWorkspace,"_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt"+lTagWorkspace))
 		else:
-			lWPass.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"),False)
-		lWFail.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"),False)
+                    lWPass.writeToFile("ralpha"+self._outputName.replace(lTagWorkspace,"_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt"+lTagWorkspace),False)
+                lWFail.writeToFile("ralpha"+self._outputName.replace(lTagWorkspace,"_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt"+lTagWorkspace),False)
 		return [lPass,lFail]
 
 	def buildRooPolyArray(self,iPt,iRho,iQCD,iZero,iVars):
@@ -350,12 +404,12 @@ class dazsleRhalphabetBuilder:
 		for pRVar in range(0,self._poly_lNR+1):
 			lTmpArray = r.RooArgList()
 			for pVar in range(0,self._poly_lNP+1):
-				if lNCount == 0: lTmpArray.add(iQCD); # for the very first constant (e.g. p0r0), just set that to 1
-				else: lTmpArray.add(iVars[lNCount])
-				lNCount=lNCount+1
+                            if lNCount == 0: lTmpArray.add(iQCD); # for the very first constant (e.g. p0r0), just set that to 1
+                            else: lTmpArray.add(iVars[lNCount])
+                            lNCount=lNCount+1
 			pLabel="Var_Pol_Bin_"+str(round(iPt,2))+"_"+str(round(iRho,3))+"_"+str(pRVar)
 			pPol = r.RooPolyVar(pLabel,pLabel,lPt,lTmpArray)
-			pPol.Print()
+			#pPol.Print()
 			lRhoArray.add(pPol);
 			self._allVars.append(pPol)
 
@@ -364,58 +418,133 @@ class dazsleRhalphabetBuilder:
 		self._allVars.extend([lPt,lRho,lRhoPol])
 		return lRhoPol
 
+        def buildRooPolyRhoArrayBernstein(self,iPt,iRho,iQCD,iZero,iVars):
+            
+                print "---- [buildRooPolyArrayBernstein]"
+                lPt  = r.RooConstVar("Var_Pt_" +str(iPt)+"_"+str(iRho), "Var_Pt_" +str(iPt)+"_"+str(iRho),(iPt))
+                lRho = r.RooConstVar("Var_Rho_"+str(iPt)+"_"+str(iRho), "Var_Rho_"+str(iPt)+"_"+str(iRho),(iRho))
+                lPt_rescaled = r.RooConstVar("Var_Pt_rescaled_" + str(iPt) + "_" + str(iRho),
+                                             "Var_Pt_rescaled_" + str(iPt) + "_" + str(iRho),
+                                             ((iPt - self._pt_lo) / (self._pt_hi - self._pt_lo)))
+                lRho_rescaled = r.RooConstVar("Var_Rho_rescaled_" + str(round(iPt, 2)) + "_" + str(round(iRho, 3)),
+                                              "Var_Rho_rescaled_" + str(round(iPt, 2)) + "_" + str(round(iRho, 3)),
+                                              ((iRho - self._rho_lo) / (self._rho_hi - self._rho_lo)))
+                # pT degree
+                if self._poly_lNP == 1:
+                    ptPolyString = "@0*(1-@2)+@1*@2"
+                    #ptPolyString = "@0+@0*(1-@2)+@1*@2"
+                elif self._poly_lNP == 2:
+                    ptPolyString = "@0*(1-@3)**2+@1*2*@3*(1-@3)+@2*@3**2"
+                elif self._poly_lNP == 3:
+                    ptPolyString = "(@0*(1-@4)**3)+(@1*3*@4*(1-@4)**2)+(@2*3*(@4**2)*(1-@4))+(@3*(@4**3))"
+                elif self._poly_lNP == 4:
+                    ptPolyString = "(@0*(1-@5)**4)+(@1*4*@5*(1-@5)**3)+(@2*6*(@5**2)*(1-@5)**2)+(@3*4*(@5**3)*(1-@5))+@4*@5**4"
+                elif self._poly_lNP == 5:
+                    ptPolyString = "(@0*(1-@6)**5)+(@1*5*@6*(1-@6)**4)+(@2*10*(@6**2)*(1-@6)**3)+(@3*10*(@6**3)*(1-@6)**2)+(@4*5*(@6**4)*(1-@6))+@5*@6**5"
+                elif self._poly_lNP == 6:
+                    ptPolyString = "(@0*(1-@7)**6)+(@1*6*@7*(1-@7)**5)+(@2*15*(@7**2)*(1-@7)**4)+(@3*20*(@7**3)*(1-@7)**3)+(@4*15*(@7**4)*(1-@7)**2)+@5*6*(@7**5)*(1-@7)+@6*@7**6"
+                # rho degree
+                if self._poly_lNR == 1:
+                    rhoPolyString = "@0*(1-@2)+@1*@2"
+                elif self._poly_lNR == 2:
+                    rhoPolyString = "(@0*(1-@3)**2)+(@1*2*@3*(1-@3))+@2*@3**2"
+                elif self._poly_lNR == 3:
+                    rhoPolyString = "(@0*(1-@4)**3)+(@1*3*@4*(1-@4)**2)+(@2*3*(@4**2)*(1-@4))+(@3*(@4**3))"
+                elif self._poly_lNR == 4:
+                    rhoPolyString = "(@0*(1-@5)**4)+(@1*4*@5*(1-@5)**3)+(@2*6*(@5**2)*(1-@5)**2)+(@3*4*(@5**3)*(1-@5))+@4*@5**4"
+                elif self._poly_lNR == 5:
+                    rhoPolyString = "(@0*(1-@6)**5)+(@1*5*@6*(1-@6)**4)+(@2*10*(@6**2)*(1-@6)**3)+(@3*10*(@6**3)*(1-@6)**2)+(@4*5*(@6**4)*(1-@6))+@5*@6**5"
+                elif self._poly_lNR == 6:
+                    rhoPolyString = "(@0*(1-@7)**6)+(@1*6*@7*(1-@7)**5)+(@2*15*(@7**2)*(1-@7)**4)+(@3*20*(@7**3)*(1-@7)**3)+(@4*15*(@7**4)*(1-@7)**2)+@5*6*(@7**5)*(1-@7)+@6*@7**6"
+                lRhoArray = r.RooArgList()
+                lNCount = 0
+                for pRVar in range(0,self._poly_lNR+1):
+                        lTmpArray = r.RooArgList()
+                        for pVar in range(0,self._poly_lNP+1):
+                            if lNCount == 0: lTmpArray.add(iQCD)  # for the very first constant (e.g. p0r0), just set that to 1
+                            else:
+                                #print "lNCount = " + str(lNCount)
+                                lTmpArray.add(iVars[lNCount])
+                                #print "iVars[lNCount]: ", iVars[lNCount]
+                                #print "iVars[lNCount]"
+                                #iVars[lNCount].Print()
+                            lNCount = lNCount + 1
+                        pLabel="Var_Pol_Bin_"+str(round(iPt,2))+"_"+str(round(iRho,3))+"_"+str(pRVar)
+                        lTmpArray.add(lPt_rescaled)
+                        #print "lTmpArray: ", lTmpArray.Print()
+                        pPol = r.RooFormulaVar(pLabel, pLabel, ptPolyString, lTmpArray)
+                        #print "pPol:"
+                        #print pPol.Print("V")
+                        #pPol.Print()
+                        lRhoArray.add(pPol)
+                        self._allVars.append(pPol)
+                        #print "pPol No Bernstein"
+                        pPoltest = r.RooPolyVar(pLabel,pLabel,lPt,lTmpArray)
+                        #pPoltest.Print("V")
+
+                lLabel="Var_RhoPol_Bin_"+str(round(iPt,2))+"_"+str(round(iRho,3))
+                lRhoArray.add(lRho_rescaled)
+                #print "lRhoArray: ", lRhoArray.Print()
+                lRhoPol = r.RooFormulaVar(lLabel, lLabel, rhoPolyString, lRhoArray)
+                self._allVars.extend([lPt_rescaled, lRho_rescaled, lRhoPol])
+                return lRhoPol
+
 	def buildPolynomialArray(self, iVars,iNVar0,iNVar1,iLabel0,iLabel1,iXMin0,iXMax0):
             
-            #print "---- [buildPolynomialArray]"
-            ## form of polynomial
-            ## (p0r0 + p1r0 * pT + p2r0 * pT^2 + ...) + 
-            ## (p0r1 + p1r1 * pT + p2r1 * pT^2 + ...) * rho + 
-            ## (p0r2 + p1r2 * pT + p2r2 * pT^2 + ...) * rho^2 + ...
-            # Set to the background only
-            if self._freeze:
-                lFile = r.TFile(self._inputrfile)
-                lFit  = r.RooFitResult(lFile.Get("fit_b"))
-                self._lEffQCD.setVal(lFit.floatParsFinal().find("qcdeff").getVal())
+                #print "---- [buildPolynomialArray]"
+                ## form of polynomial
+                ## (p0r0 + p1r0 * pT + p2r0 * pT^2 + ...) + 
+                ## (p0r1 + p1r1 * pT + p2r1 * pT^2 + ...) * rho + 
+                ## (p0r2 + p1r2 * pT + p2r2 * pT^2 + ...) * rho^2 + ...
+                # Set to the background only
+                if self._freeze:
+                    lFile = r.TFile(self._inputrfile)
+                    lFit  = r.RooFitResult(lFile.Get("fit_b"))
+                    self._lEffQCD.setVal(lFit.floatParsFinal().find("qcdeff").getVal())
 
-            for i0 in range(iNVar0+1):
-                for i1 in range(iNVar1+1):
-                    pVar = iLabel1+str(i1)+iLabel0+str(i0);
-                    pXMin = iXMin0
-                    pXMax = iXMax0
-                    if self._freeze:
-                        pVal  = math.pow(10,-min(i1,2))
-                        if i1 == 0:
-                            pVal  = math.pow(10,-i1-min(int(i0*0.5),1))
-                    else:
-                        pVal  = math.pow(10,-min(i1,2))
-                        if i1 == 0:
-                            pVal  = math.pow(10,-i1-min(int(i0*0.5),1))
-                    if self._freeze:
-                        pCent = 0 if pVar == "p0r0" else lFit.floatParsFinal().find(pVar).getVal()
-                        if pVar == "p0r0":
-                            pXMin = pXMin*pVal
-                            pXMax = pXMin*pVal
+                for i0 in range(iNVar0+1):
+                    for i1 in range(iNVar1+1):
+                        pVar = iLabel1+str(i1)+iLabel0+str(i0);
+                        pXMin = iXMin0
+                        pXMax = iXMax0
+                        if self._freeze:
+                            pVal  = math.pow(10,-min(i1,2))
+                            if i1 == 0:
+                                pVal  = math.pow(10,-i1-min(int(i0*0.5),1))
                         else:
-                            pXmin = pXMin*pVal
-                            pXmax = pXMax*pVal
-                            #pXMin = (lFit.floatParsFinal().find(pVar).getVal() - 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmin))
-                            #pXMax = (lFit.floatParsFinal().find(pVar).getVal() + 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmax))
-                            #print 'this Min %f vs %f'%(pXMin,lFit.floatParsFinal().find(pVar).getVal() - lFit.floatParsFinal().find(pVar).getError() )
-                            #print 'this Max %f vs %f'%(pXMax,lFit.floatParsFinal().find(pVar).getVal() + lFit.floatParsFinal().find(pVar).getError() )
-                    else:
-                        pCent = 0
-                        pXMin = pXMin*pVal
-                        pXMax = pXMax*pVal
-                    if pVar != "p0r0" and self._freeze:
-                        print lFit.floatParsFinal().find(pVar).getVal()
-                        print lFit.floatParsFinal().find(pVar).getError()
-                    pRooVar = r.RooRealVar(pVar,pVar,pCent,pXMin,pXMax)
-                    log.info("Declaring roovars")
-                    log.info(pVar+' '+str(pVal))
-                    iVars.append(pRooVar)
+                            pVal  = math.pow(10,-min(i1,2))
+                            if i1 == 0:
+                                pVal  = math.pow(10,-i1-min(int(i0*0.5),1))
+                            if self._bernstein:
+                                pVal = 10.0
+                        if self._freeze:
+                            pCent = 0 if pVar == "p0r0" else lFit.floatParsFinal().find(pVar).getVal()
+                            if pVar == "p0r0":
+                                pXMin = pXMin*pVal
+                                pXMax = pXMin*pVal
+                            else:
+                                pXmin = pXMin*pVal
+                                pXmax = pXMax*pVal
+                                #pXMin = (lFit.floatParsFinal().find(pVar).getVal() - 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmin))
+                                #pXMax = (lFit.floatParsFinal().find(pVar).getVal() + 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmax))
+                                #print 'this Min %f vs %f'%(pXMin,lFit.floatParsFinal().find(pVar).getVal() - lFit.floatParsFinal().find(pVar).getError() )
+                                #print 'this Max %f vs %f'%(pXMax,lFit.floatParsFinal().find(pVar).getVal() + lFit.floatParsFinal().find(pVar).getError() )
+                        else:
+                            pCent = 0
+                            if self._bernstein:
+                                pCent = 1.0
+                            pXMin = pXMin*pVal
+                            pXMax = pXMax*pVal
+                        #if pVar != "p0r0" and self._freeze:
+                            #print lFit.floatParsFinal().find(pVar).getVal()
+                            #print lFit.floatParsFinal().find(pVar).getError()
+                        pRooVar = r.RooRealVar(pVar,pVar,pCent,pXMin,pXMax)
+                        log.info("Declaring roovars")
+                        log.info(pVar+' '+str(pVal))
+                        iVars.append(pRooVar)
 
-            if self._freeze and pVar != "p0r0":
-		lFile.Close()
+                if self._freeze and pVar != "p0r0":
+                    lFile.Close()
 
 	def workspaceInputs(self, iHP,iHF,iBin):
 		
@@ -468,7 +597,7 @@ class dazsleRhalphabetBuilder:
 		return lHist	
 
 	def getSignalInputs(self,iHP,iHF,iBin):		
-		#getting signals - skip data+MC (first 5 elm in iHP and iHF)
+		#getting signals 
 		lPSigs  = []
 		lFSigs  = []
                 for mass in MASSES:
@@ -504,7 +633,7 @@ class dazsleRhalphabetBuilder:
                         if "tqq" in process: procid = 2;
                         passid = 1 if "pass" in cat  else 2
                         if ('tqq' in process or 'wqq' in process or 'zqq' in process) and self._syst:
-                            print '--- Systematics'
+                            #print '--- Systematics'
                             hout = []
                             histDict = {}
                             for syst in systematics:
@@ -534,8 +663,8 @@ class dazsleRhalphabetBuilder:
                                             # hout.append(tmph_mass_up)
                                             # hout.append(tmph_mass_down)
                                 else:
-                                    print process + '_' + cat + '_' + syst + 'Up'
-                                    print process + '_' + cat + '_' + syst + 'Down'
+                                    #print process + '_' + cat + '_' + syst + 'Up'
+                                    #print process + '_' + cat + '_' + syst + 'Down'
                                     tmph_up = self._inputfile.Get(process + '_' + cat + '_' + syst + 'Up').Clone()
                                     tmph_down = self._inputfile.Get(process + '_' + cat + '_' + syst + 'Down').Clone()                            
                                     scaleHists(tmph_up,procid,passid)
@@ -555,42 +684,122 @@ class dazsleRhalphabetBuilder:
 
                                 # remove rho regions
                                 removeRho(hout,iPt,int(lPt),self._jet)
-                                for h in hout:
-                                    tmprdh = RooDataHist(h.GetName(),h.GetName(),r.RooArgList(self._lMSD),h)
+                                for lH in hout:
+                                    tmprdh = RooDataHist(lH.GetName(),lH.GetName(),r.RooArgList(self._lMSD),lH)
                                     getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
                                     self._outfile_validation.cd()
-                                    h.Write()
+                                    #print "WHAT is being written ",lH.GetName(),lH.GetTitle()
+                                    lH.Write()
 
 			if iShift and ("wqq" in process or "zqq" in process):
 
-                                lFile = self._inputsigfile;
+                                lHMatched = {}
+                                lHUnmatched = {}
+                                lsig  = False
+                                #lFile = self._inputsigfile;
+                                lFile = self._inputfile;
 				if process == "wqq": mass = 80.;
 				elif process == "zqq": mass = 91.;
 				elif process == "tqq": mass = 80.;
 				else: 
                                     mass = float(process[3:])
+                                    lsig = True
 				log.info("process %s, mass %f"%(process,mass))
 
+                                # 2016 sig samples!!!!!
+                                if self._is2016 and int(lPt) ==1 and lsig: continue
+                                
                                 lFile.cd()
-				# get the matched and unmatched hist and scale them by V_SF
-				tmph_matched = lFile.Get(process+"_"+cat+"_matched").Clone();
-				tmph_unmatched = lFile.Get(process+"_"+cat+"_unmatched").Clone();
-                                for lH in [tmph_matched,tmph_unmatched]: 
+				# get the matched and unmatched hist 
+                                if self._is2016 and lsig:
+                                    lHMatched[process] = lFile.Get(process+"_2016_"+cat+"_matched").Clone();
+                                    lHUnmatched[process] = lFile.Get(process+"_2016_"+cat+"_unmatched").Clone();
+                                else:
+                                    lHMatched[process] = lFile.Get(process+"_"+cat+"_matched").Clone();
+                                    lHUnmatched[process] = lFile.Get(process+"_"+cat+"_unmatched").Clone();
+                                for lH in (lHMatched.values()+lHUnmatched.values()):
                                     log.info("before scaling template %s, integral: %f"%(lH.GetName(),lH.Integral()))
+                                
+                                # get signals
+                                if lsig:
+                                    self._inputsigfile.cd()
+                                    if not "pass" in cat:
+                                        lHMatched[process] = self._inputsigfile.Get(process+"_"+cat+"_matched").Clone();
+                                        lHUnmatched[process] = self._inputsigfile.Get(process+"_"+cat+"_unmatched").Clone();
 
-                                scaleHists(tmph_matched,procid,passid)
-                                scaleHists(tmph_unmatched,procid,0)
-                                for lH in [tmph_matched,tmph_unmatched]:
+                                # scale them by V_SF
+                                scaleHists(lHMatched[process],procid,passid)
+                                scaleHists(lHUnmatched[process],procid,0)
+                                for lH in (lHMatched.values()+lHUnmatched.values()):
                                     log.info("after scaling template %s, integral: %f"%(lH.GetName(),lH.Integral()))
 
-				# project each into mass axis
-				tmph_mass_matched = proj("cat",str(lPt),tmph_matched,self._mass_nbins,self._mass_lo,self._mass_hi);
-				tmph_mass_unmatched = proj("cat",str(lPt),tmph_unmatched,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                removeRho([tmph_mass_matched,tmph_mass_unmatched],iPt,int(lPt),self._jet)
+                                # tmp: scale back 2017 signals 
+                                if lsig and not self._is2016:
+                                    lHMatched[process].Scale(2.065) 
+                                    lHUnmatched[process].Scale(2.065)
+                                    lHMatched[process].Scale(KFACTORJET)
+                                    lHUnmatched[process].Scale(KFACTORJET)
 
+                                if self._comb:
+                                    lHMatched[process].Scale(1/2.25)
+                                    lHUnmatched[process].Scale(1/2.25)
+
+                                # remove rho from 2d hists
+                                removeRho(lHMatched,0,0,self._jet)
+                                removeRho(lHUnmatched,0,0,self._jet)
+
+				# project each into mass axis
+				tmph_mass_matched = proj("cat",str(lPt),lHMatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
+				tmph_mass_unmatched = proj("cat",str(lPt),lHUnmatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
+
+                                # for small signals
+                                # lSmall = False;
+                                # if mass == 50 and int(lPt) > 4:
+                                #     lSmall = True;
+                                #     pInt = tmph_mass_matched.Integral()+0.01; pMInt = tmph_mass_unmatched.Integral()+0.01;
+                                #     tmph_mass_matched = proj("cat",'4',tmph_matched,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                #     tmph_mass_unmatched = proj("cat",'4',tmph_unmatched,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                #     tmph_mass_matched.Scale(pInt/tmph_mass_matched.Integral()) 
+                                #     tmph_mass_unmatched.Scale(pMInt/tmph_mass_unmatched.Integral()) 
+                                # if mass >= 200 and int(lPt) < 3:
+                                #     lSmall = True;
+                                #     pInt = tmph_mass_matched.Integral()+0.01; pMInt = tmph_mass_unmatched.Integral()+0.01;
+                                #     tmph_mass_matched = proj("cat",'3',tmph_matched,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                #     tmph_mass_unmatched = proj("cat",'3',tmph_unmatched,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                #     tmph_mass_matched.Scale(pInt/tmph_mass_matched.Integral())
+                                #     tmph_mass_unmatched.Scale(pMInt/tmph_mass_unmatched.Integral())
+
+                                # remove Rho region
+                                removeRho([tmph_mass_matched,tmph_mass_unmatched],iPt,int(lPt),self._jet)
                                 log.info('MATCHED AND UNMATCHED CONTENT')
+                                '''
                                 for lH in [tmph_mass_matched,tmph_mass_unmatched]:
-                                    print lH.GetName(), lH.Integral()
+                                    if "zqq_pass_cat2" in lH.GetName():
+                                        print "after removing rho ", lH.GetName()
+                                        for i in range(1,lH.GetNbinsX()+1): 
+                                            print i,lH.GetBinContent(i)  
+                                            '''
+                                #    print lH.GetName(), lH.Integral()
+                                '''
+                                # scale mass projected sig back to 0.0 cut
+                                if lsig:
+                                    if "pass" in cat:  
+                                        self.signalScalePass(tmph_mass_matched,lPt,process+"_"+cat+"_matched")
+                                        '''
+                                    # self._inputsigfile.cd()
+                                    # if "pass" in cat:
+                                    #     lmatchedN2 = self._inputsigfile.Get(process+"_"+cat+"_matched").Clone();
+                                    #     lunmatchedN2 = self._inputsigfile.Get(process+"_"+cat+"_unmatched").Clone();
+                                    #     tmph_mass_matchedN2 = proj("cat",str(lPt),lmatchedN2,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                    #     tmph_mass_unmatchedN2 = proj("cat",str(lPt),lunmatchedN2,self._mass_nbins,self._mass_lo,self._mass_hi);
+                                    #     tmph_mass_matched.Scale(tmph_mass_matchedN2.Integral()/tmph_mass_matched.Integral())
+                                    #     tmph_mass_unmatched.Scale(tmph_mass_unmatchedN2.Integral()/tmph_mass_unmatched.Integral())
+
+                                if self._smooth:
+                                    if lsig and not self._is2016:
+                                        if (self._jet == 'AK8' and mass >150) or (self._jet == 'CA15' and mass>200):
+                                            tmph_mass_matched.Smooth()
+                                            tmph_mass_unmatched.Smooth()
 
 				# smear/shift the matched
 				# mass_shift = MASS_SF = m_data/m_mc = 1.001+/-0.05
@@ -604,6 +813,7 @@ class dazsleRhalphabetBuilder:
                                 # 0.0065 = 0.0065/1.001
                                 # or 5 -> 0.0065*5 -> 0.0325*20 -> 0.65 -> 0.01 in datacard
                                 # or 5 -> 0.01*5 -> 0.01*5*20 -> 1 -> 0.01 in datacard
+                                # 0.15 = 0.01( cons) *15 => 1/15 = 0.06
                                 # 2017: 
                                 # 0.03 in scale datacard -> so this one is easy just put whatever sigma shift*shift_unc
 				# resolution = 1.1+0.4  
@@ -612,15 +822,17 @@ class dazsleRhalphabetBuilder:
 				# res_shift_unc = sqrt((0.453/8.831)^2+(0.340/7.93)^2) * sigma shift= 0.067* sigma shift (0.25*2*10 in datacard)
                                 # 3 numbers: sf_err_unc, smear in datacard, * sigma, smear_unc*sigma
                                 # 2016: 0.04 -> (0.04*20 = 0.8 -> 1%) and 0.25 in datacard
-                                # 
+                                # 0.06 approx to 0.1: 0.1*4 = 0.4 => 1/4: 0.25 in datacard
                                 # 0.067, 0.25, 5, 0.335 (0.4)
                                 # 0.25 in smear datacard
                                 
 				hist_container = hist( [mass],[tmph_mass_matched] );	
+                                mass_sigma = MASS_SIGMA[self._jet]
 				mass_shift = MASS_SF[self._jet];
-				mass_shift_unc = MASS_SF_ERR[self._jet] * 10; # 10 sigma shift!  
+				mass_shift_unc = MASS_SF_ERR[self._jet] * mass_sigma; # 20 sigma shift!  
+                                res_sigma = RES_SIGMA[self._jet]
 				res_shift = RES_SF[self._jet];
-				res_shift_unc = RES_SF_ERR[self._jet] * 5; # 5 sigma shift! 
+				res_shift_unc = RES_SF_ERR[self._jet] * res_sigma; # 7 sigma shift! 
 
 				# get new central value
 				shift_val = mass - mass*mass_shift;
@@ -642,11 +854,46 @@ class dazsleRhalphabetBuilder:
 				# get shift up/down
 				shift_unc = mass*mass_shift*mass_shift_unc;
 				hmatchedsys_shift = hist_container.shift( hmatched_new_central, shift_unc);
+                                #hmatchedsys_shift = hist_container.shift( hmatched_new_central, mass * shift_unc);
 				# get res up/down
 				hmatchedsys_smear = hist_container.smear( hmatched_new_central, res_shift_unc);	
 
-                                hmatched_new_central.SetName(pFunc.GetName());
+                                # for small signals
+                                if self._jet == 'AK8':
+                                    if mass == 50 and int(lPt) > 3:
+                                        hmatchedsys_shift[1] = hmatched_new_central.Clone("zqq50"+str(cat)+"_"+str(iPt)+"tmpScaleDn")
+                                    if (mass == 50 and int(lPt) > 4) or (mass >= 200 and int(lPt) < 5) or (mass >= 200 and int(lPt) == 1):
+                                        #or (self._is2016 and mass == 50 and int(lPt) >= 3) or (self._is2016 and mass >= 150 and int(lPt) <= 6) or (self._is2016 and mass <= 150 and int(lPt) == 6):
+                                        hmatchedsys_shift[1] = hmatched_new_central.Clone()
+                                        log.info("basically 50 GeV is 1 event ")
+                                        pInt = hmatched_new_central.Integral()+0.01
+                                        hmatched_new_central.Add(tmph_mass_unmatched); lInt = max(hmatched_new_central.Integral(),0.01);
+                                        hmatched_new_central.Scale(pInt/lInt);
+                                        hmatchedsys_shift[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[0].Integral(),0.01);
+                                        hmatchedsys_shift[0].Scale(pInt/lInt);
+                                        hmatchedsys_shift[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[1].Integral(),0.01);
+                                        hmatchedsys_shift[1].Scale(pInt/lInt);
+                                        hmatchedsys_smear[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[0].Integral(),0.01);
+                                        hmatchedsys_smear[0].Scale(pInt/lInt);
+                                        hmatchedsys_smear[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[1].Integral(),0.01);
+                                        hmatchedsys_smear[1].Scale(pInt/lInt);
+                                if self._jet == 'CA15':
+                                    if (mass > 350 and int(lPt) < 2) or (mass >= 450 and int(lPt) < 4) or (mass ==80 and int(lPt) > 4) or (mass ==91 and int(lPt) >4):
+                                        hmatchedsys_shift[1] = hmatched_new_central.Clone()
+                                        log.info("basically get is 1 event ")
+                                        pInt = hmatched_new_central.Integral()+0.01
+                                        hmatched_new_central.Add(tmph_mass_unmatched); lInt = max(hmatched_new_central.Integral(),0.01);
+                                        hmatched_new_central.Scale(pInt/lInt);
+                                        hmatchedsys_shift[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[0].Integral(),0.01);
+                                        hmatchedsys_shift[0].Scale(pInt/lInt);
+                                        hmatchedsys_shift[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[1].Integral(),0.01);
+                                        hmatchedsys_shift[1].Scale(pInt/lInt);
+                                        hmatchedsys_smear[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[0].Integral(),0.01);
+                                        hmatchedsys_smear[0].Scale(pInt/lInt);
+                                        hmatchedsys_smear[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[1].Integral(),0.01);
+                                        hmatchedsys_smear[1].Scale(pInt/lInt);
 
+                                hmatched_new_central.SetName(pFunc.GetName());
                                 hmatchedsys_shift[0].SetName(pFunc.GetName()+"_scaleUp");
                                 hmatchedsys_shift[1].SetName(pFunc.GetName()+"_scaleDown");
 				hmatchedsys_smear[0].SetName(pFunc.GetName()+"_smearUp");
@@ -657,7 +904,7 @@ class dazsleRhalphabetBuilder:
                                 removeRho(hout,iPt,int(lPt),self._jet);
 
                                 # Interpolation
-                                if self._interpol:
+                                if self._interpol: # and 'cat1' not in iCat: # tmp for 2016 samples
                                     if mass > 0 and mass != 80. and mass != 91.:
 					lInterpolMasses.append(mass);     
 					lInterpolShape_central.append(hmatched_new_central) 
@@ -669,7 +916,23 @@ class dazsleRhalphabetBuilder:
                                 # write to validation
 				for h in hout:
                                     self._outfile_validation.cd()
+                                    for i in range(1, h.GetNbinsX() + 1):
+                                        massVal = h.GetXaxis().GetBinCenter(i)
+                                        rhoVal = r.TMath.Log(massVal * massVal / iPt / iPt)
+                                        if rhoVal < self._rho_lo or rhoVal > self._rho_hi:
+                                            '''
+                                            if "zqq_pass_cat2" in h.GetName():
+                                                print "removing rho = %.2f for %s, pt_val = %.2f, mass bin [%i,%i]" % (
+                                                    rhoVal, h.GetName(), iPt, h.GetXaxis().GetBinLowEdge(i), h.GetXaxis().GetBinUpEdge(i))
+                                                    '''
+                                            h.SetBinContent(i, 0.)
                                     h.Write();
+                                    '''
+                                    if "zqq" in h.GetName():
+                                        print "WHAT is being written before interpol ",h.GetName(),h.GetTitle()
+                                        for i in range(1,h.GetNbinsX()+1):
+                                            print i,h.GetBinContent(i)
+                                            '''
                                     tmprdh = RooDataHist(h.GetName(),h.GetName(),r.RooArgList(self._lMSD),h)
                                     getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
                                     # create hists for scale pT
@@ -681,8 +944,8 @@ class dazsleRhalphabetBuilder:
 				getattr(lW,'import')(pFunc,r.RooFit.RecycleConflictNodes())
 				
                 # signal interpolation
-                if self._interpol:
-                    print '----- [Interpolating]: ',len(lInterpolMasses), lInterpolMasses,' for cat: ',iCat
+                if self._interpol and not (self._is2016 and 'cat1' in iCat) and not (self._jet == "CA15" and 'cat1' in iCat): 
+                    #print '----- [Interpolating]: ',len(lInterpolMasses), lInterpolMasses,' for cat: ',iCat
                     morphedHistContainer_central = hist(lInterpolMasses,lInterpolShape_central);
                     morphedHistContainer_scaleUp = hist(lInterpolMasses,lInterpolShape_scaleUp);
                     morphedHistContainer_scaleDn = hist(lInterpolMasses,lInterpolShape_scaleDn);
@@ -690,27 +953,69 @@ class dazsleRhalphabetBuilder:
                     morphedHistContainer_smearDn = hist(lInterpolMasses,lInterpolShape_smearDn);
                     interpolatedMasses = [55.,60.0,65.,70.,
                                           80.,85.,90.0,95.,
+                                          #100., # tmp: added 100
                                           105.,110.0,
-                                          115., #tmp:removed 115
+                                          #115., #tmp:removed 115
                                           120.,
                                           130.,135.0,140.,145.,
                                           155.,160.,165.0,170.,
-                                          175., #tmp: removed 175
+                                          #175., #tmp: removed 175
                                           180.0,185.,190.,195., 
+                                          #200., #tmp
                                           205.,210.,215.,220.,
-                                          225., #tmp: removed 225
+                                          #225., #tmp: removed 225
                                           230.,235.,240,245.,
-                                          255.,260.,265.,270.,275.,
-                                          280.,285.,290.,295.]
+                                          255.,260.,265.,270.,
+                                          #275.,
+                                          280.,285.,
+                                          290.,295.
+                                          ]
                     
+                    if self._is2016:
+                        interpolatedMasses.append(115)
+                        interpolatedMasses.append(175)
+                        interpolatedMasses.append(225)
+                        interpolatedMasses.append(275)
+
+                    if self._jet == 'CA15':
+                        interpolatedMasses = [110.0,
+                                              120.,
+                                              130.,135.0,140.,145.,
+                                              155.,160.,165.0,170.,
+                                              175.,
+                                              180.0,185.,190.,195.,
+                                              205.,210.,215.,220.,
+                                              225.,
+                                              230.,235.,240,245.,
+                                              255.,260.,265.,270.,
+                                              275.,
+                                              280.,285.,290.,295.,
+                                              305.,310.,315.,320.,
+                                              325.,330.,335.,340.,345.,
+                                              355.,360.,365.,370.,375.,
+                                              380.,385.,390.,395.,
+                                              405.,410.,415.,420.,
+                                              425.,430.,435.,440.,445.,
+                                              #455.,460.,465.,470.,475.,
+                                              #480.,485.,490.,495.
+                                              ]
+                        if self._comb:
+                            interpolatedMasses = [
+                                180.0,185.,190.,195.,
+                                205.,210.,215.,220.,
+                                230.,235.,240,245.,
+                                255.,260.,265.,270.,
+                                280.,285.,290.,295.,]
+
                     for m in interpolatedMasses:
 			mid=-1
-			if m > 200 and  int(lPt) == 1:
-                            mid=len(lInterpolMasses)-3
-			if m > 250 and  int(lPt) == 2:
-                            mid=len(lInterpolMasses)-2
-			#if m < 75  and  int(lPt) >  4:
-			#	mid=0
+                        if self._jet == 'AK8':
+                            if m > 200 and  int(lPt) == 2:
+                                mid=len(lInterpolMasses)-3
+                            if m > 250 and  int(lPt) == 3:
+                                mid=len(lInterpolMasses)-2
+                        #if m < 75  and  int(lPt) >  4:
+                        #    mid=0
                         if mid != -1:
                             htmp_central = lInterpolShape_central[mid].Clone("tmp"+str(m)+"scaleup")
                             htmp_scaleUp = lInterpolShape_scaleUp[mid].Clone("tmp"+str(m)+"scaleup")
@@ -728,6 +1033,9 @@ class dazsleRhalphabetBuilder:
 			htmp_scaleDn.SetName("zqq%i_%s_scaleDown" % (int(m),iCat));
 			htmp_smearUp.SetName("zqq%i_%s_smearUp" % (int(m),iCat));
 			htmp_smearDn.SetName("zqq%i_%s_smearDown" % (int(m),iCat));
+
+                        if self._jet == 'AK8':
+                            if iCat == "pass_cat5" and m < 125 and m > 100: self.signalChopper(htmp_central,m);
 
 			hout = [htmp_central,htmp_scaleUp,htmp_scaleDn,htmp_smearUp,htmp_smearDn];
 			removeRho(hout,iPt,int(lPt),self._jet)
@@ -751,12 +1059,29 @@ class dazsleRhalphabetBuilder:
 			lW.writeToFile(iOutput,False)
 		else:
 			lW.writeToFile(iOutput)	
-		lW.Print()
+                #lW.Print()
 
 	def signalChopper(self,h,m):
 		for i in range(1,h.GetNbinsX()+1):
 			if h.GetBinCenter(i) > m + 1.5*math.sqrt(m): h.SetBinContent(i,0.);
 
+        def signalScalePass(self,iHSig_inPtbin,iPt,iName):
+                self._inputsigfile.cd()
+                lSig = self._inputsigfile.Get(iName).Clone();
+                lSig_inPtbin = proj("cat",str(iPt),lSig,self._mass_nbins,self._mass_lo,self._mass_hi)
+                print 'Scaling pass ',iName,iHSig_inPtbin.Integral(),lSig_inPtbin.Integral()
+                if iHSig_inPtbin.Integral() > 0:
+                    lSig = self._inputsigfile.Get(iName).Clone();
+                    lSig_inPtbin = proj("cat",str(iPt),lSig,self._mass_nbins,self._mass_lo,self._mass_hi)
+                    iHSig_inPtbin.Scale(lSig_inPtbin.Integral()/iHSig_inPtbin.Integral())
+                    # scale again
+                    iHSig_inPtbin.Scale(2.065)
+                    iHSig_inPtbin.Scale(KFACTORJET)
+                    '''
+                    # smooth
+                    if self._smooth:
+                        iHSig_inPtbin.Smooth()
+                        '''
 ##############################################################################
 ##############################################################################
 #### E N D   O F   C L A S S
@@ -775,7 +1100,7 @@ def main(options,args):
             lFileSig = r.TFile(options.sig);
             log.info('signal file %s'%options.sig)
         else: lFileSig = lFile
-	(hpass,hfail) = loadHistograms(lFile,lFileSig,options.jet,options.pseudo,options.pseudo15);
+	(hpass,hfail) = loadHistograms(lFile,lFileSig,options.jet,options.pseudo,options.pseudo15,options.is2016,options.forcomb);
 
 	#build the workspaces
 	dazsleRhalphabetBuilder(hpass,hfail,
@@ -785,10 +1110,14 @@ def main(options,args):
                                 options.onlyRhalph,options.freeze,
                                 options.mcstat,options.syst,
                                 options.interpol,
-                                options.jet);
-	
+                                options.jet,
+                                options.forcomb,
+                                options.smooth,
+                                options.is2016,
+                                );
+
 ##-------------------------------------------------------------------------------------
-def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15):     
+def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):     
 
 	print "---- [Load histograms]"
         lBackgrounds = ["wqq", "zqq", "qcd", "tqq"]
@@ -891,20 +1220,54 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15):
         for lH in (lHPass.values()+lHFail.values()):
             lH.SetDirectory(0)
 
-	# Z' signals scaled to DY_SF(1.45) in Zqq_create
-        ifilesig.cd()
+	# Z' signals already scaled to DY_SF(1.45) in Zqq_create
         for mass in MASSES:
-            lpass = ifilesig.Get("zqq"+str(mass)+"_pass_matched").Clone()
-            lfail = ifilesig.Get("zqq"+str(mass)+"_fail_matched").Clone()
+            ifile.cd()
+            if not is2016:
+                lpass = ifile.Get("zqq"+str(mass)+"_pass_matched").Clone()
+                lfail = ifile.Get("zqq"+str(mass)+"_fail_matched").Clone()
+            else:
+                #print mass
+                lpass = ifile.Get("zqq"+str(mass)+"_2016_pass_matched").Clone()
+                lfail = ifile.Get("zqq"+str(mass)+"_2016_fail_matched").Clone()
             log.info('Getting histogram for mass: '+str(mass))
             log.info(lpass.GetName()+' '+str(lpass.Integral()))
             log.info(lfail.GetName()+' '+str(lfail.Integral()))
-            scaleHists(lpass,1,1)
-            scaleHists(lfail,1,2)
-            log.info(lpass.GetName()+' scaled '+str(lpass.Integral()))
-            log.info(lfail.GetName()+' scaled '+str(lfail.Integral()))
             lpass.SetDirectory(0)
             lfail.SetDirectory(0)
+            
+
+            #scale N2DDT = 0.2  templates back to 0.0
+            ifilesig.cd()
+            #lpassN2 = ifilesig.Get("zqq"+str(mass)+"_pass_matched").Clone()
+            lfailN2 = ifilesig.Get("zqq"+str(mass)+"_fail_matched").Clone()
+            #print mass,lpassN2.Integral(),lpass.Integral()
+            #lpass.Scale(lpassN2.Integral()/lpass.Integral())
+            lfail = lfailN2
+            #log.info('After scaling histogram for mass: '+str(mass))
+            #log.info(lpass.GetName()+' '+str(lpass.Integral()))
+            #log.info(lfail.GetName()+' '+str(lfail.Integral()))
+            #print mass,lpass.Integral()
+
+            scaleHists(lpass,1,1)
+            scaleHists(lfail,1,2)
+            # tmp: scale back signals
+            if not is2016:
+                lpass.Scale(2.065)
+                lfail.Scale(2.065)
+                lpass.Scale(KFACTORJET)
+                lfail.Scale(KFACTORJET)
+                if iscomb:
+                    lpass.Scale(1/2.25)
+                    lfail.Scale(1/2.25)
+                log.info(lpass.GetName()+' scaled '+str(lpass.Integral()))
+                log.info(lfail.GetName()+' scaled '+str(lfail.Integral()))
+            lpass.SetDirectory(0)
+            lfail.SetDirectory(0)
+
+            lpass.Smooth()
+            lfail.Smooth()
+
             lHPass["zqq"+str(mass)] = lpass
             lHFail["zqq"+str(mass)] = lfail                
 
@@ -915,6 +1278,9 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15):
         removeRho(lHPass,0,0,ijet)
         removeRho(lHFail,0,0,ijet)
 
+        for lH in (lHPass.values()+lHFail.values()):
+            log.info("loaded 2D histogram %s with integral %f (after rho cut)"%(lH.GetName(), lH.Integral()))
+
 	return (lHPass,lHFail);
 
 ##-------------------------------------------------------------------------------------
@@ -924,7 +1290,7 @@ if __name__ == '__main__':
         parser.add_option('-v', action='store_true', dest='verbose', default=False, help='verbose')
         parser.add_option('--np', dest="np", type=int,default=3, help='degree poly pt')
         parser.add_option('--nr', dest="nr", type=int,default=4, help='degree poly rho')
-        parser.add_option('--masses',dest='masses', default='50,75,100,125,150,200,250,300',type="string", help="masses of resonance")
+        parser.add_option('--masses',dest='masses', default='50,75,100,115,125,150,175,200,225,250,275,300',type="string", help="masses of resonance")
         parser.add_option('--freeze', action='store_true', dest='freeze', default=False, help='freeze pol values', metavar='freeze')
 	parser.add_option('--pseudo', action='store_true', dest='pseudo', default =False,help='data = MC', metavar='isData')
 	parser.add_option('--pseudo15', action='store_true', dest='pseudo15', default =False,help='data = MC (fail) and fail*0.05 (pass)', metavar='isData')
@@ -937,13 +1303,16 @@ if __name__ == '__main__':
         parser.add_option('--syst', action='store_true', dest='syst', default=False, help='pick unc from templates')
         parser.add_option('--interpol', action='store_true', dest='interpol', default=False, help='do signal interpolation')
         parser.add_option('--jet', dest='jet', default='AK8', help='jet type')
+        parser.add_option('--forcomb', action='store_true', dest='forcomb',  default=False, help='combine with 2016')
+        parser.add_option('--smooth', action='store_true', dest='smooth',  default=False, help='smooth pass histogram')
+        parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016')
 
 	(options, args) = parser.parse_args()
 
 	if options.verbose:
-		log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
+            log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
 	else:
-		log.basicConfig(format="%(levelname)s: %(message)s")
+            log.basicConfig(format="%(levelname)s: %(message)s")
 
 	import tdrstyle
 	tdrstyle.setTDRStyle()
