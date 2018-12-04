@@ -21,18 +21,14 @@ veff lnN 0.91 0.91 0.91 - - 1.006 1.006 1.006 - -
 wznormEW lnN - 1.05 - - - - 1.05 - - -
 znormEW lnN - 1.15 1.15 - - - 1.15 1.15 - -
 znormQ lnN 1.1 1.1 1.1	- - 1.1	1.1 1.1	- -
-#Pu lnN 1 1 1 1 - 1 1 1 1 -
-#JER lnN 1 1 1 1 - 1 1 1 1 -
-#JES lnN 1 1 1 1 - 1 1 1 1 -
-trigger lnN 1 1 1 1 - 1 1 1 1 -
+#JER lnN 1 1 1 - 1 1 1 1 1 1 1 1 1 - 1 1 1 1 1 1
+#JES lnN 1 1 1 - 1 1 1 1 1 1 1 1 1 - 1 1 1 1 1 1
+#Pu lnN 1 1 1 - 1 1 1 1 1 1 1 1 1 - 1 1 1 1 1 1
 jecs lnN 1.02 1.02 1.02 1.02 - 1.02 1.02 1.02 1.02 - 
+trigger lnN 1.02 1.02 1.02 1.02 - 1.02 1.02 1.02 1.02 -
 muveto lnN 1.005 1.005 1.005 1.005 - 1.005 1.005 1.005 1.005 - 
 eveto lnN 1.005 1.005 1.005 1.005 - 1.005 1.005 1.005 1.005 -  
 ttnormSF lnN - - - 1.1 - - - - 1.1 -
-tteffSF lnN - - - 1.1 - - - - 0.98 -
-# tqqpassCATXnorm rateParam pass_CATX tqq (@0*@1) tqqnormSF,tqqeffSF
-# tqqfailCATXnorm rateParam fail_CATX tqq (@0*(1.0-@1*TQQEFF)/(1.0-TQQEFF)) tqqnormSF,tqqeffSF
-# tqqnormSF extArg 1.0 [0.0,10.0]
-# tqqeffSF extArg 1.0 [0.0,10.0]
+tteffSF lnN - - - 1.1 - - - - 0.97 -
 -------------------------------
 qcdeff  flatParam

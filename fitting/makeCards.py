@@ -100,10 +100,11 @@ def main(options,args):
 				dctpl = open("datacard_templates/datacard_for2017_CA15_forcomb.tpl");
 				dctplnowz = open("datacard_templates/datacard_for2017_CA15_nowz_forcomb.tpl");
 			else:
-				dctpl = open("datacard_templates/datacard_for2017_CA15.tpl");
+				#dctpl = open("datacard_templates/datacard_for2017_CA15.tpl");
+                                #dctpl = open("datacard_templates/datacard_for2017_CA15_updatedsf.tpl");
+				dctpl = open("datacard_templates/datacard_for2017_CA15_updatedsf_test.tpl");
+                                dctplnosig = open("datacard_templates/datacard_for2017_CA15_updatedsf_test_nosig.tpl");
 				dctplnowz = open("datacard_templates/datacard_for2017_CA15_nowz.tpl");
-		if options.is2016:
-			dctpl = open("datacard_templates/datacard.tpl")
 		if options.wonly:
 			dctpl = open("datacard_templates/datacard_for2017_W.tpl");
 		if options.zonly:
@@ -114,7 +115,10 @@ def main(options,args):
 			else:
 				#dctpl = open("datacard_templates/datacard_for2017.tpl");
                                 dctpl = open("datacard_templates/datacard_for2017_updatedsf.tpl");
-				
+                                #dctpl = open("datacard_templates/datacard_for2017_updatedsf_test.tpl");
+				dctplnosig = open("datacard_templates/datacard_for2017_updatedsf_test_nosig.tpl");
+		if options.is2016:
+                        dctpl = open("datacard_templates/datacard_for2016.tpl")
 		histoDict["data_obs_pass"] = tfile.Get('data_obs_pass').Clone()
 		numberOfMassBins = MASSBINS[options.jet]; #options.nmass;
 		numberOfPtBins = histoDict["data_obs_pass"].GetYaxis().GetNbins(); #options.npt;
@@ -133,6 +137,11 @@ def main(options,args):
 			for line in dctplnowz:
 				line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
 				linelnowz.append(line.strip());
+		if options.nosig != 0:
+			linelnosig = [];
+			for line in dctplnosig:
+                                line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
+				linelnosig.append(line.strip());
 
 		for i in range(1,numberOfPtBins+1):
 			jesErrs = {}
@@ -252,6 +261,7 @@ def main(options,args):
                         
 			for box in boxes:
 				for proc in (sigs+bkgs):
+					if proc in sigs and options.nosig != 0 and (i!=options.nosig): continue
 					if 'qcd' in proc:
 						jesString += ' -'
 						jerString += ' -'
@@ -298,6 +308,8 @@ def main(options,args):
 			# no W and Z for cats 5 and 6 for CA15
 			if options.jet == 'CA15' and (i == 5 or i == 6) and options.nowz:
 				linelines= linelnowz
+			if options.nosig != 0 and (i!=options.nosig):
+				linelines=linelnosig
 			for l in linelines:
 				if 'JES' in l:
 					if options.nowz and (i==5 or i==6): continue
@@ -314,6 +326,7 @@ def main(options,args):
 				elif 'trigger' in l:
 					if options.nowz and (i==5 or i==6): continue
                                         if options.syst: newline = triggerString
+					elif options.forcomb: newline = l
                                         else: continue
 				elif 'jecs' in l:
 					if options.syst: continue
@@ -477,10 +490,11 @@ if __name__ == '__main__':
         parser.add_option('--qcd', action='store_true', dest='qcd', default=False, help='all qcd fail bins')
         parser.add_option('--nowz', action='store_true', dest='nowz', default=False, help='no w and z')
 	parser.add_option('--no-mcstat-shape', action='store_true', dest='noMcStatShape', default =False,help='change mcstat uncertainties to lnN', metavar='noMcStatShape')
+        parser.add_option('--nosig', dest='nosig', type=int, default=0, help='no signal (if not 0 then inject signal in that cat)')
         parser.add_option('--jet', dest='jet', default='AK8', help='jet type')
         parser.add_option('--jetdir', dest='jetdir', default='', help='jet dir')
         parser.add_option('--tag', dest='tag', default='blinded', help='tag')
-        parser.add_option('--skipcat', action='store', dest='skipcat', default='0', type='string', help='number of cat to skip')
+        parser.add_option('--skipcat', action='store', dest='skipcat', default='1', type='string', help='number of cat to skip')
         parser.add_option('--interpol', action='store_true', dest='interpol', default=False, help='do signal interpolation')
 	parser.add_option('--forcomb', action='store_true', dest='forcomb',  default=False, help='combine with 2016')
         parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016')

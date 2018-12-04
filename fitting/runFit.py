@@ -51,6 +51,7 @@ def parser():
     parser.add_option('--nocards', action='store_true', dest='nocards', default=False, help='no make cards again')
     parser.add_option('--dry-run', dest="dryRun",default=False,action='store_true',help="Just print out commands to run")
     parser.add_option('--allfits', action='store_true', dest='allfits', default=False, help='all fits for imapcts')
+    parser.add_option('--nosig', dest='nosig', type=int, default=0, help='no signal (if not 0 then inject signal in that cat)')
 
     (options,args) = parser.parse_args()
     return options
@@ -131,6 +132,7 @@ def setup(options,iMass):
             #lCommandSys = lCommandNoSys +'  --no-mcstat-shape'
             lCommandSysNoWZ = lCommandSys + ' --nowz'
             lCommandNoSysComb = lCommandNoSys + ' --no-mcstat-shape --forcomb'
+            lCommandNoSig = lCommandSys + ' --nosig %i'%options.nosig
             lCommandBase = lCommandSys
             if options.forcomb:
                 lCommandBase = lCommandNoSysComb
@@ -140,6 +142,8 @@ def setup(options,iMass):
                 lCommandBase += ' --is2016sig '
             if options.nowz:
                 lCommandBase = lCommandSysNoWZ
+            if options.nosig!=0:
+                lCommandBase = lCommandNoSig
             if iMass not in NOMINAL_MASSES and not options.is2016sig:
                 lCommandBase = lCommandBase + ' --interpol'
             if iMass not in NOMINAL_MASSES_2016 and options.is2016sig:
@@ -170,6 +174,7 @@ def setup(options,iMass):
     os.chdir (iDir)
 
 def impacts(base,iLabel,iMass,iAllfits=False):
+    idir=os.getcwd()                                                                                                                                                                
     '''
     fileName='runimpacts_%s.sh' % (iLabel)
     os.system('rm %s'%fileName)
@@ -193,7 +198,7 @@ def impacts(base,iLabel,iMass,iAllfits=False):
         lFiles = [dirs[len(dirs)-1]]
         write_bash(os.path.abspath(fileName),lCommand,lFiles)
         write_condor(os.path.abspath(fileName), [], lFilesToTransfer, options.dryRun)
-        '''
+
     fileName='runimpacts_%s_asimov.sh' % (iLabel)
     os.system('rm %s'%fileName)
     dirs=os.getcwd().split("/")
@@ -246,6 +251,7 @@ def impacts(base,iLabel,iMass,iAllfits=False):
             sub_file.close()
             os.system('chmod +x %s' % os.path.abspath(sub_file.name))
             os.system('bsub -q 8nh -R "rusage[tmp=3600:duration=3600:decay=1]" -o out.%%J %s' % (os.path.abspath(sub_file.name)))
+            '''
     fileName='runimpacts_%s_data.sh' % (iLabel)
     os.system('rm %s'%fileName)
     dirs=os.getcwd().split("/")
@@ -304,8 +310,10 @@ def limit(base,iLabel,iMass,options):
     lCommand += 'cd    %s   \n' % dirs[len(dirs)-1]
     lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 \n' % base
     lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimit.root \n' % (os.getcwd(),iLabel)
-    lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 -t -1 --run expected \n' % base
-    lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimitexpectedt1.root \n' % (os.getcwd(),iLabel)
+    #lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 -t -1 --run expected \n' % base
+    #lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimitexpectedt1.root \n' % (os.getcwd(),iLabel)
+    #lCommand += 'combine -M MaxLikelihoodFit %s --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties'% base
+    #lCommand += 'mv mlfit.root %s/%smlfit.root \n' % (os.getcwd(),iLabel)
     # if int(iMass) < 150:
     #     sub_file.write('combine -M MaxLikelihoodFit %s --minimizerStrategy 0 --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties  --robustFit 1 > /dev/null \n' % base)
     # else:
@@ -749,7 +757,7 @@ if __name__ == "__main__":
         if not options.nocards:
             setup(options,mass)
         else:
-            iDir = '%s/results/%s/%s/ZQQ_%s'%(os.getcwd(),options.tag,options.jet,iMass)
+            iDir = '%s/results/%s/%s/ZQQ_%s'%(os.getcwd(),options.tag,options.jet,mass)
             os.chdir (iDir)
         if not options.condense:
             if options.method=='MaxLikelihoodFit':

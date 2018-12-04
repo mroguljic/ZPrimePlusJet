@@ -31,15 +31,15 @@ MASS_SF_ERR['AK8'] = 0.006 #0.003
 MASS_SIGMA['AK8'] = 10 #20
 MASS_SF['CA15'] = 0.988 #0.989 # 1.001
 MASS_SF_ERR['CA15'] = 0.007
-MASS_SIGMA['CA15'] = 4
+MASS_SIGMA['CA15'] = 5 #4 
 
 RES_SF,RES_SF_ERR,RES_SIGMA = {},{},{}
 RES_SF['AK8'] = 1.082 #1.030 #1.114
 RES_SF_ERR['AK8'] = 0.067 #0.029 #0.067
-RES_SIGMA['AK8'] = 3 #7
+RES_SIGMA['AK8'] = 3 # 2#7
 RES_SF['CA15'] = 1.126 #1.092
 RES_SF_ERR['CA15'] = 0.084 #0.067
-RES_SIGMA['CA15'] = 2 #1.
+RES_SIGMA['CA15'] = 1 #1.
 
 TT_SF,TT_PT = {},{}
 TT_SF['AK8'] = 1 #0.93*0.91
@@ -720,6 +720,14 @@ class dazsleRhalphabetBuilder:
                                 for lH in (lHMatched.values()+lHUnmatched.values()):
                                     log.info("before scaling template %s, integral: %f"%(lH.GetName(),lH.Integral()))
                                 
+                                # TMP: scale W and Z
+                                # if process == "wqq":
+                                #     lHMatched[process].Scale(1/1.1)
+                                #     lHUnmatched[process].Scale(1/1.1)
+                                # if process == "zqq":
+                                #     lHMatched[process].Scale(1/1.4)
+                                #     lHUnmatched[process].Scale(1/1.4)
+
                                 # get signals
                                 if lsig:
                                     self._inputsigfile.cd()
@@ -740,7 +748,7 @@ class dazsleRhalphabetBuilder:
                                     lHMatched[process].Scale(KFACTORJET)
                                     lHUnmatched[process].Scale(KFACTORJET)
 
-                                if self._comb:
+                                if lsig and self._comb:
                                     lHMatched[process].Scale(1/2.25)
                                     lHUnmatched[process].Scale(1/2.25)
 
@@ -1129,23 +1137,31 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
         ifile.cd()
         # W,Z matched components - only need to scale by V_SF
         # 2016 W scaled to W_SF(1.35)*EWK*QCD * wscale[1.0,1.0,1.0,1.20,1.25,1.25,1.0] in Zqq_create(2017)
+        # 2017 W scaled to newkfactors*EWK
 	lHP1 = ifile.Get("wqq_pass_matched").Clone()
 	lHF1 = ifile.Get("wqq_fail_matched").Clone()
         log.info('wqq_pass_matched %f'%lHP1.Integral())
         log.info('wqq_fail_matched %f'%lHF1.Integral())
 	scaleHists(lHP1,0,1)
 	scaleHists(lHF1,0,2)
+        ## TMP: lets try scaling w(2017) to match w(2016) norm:
+        # lHP1.Scale(1/1.1)
+        # lHF1.Scale(1/1.1)
 	log.info('wqq_pass_matched scaled %f'%lHP1.Integral())
 	log.info('wqq_fail_matched scaled %f'%lHF1.Integral())
         lHPass["wqq"] = lHP1
         lHFail["wqq"] = lHF1
-        # 2016 Z scaled to DY_SF(1.45)*EWK in Zqq_create(2017)  
+        # 2016 Z scaled to DY_SF(1.45)*EWK in Zqq_create(2016)
+        # 2017 Z scaled to newKfactors*EWK
 	lHP2 = ifile.Get("zqq_pass_matched").Clone()
         lHF2 = ifile.Get("zqq_fail_matched").Clone()
         log.info('zqq_pass_matched %f'%lHP2.Integral())
         log.info('zqq_fail_matched %f'%lHF2.Integral())
         scaleHists(lHP2,1,1)
         scaleHists(lHF2,1,2)
+        ## TMP: lets try scaling z(2017) to match z(2016) norm:
+        # lHP2.Scale(1/1.4)
+        # lHF2.Scale(1/1.4)
         log.info('zqq_pass_matched scaled %f'%lHP2.Integral())
 	log.info('zqq_fail_matched scaled %f'%lHF2.Integral())
         lHPass["zqq"] = lHP2
