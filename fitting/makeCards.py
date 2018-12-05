@@ -84,7 +84,6 @@ def main(options,args):
 						histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_2016_%s'%(proc,box)).Clone()
 					else:
 						histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_%s'%(proc,box)).Clone()
-				#print proc,' ',histoDict['%s_%s'%(proc,box)].Integral()
 				if ('wqq' in proc or 'zqq' in proc):
 					if str(iMass) in proc and options.is2016sig:
 						histoDict['%s_%s_matched'%(proc,box)] = tfile.Get('%s_2016_%s_matched'%(proc,box)).Clone()
@@ -92,8 +91,6 @@ def main(options,args):
 					else:
 						histoDict['%s_%s_matched'%(proc,box)] = tfile.Get('%s_%s_matched'%(proc,box)).Clone()
 						histoDict['%s_%s_unmatched'%(proc,box)] = tfile.Get('%s_%s_unmatched'%(proc,box)).Clone()
-					#print 'matched ',histoDict['%s_%s_matched'%(proc,box)].Integral()
-					#print 'unmatched ',histoDict['%s_%s_unmatched'%(proc,box)].Integral()
 
 		if options.jet == 'CA15':
 			if options.forcomb:
@@ -114,8 +111,8 @@ def main(options,args):
 				dctpl = open("datacard_templates/datacard_for2017_forcomb.tpl");
 			else:
 				#dctpl = open("datacard_templates/datacard_for2017.tpl");
-                                dctpl = open("datacard_templates/datacard_for2017_updatedsf.tpl");
-                                #dctpl = open("datacard_templates/datacard_for2017_updatedsf_test.tpl");
+                                #dctpl = open("datacard_templates/datacard_for2017_updatedsf.tpl");
+                                dctpl = open("datacard_templates/datacard_for2017_updatedsf_test.tpl");
 				dctplnosig = open("datacard_templates/datacard_for2017_updatedsf_test_nosig.tpl");
 		if options.is2016:
                         dctpl = open("datacard_templates/datacard_for2016.tpl")

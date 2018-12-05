@@ -117,7 +117,7 @@ def divide(iData,iHists):
     iAllP.extend(iHistsP)
     return iAllP[0]
 
-def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False):
+def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False,iB=False):
     iData.GetXaxis().SetTitle("m_{SD} (GeV)")
     lC0 = r.TCanvas("c","c",900,800);
     p12 = r.TPad("p12","p12",0.0,0.3,1.0,1.0);
@@ -216,8 +216,8 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
 
     lLegend.AddEntry(iHists["qcd"],"Multijet pred.","lf")
     lLegend.AddEntry(iHists["tqq"],"t#bar{t}/single-t (qq)+jets","l")
-
-    lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%str(iMass),"lf")
+    if not iB:
+        lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%str(iMass),"lf")
 
     lLegend.Draw()
     
@@ -359,7 +359,9 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         iOneWithErrors.SetFillColor(r.kGray+2)
 
     sigHistResiduals = []
-    sigHists = [iHists["zpqq"]]
+    sigHists = []
+    if not iB:
+        sigHists.append(iHists["zpqq"]
     if not iNOWZ:
         sigHists.append(iHists["wqq"])
         sigHists.append(iHists["zqq"])        
@@ -441,13 +443,14 @@ def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True):
         lHists["zqq"].SetLineWidth(2)
         
     lHists["tqq"] = load(iFile,lFit+"tqq")
-    lHists["zpqq"] = load(iFile,lFit+"zqq"+str(iMass))
-    lHists["tqq"].SetLineColor(r.kMagenta+3)
-    lHists["zpqq"].SetLineColor(r.kPink + 7)
-    lHists["zpqq"].SetFillColor(r.kPink + 7)
-    lHists["zpqq"].SetLineStyle(5)
-    lHists["zpqq"].SetLineStyle(2)
+    if iS:
+        lHists["zpqq"] = load(iFile,lFit+"zqq"+str(iMass))
+        lHists["zpqq"].SetLineColor(r.kPink + 7)
+        lHists["zpqq"].SetFillColor(r.kPink + 7)
+        lHists["zpqq"].SetLineStyle(5)
+        lHists["zpqq"].SetLineStyle(2)
     lHists["tqq"].SetLineWidth(2)
+    lHists["tqq"].SetLineColor(r.kMagenta+3)
 
     if iComb:
         lHists["mc"] = load(iFile,lFit+"qcd2017")
@@ -565,6 +568,6 @@ if __name__ == "__main__":
     if options.fail:
         name += '_fail'
     #print 'CAT', iC 
-    draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz)
+    draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb)
 
 

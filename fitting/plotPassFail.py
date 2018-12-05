@@ -787,10 +787,12 @@ if __name__ == "__main__":
         lParams.append("p3r4");
         lParams.append("p3r5");
     print len(lParams)
+    lNuisances = ["tqqnormSF","tqqeffSF","scale","smear","veff","wznormE2","wznormE3","wznormE4","wznormE5","wznormE6","znormE2","znormE3","znormE4","znormE5","znormQ"]
+    for p in lNuisances:
+        if rfr.floatParsFinal().find(p):
+            print p, "=", rfr.floatParsFinal().find(p).getVal(), "+/-", rfr.floatParsFinal().find(p).getError()
     for p in lParams:
         #rfr.floatParsFinal().Print()
-        print "tqqnormSF =", rfr.floatParsFinal().find("tqqnormSF").getVal(),  "+/-", rfr.floatParsFinal().find("tqqnormSF").getError()
-        print "tqqeffSF = ", rfr.floatParsFinal().find("tqqeffSF").getVal(),  "+/-", rfr.floatParsFinal().find("tqqeffSF").getError()
         if rfr.floatParsFinal().find(p):
             print p, "=", rfr.floatParsFinal().find(p).getVal(), "+/-", rfr.floatParsFinal().find(p).getError()
             pars.append(rfr.floatParsFinal().find(p).getVal())
