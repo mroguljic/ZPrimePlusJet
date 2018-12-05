@@ -54,13 +54,14 @@ V_SF['CA15'] = 1.022 #0.864
 V_SF_ERR['CA15'] = 0.064 #0.063
 
 RHO_RANGE,MASSES = {},{}
-RHO_RANGE['AK8'] = [-5.5,-2.1] #  [-5.2,-2.1]  
-RHO_RANGE['CA15'] = [-4.391,-1] #[-4.2,-0.8] 
+RHO_RANGE['AK8'] = [-5.5,-2.1]
+RHO_RANGE['CA15'] = [-4.391,-1] 
 MASSES['AK8'] = []
 MASSES['CA15'] = []
 
 # 2017 signals produced up to 1 jet
 KFACTORJET = 1.5
+KFACTORWIDTH = 2.065
 
 fHists=[]
 
@@ -92,12 +93,6 @@ def removeRho(iHists,iPt=0,iPtCat=0,iJet='AK8'):
     if iPt == 0:
         for lH in iHists.values():
             log.info('Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName()))
-            '''
-            if "zqq_pass" in lH.GetName():
-                print 'Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName())
-                for i0 in range(1,MASSBINS[iJet]+1):
-                    print i0,lH.GetBinContent(i0, 2, 0);
-                    '''
             for i0 in range(1,MASSBINS[iJet]+1):
                 lmass = lH.GetXaxis().GetBinCenter(i0)
                 for i1 in range(1,lH.GetNbinsY()+1):
@@ -108,22 +103,10 @@ def removeRho(iHists,iPt=0,iPtCat=0,iJet='AK8'):
                                 lrho, lH.GetName(), lH.GetYaxis().GetBinLowEdge(i1), lH.GetYaxis().GetBinUpEdge(i1), lpt,
                                 lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0), lmass))
                         lH.SetBinContent(i0, i1, 0);
-                        #if "zqq_pass" in lH.GetName() and i1 == 2:
-                        #    print 'Bin removed ',i0,i1,lrho,lpt,lmass
             lH.SetDirectory(0);
     else:
         for lH in iHists:
             log.info('Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetName()))
-            if "zqq_pass" in lH.GetName() and iPtCat == 2:
-                #print 'Going to remove Rho region in range %f %f for %s'%(RHO_RANGE[iJet][0], RHO_RANGE[iJet][1], lH.GetTitle())
-                #print 'iH %s ipt %f iptcat %f ijet %s'%(lH.GetTitle(),iPt,iPtCat,iJet)
-                for i0 in range(1, lH.GetNbinsX()+1):
-                    lmass = lH.GetXaxis().GetBinCenter(i0)
-                    lpt = iPt
-                    lrho = r.TMath.Log(lmass*lmass/lpt/lpt)
-                    #print i0,lH.GetBinContent(i0, 0),lmass,lrho
-
-            #for i0 in range(1,MASSBINS[iJet]+1):
             for i0 in range(1, lH.GetNbinsX()+1):
                 lmass = lH.GetXaxis().GetBinCenter(i0)
                 lpt = iPt
@@ -133,31 +116,29 @@ def removeRho(iHists,iPt=0,iPtCat=0,iJet='AK8'):
                     log.info("1D HISTO: Removing rho = %.2f for %s, pt %f and cat %f, mass bin [%i,%i] and %f" % ( 
                             lrho, lH.GetName(), lpt, pPt,
                             lH.GetXaxis().GetBinLowEdge(i0), lH.GetXaxis().GetBinUpEdge(i0),lmass)) 
-                    #if "zqq_pass" in lH.GetName() and iPtCat == 2:
-                    #    print 'Bin removed ',i0,lrho,lpt,lmass
                     lH.SetBinContent(i0, 0);
             lH.SetDirectory(0);
 
 class dazsleRhalphabetBuilder: 
 
-        def __init__( self, hpass, hfail, inputfile, inputsigfile, inputrfile, nr=4, np=3, onlyRhalph = False, freeze_poly = False, mcstat = False, syst = False, interpol = True, jet = 'AK8', comb = False, smooth = False, is2016 = False): 
-
+        def __init__( self, hpass, hfail, inputfile, inputsigfile, options):
 		self._hpass = hpass;
 		self._hfail = hfail;
 		self._inputfile = inputfile;
                 self._inputsigfile = inputsigfile;
-                self._inputrfile = inputrfile;
-                self._onlyRhalph = onlyRhalph;
+                self._inputrfile = options.inputrfile;
+                self._onlyRhalph = options.onlyRhalph;
                 self._onlyInputs = False;
                 self._bernstein = True;
-                self._is2016 = is2016;
-                self._freeze = freeze_poly;
-                self._mcstat = mcstat;
-                self._syst = syst;
-                self._interpol = interpol;
-                self._jet = jet;
-                self._comb = comb;
-                self._smooth = smooth;
+                self._is2016 = options.is2016;
+                self._freeze = options.freeze;
+                self._mcstat = options.mcstat;
+                self._syst = options.syst;
+                self._interpol = options.interpol;
+                self._jet = options.jet;
+                self._comb = options.forcomb;
+                self._smooth = options.smooth;
+                self._scaleWZ = options.scaleWZ;
 
 		self._outputName = "base.root";
                 if self._comb:
@@ -165,24 +146,24 @@ class dazsleRhalphabetBuilder:
 		self._outfile_validation = r.TFile("validation.root","RECREATE");
 
 		# mass bins
-		self._mass_nbins = MASSBINS[jet];
-		self._mass_lo    = MASSLO[jet];
-		self._mass_hi    = MASSHI[jet];
+		self._mass_nbins = MASSBINS[self._jet];
+		self._mass_lo    = MASSLO[self._jet];
+		self._mass_hi    = MASSHI[self._jet];
 		log.info("Number of mass bins %f and lo: %f hi: %f "%(self._mass_nbins, self._mass_lo, self._mass_hi));
 
 		# rho range
-		self._rho_lo = RHO_RANGE[jet][0];
-		self._rho_hi = RHO_RANGE[jet][1];
+		self._rho_lo = RHO_RANGE[self._jet][0];
+		self._rho_hi = RHO_RANGE[self._jet][1];
 		log.info(" Rho: Low : %f High: %f"%(self._rho_lo, self._rho_hi));
 
 		# polynomial order for fit
-		self._poly_lNP = np; # 3rd order in pT
-		self._poly_lNR = nr; # 4th order in rho
+		self._poly_lNP = options.np; # order in pT
+		self._poly_lNR = options.nr; # order in rho
 
 		# pt bins
 		self._nptbins = hpass["data_obs"].GetYaxis().GetNbins();
-		self._pt_lo = hpass["data_obs"].GetYaxis().GetBinLowEdge( 1 );
-		self._pt_hi = hpass["data_obs"].GetYaxis().GetBinUpEdge( self._nptbins );
+		self._pt_lo   = hpass["data_obs"].GetYaxis().GetBinLowEdge( 1 );
+		self._pt_hi   = hpass["data_obs"].GetYaxis().GetBinUpEdge( self._nptbins );
 	
 		# define RooRealVars
 		self._lMSD    = r.RooRealVar("x","x",self._mass_lo,self._mass_hi);
@@ -366,12 +347,12 @@ class dazsleRhalphabetBuilder:
 
 		lPass  = r.RooParametricHist(lName+"_pass_"+iCat,lName+"_pass_"+iCat,self._lMSD,lPassBins,iHs[0])
 		lFail  = r.RooParametricHist(lName+"_fail_"+iCat,lName+"_fail_"+iCat,self._lMSD,lFailBins,iHs[0])
-		log.info("Print pass and fail RooParametricHists")
+		#log.info("Print pass and fail RooParametricHists")
 		#lPass.Print()
 		#lFail.Print()
 		lNPass = r.RooAddition(lName+"_pass_"+iCat+"_norm",lName+"_pass_"+iCat+"_norm",lPassBins)
 		lNFail = r.RooAddition(lName+"_fail_"+iCat+"_norm",lName+"_fail_"+iCat+"_norm",lFailBins)
-		log.info("Printing NPass and NFail variables:")
+		#log.info("Printing NPass and NFail variables:")
 		#lNPass.Print()
 		#lNFail.Print()
 		self._allShapes.extend([lPass,lFail,lNPass,lNFail])
@@ -396,7 +377,7 @@ class dazsleRhalphabetBuilder:
 
 	def buildRooPolyArray(self,iPt,iRho,iQCD,iZero,iVars):
 		
-		print "---- [buildRooPolyArray]"	
+                # print "---- [buildRooPolyArray]"	
 		lPt  = r.RooConstVar("Var_Pt_" +str(iPt)+"_"+str(iRho), "Var_Pt_" +str(iPt)+"_"+str(iRho),(iPt))
 		lRho = r.RooConstVar("Var_Rho_"+str(iPt)+"_"+str(iRho), "Var_Rho_"+str(iPt)+"_"+str(iRho),(iRho))
 		lRhoArray = r.RooArgList()
@@ -420,7 +401,7 @@ class dazsleRhalphabetBuilder:
 
         def buildRooPolyRhoArrayBernstein(self,iPt,iRho,iQCD,iZero,iVars):
             
-                print "---- [buildRooPolyArrayBernstein]"
+                # print "---- [buildRooPolyArrayBernstein]"
                 lPt  = r.RooConstVar("Var_Pt_" +str(iPt)+"_"+str(iRho), "Var_Pt_" +str(iPt)+"_"+str(iRho),(iPt))
                 lRho = r.RooConstVar("Var_Rho_"+str(iPt)+"_"+str(iRho), "Var_Rho_"+str(iPt)+"_"+str(iRho),(iRho))
                 lPt_rescaled = r.RooConstVar("Var_Pt_rescaled_" + str(iPt) + "_" + str(iRho),
@@ -432,7 +413,6 @@ class dazsleRhalphabetBuilder:
                 # pT degree
                 if self._poly_lNP == 1:
                     ptPolyString = "@0*(1-@2)+@1*@2"
-                    #ptPolyString = "@0+@0*(1-@2)+@1*@2"
                 elif self._poly_lNP == 2:
                     ptPolyString = "@0*(1-@3)**2+@1*2*@3*(1-@3)+@2*@3**2"
                 elif self._poly_lNP == 3:
@@ -463,28 +443,17 @@ class dazsleRhalphabetBuilder:
                         for pVar in range(0,self._poly_lNP+1):
                             if lNCount == 0: lTmpArray.add(iQCD)  # for the very first constant (e.g. p0r0), just set that to 1
                             else:
-                                #print "lNCount = " + str(lNCount)
                                 lTmpArray.add(iVars[lNCount])
-                                #print "iVars[lNCount]: ", iVars[lNCount]
-                                #print "iVars[lNCount]"
-                                #iVars[lNCount].Print()
                             lNCount = lNCount + 1
                         pLabel="Var_Pol_Bin_"+str(round(iPt,2))+"_"+str(round(iRho,3))+"_"+str(pRVar)
                         lTmpArray.add(lPt_rescaled)
-                        #print "lTmpArray: ", lTmpArray.Print()
                         pPol = r.RooFormulaVar(pLabel, pLabel, ptPolyString, lTmpArray)
-                        #print "pPol:"
-                        #print pPol.Print("V")
-                        #pPol.Print()
                         lRhoArray.add(pPol)
                         self._allVars.append(pPol)
-                        #print "pPol No Bernstein"
                         pPoltest = r.RooPolyVar(pLabel,pLabel,lPt,lTmpArray)
-                        #pPoltest.Print("V")
 
                 lLabel="Var_RhoPol_Bin_"+str(round(iPt,2))+"_"+str(round(iRho,3))
                 lRhoArray.add(lRho_rescaled)
-                #print "lRhoArray: ", lRhoArray.Print()
                 lRhoPol = r.RooFormulaVar(lLabel, lLabel, rhoPolyString, lRhoArray)
                 self._allVars.extend([lPt_rescaled, lRho_rescaled, lRhoPol])
                 return lRhoPol
@@ -721,12 +690,13 @@ class dazsleRhalphabetBuilder:
                                     log.info("before scaling template %s, integral: %f"%(lH.GetName(),lH.Integral()))
                                 
                                 # TMP: scale W and Z
-                                # if process == "wqq":
-                                #     lHMatched[process].Scale(1/1.1)
-                                #     lHUnmatched[process].Scale(1/1.1)
-                                # if process == "zqq":
-                                #     lHMatched[process].Scale(1/1.4)
-                                #     lHUnmatched[process].Scale(1/1.4)
+                                if self._scaleWZ:
+                                    if process == "wqq":
+                                        lHMatched[process].Scale(1/1.1)
+                                        lHUnmatched[process].Scale(1/1.1)
+                                    if process == "zqq":
+                                        lHMatched[process].Scale(1/1.4)
+                                        lHUnmatched[process].Scale(1/1.4)
 
                                 # get signals
                                 if lsig:
@@ -743,8 +713,8 @@ class dazsleRhalphabetBuilder:
 
                                 # tmp: scale back 2017 signals 
                                 if lsig and not self._is2016:
-                                    lHMatched[process].Scale(2.065) 
-                                    lHUnmatched[process].Scale(2.065)
+                                    lHMatched[process].Scale(KFACTORWIDTH) 
+                                    lHUnmatched[process].Scale(KFACTORWIDTH)
                                     lHMatched[process].Scale(KFACTORJET)
                                     lHUnmatched[process].Scale(KFACTORJET)
 
@@ -1083,7 +1053,7 @@ class dazsleRhalphabetBuilder:
                     lSig_inPtbin = proj("cat",str(iPt),lSig,self._mass_nbins,self._mass_lo,self._mass_hi)
                     iHSig_inPtbin.Scale(lSig_inPtbin.Integral()/iHSig_inPtbin.Integral())
                     # scale again
-                    iHSig_inPtbin.Scale(2.065)
+                    iHSig_inPtbin.Scale(KFACTORWIDTH)
                     iHSig_inPtbin.Scale(KFACTORJET)
                     '''
                     # smooth
@@ -1102,30 +1072,17 @@ def main(options,args):
         MASSES = massIterable(options.masses)
 
 	#load input histograms: 2D histograms(mass,pT) of pass and fail region, for each MC and data
-	#1:wqq,2:zqq,3:qcd,4:tqq,0:data+signals(50,75,100,125,150,200,250,300)
         lFile  = r.TFile(options.input);
         if options.sig: 
             lFileSig = r.TFile(options.sig);
             log.info('signal file %s'%options.sig)
         else: lFileSig = lFile
-	(hpass,hfail) = loadHistograms(lFile,lFileSig,options.jet,options.pseudo,options.pseudo15,options.is2016,options.forcomb);
+	(hpass,hfail) = loadHistograms(lFile,lFileSig,options)
 
 	#build the workspaces
-	dazsleRhalphabetBuilder(hpass,hfail,
-                                lFile,lFileSig,
-                                options.inputrfile,
-                                options.nr,options.np,
-                                options.onlyRhalph,options.freeze,
-                                options.mcstat,options.syst,
-                                options.interpol,
-                                options.jet,
-                                options.forcomb,
-                                options.smooth,
-                                options.is2016,
-                                );
+	dazsleRhalphabetBuilder(hpass,hfail,lFile,lFileSig,options);
 
-##-------------------------------------------------------------------------------------
-def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):     
+def loadHistograms(ifile,ifilesig,options):
 
 	print "---- [Load histograms]"
         lBackgrounds = ["wqq", "zqq", "qcd", "tqq"]
@@ -1135,6 +1092,7 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 	lHFail = {};
 
         ifile.cd()
+
         # W,Z matched components - only need to scale by V_SF
         # 2016 W scaled to W_SF(1.35)*EWK*QCD * wscale[1.0,1.0,1.0,1.20,1.25,1.25,1.0] in Zqq_create(2017)
         # 2017 W scaled to newkfactors*EWK
@@ -1145,12 +1103,14 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 	scaleHists(lHP1,0,1)
 	scaleHists(lHF1,0,2)
         ## TMP: lets try scaling w(2017) to match w(2016) norm:
-        # lHP1.Scale(1/1.1)
-        # lHF1.Scale(1/1.1)
+        if options.scaleWZ:
+            lHP1.Scale(1/1.1)
+            lHF1.Scale(1/1.1)
 	log.info('wqq_pass_matched scaled %f'%lHP1.Integral())
 	log.info('wqq_fail_matched scaled %f'%lHF1.Integral())
         lHPass["wqq"] = lHP1
         lHFail["wqq"] = lHF1
+
         # 2016 Z scaled to DY_SF(1.45)*EWK in Zqq_create(2016)
         # 2017 Z scaled to newKfactors*EWK
 	lHP2 = ifile.Get("zqq_pass_matched").Clone()
@@ -1160,8 +1120,9 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
         scaleHists(lHP2,1,1)
         scaleHists(lHF2,1,2)
         ## TMP: lets try scaling z(2017) to match z(2016) norm:
-        # lHP2.Scale(1/1.4)
-        # lHF2.Scale(1/1.4)
+        if options.scaleWZ:
+            lHP2.Scale(1/1.4)
+            lHF2.Scale(1/1.4)
         log.info('zqq_pass_matched scaled %f'%lHP2.Integral())
 	log.info('zqq_fail_matched scaled %f'%lHF2.Integral())
         lHPass["zqq"] = lHP2
@@ -1173,10 +1134,6 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 	lHF3 = ifile.Get("qcd_fail").Clone()
         log.info('qcd_pass %f'%lHP3.Integral())
         log.info('qcd_fail %f'%lHF3.Integral())
-        # To check QCD yields
-	# for i0 in range(1,lHF3.GetNbinsY()+1):
-	# 	for i1 in range(1,lHF3.GetNbinsX()+1):		
-	# 		log.info('qcd fail bin %i %i %f'%(i0,i1,lHF3.GetBinContent(i1,i0)))
         lHPass["qcd"] = lHP3
         lHFail["qcd"] = lHF3
 
@@ -1204,7 +1161,7 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 	log.info('total mc pass %f'%(lHP1.Integral()+lHP2.Integral()+lHP3.Integral()+lHP4.Integral()))
         log.info('total mc fail %f'%(lHF1.Integral()+lHF2.Integral()+lHF3.Integral()+lHF4.Integral()))
 
-	if ipseudo:
+	if options.pseudo:
 		lHP0 = lHP3.Clone("data_obs_pass")
 		lHF0 = lHF3.Clone("data_obs_fail")
 		lHF0.Add(lHF1)
@@ -1215,7 +1172,7 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 		lHP0.Add(lHP4)
 		log.info('data(mc) pass %f'%lHP0.Integral())
 		log.info('data(mc) fail %f'%lHF0.Integral())
-	elif ipseudo15:
+	elif options.pseudo15:
 		lHF0 = lHF3.Clone("data_obs_fail")
 		lHP0 = lHF3.Clone("data_obs_pass");
 		lHP0.Scale(0.05);
@@ -1239,11 +1196,10 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
 	# Z' signals already scaled to DY_SF(1.45) in Zqq_create
         for mass in MASSES:
             ifile.cd()
-            if not is2016:
+            if not options.is2016:
                 lpass = ifile.Get("zqq"+str(mass)+"_pass_matched").Clone()
                 lfail = ifile.Get("zqq"+str(mass)+"_fail_matched").Clone()
             else:
-                #print mass
                 lpass = ifile.Get("zqq"+str(mass)+"_2016_pass_matched").Clone()
                 lfail = ifile.Get("zqq"+str(mass)+"_2016_fail_matched").Clone()
             log.info('Getting histogram for mass: '+str(mass))
@@ -1268,12 +1224,12 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
             scaleHists(lpass,1,1)
             scaleHists(lfail,1,2)
             # tmp: scale back signals
-            if not is2016:
-                lpass.Scale(2.065)
-                lfail.Scale(2.065)
+            if not options.is2016:
+                lpass.Scale(KFACTORWIDTH)
+                lfail.Scale(KFACTORWIDTH)
                 lpass.Scale(KFACTORJET)
                 lfail.Scale(KFACTORJET)
-                if iscomb:
+                if options.forcomb:
                     lpass.Scale(1/2.25)
                     lfail.Scale(1/2.25)
                 log.info(lpass.GetName()+' scaled '+str(lpass.Integral()))
@@ -1291,8 +1247,8 @@ def loadHistograms(ifile,ifilesig,ijet,ipseudo,ipseudo15,is2016,iscomb):
             log.info("loaded 2D histogram %s with integral %f"%(lH.GetName(), lH.Integral()))
             
 	# remove rho regions
-        removeRho(lHPass,0,0,ijet)
-        removeRho(lHFail,0,0,ijet)
+        removeRho(lHPass,0,0,options.jet)
+        removeRho(lHFail,0,0,options.jet)
 
         for lH in (lHPass.values()+lHFail.values()):
             log.info("loaded 2D histogram %s with integral %f (after rho cut)"%(lH.GetName(), lH.Integral()))
@@ -1321,6 +1277,7 @@ if __name__ == '__main__':
         parser.add_option('--jet', dest='jet', default='AK8', help='jet type')
         parser.add_option('--forcomb', action='store_true', dest='forcomb',  default=False, help='combine with 2016')
         parser.add_option('--smooth', action='store_true', dest='smooth',  default=False, help='smooth pass histogram')
+        parser.add_option('--scaleWZ', action='store_true', dest='scaleWZ', default=False, help='scale W and Z to match 2017')
         parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016')
 
 	(options, args) = parser.parse_args()
