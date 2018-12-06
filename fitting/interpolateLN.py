@@ -27,14 +27,14 @@ def main(options,args):
 
     for proc in sigs:
         for box in ['pass','fail']:
-            print 'getting histogram for process: %s_%s'%(proc,box)
+            #print 'getting histogram for process: %s_%s'%(proc,box)
             histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_%s'%(proc,box)).Clone()
             matchString = '_matched'
             histoDict['%s_%s%s'%(proc,box,matchString)] = tfile.Get('%s_%s%s'%(proc,box,matchString)).Clone()
             for syst in ['JER','JES','Pu','trigger']:
-                print 'getting histogram for process: %s_%s_%sUp'%(proc,box,syst)
+                #print 'getting histogram for process: %s_%s_%sUp'%(proc,box,syst)
                 histoDict['%s_%s_%sUp'%(proc,box,syst)] = tfile.Get('%s_%s_%sUp'%(proc,box,syst)).Clone()
-                print 'getting histogram for process: %s_%s_%sDown'%(proc,box,syst)
+                #print 'getting histogram for process: %s_%s_%sDown'%(proc,box,syst)
                 histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('%s_%s_%sDown'%(proc,box,syst)).Clone()
 
     rates = {}
@@ -65,7 +65,7 @@ def main(options,args):
     for i_sig, proc in enumerate(sigs):
         re_match = re_zqq.search(proc)
         mass = int(re_match.group("mass"))
-        print 'MASS ',mass,' i_sig ',i_sig, ' proc'
+        #print 'MASS ',mass,' i_sig ',i_sig, ' proc'
         for box in ['pass','fail']:
             for i in range(1,numberOfPtBins+1):
                 if muonCR:
@@ -106,15 +106,6 @@ def main(options,args):
                         ratePuDown = histoDict['%s_%s_PuDown'%(proc,box)].Integral(1, numberOfMassBins, i, i)
                         rateTriggerUp = histoDict['%s_%s_triggerUp'%(proc,box)].Integral(1, numberOfMassBins, i, i)
                         rateTriggerDown = histoDict['%s_%s_triggerDown'%(proc,box)].Integral(1, numberOfMassBins, i, i)
-                    if i ==5:
-                        print 'rateJESUp ',rateJESUp
-                        print 'rateJESDown ',rateJESDown
-                        print 'rateJERUp ',rateJERUp 
-                        print 'rateJERDown ',rateJERDown
-                        print 'ratePuUp ',ratePuUp 
-                        print 'ratePuDown ',ratePuDown
-                        print 'rateTriggerUp ',rateTriggerUp 
-                        print 'rateTriggerDown ',rateTriggerDown  
                     jesErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJESUp-rate)+abs(rateJESDown-rate))/(2.*rate)   
                     jerErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJERUp-rate)+abs(rateJERDown-rate))/(2.*rate) 
                     puErrs['%s_%s'%(proc,box)] =  1.0+(abs(ratePuUp-rate)+abs(ratePuDown-rate))/(2.*rate)
@@ -124,7 +115,7 @@ def main(options,args):
                     jerErrs['%s_%s'%(proc,box)] =  1.0
                     puErrs['%s_%s'%(proc,box)] =  1.0
                     triggerErrs['%s_%s'%(proc,box)] =  1.0
-                print proc, 'cat %i'%i, 'JES', jesErrs['%s_%s'%(proc,box)], 'JER' ,jerErrs['%s_%s'%(proc,box)], 'PU', puErrs['%s_%s'%(proc,box)], 'mcstat', mcstatErrs['%s_%s'%(proc,box),i,1], 'trigger', triggerErrs['%s_%s'%(proc,box)]
+                #print proc, 'cat %i'%i, 'JES', jesErrs['%s_%s'%(proc,box)], 'JER' ,jerErrs['%s_%s'%(proc,box)], 'PU', puErrs['%s_%s'%(proc,box)], 'mcstat', mcstatErrs['%s_%s'%(proc,box),i,1], 'trigger', triggerErrs['%s_%s'%(proc,box)]
                 jesGraph[box, i].SetPoint(i_sig, mass,  jesErrs['%s_%s'%(proc,box)])
                 jerGraph[box, i].SetPoint(i_sig, mass,  jerErrs['%s_%s'%(proc,box)])
                 puGraph[box, i].SetPoint(i_sig, mass,  puErrs['%s_%s'%(proc,box)])
