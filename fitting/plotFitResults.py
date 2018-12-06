@@ -21,7 +21,7 @@ parser.add_option('--skipcat' ,action='store',type=int,     dest='skipcat' ,defa
 parser.add_option('--nowz'    ,action='store_true',         dest='nowz'    ,default=False,          help='no w')
 parser.add_option('--isMuonCR',action='store_true',         dest='isMuonCR',default=True,           help='muon CR')
 parser.add_option('--fitb'    ,action='store_true',         dest='fitb'    ,default=False,          help='fit background only')
-parser.add_option("--lumi"    ,action='store',type=float,   dest="lumi"    ,default=3.6,            help="luminosity", metavar="lumi")
+parser.add_option("--lumi"    ,action='store',type=float,   dest="lumi"    ,default=41.1,           help="luminosity", metavar="lumi")
 parser.add_option("--onecat"  ,action='store',type=int,     dest='onecat'  ,default=0,              help='single cat fit')
 parser.add_option('--forcomb', action='store',type='string',dest='forcomb' ,default="",             help='combine with 2016')
 parser.add_option('--odir',                                 dest='odir'    ,default='./',           help='output directory',metavar='odir')
@@ -361,7 +361,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     sigHistResiduals = []
     sigHists = []
     if not iB:
-        sigHists.append(iHists["zpqq"]
+        sigHists.append(iHists["zpqq"])
     if not iNOWZ:
         sigHists.append(iHists["wqq"])
         sigHists.append(iHists["zqq"])        
