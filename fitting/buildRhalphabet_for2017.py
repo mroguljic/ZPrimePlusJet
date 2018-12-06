@@ -28,7 +28,7 @@ MASSHI['CA15'] = 500
 MASS_SF,MASS_SF_ERR,MASS_SIGMA = {},{},{}
 MASS_SF['AK8'] = 0.989 #0.983 # 1.001
 MASS_SF_ERR['AK8'] = 0.006 #0.003
-MASS_SIGMA['AK8'] = 10 #20
+MASS_SIGMA['AK8'] = 30 #20
 MASS_SF['CA15'] = 0.988 #0.989 # 1.001
 MASS_SF_ERR['CA15'] = 0.007
 MASS_SIGMA['CA15'] = 5 #4 
@@ -36,7 +36,7 @@ MASS_SIGMA['CA15'] = 5 #4
 RES_SF,RES_SF_ERR,RES_SIGMA = {},{},{}
 RES_SF['AK8'] = 1.082 #1.030 #1.114
 RES_SF_ERR['AK8'] = 0.067 #0.029 #0.067
-RES_SIGMA['AK8'] = 3 # 2#7
+RES_SIGMA['AK8'] = 6 # 2#7
 RES_SF['CA15'] = 1.126 #1.092
 RES_SF_ERR['CA15'] = 0.084 #0.067
 RES_SIGMA['CA15'] = 1 #1.
@@ -131,9 +131,9 @@ class dazsleRhalphabetBuilder:
                 self._onlyInputs = False;
                 self._bernstein = True;
                 self._is2016 = options.is2016;
+                self._is2016WZ = options.is2016WZ;
                 self._freeze = options.freeze;
                 self._mcstat = options.mcstat;
-                self._syst = options.syst;
                 self._interpol = options.interpol;
                 self._jet = options.jet;
                 self._comb = options.forcomb;
@@ -217,10 +217,9 @@ class dazsleRhalphabetBuilder:
 		log.info("Number of pt bins = %f"%self._nptbins);
 		for ipt in range(1,self._nptbins+1):
                         # approximate pT bin value
-                        #print "------- pT bin number ",ipt	      
                         pPt = self._hpass["data_obs"].GetYaxis().GetBinLowEdge(ipt)+self._hpass["data_obs"].GetYaxis().GetBinWidth(ipt)*0.3;
 
-			# 1d histograms in each pT bin (in the order... data, w, z, qcd, top, signals)
+			# 1d histograms in each pT bin
 			hpass_inPtBin = {};
 			hfail_inPtBin = {};
                         for ih, h in self._hpass.iteritems():
@@ -596,69 +595,9 @@ class dazsleRhalphabetBuilder:
 			process = pFunc.GetName().split("_")[0];
 			cat     = pFunc.GetName().split("_")[1];
 			mass    = 0.;
-                        systematics = ['JES', 'JER', 'trigger', 'mcstat','Pu']
                         if "wqq" in process: procid = 0;
                         if "zqq" in process: procid = 1;
-                        if "tqq" in process: procid = 2;
                         passid = 1 if "pass" in cat  else 2
-                        if ('tqq' in process or 'wqq' in process or 'zqq' in process) and self._syst:
-                            #print '--- Systematics'
-                            hout = []
-                            histDict = {}
-                            for syst in systematics:
-                                if syst == 'mcstat':
-                                    if self._mcstat:
-                                        matchingString = ''
-                                        if ('wqq' in process or 'zqq' in process): matchingString = '_matched'
-                                        tmph = self._inputfile.Get(process + '_' + cat + matchingString).Clone(process + '_' + cat)
-                                        tmph_up = self._inputfile.Get(process + '_' + cat + matchingString).Clone(process + '_' + cat + '_' + syst + 'Up')
-                                        tmph_down = self._inputfile.Get(process + '_' + cat + matchingString).Clone(process + '_' + cat + '_' + syst + 'Down')
-                                        scaleHists(tmph,procid,passid)
-                                        scaleHists(tmph_up,procid,passid)
-                                        scaleHists(tmph_down,procid,passid)
-                                        tmph_mass = proj("cat",str(lPt),tmph,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                        tmph_mass_up = proj('cat', str(lPt), tmph_up, self._mass_nbins, self._mass_lo, self._mass_hi)
-                                        tmph_mass_down = proj('cat', str(lPt), tmph_down, self._mass_nbins, self._mass_lo,self._mass_hi)
-                                        for i in range(1, tmph_mass_up.GetNbinsX() + 1):
-                                            mcstatup = tmph_mass_up.GetBinContent(i) + tmph_mass_up.GetBinError(i)
-                                            mcstatdown = max(0., tmph_mass_down.GetBinContent(i) - tmph_mass_down.GetBinError(i))
-                                            tmph_mass_up.SetBinContent(i, mcstatup)
-                                            tmph_mass_down.SetBinContent(i, mcstatdown)
-                                        histDict[pFunc.GetName()] = tmph_mass
-                                        histDict[pFunc.GetName() + '_' + pFunc.GetName().replace('_', '') + syst + 'Up'] = tmph_mass_up
-                                        histDict[pFunc.GetName() + '_' + pFunc.GetName().replace('_', '') + syst + 'Down'] = tmph_mass_down
-                                        if 'tqq' in process:
-                                            hout.append(tmph_mass)
-                                            # hout.append(tmph_mass_up)
-                                            # hout.append(tmph_mass_down)
-                                else:
-                                    #print process + '_' + cat + '_' + syst + 'Up'
-                                    #print process + '_' + cat + '_' + syst + 'Down'
-                                    tmph_up = self._inputfile.Get(process + '_' + cat + '_' + syst + 'Up').Clone()
-                                    tmph_down = self._inputfile.Get(process + '_' + cat + '_' + syst + 'Down').Clone()                            
-                                    scaleHists(tmph_up,procid,passid)
-                                    scaleHists(tmph_down,procid,passid)
-                                    tmph_mass_up = proj('cat', str(lPt), tmph_up, self._mass_nbins, self._mass_lo, self._mass_hi)
-                                    tmph_mass_down = proj('cat', str(lPt), tmph_down, self._mass_nbins, self._mass_lo, self._mass_hi)
-                                    tmph_mass_up.SetName(pFunc.GetName() + '_' + syst + 'Up')
-                                    tmph_mass_down.SetName(pFunc.GetName() + '_' + syst + 'Down')
-                                    hout.append(tmph_mass_up)
-                                    hout.append(tmph_mass_down)
-
-                                if self._mcstat:
-                                    uncorrelate(histDict, 'mcstat')
-                                    for key, myhist in histDict.iteritems():
-                                        if 'mcstat' in key:
-                                            hout.append(myhist)
-
-                                # remove rho regions
-                                removeRho(hout,iPt,int(lPt),self._jet)
-                                for lH in hout:
-                                    tmprdh = RooDataHist(lH.GetName(),lH.GetName(),r.RooArgList(self._lMSD),lH)
-                                    getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
-                                    self._outfile_validation.cd()
-                                    #print "WHAT is being written ",lH.GetName(),lH.GetTitle()
-                                    lH.Write()
 
 			if iShift and ("wqq" in process or "zqq" in process):
 
@@ -669,7 +608,6 @@ class dazsleRhalphabetBuilder:
                                 lFile = self._inputfile;
 				if process == "wqq": mass = 80.;
 				elif process == "zqq": mass = 91.;
-				elif process == "tqq": mass = 80.;
 				else: 
                                     mass = float(process[3:])
                                     lsig = True
@@ -680,7 +618,7 @@ class dazsleRhalphabetBuilder:
                                 
                                 lFile.cd()
 				# get the matched and unmatched hist 
-                                if self._is2016 and lsig:
+                                if (self._is2016 and lsig) or (self._is2016WZ and (process == "wqq" or process == "zqq")):
                                     lHMatched[process] = lFile.Get(process+"_2016_"+cat+"_matched").Clone();
                                     lHUnmatched[process] = lFile.Get(process+"_2016_"+cat+"_unmatched").Clone();
                                 else:
@@ -722,30 +660,13 @@ class dazsleRhalphabetBuilder:
                                     lHMatched[process].Scale(1/2.25)
                                     lHUnmatched[process].Scale(1/2.25)
 
-                                # remove rho from 2d hists
+                                # remove rho from 2d hists after rescaling
                                 removeRho(lHMatched,0,0,self._jet)
                                 removeRho(lHUnmatched,0,0,self._jet)
 
 				# project each into mass axis
 				tmph_mass_matched = proj("cat",str(lPt),lHMatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
 				tmph_mass_unmatched = proj("cat",str(lPt),lHUnmatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
-
-                                # for small signals
-                                # lSmall = False;
-                                # if mass == 50 and int(lPt) > 4:
-                                #     lSmall = True;
-                                #     pInt = tmph_mass_matched.Integral()+0.01; pMInt = tmph_mass_unmatched.Integral()+0.01;
-                                #     tmph_mass_matched = proj("cat",'4',tmph_matched,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                #     tmph_mass_unmatched = proj("cat",'4',tmph_unmatched,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                #     tmph_mass_matched.Scale(pInt/tmph_mass_matched.Integral()) 
-                                #     tmph_mass_unmatched.Scale(pMInt/tmph_mass_unmatched.Integral()) 
-                                # if mass >= 200 and int(lPt) < 3:
-                                #     lSmall = True;
-                                #     pInt = tmph_mass_matched.Integral()+0.01; pMInt = tmph_mass_unmatched.Integral()+0.01;
-                                #     tmph_mass_matched = proj("cat",'3',tmph_matched,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                #     tmph_mass_unmatched = proj("cat",'3',tmph_unmatched,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                #     tmph_mass_matched.Scale(pInt/tmph_mass_matched.Integral())
-                                #     tmph_mass_unmatched.Scale(pMInt/tmph_mass_unmatched.Integral())
 
                                 # remove Rho region
                                 removeRho([tmph_mass_matched,tmph_mass_unmatched],iPt,int(lPt),self._jet)
@@ -898,19 +819,8 @@ class dazsleRhalphabetBuilder:
                                         massVal = h.GetXaxis().GetBinCenter(i)
                                         rhoVal = r.TMath.Log(massVal * massVal / iPt / iPt)
                                         if rhoVal < self._rho_lo or rhoVal > self._rho_hi:
-                                            '''
-                                            if "zqq_pass_cat2" in h.GetName():
-                                                print "removing rho = %.2f for %s, pt_val = %.2f, mass bin [%i,%i]" % (
-                                                    rhoVal, h.GetName(), iPt, h.GetXaxis().GetBinLowEdge(i), h.GetXaxis().GetBinUpEdge(i))
-                                                    '''
                                             h.SetBinContent(i, 0.)
                                     h.Write();
-                                    '''
-                                    if "zqq" in h.GetName():
-                                        print "WHAT is being written before interpol ",h.GetName(),h.GetTitle()
-                                        for i in range(1,h.GetNbinsX()+1):
-                                            print i,h.GetBinContent(i)
-                                            '''
                                     tmprdh = RooDataHist(h.GetName(),h.GetName(),r.RooArgList(self._lMSD),h)
                                     getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
                                     # create hists for scale pT
@@ -1096,8 +1006,12 @@ def loadHistograms(ifile,ifilesig,options):
         # W,Z matched components - only need to scale by V_SF
         # 2016 W scaled to W_SF(1.35)*EWK*QCD * wscale[1.0,1.0,1.0,1.20,1.25,1.25,1.0] in Zqq_create(2017)
         # 2017 W scaled to newkfactors*EWK
-	lHP1 = ifile.Get("wqq_pass_matched").Clone()
-	lHF1 = ifile.Get("wqq_fail_matched").Clone()
+        if options.is2016WZ:
+            lHP1 = ifile.Get("wqq_2016_pass_matched").Clone()
+            lHF1 = ifile.Get("wqq_2016_fail_matched").Clone()
+        else:
+            lHP1 = ifile.Get("wqq_pass_matched").Clone()
+            lHF1 = ifile.Get("wqq_fail_matched").Clone()
         log.info('wqq_pass_matched %f'%lHP1.Integral())
         log.info('wqq_fail_matched %f'%lHF1.Integral())
 	scaleHists(lHP1,0,1)
@@ -1113,8 +1027,12 @@ def loadHistograms(ifile,ifilesig,options):
 
         # 2016 Z scaled to DY_SF(1.45)*EWK in Zqq_create(2016)
         # 2017 Z scaled to newKfactors*EWK
-	lHP2 = ifile.Get("zqq_pass_matched").Clone()
-        lHF2 = ifile.Get("zqq_fail_matched").Clone()
+        if options.is2016WZ:
+            lHP2 = ifile.Get("zqq_2016_pass_matched").Clone()
+            lHF2 = ifile.Get("zqq_2016_fail_matched").Clone()
+        else:
+            lHP2 = ifile.Get("zqq_pass_matched").Clone()
+            lHF2 = ifile.Get("zqq_fail_matched").Clone()
         log.info('zqq_pass_matched %f'%lHP2.Integral())
         log.info('zqq_fail_matched %f'%lHF2.Integral())
         scaleHists(lHP2,1,1)
@@ -1278,7 +1196,8 @@ if __name__ == '__main__':
         parser.add_option('--forcomb', action='store_true', dest='forcomb',  default=False, help='combine with 2016')
         parser.add_option('--smooth', action='store_true', dest='smooth',  default=False, help='smooth pass histogram')
         parser.add_option('--scaleWZ', action='store_true', dest='scaleWZ', default=False, help='scale W and Z to match 2017')
-        parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016')
+        parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016 signal samples')
+        parser.add_option('--is2016WZ', action='store_true', dest='is2016WZ',  default=False, help='is 2016 W and Z samples')
 
 	(options, args) = parser.parse_args()
 
