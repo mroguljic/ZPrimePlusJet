@@ -27,16 +27,33 @@ MASSHI['CA15'] = 500
 
 MASS_SF,MASS_SF_ERR,MASS_SIGMA = {},{},{}
 MASS_SF['AK8'] = 0.989 #0.983 # 1.001
-MASS_SF_ERR['AK8'] = 0.006 #0.003
-MASS_SIGMA['AK8'] = 30 #20
+#MASS_SF['AK8'] = 0.974 
+#MASS_SF['AK8'] = 0.983
+#MASS_SF_ERR['AK8'] = 0.003
+#MASS_SF['AK8'] = 0.974
+MASS_SF_ERR['AK8'] = 0.012
+#MASS_SF_ERR['AK8'] = 0.024
+#MASS_SF_ERR['AK8'] = 0.009
+#MASS_SF_ERR['AK8'] = 0.006 #0.003
+#MASS_SF_ERR['AK8'] = 0.012
+#MASS_SF_ERR['AK8'] = 0.003
+#MASS_SIGMA['AK8'] = 10 #10 #20
+MASS_SIGMA['AK8'] = 3
+#MASS_SIGMA['AK8'] = 5
 MASS_SF['CA15'] = 0.988 #0.989 # 1.001
 MASS_SF_ERR['CA15'] = 0.007
 MASS_SIGMA['CA15'] = 5 #4 
 
 RES_SF,RES_SF_ERR,RES_SIGMA = {},{},{}
-RES_SF['AK8'] = 1.082 #1.030 #1.114
-RES_SF_ERR['AK8'] = 0.067 #0.029 #0.067
-RES_SIGMA['AK8'] = 6 # 2#7
+#RES_SF['AK8'] = 1.082 #1.030 #1.114
+#RES_SF_ERR['AK8'] = 0.067 #0.029 #0.067
+RES_SF['AK8'] = 1.1
+RES_SF_ERR['AK8'] = 0.1
+#RES_SF_ERR['AK8'] = 0.62
+#RES_SF['AK8']  = 1.699
+#RES_SF_ERR['AK8'] = 0.296
+#RES_SIGMA['AK8'] = 1 # 2#7
+RES_SIGMA['AK8'] = 2
 RES_SF['CA15'] = 1.126 #1.092
 RES_SF_ERR['CA15'] = 0.084 #0.067
 RES_SIGMA['CA15'] = 1 #1.
@@ -48,8 +65,11 @@ TT_SF['CA15'] = 1 #1.09*1.09
 TT_PT['CA15'] = [1.0,1.0,1.0,1.0,1.0,1.0,1.0]
 
 V_SF,V_SF_ERR = {},{}
-V_SF['AK8'] = 0.896 #0.837
-V_SF_ERR['AK8'] = 0.088 #0.043
+V_SF['AK8'] = 0.896  #0.896 #0.837
+#V_SF_ERR['AK8'] = 0.37
+V_SF_ERR['AK8'] = 0.088#0.088 #0.043
+#V_SF['AK8'] = 1.259
+#V_SF_ERR['AK8'] = 0.294
 V_SF['CA15'] = 1.022 #0.864
 V_SF_ERR['CA15'] = 0.064 #0.063
 
@@ -59,11 +79,56 @@ RHO_RANGE['CA15'] = [-4.391,-1]
 MASSES['AK8'] = []
 MASSES['CA15'] = []
 
+MASSW = 80.4
+MASSZ = 91.
+
 # 2017 signals produced up to 1 jet
 KFACTORJET = 1.5
 KFACTORWIDTH = 2.065
 
 fHists=[]
+
+CUTSIGNAL = {}
+#CUTSIGNAL['AK8'] = 90
+#CUTSIGNAL['AK8'] = 130
+#CUTSIGNAL['AK8'] = 180
+CUTSIGNAL['AK8'] =  210
+CUTSIGNAL['CA15'] = 250
+
+
+def isInRhoRange(iMass,iPt,iJet):
+    pRho = r.TMath.Log(iMass*iMass/iPt/iPt)
+    if not (pRho < RHO_RANGE[iJet][0] or pRho > RHO_RANGE[iJet][1]):
+        return False
+    return True
+
+def check2D(iH,iBinMass,iBinPt,iJet):
+    pMass = iH.GetXaxis().GetBinCenter(iBinMass)
+    pPt = iH.GetYaxis().GetBinLowEdge(iBinPt) + 0.3*(iH.GetYaxis().GetBinWidth(iBinPt))
+    return isInRhoRange(pMass,pPt,iJet)
+
+def check1D(iH,iBinMass,iPt,iJet):
+    pMass = iH.GetXaxis().GetBinCenter(iBinMass)
+    return isInRhoRange(pMass,iPt,iJet)
+
+def find1D(iFile,iPtBins,iProc,iBox,iJet,iDataH):
+    lNoYield = []
+    lFile = r.TFile.Open(iFile)
+    for iBinPt in iPtBins:
+        if ('wqq' in iProc or 'zqq' in iProc):
+            try:
+                lH = lFile.Get('%s_%s_cat%s'%(iProc,iBox,str(iBinPt))).Clone()
+                if lH.Integral() > 0:
+                    pPt = iDataH.GetYaxis().GetBinLowEdge(iBinPt)+0.3*(iDataH.GetYaxis().GetBinWidth(iBinPt))
+                    removeRho([lH],pPt,iBinPt,iJet)
+                    if lH.Integral() <= CUTSIGNAL[iJet]:
+                        lNoYield.append(iBinPt)
+                else:
+                    lNoYield.append(iBinPt)
+            except:
+                lNoYield.append(iBinPt)
+    print '1D',lNoYield
+    return lNoYield
 
 def massIterable(massList):    
     if len(massList.split(','))==1:
@@ -468,7 +533,7 @@ class dazsleRhalphabetBuilder:
                 if self._freeze:
                     lFile = r.TFile(self._inputrfile)
                     lFit  = r.RooFitResult(lFile.Get("fit_b"))
-                    self._lEffQCD.setVal(lFit.floatParsFinal().find("qcdeff").getVal())
+                    self._lEffQCD.setVal(lFit.floatParsFinal().find("qcd2017eff").getVal())
 
                 for i0 in range(iNVar0+1):
                     for i1 in range(iNVar1+1):
@@ -491,10 +556,10 @@ class dazsleRhalphabetBuilder:
                                 pXMin = pXMin*pVal
                                 pXMax = pXMin*pVal
                             else:
-                                pXmin = pXMin*pVal
-                                pXmax = pXMax*pVal
-                                #pXMin = (lFit.floatParsFinal().find(pVar).getVal() - 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmin))
-                                #pXMax = (lFit.floatParsFinal().find(pVar).getVal() + 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXmax))
+                                #pXmin = pXMin*pVal
+                                #pXmax = pXMax*pVal
+                                pXMin = (lFit.floatParsFinal().find(pVar).getVal() - 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXMin))
+                                pXMax = (lFit.floatParsFinal().find(pVar).getVal() + 10*lFit.floatParsFinal().find(pVar).getError()*abs(pXMax))
                                 #print 'this Min %f vs %f'%(pXMin,lFit.floatParsFinal().find(pVar).getVal() - lFit.floatParsFinal().find(pVar).getError() )
                                 #print 'this Max %f vs %f'%(pXMax,lFit.floatParsFinal().find(pVar).getVal() + lFit.floatParsFinal().find(pVar).getError() )
                         else:
@@ -580,16 +645,19 @@ class dazsleRhalphabetBuilder:
                 print "---  [Making workspace]: " + "w_" + str(iCat)
 		lW = r.RooWorkspace("w_"+str(iCat))
 
-		# get the pT bin
+		# get the pT bin (0,1,2,3,4..)
 		lPt = iCat[-1:];
 
                 if self._interpol:
                     lInterpolMasses = []; 
-                    lInterpolShape_central = [];
-                    lInterpolShape_scaleUp = []; lInterpolShape_scaleDn = [];
-                    lInterpolShape_smearUp = []; lInterpolShape_smearDn = [];
+                    lInterpolShapes = {};
+                    lInterpolShapes['central'] = []
+                    lInterpolShapes['scaleUp'] = []
+                    lInterpolShapes['scaleDown'] = []
+                    lInterpolShapes['smearUp'] = []
+                    lInterpolShapes['smearDown'] = []
 
-		for pFunc in iFuncs:
+                for pFunc in iFuncs:
 			log.info('Taking matched and unmatched templates from %s'%pFunc.GetName())
 			
 			process = pFunc.GetName().split("_")[0];
@@ -606,8 +674,8 @@ class dazsleRhalphabetBuilder:
                                 lsig  = False
                                 #lFile = self._inputsigfile;
                                 lFile = self._inputfile;
-				if process == "wqq": mass = 80.;
-				elif process == "zqq": mass = 91.;
+                                if process == "wqq": mass = MASSW;
+				elif process == "zqq": mass = MASSZ;
 				else: 
                                     mass = float(process[3:])
                                     lsig = True
@@ -616,8 +684,8 @@ class dazsleRhalphabetBuilder:
                                 # 2016 sig samples!!!!!
                                 if self._is2016 and int(lPt) ==1 and lsig: continue
                                 
-                                lFile.cd()
 				# get the matched and unmatched hist 
+                                lFile.cd()
                                 if (self._is2016 and lsig) or (self._is2016WZ and (process == "wqq" or process == "zqq")):
                                     lHMatched[process] = lFile.Get(process+"_2016_"+cat+"_matched").Clone();
                                     lHUnmatched[process] = lFile.Get(process+"_2016_"+cat+"_unmatched").Clone();
@@ -656,44 +724,24 @@ class dazsleRhalphabetBuilder:
                                     lHMatched[process].Scale(KFACTORJET)
                                     lHUnmatched[process].Scale(KFACTORJET)
 
+                                # scale signals to same gq for comb
                                 if lsig and self._comb:
                                     lHMatched[process].Scale(1/2.25)
                                     lHUnmatched[process].Scale(1/2.25)
 
                                 # remove rho from 2d hists after rescaling
-                                removeRho(lHMatched,0,0,self._jet)
-                                removeRho(lHUnmatched,0,0,self._jet)
+                                #removeRho(lHMatched,0,0,self._jet) #tmp to check interpoltion without rho cut
+                                #removeRho(lHUnmatched,0,0,self._jet)
 
 				# project each into mass axis
 				tmph_mass_matched = proj("cat",str(lPt),lHMatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
 				tmph_mass_unmatched = proj("cat",str(lPt),lHUnmatched[process],self._mass_nbins,self._mass_lo,self._mass_hi);
 
-                                # remove Rho region
-                                removeRho([tmph_mass_matched,tmph_mass_unmatched],iPt,int(lPt),self._jet)
-                                log.info('MATCHED AND UNMATCHED CONTENT')
-                                '''
-                                for lH in [tmph_mass_matched,tmph_mass_unmatched]:
-                                    if "zqq_pass_cat2" in lH.GetName():
-                                        print "after removing rho ", lH.GetName()
-                                        for i in range(1,lH.GetNbinsX()+1): 
-                                            print i,lH.GetBinContent(i)  
-                                            '''
-                                #    print lH.GetName(), lH.Integral()
-                                '''
-                                # scale mass projected sig back to 0.0 cut
-                                if lsig:
-                                    if "pass" in cat:  
-                                        self.signalScalePass(tmph_mass_matched,lPt,process+"_"+cat+"_matched")
-                                        '''
-                                    # self._inputsigfile.cd()
-                                    # if "pass" in cat:
-                                    #     lmatchedN2 = self._inputsigfile.Get(process+"_"+cat+"_matched").Clone();
-                                    #     lunmatchedN2 = self._inputsigfile.Get(process+"_"+cat+"_unmatched").Clone();
-                                    #     tmph_mass_matchedN2 = proj("cat",str(lPt),lmatchedN2,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                    #     tmph_mass_unmatchedN2 = proj("cat",str(lPt),lunmatchedN2,self._mass_nbins,self._mass_lo,self._mass_hi);
-                                    #     tmph_mass_matched.Scale(tmph_mass_matchedN2.Integral()/tmph_mass_matched.Integral())
-                                    #     tmph_mass_unmatched.Scale(tmph_mass_unmatchedN2.Integral()/tmph_mass_unmatched.Integral())
+                                # remove Rho region after projecting
+                                #removeRho([tmph_mass_matched,tmph_mass_unmatched],iPt,int(lPt),self._jet)
+                                #log.info('MATCHED AND UNMATCHED CONTENT')
 
+                                # smooth templates
                                 if self._smooth:
                                     if lsig and not self._is2016:
                                         if (self._jet == 'AK8' and mass >150) or (self._jet == 'CA15' and mass>200):
@@ -728,13 +776,15 @@ class dazsleRhalphabetBuilder:
 				hist_container = hist( [mass],[tmph_mass_matched] );	
                                 mass_sigma = MASS_SIGMA[self._jet]
 				mass_shift = MASS_SF[self._jet];
-				mass_shift_unc = MASS_SF_ERR[self._jet] * mass_sigma; # 20 sigma shift!  
+				mass_shift_unc = MASS_SF_ERR[self._jet] * mass_sigma; 
                                 res_sigma = RES_SIGMA[self._jet]
 				res_shift = RES_SF[self._jet];
-				res_shift_unc = RES_SF_ERR[self._jet] * res_sigma; # 7 sigma shift! 
+				res_shift_unc = RES_SF_ERR[self._jet] * res_sigma; 
 
 				# get new central value
 				shift_val = mass - mass*mass_shift;
+                                # shift by -2
+                                #shift_val = -2/10 * shift_val
 				tmp_shifted_h = hist_container.shift( tmph_mass_matched, shift_val);
 				# get new central value and new smeared value
 				smear_val = res_shift - 1.;
@@ -752,45 +802,10 @@ class dazsleRhalphabetBuilder:
 
 				# get shift up/down
 				shift_unc = mass*mass_shift*mass_shift_unc;
+                                #shift_unc = -2/10 * shift_unc
 				hmatchedsys_shift = hist_container.shift( hmatched_new_central, shift_unc);
-                                #hmatchedsys_shift = hist_container.shift( hmatched_new_central, mass * shift_unc);
 				# get res up/down
 				hmatchedsys_smear = hist_container.smear( hmatched_new_central, res_shift_unc);	
-
-                                # for small signals
-                                if self._jet == 'AK8':
-                                    if mass == 50 and int(lPt) > 3:
-                                        hmatchedsys_shift[1] = hmatched_new_central.Clone("zqq50"+str(cat)+"_"+str(iPt)+"tmpScaleDn")
-                                    if (mass == 50 and int(lPt) > 4) or (mass >= 200 and int(lPt) < 5) or (mass >= 200 and int(lPt) == 1):
-                                        #or (self._is2016 and mass == 50 and int(lPt) >= 3) or (self._is2016 and mass >= 150 and int(lPt) <= 6) or (self._is2016 and mass <= 150 and int(lPt) == 6):
-                                        hmatchedsys_shift[1] = hmatched_new_central.Clone()
-                                        log.info("basically 50 GeV is 1 event ")
-                                        pInt = hmatched_new_central.Integral()+0.01
-                                        hmatched_new_central.Add(tmph_mass_unmatched); lInt = max(hmatched_new_central.Integral(),0.01);
-                                        hmatched_new_central.Scale(pInt/lInt);
-                                        hmatchedsys_shift[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[0].Integral(),0.01);
-                                        hmatchedsys_shift[0].Scale(pInt/lInt);
-                                        hmatchedsys_shift[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[1].Integral(),0.01);
-                                        hmatchedsys_shift[1].Scale(pInt/lInt);
-                                        hmatchedsys_smear[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[0].Integral(),0.01);
-                                        hmatchedsys_smear[0].Scale(pInt/lInt);
-                                        hmatchedsys_smear[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[1].Integral(),0.01);
-                                        hmatchedsys_smear[1].Scale(pInt/lInt);
-                                if self._jet == 'CA15':
-                                    if (mass > 350 and int(lPt) < 2) or (mass >= 450 and int(lPt) < 4) or (mass ==80 and int(lPt) > 4) or (mass ==91 and int(lPt) >4):
-                                        hmatchedsys_shift[1] = hmatched_new_central.Clone()
-                                        log.info("basically get is 1 event ")
-                                        pInt = hmatched_new_central.Integral()+0.01
-                                        hmatched_new_central.Add(tmph_mass_unmatched); lInt = max(hmatched_new_central.Integral(),0.01);
-                                        hmatched_new_central.Scale(pInt/lInt);
-                                        hmatchedsys_shift[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[0].Integral(),0.01);
-                                        hmatchedsys_shift[0].Scale(pInt/lInt);
-                                        hmatchedsys_shift[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_shift[1].Integral(),0.01);
-                                        hmatchedsys_shift[1].Scale(pInt/lInt);
-                                        hmatchedsys_smear[0].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[0].Integral(),0.01);
-                                        hmatchedsys_smear[0].Scale(pInt/lInt);
-                                        hmatchedsys_smear[1].Add(tmph_mass_unmatched); lInt= max(hmatchedsys_smear[1].Integral(),0.01);
-                                        hmatchedsys_smear[1].Scale(pInt/lInt);
 
                                 hmatched_new_central.SetName(pFunc.GetName());
                                 hmatchedsys_shift[0].SetName(pFunc.GetName()+"_scaleUp");
@@ -798,28 +813,29 @@ class dazsleRhalphabetBuilder:
 				hmatchedsys_smear[0].SetName(pFunc.GetName()+"_smearUp");
 				hmatchedsys_smear[1].SetName(pFunc.GetName()+"_smearDown");
                                 
-                                #remove rho regions for  smear,shift hists
+                                #remove rho regions for smear,shift hists
                                 hout = [hmatched_new_central,hmatchedsys_shift[0],hmatchedsys_shift[1],hmatchedsys_smear[0],hmatchedsys_smear[1]];
-                                removeRho(hout,iPt,int(lPt),self._jet);
+                                #removeRho(hout,iPt,int(lPt),self._jet); # tmp!
 
                                 # Interpolation
                                 if self._interpol: # and 'cat1' not in iCat: # tmp for 2016 samples
-                                    if mass > 0 and mass != 80. and mass != 91.:
-					lInterpolMasses.append(mass);     
-					lInterpolShape_central.append(hmatched_new_central) 
-					lInterpolShape_scaleUp.append(hmatchedsys_shift[0]) 
-					lInterpolShape_scaleDn.append(hmatchedsys_shift[1])  
-					lInterpolShape_smearUp.append(hmatchedsys_smear[0])  
-					lInterpolShape_smearDn.append(hmatchedsys_smear[1])  
+                                    if mass > 0 and mass != MASSW and mass != MASSZ:
+                                        ht = hmatched_new_central.Clone(pFunc.GetName()+"_tmp_central")
+                                        removeRho([ht],iPt,int(lPt),self._jet);
+                                        print 'CUTSIGNAL ',ht.GetName(),ht.Integral(),CUTSIGNAL[self._jet]
+                                        if ht.Integral() > CUTSIGNAL[self._jet]:
+                                            lInterpolMasses.append(mass);     
+                                            lInterpolShapes['central'].append(hmatched_new_central)
+                                            lInterpolShapes['scaleUp'].append(hmatchedsys_shift[0])
+                                            lInterpolShapes['scaleDown'].append(hmatchedsys_shift[1])
+                                            lInterpolShapes['smearUp'].append(hmatchedsys_smear[0])
+                                            lInterpolShapes['smearDown'].append(hmatchedsys_smear[1])
 				
                                 # write to validation
-				for h in hout:
+                                for h in hout:
+                                    # remove rho before saving
+                                    removeRho([h],iPt,int(lPt),self._jet);
                                     self._outfile_validation.cd()
-                                    for i in range(1, h.GetNbinsX() + 1):
-                                        massVal = h.GetXaxis().GetBinCenter(i)
-                                        rhoVal = r.TMath.Log(massVal * massVal / iPt / iPt)
-                                        if rhoVal < self._rho_lo or rhoVal > self._rho_hi:
-                                            h.SetBinContent(i, 0.)
                                     h.Write();
                                     tmprdh = RooDataHist(h.GetName(),h.GetName(),r.RooArgList(self._lMSD),h)
                                     getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
@@ -828,104 +844,71 @@ class dazsleRhalphabetBuilder:
                                         pName=h.GetName().replace("scale","scalept")
                                         tmprdh = RooDataHist(pName,pName,r.RooArgList(self._lMSD),h)
                                         getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
+                                        # create hists for scale per category
+                                        pName=h.GetName().replace("scale","scale%i"%int(lPt))
+                                        print 'SCALE BY CAT %s '%("scale%i"%int(lPt)),pName
+                                        tmprdh = RooDataHist(pName,pName,r.RooArgList(self._lMSD),h)
+                                        getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
 			else: 
 				getattr(lW,'import')(pFunc,r.RooFit.RecycleConflictNodes())
 				
                 # signal interpolation
                 if self._interpol and not (self._is2016 and 'cat1' in iCat) and not (self._jet == "CA15" and 'cat1' in iCat): 
                     #print '----- [Interpolating]: ',len(lInterpolMasses), lInterpolMasses,' for cat: ',iCat
-                    morphedHistContainer_central = hist(lInterpolMasses,lInterpolShape_central);
-                    morphedHistContainer_scaleUp = hist(lInterpolMasses,lInterpolShape_scaleUp);
-                    morphedHistContainer_scaleDn = hist(lInterpolMasses,lInterpolShape_scaleDn);
-                    morphedHistContainer_smearUp = hist(lInterpolMasses,lInterpolShape_smearUp);
-                    morphedHistContainer_smearDn = hist(lInterpolMasses,lInterpolShape_smearDn);
-                    interpolatedMasses = [55.,60.0,65.,70.,
-                                          80.,85.,90.0,95.,
-                                          #100., # tmp: added 100
-                                          105.,110.0,
-                                          #115., #tmp:removed 115
-                                          120.,
-                                          130.,135.0,140.,145.,
-                                          155.,160.,165.0,170.,
-                                          #175., #tmp: removed 175
-                                          180.0,185.,190.,195., 
-                                          #200., #tmp
-                                          205.,210.,215.,220.,
-                                          #225., #tmp: removed 225
-                                          230.,235.,240,245.,
-                                          255.,260.,265.,270.,
-                                          #275.,
-                                          280.,285.,
-                                          290.,295.
-                                          ]
+                    morphedHistContainer = {}
+                    for key,lShape in lInterpolShapes.iteritems():
+                        morphedHistContainer[key] = hist(lInterpolMasses,lShape)
+
+                    lDictMass = {
+                        '50':  [75,[55.,60.,65.,70.]],
+                        '75':  [100,[80.,85.,90.,95.]],
+                        '100': [115,[105.,110.]],
+                        '115': [125,[120.]],
+                        '125': [150,[130.,135.,140.,145.]],
+                        '150': [175,[155.,160.,165.,170.]],
+                        '175': [200,[180.,185.,190.,195.]],
+                        '200': [225,[205.,210.,215.,220.]],
+                        '225': [250,[230.,235.,240.,245.]],
+                        #'250': [300,[255.,260.,265.,270.,275.,280.,285.,290.,295.]]
+                        '250': [275,[255.,260.,265.,270.]],
+                        '275': [300,[280.,285.,290.,295.]],
+                        '300': [350,[305.,310.,315.,320.,325.,330.,335.,340.,345.]],
+                        '350': [400,[355.,360.,365.,370.,375.,380.,385.,390.,395.]],
+                        '400': [450,[405.,410.,415.,420.,425.,430.,435.,440.,445.]],
+                        }
+                    lMasses = []
+                    print 'linterpolMasses',lInterpolMasses
+                    for iM,iL in lDictMass.iteritems():
+                        if int(iM) in lInterpolMasses and iL[0] in lInterpolMasses:
+                            lMasses.extend(iL[1])
+                    print 'Interpolated masses ',lMasses
                     
                     if self._is2016:
-                        interpolatedMasses.append(115)
-                        interpolatedMasses.append(175)
-                        interpolatedMasses.append(225)
-                        interpolatedMasses.append(275)
+                        lMasses.append(115)
+                        lMasses.append(175)
+                        lMasses.append(225)
+                        lMasses.append(275)
 
-                    if self._jet == 'CA15':
-                        interpolatedMasses = [110.0,
-                                              120.,
-                                              130.,135.0,140.,145.,
-                                              155.,160.,165.0,170.,
-                                              175.,
-                                              180.0,185.,190.,195.,
-                                              205.,210.,215.,220.,
-                                              225.,
-                                              230.,235.,240,245.,
-                                              255.,260.,265.,270.,
-                                              275.,
-                                              280.,285.,290.,295.,
-                                              305.,310.,315.,320.,
-                                              325.,330.,335.,340.,345.,
-                                              355.,360.,365.,370.,375.,
-                                              380.,385.,390.,395.,
-                                              405.,410.,415.,420.,
-                                              425.,430.,435.,440.,445.,
-                                              #455.,460.,465.,470.,475.,
-                                              #480.,485.,490.,495.
-                                              ]
-                        if self._comb:
-                            interpolatedMasses = [
-                                180.0,185.,190.,195.,
-                                205.,210.,215.,220.,
-                                230.,235.,240,245.,
-                                255.,260.,265.,270.,
-                                280.,285.,290.,295.,]
+                    for m in lMasses:
+			#mid=-1
+                        htmp ={}
+                        # if self._jet == 'AK8':
+                        #     if m > 200 and  int(lPt) == 2:
+                        #         mid=len(lInterpolMasses)-3
+                        #     if m > 250 and  int(lPt) == 3:
+                        #         mid=len(lInterpolMasses)-2
+                        # if mid != -1:
+                        #     for key,lShapes in lInterpolShapes.iteritems():
+                        #         htmp[key] = lShapes[mid].Clone("tmp_%s_%s_%s"%(str(m),iCat,key))
+                        # else:
+                        for key,container in morphedHistContainer.iteritems():
+                            htmp[key] = container.morph(m,"_%s_%s"%(iCat,key))
+                            if 'central' in key: 
+                                htmp[key].SetName("zqq%i_%s" % (int(m),iCat));
+                            else:
+                                htmp[key].SetName("zqq%i_%s_%s"% (int(m),iCat,key));
 
-                    for m in interpolatedMasses:
-			mid=-1
-                        if self._jet == 'AK8':
-                            if m > 200 and  int(lPt) == 2:
-                                mid=len(lInterpolMasses)-3
-                            if m > 250 and  int(lPt) == 3:
-                                mid=len(lInterpolMasses)-2
-                        #if m < 75  and  int(lPt) >  4:
-                        #    mid=0
-                        if mid != -1:
-                            htmp_central = lInterpolShape_central[mid].Clone("tmp"+str(m)+"scaleup")
-                            htmp_scaleUp = lInterpolShape_scaleUp[mid].Clone("tmp"+str(m)+"scaleup")
-                            htmp_scaleDn = lInterpolShape_scaleDn[mid].Clone("tmp"+str(m)+"scaledn")
-                            htmp_smearUp = lInterpolShape_smearUp[mid].Clone("tmp"+str(m)+"smearup")
-                            htmp_smearDn = lInterpolShape_smearDn[mid].Clone("tmp"+str(m)+"smeardn")
-                        else:
-                            htmp_central = morphedHistContainer_central.morph(m);
-                            htmp_scaleUp = morphedHistContainer_scaleUp.morph(m);
-                            htmp_scaleDn = morphedHistContainer_scaleDn.morph(m);
-                            htmp_smearUp = morphedHistContainer_smearUp.morph(m);
-                            htmp_smearDn = morphedHistContainer_smearDn.morph(m);
-                        htmp_central.SetName("zqq%i_%s" % (int(m),iCat));
-                        htmp_scaleUp.SetName("zqq%i_%s_scaleUp" % (int(m),iCat)); 
-			htmp_scaleDn.SetName("zqq%i_%s_scaleDown" % (int(m),iCat));
-			htmp_smearUp.SetName("zqq%i_%s_smearUp" % (int(m),iCat));
-			htmp_smearDn.SetName("zqq%i_%s_smearDown" % (int(m),iCat));
-
-                        if self._jet == 'AK8':
-                            if iCat == "pass_cat5" and m < 125 and m > 100: self.signalChopper(htmp_central,m);
-
-			hout = [htmp_central,htmp_scaleUp,htmp_scaleDn,htmp_smearUp,htmp_smearDn];
+                        hout = [htmp['central'],htmp['scaleUp'],htmp['scaleDown'],htmp['smearUp'],htmp['smearDown']];
 			removeRho(hout,iPt,int(lPt),self._jet)
 
 			for h in hout:
@@ -937,6 +920,11 @@ class dazsleRhalphabetBuilder:
 					pName=h.GetName().replace("scale","scalept")
 					tmprdh = RooDataHist(pName,pName,r.RooArgList(self._lMSD),h)
 					getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
+                                        # create scale hists by pt category
+                                        pName=h.GetName().replace("scale","scale%i"%int(lPt))
+                                        print 'SCALE BY CAT %s '%("scale%i"%int(lPt)),pName
+                                        tmprdh = RooDataHist(pName,pName,r.RooArgList(self._lMSD),h)
+                                        getattr(lW,'import')(tmprdh, r.RooFit.RecycleConflictNodes())
 
 		log.info('Writing to workspace')
 		for pData in iDatas:
@@ -948,10 +936,6 @@ class dazsleRhalphabetBuilder:
 		else:
 			lW.writeToFile(iOutput)	
                 #lW.Print()
-
-	def signalChopper(self,h,m):
-		for i in range(1,h.GetNbinsX()+1):
-			if h.GetBinCenter(i) > m + 1.5*math.sqrt(m): h.SetBinContent(i,0.);
 
         def signalScalePass(self,iHSig_inPtbin,iPt,iName):
                 self._inputsigfile.cd()
@@ -1187,7 +1171,7 @@ if __name__ == '__main__':
         parser.add_option('--pseudo17', action='store_true', dest='pseudo17', default =False,help='data = MC (fail) and fail*0.05 (pass)', metavar='isData')
 	parser.add_option('--input', dest='input', default = 'histInputs/2016hist_1DZqq-dataReRecoSpring165eff-3481-Gridv130-final.root',help='input histograms')
         parser.add_option('--sig', dest='sig', default = None, help='input signals')
-        parser.add_option('--rfile', dest='inputrfile', default = 'mlfit_param.root',help='file for poly freeze')
+        parser.add_option('--rfile', dest='inputrfile', default = 'mlfit_bonly.root',help='file for poly freeze')
         parser.add_option('--ronly', action='store_true', dest='onlyRhalph', default=False, help='running rhalph only')
         parser.add_option('--mcstat', action='store_true', dest='mcstat', default=False, help='do bin by bin unc')
         parser.add_option('--syst', action='store_true', dest='syst', default=False, help='pick unc from templates')
