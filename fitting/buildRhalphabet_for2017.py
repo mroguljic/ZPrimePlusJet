@@ -95,6 +95,8 @@ CUTSIGNAL = {}
 CUTSIGNAL['AK8'] =  210
 CUTSIGNAL['CA15'] = 250
 
+CUTSIGNAL_2016 = {}
+CUTSIGNAL_2016['AK8'] =  20
 
 def isInRhoRange(iMass,iPt,iJet):
     pRho = r.TMath.Log(iMass*iMass/iPt/iPt)
@@ -111,9 +113,10 @@ def check1D(iH,iBinMass,iPt,iJet):
     pMass = iH.GetXaxis().GetBinCenter(iBinMass)
     return isInRhoRange(pMass,iPt,iJet)
 
-def find1D(iFile,iPtBins,iProc,iBox,iJet,iDataH):
+def find1D(iFile,iPtBins,iProc,iBox,iJet,iDataH,is2016=False):
     lNoYield = []
     lFile = r.TFile.Open(iFile)
+    if is2016: return lNoYield
     for iBinPt in iPtBins:
         if ('wqq' in iProc or 'zqq' in iProc):
             try:
@@ -121,7 +124,9 @@ def find1D(iFile,iPtBins,iProc,iBox,iJet,iDataH):
                 if lH.Integral() > 0:
                     pPt = iDataH.GetYaxis().GetBinLowEdge(iBinPt)+0.3*(iDataH.GetYaxis().GetBinWidth(iBinPt))
                     removeRho([lH],pPt,iBinPt,iJet)
-                    if lH.Integral() <= CUTSIGNAL[iJet]:
+                    cut = CUTSIGNAL[iJet]
+                    print lH.Integral(),lH.GetName()
+                    if lH.Integral() <= cut:
                         lNoYield.append(iBinPt)
                 else:
                     lNoYield.append(iBinPt)
