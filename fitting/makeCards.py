@@ -10,16 +10,14 @@ import time
 import array
 
 # including other directories
-sys.path.insert(0, '../.')
+#sys.path.insert(0, '../.')
 from tools import *
 from buildRhalphabet_for2017 import *
-#from buildRhalphabet_for2017_updatedsf import *
 
-##-------------------------------------------------------------------------------------
 def main(options,args):
 
 	skipcats = options.skipcat.split(',')
-	#print 'SKIP',skipcats
+
 	boxes = ['pass','fail']            
 	bkgs = ['wqq','zqq','tqq']
 	if options.forcomb:
@@ -29,7 +27,6 @@ def main(options,args):
 	systs = ['JER','JES','Pu','trigger']    
 
 	tfile = r.TFile.Open(options.ifile)
-	#lnNFile = r.TFile.Open(options.ifile)
 	if not options.is2016:
 		lnNFile =  r.TFile.Open(options.ifile.replace('.root','_lnN.root'))
 	lmasses = options.masses
@@ -37,6 +34,7 @@ def main(options,args):
 		lmasses = '80'
 	if options.zonly:
 		lmasses= '90'
+
 
 	for iMass in massIterable(lmasses):
                 histoDict = {}
@@ -46,6 +44,7 @@ def main(options,args):
 			jetdir = options.jetdir
 		print options.jet,options.jetdir
 		print 'JETDIR',jetdir
+
 		lDir = 'results/%s/%s/ZQQ_%s'%(options.tag,jetdir,str(iMass))
 		if options.wonly:
 			lDir = 'results/%s/%s/WQQ'%(options.tag,jetdir)
@@ -53,39 +52,34 @@ def main(options,args):
                         lDir = 'results/%s/%s/ZQQ'%(options.tag,jetdir)
 		else:
 			sigs = ['zqq%s'%str(iMass)]
+
 		print 'mkdir -p %s'%lDir
 		os.system('mkdir -p %s'%lDir)
+
 		for proc in (sigs+bkgs):
 			for box in boxes:
 				if options.interpol and str(iMass) in proc:
 					continue
-				#if not os.path.isfile(options.ifile.replace('.root','_lnN.root')): continue
-				#       lnNFile =  r.TFile.Open(options.ifile.replace('.root','_lnN.root'))
 				if options.syst:
                                         for syst in systs:
 						if 'qcd' in proc and options.forcomb:
 							histoDict['%s_%s_%sUp'%(proc,box,syst)] = tfile.Get('qcd_%s_%sUp'%(box,syst)).Clone()
 							histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('qcd_%s_%sDown'%(box,syst)).Clone()
-						elif str(iMass) in proc and options.is2016sig:
+						elif (str(iMass) in proc and options.is2016sig) or (options.is2016WZ and (proc=='wqq' or proc=='zqq')):
 							histoDict['%s_%s_%sUp'%(proc,box,syst)] = tfile.Get('%s_2016_%s_%sUp'%(proc,box,syst)).Clone()
                                                         histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('%s_2016_%s_%sDown'%(proc,box,syst)).Clone()
 						else:
-							#print 'getting histogram for process: %s_%s_%sUp'%(proc,box,syst)
 							histoDict['%s_%s_%sUp'%(proc,box,syst)] = tfile.Get('%s_%s_%sUp'%(proc,box,syst)).Clone()
-							# print histoDict['%s_%s_%sUp'%(proc,box,syst)].Integral()
-							# print 'getting histogram for process: %s_%s_%sDown'%(proc,box,syst)  
 							histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('%s_%s_%sDown'%(proc,box,syst)).Clone()
-				#if options.interpol and str(iMass) in proc: continue
-				#print 'getting histogram for process: %s_%s'%(proc,box)
 				if 'qcd' in proc and options.forcomb:
 					histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_%s'%(proc.replace('qcd2017','qcd'),box)).Clone()
 				else:
-					if str(iMass) in proc and options.is2016sig:
+                                        if (str(iMass) in proc and options.is2016sig) or (options.is2016WZ and (proc=='wqq' or proc=='zqq')):
 						histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_2016_%s'%(proc,box)).Clone()
 					else:
 						histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_%s'%(proc,box)).Clone()
 				if ('wqq' in proc or 'zqq' in proc):
-					if str(iMass) in proc and options.is2016sig:
+					if (str(iMass) in proc and options.is2016sig) or (options.is2016WZ and (proc=='wqq' or proc=='zqq')):
 						histoDict['%s_%s_matched'%(proc,box)] = tfile.Get('%s_2016_%s_matched'%(proc,box)).Clone()
 						histoDict['%s_%s_unmatched'%(proc,box)] = tfile.Get('%s_2016_%s_unmatched'%(proc,box)).Clone()
 					else:
@@ -94,21 +88,27 @@ def main(options,args):
 
 		if options.jet == 'CA15':
 			if options.forcomb:
-				dctpl = open("datacard_templates/datacard_for2017_CA15_forcomb.tpl");
-				dctplnowz = open("datacard_templates/datacard_for2017_CA15_nowz_forcomb.tpl");
+				dctpl = open("datacard_templates/datacard_for2017_CA15_forcomb_updatedsf.tpl");
+				dctplnowz = open("datacard_templates/datacard_for2017_CA15_forcomb_updatedsf_nowz.tpl");
+                                dctplnosig = open("datacard_templates/datacard_for2017_CA15_forcomb_updatedsf_test_nosig.tpl");
+				dctplnowznosig = open("datacard_templates/datacard_for2017_CA15_forcomb_updatedsf_test_nosig_nowz.tpl");
 			else:
 				#dctpl = open("datacard_templates/datacard_for2017_CA15.tpl");
                                 #dctpl = open("datacard_templates/datacard_for2017_CA15_updatedsf.tpl");
 				dctpl = open("datacard_templates/datacard_for2017_CA15_updatedsf_test.tpl");
                                 dctplnosig = open("datacard_templates/datacard_for2017_CA15_updatedsf_test_nosig.tpl");
-				dctplnowz = open("datacard_templates/datacard_for2017_CA15_nowz.tpl");
+				#dctplnowz = open("datacard_templates/datacard_for2017_CA15_nowz.tpl");
+				dctplnowz = open("datacard_templates/datacard_for2017_CA15_updatedsf_test_nowz.tpl");
+                                dctplnowznosig = open("datacard_templates/datacard_for2017_CA15_updatedsf_test_nosig_nowz.tpl");
 		if options.wonly:
 			dctpl = open("datacard_templates/datacard_for2017_W.tpl");
 		if options.zonly:
 			dctpl = open("datacard_templates/datacard_for2017_Z.tpl");
 		if options.jet == 'AK8':
 			if options.forcomb:
-				dctpl = open("datacard_templates/datacard_for2017_forcomb.tpl");
+				#dctpl = open("datacard_templates/datacard_for2017_forcomb.tpl");
+				dctpl = open("datacard_templates/datacard_for2017_forcomb_updatedsf_test.tpl");
+				dctplnosig = open("datacard_templates/datacard_for2017_forcomb_updatedsf_test_nosig.tpl");
 			else:
 				#dctpl = open("datacard_templates/datacard_for2017.tpl");
                                 #dctpl = open("datacard_templates/datacard_for2017_updatedsf.tpl");
@@ -116,37 +116,48 @@ def main(options,args):
 				dctplnosig = open("datacard_templates/datacard_for2017_updatedsf_test_nosig.tpl");
 		if options.is2016:
                         dctpl = open("datacard_templates/datacard_for2016.tpl")
+                        dctplnosig = open("datacard_templates/datacard_for2016_nosig.tpl")
+
 		histoDict["data_obs_pass"] = tfile.Get('data_obs_pass').Clone()
-		numberOfMassBins = MASSBINS[options.jet]; #options.nmass;
-		numberOfPtBins = histoDict["data_obs_pass"].GetYaxis().GetNbins(); #options.npt;
-		#print 'Number of Ptbins ',numberOfPtBins
+		numberOfMassBins = MASSBINS[options.jet]; 
+		numberOfPtBins = histoDict["data_obs_pass"].GetYaxis().GetNbins(); 
+		lPtBins = [x for x in range(1,numberOfPtBins+1) if x not in  map(int,skipcats)]
+		lPtBinsNoSig = find1D(options.base,lPtBins,"zqq"+str(iMass),"pass",options.jet,histoDict["data_obs_pass"],options.is2016)
+		lPtBinsNoWZ = find1D(options.base,lPtBins,"zqq","pass",options.jet,histoDict["data_obs_pass"],options.is2016)
+
+		if options.nosig != '':
+			lPtBinsNoSig = lPtBinsNoSig + list(set(map(int,options.nosig.split(',')))-set(lPtBinsNoSig))
+
+		print 'PTBINS',lPtBins
+		print 'PTBINS NO SIG',lPtBinsNoSig
+		print 'PTBINS NO WZ',lPtBinsNoWZ
 
 		combinecards = 'combineCards.py ';
 		linel = [];
 		for line in dctpl:
-			#print line.strip().split();
-			#print iMass
 			line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
-			#print line.strip()
 			linel.append(line.strip());
                 if options.jet == 'CA15':
 			linelnowz = [];
 			for line in dctplnowz:
 				line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
 				linelnowz.append(line.strip());
-		if options.nosig != 0:
-			linelnosig = [];
-			for line in dctplnosig:
-                                line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
-				linelnosig.append(line.strip());
+			linelnowznosig = [];
+			for line in dctplnowznosig:
+				linelnowznosig.append(line.strip());
+		linelnosig = [];
+		for line in dctplnosig:
+			#line = line.replace("SIGNALNAME", 'zqq').replace("SIGNALMASS", str(iMass))
+			linelnosig.append(line.strip());
 
-		for i in range(1,numberOfPtBins+1):
+		for i in lPtBins:
 			jesErrs = {}
 			jerErrs = {}
 			puErrs = {}
 			triggerErrs = {}
 			vErrs = {}
 			mcstatErrs = {}
+			scaleErrs = {}
 			scaleptErrs = {}
 			zreweightErrs = {}
 			tag = "cat"+str(i);
@@ -202,16 +213,24 @@ def main(options,args):
 							jerErrs['%s_%s'%(proc,box)] =  1.0
 							puErrs['%s_%s'%(proc,box)] =  1.0
 							triggerErrs['%s_%s'%(proc,box)] =  1.02
+					if (i == 2 and numberOfPtBins == 6):
+                                                scaleErrs['%s_%s'%(proc,box)] = 0.025
+                                                scaleptErrs['%s_%s'%(proc,box)] = 0.03
+                                                zreweightErrs['%s_%s'%(proc,box)] = 1.05
 					if (i == 2 and numberOfPtBins == 5) or (i == 3 and numberOfPtBins == 6):
+						scaleErrs['%s_%s'%(proc,box)] = 0.1
 						scaleptErrs['%s_%s'%(proc,box)] =  0.03
 						zreweightErrs['%s_%s'%(proc,box)] = 1.03
 					elif (i == 3 and numberOfPtBins == 5) or (i == 4 and numberOfPtBins == 6):
+						scaleErrs['%s_%s'%(proc,box)] =0.1
 						scaleptErrs['%s_%s'%(proc,box)] =  0.06
                                                 zreweightErrs['%s_%s'%(proc,box)] = 1.03
 					elif (i == 4 and numberOfPtBins == 5) or (i == 5 and numberOfPtBins == 6):
+						scaleErrs['%s_%s'%(proc,box)] =0.1
 						scaleptErrs['%s_%s'%(proc,box)] =  0.09
                                                 zreweightErrs['%s_%s'%(proc,box)] = 1.05
 					elif (i == 5 and numberOfPtBins == 5) or (i == 6 and numberOfPtBins == 6):
+						scaleErrs['%s_%s'%(proc,box)] =0.1
 						scaleptErrs['%s_%s'%(proc,box)] =  0.12
                                                 zreweightErrs['%s_%s'%(proc,box)] = 1.08
 
@@ -243,6 +262,7 @@ def main(options,args):
 			puString = 'Pu lnN'
 			triggerString = 'trigger lnN'
 			vString = 'veff lnN'
+			scaleString = 'scale%s shape'%i
 			scaleptString = 'scalept shape'
 			zreweightString = 'zreweight lnN'
 			mcStatStrings = {}
@@ -258,7 +278,8 @@ def main(options,args):
                         
 			for box in boxes:
 				for proc in (sigs+bkgs):
-					if proc in sigs and options.nosig != 0 and (i!=options.nosig): continue
+					if proc in sigs and (i in lPtBinsNoSig): continue
+					if (proc=="wqq" or proc=="zqq") and(i in lPtBinsNoWZ): continue
 					if 'qcd' in proc:
 						jesString += ' -'
 						jerString += ' -'
@@ -273,12 +294,17 @@ def main(options,args):
 						if (i > 1 and numberOfPtBins == 5) or (i > 2 and numberOfPtBins == 6):
 							scaleptString += ' -'
 							zreweightString += ' -'
+                                                if (i > 1 and numberOfPtBins == 5) or (i > 1 and numberOfPtBins == 6):
+                                                        scaleString += ' -'
 					else:
 						#print i
 						#print numberOfPtBins
 						if (i > 1 and numberOfPtBins == 5) or (i > 2 and numberOfPtBins == 6):
 							scaleptString += ' %.3f'%scaleptErrs['%s_%s'%(proc,box)]
 							zreweightString += ' %.3f'%zreweightErrs['%s_%s'%(proc,box)]
+                                                if (i > 1 and numberOfPtBins == 5) or (i > 1 and numberOfPtBins == 6):
+                                                        scaleString += ' %.3f'%scaleErrs['%s_%s'%(proc,box)]
+
 					if proc in ['qcd','tqq','qcd2017']:
 						vString += ' -'
 					else:
@@ -292,36 +318,36 @@ def main(options,args):
 									mcStatStrings['%s_%s'%(proc1,box1),i,j] += '\t-'
 
 			tag = "cat"+str(i);
-			#print i
-			#print skipcats
 			tagcat = tag
 			if options.is2016:
 				tagcat += "_2016"
-			if str(i) not in skipcats:
-				combinecards += "%s=card_rhalphabet_%s%s_%s.txt " % (tagcat,str(options.np),str(options.nr),tagcat)
-			#print(os.getcwd())
+			#if str(i) not in skipcats: 3 not needed
+			combinecards += "%s=card_rhalphabet_%s%s_%s.txt " % (tagcat,str(options.np),str(options.nr),tagcat)
 			dctmp = open("%s/card_rhalphabet_%s%s_%s.txt" % (lDir,str(options.np),str(options.nr),tagcat), 'w')
 			linelines = linel
-			# no W and Z for cats 5 and 6 for CA15
-			if options.jet == 'CA15' and (i == 5 or i == 6) and options.nowz:
-				linelines= linelnowz
-			if options.nosig != 0 and (i!=options.nosig):
-				linelines=linelnosig
+			if i in lPtBinsNoSig:
+                                linelines=linelnosig
+			# no W and Z for high pt cats for CA15
+			if options.jet == 'CA15' and (i in lPtBinsNoWZ): 
+				if (i in lPtBinsNoSig):
+					linelines= linelnowznosig
+				else:
+					linelines= linelnowz
 			for l in linelines:
 				if 'JES' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
 					if options.syst: newline = jesString
 					else: continue
 				elif 'JER' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
 					if options.syst: newline = jerString
 					else: continue
 				elif 'Pu' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
 					if options.syst: newline = puString
 					else: continue
 				elif 'trigger' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
                                         if options.syst: newline = triggerString
 					elif options.forcomb: newline = l
                                         else: continue
@@ -333,18 +359,27 @@ def main(options,args):
 						newline = vString ##FIXME?
 					else:
 						newline = l
+				elif 'scaleCAT' in l:
+					if options.scalebypt:
+                                                l = l.replace('CAT',str(i))
+                                                newline = l
+						scaleString = scaleString.replace('CAT',str(i))
+						newline = scaleString
+					else:
+						l = l.replace('CAT','')
+						newline = l
 				elif 'scalept' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
 					if ((i>1 and numberOfPtBins == 5) or (i > 2 and numberOfPtBins == 6)):
 						newline = scaleptString
 					else:
 						newline = l.replace('0.03','-')
 				elif 'zreweight' in l:
-					if options.nowz and (i==5 or i==6): continue
+					#if options.nowz and (i==5 or i==6): continue
                                         if ((i>1 and numberOfPtBins == 5) or (i > 2 and numberOfPtBins == 6)):
                                                 newline = zreweightString
                                         else:
-                                                newline = l.replace('0.03','-')
+                                                newline = l.replace('0.15','-')
 				elif 'znormEW' in l and 'wznormEW' not in l:
 					if not options.corrZ:
 						l = l.replace('EW','E'+str(i))
@@ -399,9 +434,8 @@ def main(options,args):
 					if pVar!="p0r0" or pVar!="p20170r20170":
 						dctmp.write("%s flatParam \n"%pVar)
 			if options.automc:
-				#print 'include %s%scat%i autoMCstats'%(proc,box,i)
 				dctmp.write('$CHANNEL autoMCStats 10 \n') ##FIXME: modify threshold
-			elif options.mcstat and not (options.nowz and (i==5 or i==6)):
+			elif options.mcstat and (i not in lPtBinsNoWZ):
 				for box in boxes:
 					for proc in sigs+bkgs:
 						if options.noMcStatShape and proc!='qcd' and proc!='qcd2017':                        
@@ -420,11 +454,7 @@ def main(options,args):
 								pRho = r.TMath.Log(pMass*pMass/pPt/pPt)
 								if not (pRho < RHO_RANGE[options.jet][0] or pRho > RHO_RANGE[options.jet][1]):
 									dctmp.write(mcStatStrings['%s_%s'%(proc,box),i,j] + "\n")
-									#print 'include %s%scat%imcstat%i'%(proc,box,i,j)
-								#else:
-								#print 'do not include %s%scat%imcstat%i'%(proc,box,i,j)
-							#else:
-							#	print 'do not include %s%scat%imcstat%i'%(proc,box,i,j)
+
 			for im in range(numberOfMassBins):
 				if options.qcd:
 					if options.forcomb:
@@ -445,11 +475,6 @@ def main(options,args):
 								dctmp.write("qcd2017_fail_%s_Bin%i flatParam \n" % (tag,im+1))
 							else:
 								dctmp.write("qcd_fail_%s_Bin%i flatParam \n" % (tag,im+1))
-							#print 'include qcd_fail_%s_Bin%i'%(tag,im+1)
-						#else:
-						#	print 'do not include qcd_fail_%s_Bin%i'%(tag,im+1)
-					#else:
-					#	print '0 content: do not include qcd_fail_%s_Bin%i'%(tag,im+1)
 			dctmp.close()
 
 		ldir = os.getcwd()
@@ -487,7 +512,7 @@ if __name__ == '__main__':
         parser.add_option('--qcd', action='store_true', dest='qcd', default=False, help='all qcd fail bins')
         parser.add_option('--nowz', action='store_true', dest='nowz', default=False, help='no w and z')
 	parser.add_option('--no-mcstat-shape', action='store_true', dest='noMcStatShape', default =False,help='change mcstat uncertainties to lnN', metavar='noMcStatShape')
-        parser.add_option('--nosig', dest='nosig', type=int, default=0, help='no signal (if not 0 then inject signal in that cat)')
+        parser.add_option('--nosig', dest='nosig', default='', help='cats with no signal (if not here then inject signal in that cat)')
         parser.add_option('--jet', dest='jet', default='AK8', help='jet type')
         parser.add_option('--jetdir', dest='jetdir', default='', help='jet dir')
         parser.add_option('--tag', dest='tag', default='blinded', help='tag')
@@ -496,12 +521,14 @@ if __name__ == '__main__':
 	parser.add_option('--forcomb', action='store_true', dest='forcomb',  default=False, help='combine with 2016')
         parser.add_option('--is2016', action='store_true', dest='is2016',  default=False, help='is 2016')
         parser.add_option('--is2016sig', action='store_true', dest='is2016sig',  default=False, help='is 2016 signal')
+        parser.add_option('--is2016WZ', action='store_true', dest='is2016WZ',  default=False, help='is 2016 W and Z samples')
 	parser.add_option('--isMuonCR', action='store_true', dest='isMuonCR', default=False, help='muon CR')
 	parser.add_option('--wonly', action='store_true', dest='wonly', default=False, help='only W extraction')
 	parser.add_option('--zonly', action='store_true', dest='zonly',default=False, help='only Z extraction')
-
+	parser.add_option('--scalebypt', action='store_true', dest='scalebypt', default=False, help='scale divided by pt cat')
+	parser.add_option('--base', action='store', dest='base', default='validation.root', type='string', help='base file to check for signal')
 	(options, args) = parser.parse_args()
-
+	
 	import tdrstyle
 	tdrstyle.setTDRStyle()
 	r.gStyle.SetPadTopMargin(0.10)
@@ -513,4 +540,4 @@ if __name__ == '__main__':
 	r.gROOT.SetBatch()
 	
 	main(options,args)
-##-------------------------------------------------------------------------------------
+
