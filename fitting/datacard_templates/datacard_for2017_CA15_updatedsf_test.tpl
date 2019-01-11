@@ -20,9 +20,7 @@ smear shape 1 1 1 - - 1 1 1 - -
 veff lnN 1.07 1.07 1.07 - - 1.07 1.07 1.07 - -
 wznormEW lnN - 1.05 - - - - 1.05 - - -
 znormEW lnN - 1.15 1.15 - - - 1.15 1.15 - -
-#znormQ lnN 1.15 1.15 1.15 - - 1.15 1.15 1.15 - -
-znormZQ lnN 1.10 - 1.3 - - 1.10 - 1.3 - -
-znormWQ lnN - 1.3 - - - - 1.3 - - -
+znormQ lnN 1.1 1.1 1.1 - - 1.1 1.1 1.1 - -
 zreweight lnN 1.05 - - - - 1.05 - - - -
 #Pu lnN 1 1 1 1 - 1 1 1 1 -
 #JER lnN 1 1 1 1 - 1 1 1 1 -

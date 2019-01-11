@@ -14,13 +14,13 @@ process 1 2 3 4 1 2 3 4
 rate -1 -1 -1 1 -1 -1 -1 1
 --------------------------------
 lumi lnN 1.023 1.023 - - 1.023 1.023 - -
-scale shape 0.1 0.1 - - 0.1 0.1 - -
+scale shape 0.33 0.33 - - 0.33 0.33 - -
 scalept shape 0.03 0.03 - - 0.03 0.03 - -
-smear shape 0.33 0.33 - - 0.33 0.33 - -
-veff lnN 1.11 1.11 - - 1.11 1.11 - -
+smear shape 0.5 0.5 - - 0.5 0.5 - -
+veff lnN 1.1 1.1 - - 1.1 1.1 - -
 wznormEW lnN 1.05 - - - 1.05 - - -
 znormEW lnN 1.15 1.15 - - 1.15 1.15 - -
-znormQ lnN 1.15 1.15 - - 1.15 1.15 - -
+znormQ lnN 1.1 1.1 - - 1.1 1.1 - -
 zreweight lnN - - - - - - - -
 #Pu lnN 1 1 1 - 1 1 1 -
 #JER lnN 1 1 1 - 1 1 1 -

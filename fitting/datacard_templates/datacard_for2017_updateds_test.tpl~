@@ -18,7 +18,7 @@ scale shape 0.1 0.1 0.1 - - 0.1 0.1 0.1 - -
 scalept shape 0.03 0.03 0.03 - - 0.03 0.03 0.03 - -
 smear shape 0.33 0.33 0.33 - - 0.33 0.33 0.33 - -
 #smear shape 0.5 0.5 0.5 - - 0.5 0.5 0.5 - -
-veff lnN 1.23 1.23 1.23 - - 1.23 1.23 1.23 - -
+veff lnN 1.11 1.11 1.11 - - 1.11 1.11 1.11 - -
 wznormEW lnN - 1.05 - - - - 1.05 - - -
 znormEW lnN - 1.15 1.15 - - - 1.15 1.15 - -
 znormQ lnN 1.1 1.1 1.1	- - 1.1	1.1 1.1	- -
@@ -37,4 +37,4 @@ tqqfailCATXnorm rateParam fail_CATX tqq (@0*(1.0-@1*TQQEFF)/(1.0-TQQEFF)) tqqnor
 tqqnormSF extArg 1.0 [0.0,10.0]
 tqqeffSF extArg 1.0 [0.0,10.0]
 -------------------------------
-qcd2017eff  flatParam
+qcdeff  flatParam
