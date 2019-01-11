@@ -21,10 +21,12 @@ parser.add_option('--skipcat' ,action='store',type=int,     dest='skipcat' ,defa
 parser.add_option('--nowz'    ,action='store_true',         dest='nowz'    ,default=False,          help='no w')
 parser.add_option('--isMuonCR',action='store_true',         dest='isMuonCR',default=True,           help='muon CR')
 parser.add_option('--fitb'    ,action='store_true',         dest='fitb'    ,default=False,          help='fit background only')
+parser.add_option('--prefit'  ,action='store_true',         dest='prefit'  ,default=False,          help='pre fit')
 parser.add_option("--lumi"    ,action='store',type=float,   dest="lumi"    ,default=41.1,           help="luminosity", metavar="lumi")
 parser.add_option("--onecat"  ,action='store',type=int,     dest='onecat'  ,default=0,              help='single cat fit')
 parser.add_option('--forcomb', action='store',type='string',dest='forcomb' ,default="",             help='combine with 2016')
 parser.add_option('--odir',                                 dest='odir'    ,default='./',           help='output directory',metavar='odir')
+parser.add_option('--template',action='store_true',         dest='template',default=False,          help='template')
 
 (options,args) = parser.parse_args()
 print options
@@ -117,7 +119,67 @@ def divide(iData,iHists):
     iAllP.extend(iHistsP)
     return iAllP[0]
 
-def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False,iB=False):
+def drawTemplates(iHists,iTags,iName,iFail,iMax):
+    iHists[0].GetXaxis().SetTitle("m_{SD} (GeV)")
+    lC0 = r.TCanvas("c","c",900,800);
+    iHists[0].GetYaxis().SetTitle("Events / 5 GeV")
+    iHists[0].GetXaxis().SetTitleOffset(2)
+    iHists[0].GetYaxis().SetTitleOffset(1.3)
+    iHists[0].GetYaxis().SetTitleSize(0.04)
+    iHists[0].GetYaxis().SetLabelSize(0.035)
+    iHists[0].GetXaxis().SetLabelOffset(0.05)
+    iHists[0].GetYaxis().SetRangeUser(0.,iMax)
+    #iHists[0].GetYaxis().SetRangeUser(0.,iHists[0].GetMaximum()*1.2)
+    iHists[0].Draw("hist")
+    lLegend = r.TLegend(0.33,0.73,0.88,0.88)
+    lLegend.SetFillColor(0)
+    lLegend.SetBorderSize(0)
+    lLegend.SetTextFont(42)
+    lLegend.SetTextSize(0.03)
+    for i0,pHist in enumerate(iHists):
+        pHist.SetLineWidth(2)
+        if iFail:
+            if pHist.GetName().find("fail") > -1:
+                if not "qcd" in pHist.GetName():
+                    if "(B)" in iTags[i0]: 
+                        pHist.SetLineColor(50+i0)
+                        pHist.SetMarkerColor(50+i0)
+                    pHist.Draw("histsames") 
+                else:
+                    pHist.SetFillColor(0)
+                    pHist.SetFillStyle(1001)
+                    pHist.SetLineColor(50+i0)
+                    pHist.SetLineStyle(1)
+                    pHist.SetMarkerStyle(1)
+                    pHist.SetMarkerColor(50+i0)
+                    pHist.Draw("pesames")
+                lLegend.AddEntry(pHist,iTags[i0],"l")
+        else:
+            if pHist.GetName().find("pass") > -1:
+                if not "qcd" in pHist.GetName():
+                    if "(B)" in iTags[i0]:
+                        pHist.SetLineColor(50+i0)
+                        pHist.SetMarkerColor(50+i0)
+                    pHist.Draw("histsames")
+                else:
+                    pHist.SetFillColor(0)
+                    pHist.SetFillStyle(1001)
+                    pHist.SetLineColor(50+i0)
+                    pHist.SetLineStyle(1)
+                    pHist.SetMarkerStyle(1)
+                    pHist.SetMarkerColor(50+i0)
+                    pHist.Draw("pesames")
+                lLegend.AddEntry(pHist,iTags[i0],"l")
+    lLegend.Draw()
+    lC0.Modified()
+    lC0.Update()
+    os.system('mkdir -p %s'%options.odir)
+    lC0.SaveAs(options.odir+'/'+iName+"_templates.png")
+    #lC0.SaveAs(options.odir+'/'+iName+"_templates.pdf")
+    #lC0.SaveAs(options.odir+'/'+iName+"_templates.root")
+
+
+def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False,iB=False,iPrefit=False):
     iData.GetXaxis().SetTitle("m_{SD} (GeV)")
     lC0 = r.TCanvas("c","c",900,800);
     p12 = r.TPad("p12","p12",0.0,0.3,1.0,1.0);
@@ -189,6 +251,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     for key,pHist in iHists.iteritems():
         #print key
         #pHist.GetXaxis().SetRangeUser(RANGE_LO[iJet],RANGE_HI[iJet])
+        if pHist is None: continue
         pHist.SetLineWidth(2)
         if iFail:
             if pHist.GetName().find("fail") > -1:
@@ -216,7 +279,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
 
     lLegend.AddEntry(iHists["qcd"],"Multijet pred.","lf")
     lLegend.AddEntry(iHists["tqq"],"t#bar{t}/single-t (qq)+jets","l")
-    if not iB:
+    if not (iB or iPrefit) and iHists["zpqq"] != None:
         lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%str(iMass),"lf")
 
     lLegend.Draw()
@@ -335,7 +398,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         iOneWithErrors = iHists["mc"].Clone();
         iOneWithErrors.Divide(iHists["mc"].Clone());
         for i in range(iOneWithErrors.GetNbinsX()): 
-            if iHists[3].GetBinContent(i+1) > 0: 
+            if iHists["mc"].GetBinContent(i+1) > 0: 
                 #print iHists["mc"].GetBinError(i+1)/iHists["mc"].GetBinContent(i+1)
                 iOneWithErrors.SetBinError( i+1, iHists["mc"].GetBinError(i+1)/iHists["mc"].GetBinContent(i+1) );
             else: iOneWithErrors.SetBinError( i+1, 0.014);
@@ -358,37 +421,39 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         iOneWithErrors.SetLineColor(r.kGray+2)
         iOneWithErrors.SetFillColor(r.kGray+2)
 
-    sigHistResiduals = []
-    sigHists = []
-    if not iB:
-        sigHists.append(iHists["zpqq"])
-    if not iNOWZ:
-        sigHists.append(iHists["wqq"])
-        sigHists.append(iHists["zqq"])        
-    for sigHist in sigHists:
-        sigHistResidual = sigHist.Clone('sigHistResidual%s%s' % (sigHist.GetName(),str(iCats)))
-        #sigHistResidual.GetXaxis().SetRangeUser(RANGE_LO[iJet],RANGE_HI[iJet])
-        for bin in range (0,g_data.GetN()):
-            value_data = g_data.GetY()[bin]
-            err_tot_data = g_data.GetEYhigh()[bin]
-            value_signal = sigHist.GetBinContent(bin+1)
-            ## Signal residuals
-            if err_tot_data>0:                
-                sig_residual = (value_signal) / err_tot_data
-            else:
-                sig_residual = 0                                
-            ## Fill histo with residuals
-            sigHistResidual.SetBinContent(bin+1,sig_residual)
-        sigHistResiduals.append(sigHistResidual)
-    hstack = r.THStack("hstack","hstack")
-    for sigHistResidual in sorted(sigHistResiduals,key=lambda (v): v.Integral()):
-        hstack.Add(sigHistResidual) 
-    #    sigHistResidual.Draw("hist sames")
-    hstack.Draw("hist sames")    
-    iOneWithErrorsLine = iOneWithErrors.Clone('iOneWithErrorsLine%s' %str(iCats))
-    iOneWithErrorsLine.SetFillStyle(0)
-    iOneWithErrorsLine.Draw("hist sames")
-    iRatioGraph.Draw("pezsame")
+        sigHistResiduals = []
+        sigHists = []
+        if not (iB or iPrefit):
+            if iHists["zpqq"] != None:
+                sigHists.append(iHists["zpqq"])
+        if not iNOWZ:
+            if iHists["zqq"] != None and iHists["wqq"] != None:
+                sigHists.append(iHists["wqq"])
+                sigHists.append(iHists["zqq"])        
+        for sigHist in sigHists:
+            sigHistResidual = sigHist.Clone('sigHistResidual%s%s' % (sigHist.GetName(),str(iCats)))
+            #sigHistResidual.GetXaxis().SetRangeUser(RANGE_LO[iJet],RANGE_HI[iJet])
+            for bin in range (0,g_data.GetN()):
+                value_data = g_data.GetY()[bin]
+                err_tot_data = g_data.GetEYhigh()[bin]
+                value_signal = sigHist.GetBinContent(bin+1)
+                ## Signal residuals
+                if err_tot_data>0:                
+                    sig_residual = (value_signal) / err_tot_data
+                else:
+                    sig_residual = 0                                
+                ## Fill histo with residuals
+                sigHistResidual.SetBinContent(bin+1,sig_residual)
+            sigHistResiduals.append(sigHistResidual)
+        hstack = r.THStack("hstack","hstack")
+        for sigHistResidual in sorted(sigHistResiduals,key=lambda (v): v.Integral()):
+            hstack.Add(sigHistResidual) 
+            #    sigHistResidual.Draw("hist sames")
+        hstack.Draw("hist sames")    
+        iOneWithErrorsLine = iOneWithErrors.Clone('iOneWithErrorsLine%s' %str(iCats))
+        iOneWithErrorsLine.SetFillStyle(0)
+        iOneWithErrorsLine.Draw("hist sames")
+        iRatioGraph.Draw("pezsame")
 
     #lC0.cd(1);
     #p12.cd().RedrawAxis()
@@ -417,10 +482,11 @@ def load(iFile,iName,iNorm=True):
     lHist.SetTitle(iName.replace("/","_"))
     return lHist
     
-def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True):
+def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True,iPreFit=False):
     lHists = {}
-    lFit = "shapes_fit_s/"+iCat+"/" if iS else "shapes_fit_b/"+iCat+"/"
-    #lFit = "shapes_prefit/"+iCat+"/"
+    if iPreFit: lFit = "shapes_prefit/"+iCat+"/"
+    else:
+        lFit = "shapes_fit_s/"+iCat+"/" if iS else "shapes_fit_b/"+iCat+"/"
     if iComb:
         lHists["qcd"] = load(iFile,lFit+"qcd2017")
     else:
@@ -432,23 +498,30 @@ def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True):
     lHists["qcd"].SetLineWidth(0)
     
     if not iNOWZ:
-        lHists["wqq"] = load(iFile,lFit+"wqq")
-        lHists["wqq"].SetLineColor(r.kGreen+3)
-        lHists["wqq"].SetLineStyle(3)
-        lHists["wqq"].SetLineWidth(2)
+        try:
+            lHists["wqq"] = load(iFile,lFit+"wqq")
+            lHists["wqq"].SetLineColor(r.kGreen+3)
+            lHists["wqq"].SetLineStyle(3)
+            lHists["wqq"].SetLineWidth(2)
+            
+            lHists["zqq"] = load(iFile,lFit+"zqq")
+            lHists["zqq"].SetLineColor(r.kRed+1)
+            lHists["zqq"].SetLineStyle(4)
+            lHists["zqq"].SetLineWidth(2)
+        except:
+            lHists["wqq"] = None
+            lHists["zqq"] = None
 
-        lHists["zqq"] = load(iFile,lFit+"zqq")
-        lHists["zqq"].SetLineColor(r.kRed+1)
-        lHists["zqq"].SetLineStyle(4)
-        lHists["zqq"].SetLineWidth(2)
-        
     lHists["tqq"] = load(iFile,lFit+"tqq")
     if iS:
-        lHists["zpqq"] = load(iFile,lFit+"zqq"+str(iMass))
-        lHists["zpqq"].SetLineColor(r.kPink + 7)
-        lHists["zpqq"].SetFillColor(r.kPink + 7)
-        lHists["zpqq"].SetLineStyle(5)
-        lHists["zpqq"].SetLineStyle(2)
+        try:
+            lHists["zpqq"] = load(iFile,lFit+"zqq"+str(iMass))
+            lHists["zpqq"].SetLineColor(r.kPink + 7)
+            lHists["zpqq"].SetFillColor(r.kPink + 7)
+            lHists["zpqq"].SetLineStyle(5)
+            lHists["zpqq"].SetLineStyle(2)
+        except:
+            lHists["zpqq"] = None
     lHists["tqq"].SetLineWidth(2)
     lHists["tqq"].SetLineColor(r.kMagenta+3)
 
@@ -457,8 +530,9 @@ def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True):
     else:
         lHists["mc"] = load(iFile,lFit+"qcd")
     if not iNOWZ:
-        lHists["mc"].Add(lHists["wqq"])
-        lHists["mc"].Add(lHists["zqq"])
+        if lHists["wqq"] is not None and lHists["zqq"] is not None:
+            lHists["mc"].Add(lHists["wqq"])
+            lHists["mc"].Add(lHists["zqq"])
     lHists["mc"].Add(lHists["tqq"])
     lHists["mc"].SetLineWidth(3)
     lHists["mc"].SetLineColor(r.kAzure - 5)
@@ -484,10 +558,6 @@ def loadHist(iFile,iCat,iMass,iFail=False,iNOWZ=False,iComb=False,iS=True):
     return lHists
 
 def loadData(iDataFile,iCat):
-    #lW = iDataFile.Get("w_"+iCat)
-    #lData = lW.data("data_obs_"+iCat).createHistogram("x")
-    #lData = load(iDataFile,"shapes_prefit/"+str(iCat)+"/data",False)
-    #print 'ICAT ',iCat
     lData = load(iDataFile,"shapes_fit_s/"+str(iCat)+"/data",False)
     lData.GetXaxis().SetTitle("m_{J} (GeV)")
     lData.SetMarkerStyle(20)
@@ -525,14 +595,14 @@ if __name__ == "__main__":
     lDFile = r.TFile(options.input)
 
     lDSum=None
-    lSum={}
+    lSum={}; lSumB = {};
     lDSumFail=None
     lSumFail={}
     lCh = "ch"
     iC=0
     if options.isMuonCR: lCh = "cat"
     lFits = True
-    if options.fitb: lFits = False
+    if options.prefit: lFits = False
     for cat in options.cats.split(','):
         iC=iC+1
         lCat = lCh+str(int(cat))+options.forcomb+"_pass_cat"+cat
@@ -543,31 +613,58 @@ if __name__ == "__main__":
         if options.fail:
             lCat = lCat.replace('pass','fail')
         lData  = loadData(lDFile,lCat)
+        lHistsB = {}
         if '2017' in options.forcomb:
-            lHists = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,True,lFits)
+            lHists = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,True,lFits,options.prefit)
+            if not options.prefit:
+                lHistsB = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,True,False)
         else:
-            lHists = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,False,lFits)
+            lHists = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,False,lFits,options.prefit)
+            if not options.prefit:
+                lHistsB = loadHist(lHFile,lCat,options.mass,options.fail,options.nowz,False,False,False)
         if not lSum:
             lDSum = hist(lData)
             add(lDSum,lData)
             lSum  = lHists
-            #print lDSum.GetName(),lDSum.Integral()
+            lSumB = lHistsB
         else:
             add(lDSum,lData)
-            #print lDSum.Integral(),lData.Integral()
             for key,value in lHists.iteritems():
-                lSum[key].Add(lHists[key])
-                #print key,lHists[key].Integral()
+                if lHists[key]!=None:
+                    lSum[key].Add(lHists[key])
+            for key,value in lHistsB.iteritems():
+                if not options.prefit:
+                    if lHistsB[key]!=None:
+                        lSumB[key].Add(lHistsB[key])
 
     if iC == 1: cat = int(options.cats)
     else: cat = 7
     name = 'postfit_s_'+str(options.mass)+options.forcomb+'_cat'+str(cat)
+    if options.prefit:
+        name = 'prefit_'+str(options.mass)+options.forcomb+'_cat'+str(cat)
     if options.fitb:
         name = 'postfit_b_'+str(options.mass)+options.forcomb+'_cat'+str(cat)
-    #name = 'prefit_'+str(options.mass)+'_cat'+str(cat)
+    if options.ratio:
+        name+= "_ratio"
     if options.fail:
         name += '_fail'
-    #print 'CAT', iC 
-    draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb)
-
-
+    if options.fitb:
+        draw(lDSum,lSumB,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit)
+    else:
+        draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit)
+    if options.template:
+        lHists = [lSum["wqq"],lSum["zqq"]]
+        lHistsB = [lSumB["wqq"],lSumB["zqq"]]
+        lTags = ["W(qq)+jets (S)","Z(qq)+jets (S)"]
+        lTagsB = ["W(qq)+jets (B)","Z(qq)+jets (B)"]
+        if not options.fitb and lSum["zpqq"] != None:
+            lHists.append(lSum["zpqq"])
+            lTags.append("Z'(qq) m_{Z'}=%s"%options.mass)
+        pMax = 2200 if options.fail else 1000
+        #drawTemplates(lHists,lTags,name+"_wz",options.fail,pMax)
+        drawTemplates(lHists+lHistsB,lTags+lTagsB,name+"_wz_all",options.fail,pMax)
+        lHists = [lSum["qcd"]]; lHistsB = [lSumB["qcd"]];
+        lTags = ["QCD (S)"]; lTagsB = ["QCD (B)"]
+        pMax = lDSum.GetMaximum()*1.1
+        #drawTemplates(lHists,lTags,name+"_qcd",options.fail,pMax)
+        drawTemplates(lHists+lHistsB,lTags+lTagsB,name+"_qcd_all",options.fail,pMax)   

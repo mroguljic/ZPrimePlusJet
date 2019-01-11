@@ -20,11 +20,11 @@ from buildRhalphabet_for2017 import massIterable
 # including other directories
 sys.path.insert(0, '../.')
 
-MASSES_AK8 = '50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,285,290,295,300'
+MASSES_AK8 = '50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,215,220,225,230,235,255,260,265,270,275,280,285,290,295,300'
 
 MASSES_CA15 = '100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,205,210,215,220,230,235,240,245,255,260,265,270,275,280,285,290,295,305,310,315,320,325,330,335,340,345,355,360,365,370,375,380,385,390,395,405,410,415,420,425,430,435,440,445'
 
-MASSES_AK8_CA15 = '50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,205,210,215,220,230,235,240,245,255,260,265,270,280,285,290,295,305,310,315,320,325,330,335,340,345,355,360,365,370,375,380,385,390,395,405,410,415,420,425,430,435,440,445'
+MASSES_AK8_CA15 = '50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,205,210,215,220,230,235,240,245,250,255,260,265,270,280,285,290,295,305,310,315,320,325,330,335,340,345,355,360,365,370,375,380,385,390,395,405,410,415,420,425,430,435,440,445'
 
 ROOT.gStyle.SetOptStat(0)
 ROOT.gStyle.SetOptFit(0)
@@ -496,7 +496,7 @@ if __name__ == '__main__':
 	parser = OptionParser()
 	parser.add_option('--masses',dest='masses', default='all',type='string',help='masses of resonance')
 	parser.add_option('-b','--box',dest="box", default="AK8",type="string", help="box name")
-	parser.add_option("--lumi", dest="lumi", default=4.1, type="float", help="luminosity", metavar="lumi")
+	parser.add_option("--lumi", dest="lumi", default=41.1, type="float", help="luminosity", metavar="lumi")
 	parser.add_option('-x','--xsec', dest='xsec', action='store_true',default=False, help='cross_section',metavar='xsec')
         parser.add_option('--mu', dest='mu', action='store_true',default=False, help='signal strenght',metavar='mu')
 	parser.add_option('--observed', dest='observed', action='store_true',default=False, help='show observed',metavar='observed')

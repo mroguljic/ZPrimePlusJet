@@ -20,7 +20,7 @@ class hist:
         self._hpdf .extend([lHPdf])
         return lHPdf
         
-    def morph(self,iValue):
+    def morph(self,iValue,iName=''):
         lMarker=0
         for pVal in self._vals:
             if pVal > iValue:
@@ -33,7 +33,7 @@ class hist:
         lRH1   = self.histpdf(self._hists[lMarker-1])
         lMorph = r.RooIntegralMorph("Morph","Morph",lRH0,lRH1,self._mass,lMed)
         lMed.setVal(lVal);
-        lOut   = lMorph.createHistogram("tmp"+str(iValue),self._mass)
+        lOut   = lMorph.createHistogram("tmp"+str(iValue)+iName,self._mass)
         lInt   = (self._hists[lMarker].Integral()-self._hists[lMarker-1].Integral())*lVal+self._hists[lMarker-1].Integral()
         lOut.Scale(lInt)
         return lOut

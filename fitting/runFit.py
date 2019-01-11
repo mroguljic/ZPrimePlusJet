@@ -13,6 +13,8 @@ cmssw = 'CMSSW_7_4_7'
 NOMINAL_MASSES = ['50','75','100','115','125','150','175','200','225','250','275','300','350','400','450','500']
 NOMINAL_MASSES_2016 = ['50','75','100','125','150','200','250','300']
 
+QCD_NUISANCES = 'p0r1,p0r2,p0r3,p0r4,p0r5,p1r0,p1r1,p1r2,p1r3,p1r4,p1r5,p2r0,p2r1,p2r2,p2r3,p2r4,p2r5,p3r0,p3r1,p3r2,p3r3,p3r4,p3r5,qcd2017eff,qcd_fail_cat2_Bin1,qcd_fail_cat2_Bin10,qcd_fail_cat2_Bin11,qcd_fail_cat2_Bin12,qcd_fail_cat2_Bin13,qcd_fail_cat2_Bin14,qcd_fail_cat2_Bin15,qcd_fail_cat2_Bin16,qcd_fail_cat2_Bin17,qcd_fail_cat2_Bin18,qcd_fail_cat2_Bin19,qcd_fail_cat2_Bin2,qcd_fail_cat2_Bin20,qcd_fail_cat2_Bin21,qcd_fail_cat2_Bin22,qcd_fail_cat2_Bin23,qcd_fail_cat2_Bin24,qcd_fail_cat2_Bin25,qcd_fail_cat2_Bin26,qcd_fail_cat2_Bin27,qcd_fail_cat2_Bin28,qcd_fail_cat2_Bin29,qcd_fail_cat2_Bin3,qcd_fail_cat2_Bin30,qcd_fail_cat2_Bin31,qcd_fail_cat2_Bin32,qcd_fail_cat2_Bin33,qcd_fail_cat2_Bin34,qcd_fail_cat2_Bin35,qcd_fail_cat2_Bin36,qcd_fail_cat2_Bin37,qcd_fail_cat2_Bin38,qcd_fail_cat2_Bin39,qcd_fail_cat2_Bin4,qcd_fail_cat2_Bin40,qcd_fail_cat2_Bin41,qcd_fail_cat2_Bin42,qcd_fail_cat2_Bin43,qcd_fail_cat2_Bin44,qcd_fail_cat2_Bin45,qcd_fail_cat2_Bin46,qcd_fail_cat2_Bin47,qcd_fail_cat2_Bin48,qcd_fail_cat2_Bin49,qcd_fail_cat2_Bin5,qcd_fail_cat2_Bin50,qcd_fail_cat2_Bin51,qcd_fail_cat2_Bin52,qcd_fail_cat2_Bin53,qcd_fail_cat2_Bin54,qcd_fail_cat2_Bin55,qcd_fail_cat2_Bin56,qcd_fail_cat2_Bin57,qcd_fail_cat2_Bin58,qcd_fail_cat2_Bin59,qcd_fail_cat2_Bin6,qcd_fail_cat2_Bin60,qcd_fail_cat2_Bin7,qcd_fail_cat2_Bin8,qcd_fail_cat2_Bin9,qcd_fail_cat3_Bin1,qcd_fail_cat3_Bin10,qcd_fail_cat3_Bin11,qcd_fail_cat3_Bin12,qcd_fail_cat3_Bin13,qcd_fail_cat3_Bin14,qcd_fail_cat3_Bin15,qcd_fail_cat3_Bin16,qcd_fail_cat3_Bin17,qcd_fail_cat3_Bin18,qcd_fail_cat3_Bin19,qcd_fail_cat3_Bin2,qcd_fail_cat3_Bin20,qcd_fail_cat3_Bin21,qcd_fail_cat3_Bin22,qcd_fail_cat3_Bin23,qcd_fail_cat3_Bin24,qcd_fail_cat3_Bin25,qcd_fail_cat3_Bin26,qcd_fail_cat3_Bin27,qcd_fail_cat3_Bin28,qcd_fail_cat3_Bin29,qcd_fail_cat3_Bin3,qcd_fail_cat3_Bin30,qcd_fail_cat3_Bin31,qcd_fail_cat3_Bin32,qcd_fail_cat3_Bin33,qcd_fail_cat3_Bin34,qcd_fail_cat3_Bin35,qcd_fail_cat3_Bin36,qcd_fail_cat3_Bin37,qcd_fail_cat3_Bin38,qcd_fail_cat3_Bin39,qcd_fail_cat3_Bin4,qcd_fail_cat3_Bin40,qcd_fail_cat3_Bin41,qcd_fail_cat3_Bin42,qcd_fail_cat3_Bin43,qcd_fail_cat3_Bin44,qcd_fail_cat3_Bin45,qcd_fail_cat3_Bin46,qcd_fail_cat3_Bin47,qcd_fail_cat3_Bin48,qcd_fail_cat3_Bin49,qcd_fail_cat3_Bin5,qcd_fail_cat3_Bin50,qcd_fail_cat3_Bin51,qcd_fail_cat3_Bin52,qcd_fail_cat3_Bin53,qcd_fail_cat3_Bin54,qcd_fail_cat3_Bin55,qcd_fail_cat3_Bin56,qcd_fail_cat3_Bin57,qcd_fail_cat3_Bin58,qcd_fail_cat3_Bin59,qcd_fail_cat3_Bin6,qcd_fail_cat3_Bin60,qcd_fail_cat3_Bin7,qcd_fail_cat3_Bin8,qcd_fail_cat3_Bin9,qcd_fail_cat4_Bin1,qcd_fail_cat4_Bin10,qcd_fail_cat4_Bin11,qcd_fail_cat4_Bin12,qcd_fail_cat4_Bin13,qcd_fail_cat4_Bin14,qcd_fail_cat4_Bin15,qcd_fail_cat4_Bin16,qcd_fail_cat4_Bin17,qcd_fail_cat4_Bin18,qcd_fail_cat4_Bin19,qcd_fail_cat4_Bin2,qcd_fail_cat4_Bin20,qcd_fail_cat4_Bin21,qcd_fail_cat4_Bin22,qcd_fail_cat4_Bin23,qcd_fail_cat4_Bin24,qcd_fail_cat4_Bin25,qcd_fail_cat4_Bin26,qcd_fail_cat4_Bin27,qcd_fail_cat4_Bin28,qcd_fail_cat4_Bin29,qcd_fail_cat4_Bin3,qcd_fail_cat4_Bin30,qcd_fail_cat4_Bin31,qcd_fail_cat4_Bin32,qcd_fail_cat4_Bin33,qcd_fail_cat4_Bin34,qcd_fail_cat4_Bin35,qcd_fail_cat4_Bin36,qcd_fail_cat4_Bin37,qcd_fail_cat4_Bin38,qcd_fail_cat4_Bin39,qcd_fail_cat4_Bin4,qcd_fail_cat4_Bin40,qcd_fail_cat4_Bin41,qcd_fail_cat4_Bin42,qcd_fail_cat4_Bin43,qcd_fail_cat4_Bin44,qcd_fail_cat4_Bin45,qcd_fail_cat4_Bin46,qcd_fail_cat4_Bin47,qcd_fail_cat4_Bin48,qcd_fail_cat4_Bin49,qcd_fail_cat4_Bin5,qcd_fail_cat4_Bin50,qcd_fail_cat4_Bin51,qcd_fail_cat4_Bin52,qcd_fail_cat4_Bin53,qcd_fail_cat4_Bin54,qcd_fail_cat4_Bin55,qcd_fail_cat4_Bin56,qcd_fail_cat4_Bin57,qcd_fail_cat4_Bin58,qcd_fail_cat4_Bin59,qcd_fail_cat4_Bin6,qcd_fail_cat4_Bin60,qcd_fail_cat4_Bin7,qcd_fail_cat4_Bin8,qcd_fail_cat4_Bin9,qcd_fail_cat5_Bin1,qcd_fail_cat5_Bin10,qcd_fail_cat5_Bin11,qcd_fail_cat5_Bin12,qcd_fail_cat5_Bin13,qcd_fail_cat5_Bin14,qcd_fail_cat5_Bin15,qcd_fail_cat5_Bin16,qcd_fail_cat5_Bin17,qcd_fail_cat5_Bin18,qcd_fail_cat5_Bin19,qcd_fail_cat5_Bin2,qcd_fail_cat5_Bin20,qcd_fail_cat5_Bin21,qcd_fail_cat5_Bin22,qcd_fail_cat5_Bin23,qcd_fail_cat5_Bin24,qcd_fail_cat5_Bin25,qcd_fail_cat5_Bin26,qcd_fail_cat5_Bin27,qcd_fail_cat5_Bin28,qcd_fail_cat5_Bin29,qcd_fail_cat5_Bin3,qcd_fail_cat5_Bin30,qcd_fail_cat5_Bin31,qcd_fail_cat5_Bin32,qcd_fail_cat5_Bin33,qcd_fail_cat5_Bin34,qcd_fail_cat5_Bin35,qcd_fail_cat5_Bin36,qcd_fail_cat5_Bin37,qcd_fail_cat5_Bin38,qcd_fail_cat5_Bin39,qcd_fail_cat5_Bin4,qcd_fail_cat5_Bin40,qcd_fail_cat5_Bin41,qcd_fail_cat5_Bin42,qcd_fail_cat5_Bin43,qcd_fail_cat5_Bin44,qcd_fail_cat5_Bin45,qcd_fail_cat5_Bin46,qcd_fail_cat5_Bin47,qcd_fail_cat5_Bin48,qcd_fail_cat5_Bin49,qcd_fail_cat5_Bin5,qcd_fail_cat5_Bin50,qcd_fail_cat5_Bin51,qcd_fail_cat5_Bin52,qcd_fail_cat5_Bin53,qcd_fail_cat5_Bin54,qcd_fail_cat5_Bin55,qcd_fail_cat5_Bin56,qcd_fail_cat5_Bin57,qcd_fail_cat5_Bin58,qcd_fail_cat5_Bin59,qcd_fail_cat5_Bin6,qcd_fail_cat5_Bin60,qcd_fail_cat5_Bin7,qcd_fail_cat5_Bin8,qcd_fail_cat5_Bin9,qcd_fail_cat6_Bin1,qcd_fail_cat6_Bin10,qcd_fail_cat6_Bin11,qcd_fail_cat6_Bin12,qcd_fail_cat6_Bin13,qcd_fail_cat6_Bin14,qcd_fail_cat6_Bin15,qcd_fail_cat6_Bin16,qcd_fail_cat6_Bin17,qcd_fail_cat6_Bin18,qcd_fail_cat6_Bin19,qcd_fail_cat6_Bin2,qcd_fail_cat6_Bin20,qcd_fail_cat6_Bin21,qcd_fail_cat6_Bin22,qcd_fail_cat6_Bin23,qcd_fail_cat6_Bin24,qcd_fail_cat6_Bin25,qcd_fail_cat6_Bin26,qcd_fail_cat6_Bin27,qcd_fail_cat6_Bin28,qcd_fail_cat6_Bin29,qcd_fail_cat6_Bin3,qcd_fail_cat6_Bin30,qcd_fail_cat6_Bin31,qcd_fail_cat6_Bin32,qcd_fail_cat6_Bin33,qcd_fail_cat6_Bin34,qcd_fail_cat6_Bin35,qcd_fail_cat6_Bin36,qcd_fail_cat6_Bin37,qcd_fail_cat6_Bin38,qcd_fail_cat6_Bin39,qcd_fail_cat6_Bin4,qcd_fail_cat6_Bin40,qcd_fail_cat6_Bin41,qcd_fail_cat6_Bin42,qcd_fail_cat6_Bin43,qcd_fail_cat6_Bin44,qcd_fail_cat6_Bin45,qcd_fail_cat6_Bin46,qcd_fail_cat6_Bin47,qcd_fail_cat6_Bin48,qcd_fail_cat6_Bin49,qcd_fail_cat6_Bin5,qcd_fail_cat6_Bin50,qcd_fail_cat6_Bin51,qcd_fail_cat6_Bin52,qcd_fail_cat6_Bin53,qcd_fail_cat6_Bin54,qcd_fail_cat6_Bin55,qcd_fail_cat6_Bin56,qcd_fail_cat6_Bin57,qcd_fail_cat6_Bin58,qcd_fail_cat6_Bin59,qcd_fail_cat6_Bin6,qcd_fail_cat6_Bin60,qcd_fail_cat6_Bin7,qcd_fail_cat6_Bin8,qcd_fail_cat6_Bin9'
+
 def parser():
     parser = OptionParser()
     parser.add_option('--sig',action='store',type='float',dest='sig',default=0.,help='sig')
@@ -29,7 +31,7 @@ def parser():
     parser.add_option('--rMin',dest='rMin',default='-20',type='string',help='minimum of r (signal strength) in profile likelihood plot')
     parser.add_option('--rMax',dest='rMax',default='20',type='string',help='maximum of r (signal strength) in profile likelihood plot')
     parser.add_option('-M','--method'   ,dest='method'   ,default='GoodnessOfFit',
-                      choices=['GoodnessOfFit','FTest','Asymptotic','Bias','MaxLikelihoodFit','Impacts'],help='combine method to use')
+                      choices=['GoodnessOfFit','FTest','Asymptotic','Bias','MaxLikelihoodFit','Impacts','NLLScan'],help='combine method to use')
     parser.add_option('-a','--algo'   ,dest='algo'   ,default='saturated',
                       choices=['saturated','KS'],help='GOF algo  to use')
     parser.add_option('--input', dest='input', default = 'input_hists/blinded/AK8_2017_v4_NoB_Lumi362_blinded.root',
@@ -48,11 +50,15 @@ def parser():
     parser.add_option('--isMuonCR', action='store_true', dest='isMuonCR', default=False, help='muon CR')
     parser.add_option('--is2016', action='store_true', dest='is2016', default=False, help='is 2016 sig')
     parser.add_option('--is2016sig', action='store_true', dest='is2016sig',  default=False, help='is 2016 signal')
+    parser.add_option('--is2016WZ', action='store_true', dest='is2016WZ',  default=False, help='is 2016 W and Z samples')
     parser.add_option('--nocards', action='store_true', dest='nocards', default=False, help='no make cards again')
     parser.add_option('--dry-run', dest="dryRun",default=False,action='store_true',help="Just print out commands to run")
     parser.add_option('--allfits', action='store_true', dest='allfits', default=False, help='all fits for imapcts')
     parser.add_option('--nosig', dest='nosig', type=int, default=0, help='no signal (if not 0 then inject signal in that cat)')
-
+    parser.add_option('--scalebypt', action='store_true', dest='scalebypt', default=False, help='scale divided by pt cat')
+    parser.add_option('--corrWZ', action='store_true', dest='corrWZ', default=False, help='correlate WZnorm')
+    parser.add_option('--corrZ', action='store_true', dest='corrZ', default=False, help='correlate Znorm')
+    parser.add_option('--npoints'   ,action='store',type=int,dest='npoints'   ,default=400, help='npoints')
     (options,args) = parser.parse_args()
     return options
 
@@ -69,14 +75,14 @@ def write_condor(exe='runjob.sh', arguments = [], files = [],dryRun=True):
     #out += 'RequestCpus = 6 \n'
     #out += 'request_disk = 120MB \n'
     #out += 'request_memory = 2000MB \n'
-    out += '+JobFlavour             = "workday"\n'
     out += 'Should_Transfer_Files = YES\n'
     out += 'WhenToTransferOutput = ON_EXIT_OR_EVICT\n'
     out += 'Transfer_Input_Files = %s,%s\n'%(exe,','.join(files))
     out += 'Output = %s.stdout\n'%job_name
-    out += 'Error  = %s.stderr\n'%job_name
-    out += 'Log    = %s.log\n'   %job_name
+    out += 'Error = %s.stderr\n'%job_name
+    out += 'Log = %s.log\n'   %job_name
     out += 'Arguments = %s\n'%(' '.join(arguments))
+    out += '+JobFlavour = "nextweek"\n'
     out += 'Queue 1\n'
     with open(job_name, 'w') as f:
         f.write(out)
@@ -140,8 +146,16 @@ def setup(options,iMass):
                 lCommandBase = lCommandNoSys
             if options.is2016sig:
                 lCommandBase += ' --is2016sig '
+            if options.is2016WZ:
+                lCommandBase += ' --is2016WZ '
             if options.nowz:
                 lCommandBase = lCommandSysNoWZ
+            if options.scalebypt:
+                lCommandBase += ' --scalebypt '
+            if options.corrWZ:
+                lCommandBase += ' --corrWZ '
+            if options.corrZ:
+                lCommandBase += ' --corrZ '
             if options.nosig!=0:
                 lCommandBase = lCommandNoSig
             if iMass not in NOMINAL_MASSES and not options.is2016sig:
@@ -155,7 +169,7 @@ def setup(options,iMass):
             if options.forcomb:
                 exec_me('cp base_2017.root %s ' % (iDir))
                 exec_me('cp ralphabase_%s%s_pt_2017.root %s ' % (options.np,options.nr,iDir))
-                exec_me('python makeCards.py --input input_hists/fulldataset/AK8_2016_v1_Lumi371.root --tag %s --mass %s --np 3 --nr 4  --is2016 --interpol --jetdir %s'%(options.tag,iMass,options.jet))
+                exec_me('python makeCards.py --input input_hists/fulldataset/AK8_2016_v1_Lumi371.root --tag %s --mass %s --np 3 --nr 4  --is2016 --interpol --jetdir %s --skipcat 0'%(options.tag,iMass,options.jet))
                 exec_me('cp data/2016/%s/base.root  %s'%(options.jet,iDir))
                 exec_me('cp data/2016/%s/ralphabase_34_pt.root  %s'%(options.jet,iDir))
                 os.chdir(iDir)
@@ -302,18 +316,51 @@ def impacts(base,iLabel,iMass,iAllfits=False):
             os.system('chmod +x %s' % os.path.abspath(sub_file.name))
             os.system('bsub -q 8nh -R "rusage[tmp=3600:duration=3600:decay=1]" -o out.%%J %s' % (os.path.abspath(sub_file.name)))
 
+def nllscan(base,iLabel,iMass,options):
+    fileName='runnllscan_%s.sh' % (iLabel)
+    os.system('rm %s'%fileName)
+    dirs=os.getcwd().split("/")
+    lCommand = ''
+    lCommand += 'cd    %s   \n' % dirs[len(dirs)-1]
+    #lCommand += 'text2workspace.py %s -m %s \n'% (base,iMass)
+    #lCommand += 'combine -M MultiDimFit --algo grid -P r -P scale --setPhysicsModelParameterRanges r=0,2:scale=-3,1 -m %s --points %i %s \n'%(iMass,options.npoints,base.replace('.root','.txt'))
+    #lCommand += 'combine -M MultiDimFit --algo grid --redefineSignalPOIs r,scale --setPhysicsModelParameterRanges r=0,1:scale=-5,1 -m %s --points %i %s \n'%(iMass,options.npoints,base.replace('.root','.txt'))
+    # freeze
+    freezeNuisances=QCD_NUISANCES+','+options.freezeNuisances
+    lCommand += 'combine -M MultiDimFit %s --saveWorkspace -n Err --setPhysicsModelParameters r=0 --freezeNuisances r \n'%base
+    lCommand += 'combine -M MultiDimFit higgsCombineErr.MultiDimFit.mH120.root --rMin -2 --rMax 2 --snapshotName MultiDimFit --freezeNuisances %s --algo grid --redefineSignalPOIs r,scale --setPhysicsModelParameterRanges r=0,1:scale=-5,1 -m %s --points %i \n' %(freezeNuisances,iMass,options.npoints)
+    lCommand += 'mv higgsCombineTest.MultiDimFit.mH%s.root %s/%snllscale.root \n'%(iMass,os.getcwd(),iLabel)  
+    lFilesToTransfer = [os.getcwd(),cmssw_path]
+    lFiles = [dirs[len(dirs)-1]]
+    write_bash(os.path.abspath(fileName),lCommand,lFiles)
+    write_condor(os.path.abspath(fileName), [], lFilesToTransfer, options.dryRun)
+
 def limit(base,iLabel,iMass,options):
+    freezeNuisances=QCD_NUISANCES+','+options.freezeNuisances
     fileName='runlimit_%s.sh' % (iLabel)
     os.system('rm %s'%fileName)
     dirs=os.getcwd().split("/")
     lCommand = ''
     lCommand += 'cd    %s   \n' % dirs[len(dirs)-1]
     lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 \n' % base
+    #lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 --freezeNuisances %s \n'%(base,freezeNuisances)
     lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimit.root \n' % (os.getcwd(),iLabel)
+    #lCommand += 'combine -M MaxLikelihoodFit %s --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties --freezeNuisances %s \n'%(base,freezeNuisances)
+    #lCommand += 'mv mlfit.root %s/%smlfit.root \n' % (os.getcwd(),iLabel)
     #lCommand += 'combine -M Asymptotic %s --rMin -2 --rMax 2 --minimizerStrategy 0 -t -1 --run expected \n' % base
     #lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimitexpectedt1.root \n' % (os.getcwd(),iLabel)
-    #lCommand += 'combine -M MaxLikelihoodFit %s --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties'% base
-    #lCommand += 'mv mlfit.root %s/%smlfit.root \n' % (os.getcwd(),iLabel)
+    #if iMass == '70':
+    if iMass == '275':
+        lCommand += 'combine -M MaxLikelihoodFit %s --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties \n'% base
+        lCommand += 'mv mlfit.root %s/%smlfit.root \n' % (os.getcwd(),iLabel)
+    #lCommand += 'combine -M MaxLikelihoodFit %s --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties --setPhysicsModelParameters scale=-2 --freezeNuisances scale \n'% base
+    #lCommand += 'mv mlfit.root %s/%smlfit_scale2.root \n' % (os.getcwd(),iLabel)
+    #lCommand += 'combine -M MultiDimFit %s --saveWorkspace -n Err --setPhysicsModelParameters r=0 --freezeNuisances r \n'%base
+    #lCommand += 'combine -M Asymptotic higgsCombineErr.MultiDimFit.mH120.root --rMin -2 --rMax 2 --snapshotName MultiDimFit --freezeNuisances %s \n' %(freezeNuisances)
+    #lCommand += 'mv higgsCombineTest.Asymptotic.mH120.root %s/%slimit_freezeqcdsnapshot.root \n' % (os.getcwd(),iLabel)   
+    #if iMass =='70':
+    #    lCommand += 'combine -M MaxLikelihoodFit --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties --saveNormalizations --saveOverallShapes --numToysForShapes 1000 higgsCombineErr.MultiDimFit.mH120.root --snapshotName MultiDimFit --freezeNuisances %s \n'%freezeNuisances
+    #    lCommand += 'mv mlfit.root %s/%smlfit_freezeqcdsnapshot.root \n' % (os.getcwd(),iLabel)
     # if int(iMass) < 150:
     #     sub_file.write('combine -M MaxLikelihoodFit %s --minimizerStrategy 0 --rMin -2 --rMax 2 --saveShapes --saveWithUncertainties  --robustFit 1 > /dev/null \n' % base)
     # else:
@@ -760,6 +807,9 @@ if __name__ == "__main__":
             iDir = '%s/results/%s/%s/ZQQ_%s'%(os.getcwd(),options.tag,options.jet,mass)
             os.chdir (iDir)
         if not options.condense:
+            if options.method=='NLLScan':
+                datacard = 'card_rhalphabet_%s%s_pt.txt'%(options.np,options.nr)
+                nllscan(datacard,'nllscanscale_%s%s_skip%s_%s_%s'%(options.np,options.nr,options.skipcat.split(',')[0],options.test,str(options.npoints)),mass,options)
             if options.method=='MaxLikelihoodFit':
                 if options.forcomb:
                     limit('card_2016_2017.txt','lim_2016_2017_results7_%s%s_34_skip%s'%(options.np,options.nr,options.skipcat),mass,options)
@@ -767,7 +817,7 @@ if __name__ == "__main__":
                     limit('card_2017.txt','lim_2017_%s%s_34_skip%s'%(options.np,options.nr,options.skipcat),mass,options)
                 else:
                     datacard = 'card_rhalphabet_%s%s_pt.txt'%(options.np,options.nr)
-                    limit(datacard,'lim_%s%s_skip%s_%s'%(options.np,options.nr,options.skipcat,options.test),mass,options)
+                    limit(datacard,'lim_%s%s_skip%s_%s'%(options.np,options.nr,options.skipcat.split(',')[0],options.test),mass,options)
             if options.method=='FTest':
                 iLabel= 'ftest_%s%s_vs_%s%s_%s_skip%s'%(options.np,options.nr,options.npalt,options.nralt,options.test,options.skipcat)
                 ftest('card_rhalphabet_%s%s_pt.txt'%(options.np,options.nr),'card_rhalphabet_%s%s_pt.txt'%(options.npalt,options.nralt),options.toys,options.sig,iLabel,mass)
