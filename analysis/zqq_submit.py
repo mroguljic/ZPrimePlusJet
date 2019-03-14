@@ -1,8 +1,11 @@
 #!/usr/bin/env python                                                                                                                                                                
 import glob
-import sys, commands, os, fnmatch
+import sys, commands, os, fnmatch, json
 from optparse import OptionParser
-import zqq_utils
+from zqq_utils import *
+
+cmssw = os.getenv('CMSSW_VERSION', 'CMSSW_8_1_0')
+cmssw_base = os.getenv('CMSSW_BASE', 'CMSSW_8_1_0')
 
 # submit nqueue jobs per file                                                                                                                                                     
 def write_condor(exe='runjob.sh', arguments = [], files = [],nqueue=1,dryRun=True):
@@ -15,7 +18,7 @@ def write_condor(exe='runjob.sh', arguments = [], files = [],nqueue=1,dryRun=Tru
     out += 'Output = output/%s_$(Cluster)_$(Process).stdout\n'%job_name
     out += 'Error  = error/%s_$(Cluster)_$(Process).stderr\n'%job_name
     out += 'Log    = log/%s_$(Cluster)_$(Process).log\n'   %job_name
-    out += 'Arguments = %s $(Process)\n'%(' '.join(arguments))
+    out += 'Arguments = %s $(Process)\n'%(' '.join(arguments)) # last argument is number of splitting
     out += 'Queue %i\n'%nqueue
     with open(job_name, 'w') as f:
         f.write(out)
@@ -23,7 +26,7 @@ def write_condor(exe='runjob.sh', arguments = [], files = [],nqueue=1,dryRun=Tru
         os.system("condor_submit %s"%job_name)
 
 # bash script: outdir must be in eos?
-def write_bash(temp = 'runjob.sh', command = '', files = [],sample='',outdir=''):
+def write_bash(temp = 'runjob.sh', command = '', files = [],odir=''):
     print 'writing ',temp
     out = '#!/bin/bash\n'
     # add arguments
@@ -37,7 +40,7 @@ def write_bash(temp = 'runjob.sh', command = '', files = [],sample='',outdir='')
     out += 'export SCRAM_ARCH=slc6_amd64_gcc530\n'
     out += 'scramv1 project CMSSW %s\n'%cmssw
     for f in files:
-        out += 'cp %s %s/src\n'%(f.replace("%s/src/"%cmssw_base,""),cmssw)
+        out += 'cp %s %s/src\n'%(f.replace("%s/src/ZPrimePlusJet/analysis/"%cmssw_base,""),cmssw)
         if 'data.tgz' in f:
              out += 'tar -xvzf data.tgz -C %s/src \n'%cmssw
     out += 'cd %s/src\n'%cmssw
@@ -46,8 +49,8 @@ def write_bash(temp = 'runjob.sh', command = '', files = [],sample='',outdir='')
     out += command + '\n'
     out += 'echo "Inside $MAINDIR:"\n'
     out += 'ls -lrth \n'
-    # transfer
-    out += 'OUTDIR=%s/%s \n'%sample
+    # transfer to odir ( in oes)
+    out += 'OUTDIR=root://cmseos.fnal.gov/%s \n'%(odir)
     out += 'for FILE in *.root \n'
     out += 'do \n'
     out += '\t xrdcp -f ${FILE} ${OUTDIR}/${FILE} \n'
@@ -62,44 +65,23 @@ def write_bash(temp = 'runjob.sh', command = '', files = [],sample='',outdir='')
         f.write(out)
 
 # submit by # of events
-def submitByEvents(options,iCommand,iJob,inSplit):
+def submitByEvents(options,iCommand,iJob,inSplit,iOdir):
     lexe      = "runjob_%s.sh"%(iJob)
-    files     = ['controlHistsLSFSF.py']
-    filesTransfer  = ['%s/src/lsfSF/controlHistsLSFSF.py'%cmssw_base,'%s/src/lsfSF/data/puWeights_All.root'%cmssw_base]
+    files     = ['zqq_create.py','zqq_utils.py','zqq_config.py','data.tgz']
+    filesTransfer  = ['%s/src/ZPrimePlusJet/analysis/'%cmssw_base+f for f in files]
     arguments = []
-    write_bash(lexe,iCommand,files,options.sample)
+    write_bash(lexe,iCommand,files,iOdir)
     os.system('mkdir -p output')
     os.system('mkdir -p error')
     os.system('mkdir -p log')
-    write_condor(lexe, arguments, filesTransfer,inSplit,options.dryRun)
-
-def submitByEvents(options,iLabel,iCommand,iFile,iSplit=100,iTree="otree"):
-    lEntries = loopOverEntries(iFile,iTree)
-    if lEntries > iSplit:
-        lSplit = slice_it(range(0,lEntries),iSplit)
-    else:
-        lSplit = [range(0,lEntries)]
-    print lSplit
-    for iL,iList in enumerate(lSplit):
-        print iL,iList[0],iList[-1]
-        levts     = '%i,%i'%(int(iList[0]),int(iList[-1]))
-        lCommand  = iCommand + ' --evts %s'%(levts)
-        iJob      = "%s_%i_%i"%(iLabel,int(iList[0]),int(iList[-1]))
-        lexe      = "runjob_%s.sh"%(iJob)
-        files     = ['%s/src/ZPrimePlusJet/analysis/zqq_create.py'%cmssw_base,
-                     '%s/src/ZPrimePlusJet/analysis/zqq_utils.py'%cmssw_base,
-                     '%s/src/ZPrimePlusJet/analysis/data.tgz'%cmssw_base]
-        arguments = []
-        write_bash(lexe,lCommand,files)
-        write_condor(lexe, arguments, files, options.dryRun)
+    write_condor(lexe,arguments,filesTransfer,inSplit,options.dryRun)
 
 if __name__ == '__main__':
 
     parser = OptionParser()
-    parser.add_option('-s','--sample',dest="sample", default="", help="samples to run on")
-    parser.add_option('-t','--tag',   dest="tag", default = "test", help = "tag")
-    parser.add_option('--odir',       dest="odir", default = "inputHists", help = "output dir")
-    parser.add_option('--split',      dest="split", type=int, default = 1000, help = "split")
+    parser.add_option('-t','--tag',   dest="tag",    default = "test", help = "tag")
+    parser.add_option('--odir',       dest="odir",   default = "inputHists", help = "output dir")
+    parser.add_option('--nsplit',     dest="nsplit", type=int, default = 1000, help = "split")
     parser.add_option('--hadd',       dest='hadd', action='store_true',default = False, help='hadd roots from subjobs', metavar='hadd')
     parser.add_option('--dry-run',    dest="dryRun",default=False,action='store_true',help="Just print out commands to run")
     parser.add_option('--year',       dest="year", default="2017", help='year')
@@ -108,25 +90,23 @@ if __name__ == '__main__':
     parser.add_option('--isMuonCR',   action='store_true', dest='isMuonCR', default=False, help='run on muon CR')
     parser.add_option('--isData',     action='store_true', dest='isData', default=False, help='run on data')
     parser.add_option('--isSig',      action='store_true', dest='isSig', default=False, help='run on signals')
-    parser.add_option('--nob',        action='store_true', dest='nob', default=False, help='no Run B')
     parser.add_option('--blinded',    action='store_true', dest='blinded', default=False, help='run 10th')
     parser.add_option("--sideband",   type=str, default=None, help="sideband")
-    parser.add_option('--jet',        dest='jet', default='AK8', help='jet type')
-    parser.add_option("--ddt",        type=str, default='data/GridOutput_v13.root', help="ddt")
+    parser.add_option('--jet',        dest='jet', default='AK8',                          help='jet type')
+    parser.add_option("--ddt",        type=str, default='data/GridOutput_v13.root',       help="ddt")
     parser.add_option('--control',    action='store_true', dest='control', default=False, help='control hists')
-    parser.add_option('--trigger',    action='store', dest='trigger', default=None, help='run trigger')
+    parser.add_option('--trigger',    action='store', dest='trigger', default=None,       help='run trigger')
+    parser.add_option('--trigmap',    type=str,       dest='trigmap', default='ht2017',   help='trigger tag')
 
     (options,args) = parser.parse_args()
 
-    if year=="2017":
-        samplefiles   = open(os.path("data/samplefiles.json"),"r")
+    if options.year=="2017":
+        samplefiles   = open(os.path.expandvars("data/samplefiles.json"),"r")
         tfiles  = json.load(samplefiles)['zqq2017']
-        pu_Opt  = {'data':"2017"}
         masses  = massIterable(MASSES2017)
         lumi    = 41.1
-    elif year=='2016':
+    elif options.year=='2016':
         tfiles = get2016files()
-        pu_Opt = {'data':"2016",'MC':"12.04"}
         masses = massIterable(MASSES2016)
         lumi   = 36.9
     else:
@@ -136,10 +116,10 @@ if __name__ == '__main__':
     # samples: key is the name of process in datacard
     samples = {}
     if options.isMc:
-        samples['zqq'] = ['zqq'],
-        samples['wqq'] = ['wqq'],
-        samples['tqq'] = ['tqq'],
-        samples['stqq'] = ['stqq'],
+        samples['zqq'] = ['zqq']
+        samples['wqq'] = ['wqq']
+        samples['tqq'] = ['tqq']
+        samples['stqq'] = ['stqq']
         if options.isMuonCR:
             samples['vvqq'] = ['vvqq']
             samples['wlnu'] = ['wlnu']
@@ -148,76 +128,107 @@ if __name__ == '__main__':
         samples['qcd'] = ['qcd']
     if options.isData:
         samples['data_obs'] = ['jethtb','jethtc','jethtd','jethte','jethtf']
-        if year=="2016":
+        if options.year=="2016":
             samples['data_obs'] = ['jethtb','jethtc','jethtd','jethte','jethtf','jethtg','jethth']
+        if options.trigger or options.isMuonCR:
+            samples['data_obs'] = ['muon']
+    if options.isSig:
+        for m in masses:
+            samples['zqq%s'%m] = ['zqq%s'%m]
 
+    # tag
     tag = options.tag
     if options.blinded: tag += "10th"
-    if options.nob: tag += "NOB"
-    if options.isMuonCR: tag = 'muon'+tag
-    if options.trigger is not None: tag = options.trigger+tag
+    if options.isMuonCR: tag = "muon"+tag
+    if options.trigger: tag += options.trigmap
     tag+=options.jet
 
+    # odir
+    odir = options.odir
+    if options.control: odir = odir.replace('inputHists','controlHists')
+    lOdir = '/store/user/cmantill/%s/%s'%(odir,tag)
+    exec_me('mkdir -p /eos/uscms/%s'%lOdir)
+
+    # lumi
     sf = 1
     if options.blinded: sf = 10
     lumi = lumi/sf;
 
-    lOdir = options.odir+"/"+tag
-    if options.control:
-        lOdir = "controlHists/"+tag
-    exec_me('mkdir -p %s'%(lOdir))
+    print samples
 
-    for label, s in samples.iteritems():
-        if type(tfiles[s])==type({}): continue
-        for tfile in tfiles[s]:
-            if not "root://" in tfile and not os.path.isfile(tfile):
-                print 'Error: %s does not exist'%tfile                 
-                sys.exit()
-
-        mass = 0
-        if 'zqq' in label: mass = 91.
-        if 'wqq' in label: mass= 80.4
-        if options.isSig:
-            lmass = label.replace('zqq','')
-            for m in masses:
-                if lmass == str(m): mass = float(lmass)
-
-        for ifilename in tfiles[s]:
-            lbasename = ifilename
-            ltree = "Events" # I think this works in all cases
-            lcommand  = 'python ${CMSSW_BASE}/src/zqq_create.py --odir ${MAINDIR}/ --filename %s --tag %s --tree %s --mass %.2f --jet %s --ddt %s --lumi %f --sf %i '%(lbasename,label,ltree,mass,options.jet,options.ddt,lWeight,sf)
-            if options.control: lcommand  += ' --control'
-            if options.isMuonCR: lcommand  += ' --isMuonCR'
-            if options.isData: lcommand  += ' --isData'
-            if options.nob: lcommand  += ' --nob'
-            if options.blinded: lcommand  += ' --blinded'
-            if options.year=='2017': 
-                lPuPath = getPuHistogram(s,fPuPath)
-                lcommand  += ' --isPu %s'%lPuPath 
-            if options.sideband is not None: lcommand += ' --sideband %s'%options.sideband
-            if options.trigger is not None: lcommand += ' --trigger %s'%options.trigger
-            if options.year=='2016': lcommand += ' --is2016'
-            lbase = os.getcwd()
-
-            lsub = label+'_'+ifilename.replace('.root','').replace('/','_')
-            if not options.hadd:
-                os.chdir(lOdir)
-                print "submitting jobs from : ",os.getcwd()
-                submitByEvents(options,lsub,lcommand,lfile,options.split,ltree)
-                os.chdir(lbase)
+    # iterate over samples
+    for label, samplelist in samples.iteritems():
+        for sample in samplelist:
+            lFiles={}
+            if type(tfiles[sample])!=type({}): 
+                lFiles[sample] = tfiles[sample]
             else:
-                nOutput = len(glob.glob("%s/%s_*.root"%(lOdir,lbasename.replace('.root','').replace('/','_'))))
-                if nOutput==options.split:
-                    print 'Found %i subjob output files out of %i'%(nOutput,options.split)
-                    exec_me("hadd -f %s/%s %s/%s_*.root"%(lOdir,lbasename.replace('/','_'),lOdir,lbasename.replace('.root','').replace('/','_')),options.dryRun)
-                    print "DONE hadd. Removing subjob files"
-                    exec_me("rm %s/%s_*.root"%(lOdir,lbasename.replace('.root','').replace('/','_')),options.dryRun)
-                    exec_me("rm %s/run*%s_*.jdl*"%(lOdir,lsub),options.dryRun)
-                    exec_me("rm %s/run*%s_*.sh"%(lOdir,lsub),options.dryRun)
+                lFiles = tfiles[sample]
+            print 'lfiles ', lFiles
+
+            mass = 0
+            if 'zqq' in label: mass = 91.
+            if 'wqq' in label: mass= 80.4
+            if options.isSig:
+                lmass = label.replace('zqq','')
+                for m in masses:
+                    if lmass == str(m): mass = float(lmass)
+
+            for subsample,subtfiles in lFiles.iteritems():
+                print 'subbample ', subsample, 'subfiles', subtfiles
+                if not options.isData:
+                    lumiweight = getLumiWeight(subsample,lumi,subtfiles)
                 else:
-                    print 'Found %i subjob output files out of %i'%(nOutput,options.split)
-                    exec_me("hadd -f %s/%s %s/%s_*.root"%(lOdir,lbasename.replace('/','_'),lOdir,lbasename.replace('.root','').replace('/','_')),options.dryRun)
-                    print "DONE hadd. Removing subjob files"
-                    exec_me("rm %s/%s_*.root"%(lOdir,lbasename.replace('.root','').replace('/','_')),options.dryRun)
-                    exec_me("rm %s/run*%s_*.jdl*"%(lOdir,lsub),options.dryRun)
-                    exec_me("rm %s/run*%s_*.sh"%(lOdir,lsub),options.dryRun)
+                    lumiweight = 1
+                for ifilename in subtfiles:
+                    if not "root://" in ifilename and not os.path.isfile(ifilename):
+                        print 'Error: %s does not exist'%tfile
+                        sys.exit()
+                    lbasename = ifilename.split('/')[-1]
+                    ltree = "otree" # I think this works in all cases
+                    print 'filename ',ifilename,' sample ',sample, ' basename ',lbasename
+                    if not options.hadd:
+                        lcommand  = 'python ${CMSSW_BASE}/src/zqq_create.py --odir ./ --filename %s --tag %s --tree %s --mass %.2f --jet %s --ddt %s --lumi %f --sf %i --nsplit %i'%(ifilename,label,ltree,mass,options.jet,options.ddt,lumiweight,sf,options.nsplit)
+                        if options.control:  lcommand  += ' --control'
+                        if options.isMuonCR: lcommand  += ' --isMuonCR'
+                        if options.isData:   lcommand  += ' --isData'
+                        if options.isData:   lcommand  += ' --trigmap %s'%options.trigmap
+                        if options.blinded:  lcommand  += ' --blinded'
+                        if options.year=='2017' and not options.isData: 
+                            lPuPath = fPuPath+subsample+'.root'
+                            print 'getting pu ',subsample,lPuPath,subtfiles
+                            lPuPath = getPuHistogram(sample,lPuPath,subtfiles)
+                            lcommand  += ' --isPu %s'%lPuPath 
+                        lEntries = loopOverEntries(ifilename,ltree)
+                        lcommand  += ' --entries %i'%lEntries
+                        if options.sideband is not None: lcommand += ' --sideband %s'%options.sideband
+                        if options.trigger is not None:  lcommand += ' --trigger %s'%options.trigger
+                        if options.year=='2016':         lcommand += ' --is2016'
+                        lcommand += ' --isplit {1}' # better if this goes last?
+
+                        lbase = os.getcwd()
+                        ldir = '%s/%s'%(odir,tag)
+                        print 'command ',lcommand, 'base ',lbase
+                        ljob = label+'_'+lbasename.replace('.root','').replace('/','_')
+                        os.system('mkdir -p %s'%ldir)
+                        os.chdir(ldir)
+                        submitByEvents(options,lcommand,ljob,options.nsplit,lOdir)
+                        os.chdir(lbase)
+                    else:
+                        lodir = './'
+                        nOutput = len(glob.glob("%s/%s_*.root"%(lOdir,lbasename)))
+                        if nOutput==options.split:
+                            print 'Found %s subjob output files'%nOutput
+                            exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,ifile,lodir,ifile),options.dryRun)
+                            exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("rm %s/output/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/error/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/lof/*"%(lodir),options.dryRun)
+                        else:
+                            lEntries = loopOverEntries(lfile,ltree)
+                            print 'Found %s subjob output files'%nOutput
+                            exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,ifile,lodir,ifile),options.dryRun)
+                            exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("rm %s/output/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/error/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/lof/*"%(lodir),options.dryRun)

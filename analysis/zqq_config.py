@@ -1,4 +1,5 @@
 #!/bin/python
+import ROOT
 
 # rho
 RHO_LO ={}
@@ -89,11 +90,35 @@ fcorrRECO_for = ROOT.TF1("corrRECO_for","[0]+[1]*x+[2]*pow(x,2)+[3]*pow(x,3)+[4]
 
 # pileup
 fpuData = "data/pileup_Cert_294927-306462_13TeV_PromptReco_Collisions17_withVar.root"
+fPuPath = 'data/pu2017/'
 
 # masses zqq
-MASSES2017 = '50,75,100,115,125,150,175,200,225,250,275,300,350,400,450,500')
+MASSES2017 = '50,75,100,115,125,150,175,200,225,250,275,300,350,400,450,500'
 MASSES2016 = '50,75,100,125,150,200,250,300'
 
 # files
 fXSecFile = 'data/xSections.dat'
-fPuPath = 'data/pu2017'
+
+# trigger
+triggerNames={}
+triggerNames['mu2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits",
+                          "names":["HLT_Mu50_v*"]}
+triggerNames['ht2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits",
+                          "names":[
+        "HLT_AK8PFJet330_PFAK8BTagCSV_p17_v*",
+        "HLT_PFHT1050_v*",
+        "HLT_AK8PFJet400_TrimMass30_v*",
+        "HLT_AK8PFJet420_TrimMass30_v*",
+        "HLT_AK8PFHT800_TrimMass50_v*",
+        "HLT_PFJet500_v*",
+        "HLT_AK8PFJet500_v*"]}
+triggerNames['muht2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits",
+                          "names":[
+        "HLT_Mu50_v*",
+        "HLT_AK8PFJet330_PFAK8BTagCSV_p17_v*",
+        "HLT_PFHT1050_v*",
+        "HLT_AK8PFJet400_TrimMass30_v*",
+        "HLT_AK8PFJet420_TrimMass30_v*",
+        "HLT_AK8PFHT800_TrimMass50_v*",
+        "HLT_PFJet500_v*",
+        "HLT_AK8PFJet500_v*"]}

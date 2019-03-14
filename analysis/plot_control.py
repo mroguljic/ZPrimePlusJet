@@ -144,36 +144,25 @@ def main(options,args):
         print plot
         hs = {}
         for process in sigSamples:
-            #print process
             print plot.replace('h_',process)
-            #ofile = ROOT.TFile.Open(idir+'/'+tag+'/'+process.replace('zqq','zqq')+'.root','read')
-            #ofile = ROOT.TFile.Open(idir+'/'+tag+'/'+process.replace('zqq','zqq2018')+'.root','read')
             hs[process] = ofile.Get(plot.replace('h_',process)).Clone()
             hs[process].SetDirectory(0)
-            #ofile.Close()
         hs2016 = {}
         for process in sigSamples2016:
             hs2016[process] = ofile.Get(plot.replace('h_',process)).Clone()
             hs2016[process].SetDirectory(0)
         hb = {}
         for process in bkgSamples:
-            print process
-            print plot.replace('h_',process)
-            #ofile = ROOT.TFile.Open(idir+'/'+tag+'/'+process+'.root','read')
             hb[process] = ofile.Get(plot.replace('h_',process)).Clone()
             hb[process].SetDirectory(0)
-            #ofile.Close()
         hb2016 = {}
         for process in bkgSamples2016:
             hb2016[process] = ofile.Get(plot.replace('h_',process)).Clone()
             hb2016[process].SetDirectory(0)
         if options.isMuonCR:
-            #ofile = ROOT.TFile.Open(idir+'/'+tag+'/singlemu.root','read')
             hd = ofile.Get(plot.replace('h_','data_obs'))
             hd.SetDirectory(0)
         else:
-            #dfile = ROOT.TFile.Open(idir+'/'+tag+'/jetht.root','read')
-            #hd = dfile.Get(plot.replace('h_','data_obs'))
             hd = ofile.Get(plot.replace('h_','data_obs'))
             hd.SetDirectory(0)
             hd.SetMarkerColor(1)
@@ -181,7 +170,6 @@ def main(options,args):
             hd.SetLineStyle(1)
         hd2016 = None
         for process in dataSamples2016:
-            #print process,plot,plot.replace('h_',process)
             hd2016 = ofile.Get(plot.replace('h_',process)).Clone()
             hd2016.SetDirectory(0)
         ifile = ROOT.TFile.Open(idir+'/'+tag+'/plots.root','RECREATE')
@@ -189,7 +177,6 @@ def main(options,args):
         if options.is2016:
             ratio2016 = makeCanvasComparisonStackWData(hd2016,hs2016,hb2016,legname,color,style,plot.replace('h_','stack2016_'),options.odir,lumi2016,ifile)
             makeCanvasDoubleRatio(ratio,ratio2016,['2017','2016'],[2,3],plot.replace('h_','ratio2017vs2016_'),options.odir)
-
 
 if __name__ == '__main__':
     parser = OptionParser()

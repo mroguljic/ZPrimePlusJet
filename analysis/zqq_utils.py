@@ -6,6 +6,7 @@ import warnings
 import sys
 import warnings
 import json
+from zqq_config import *
 
 def slice_it(li, cols=2):
     print 'slicing list'
@@ -17,7 +18,7 @@ def slice_it(li, cols=2):
 
 def loopOverEntries(iFile,iTree):
     print 'looping over entries %s'%iFile
-    lFile = TFile.Open(iFile)
+    lFile = ROOT.TFile.Open(iFile)
     lTree = lFile.Get(iTree)
     lEntries = lTree.GetEntriesFast()
     lFile.Close()
@@ -35,11 +36,11 @@ def exec_me(command, dryRun=False):
     if not dryRun:
         os.system(command)
 
-def getPuHistogram(iSample,iPuPath):
+def getPuHistogram(iSample,iPuPath,ifiles):
     if os.path.isfile(iPuPath):
         return iPuPath
     else:
-        for i0,itf in enumerate(tfiles[iSample]):
+        for i0,itf in enumerate(ifiles):
             f_puMC = ROOT.TFile.Open(itf)
             lTmp = f_puMC.Get("Pu")
             lTmp.SetDirectory(0)
@@ -57,12 +58,11 @@ def getPuHistogram(iSample,iPuPath):
         os.system("tar -zcvf data.tgz data")
         return iPuPath
 
-def getNentries(iFile,iFilePath):
-    print 'get N entries for %s in filepath %s'%(iFile,iFilePath)
+def getNentries(iSample,ifiles):
+    print 'get N entries for %s'%(iSample)
     n = 0
-    for i0,itf in enumerate(tfiles[iFile]):
-        print tfiles[iFile]
-        lFile = TFile.Open(iFilePath+itf)
+    for i0,itf in enumerate(ifiles):
+        lFile = ROOT.TFile.Open(itf)
         lTmp = lFile.Get("NEvents")
         lTmp.SetDirectory(0)
         lFile.Close()
@@ -75,7 +75,7 @@ def getNentries(iFile,iFilePath):
     print 'Compare n %i with nevents %i'%(n,lHNevents.GetBinContent(1))
     return lHNevents.GetBinContent(1)
 
-def getXsection(self,fDataSet,xSectionFile):
+def getXSection(fDataSet,xSectionFile):
     thisXsection = 1.0
     FoundXsection = False
     print "XSEC:: using xsection files from : ",xSectionFile
@@ -94,10 +94,10 @@ def getXsection(self,fDataSet,xSectionFile):
         sys.exit()
     return thisXsection
 
-def getLumiWeight(iLabel,iFilePath,iLumi):
-    print 'get Lumi Weight for label %s, filepath %s and lumi %3.2f'%(iLabel,iFilePath,iLumi)
-    fXSec = getXSection(xsecdict[iLabel])
-    fNentries = getNentries(iLabel,iFilePath)
+def getLumiWeight(iSample,iLumi,iFiles):
+    print 'get Lumi Weight for sample %s and lumi %3.2f'%(iSample,iLumi)
+    fXSec = getXSection(iSample,fXSecFile)
+    fNentries = getNentries(iSample,iFiles)
     fWeight = (iLumi * fXSec * 1000) / fNentries
     print 'lumi %.2f, xsec %.2f , 1000, nent %.3f: weight %f'%(iLumi,fXSec,fNentries,fWeight)
     return fWeight
@@ -136,6 +136,40 @@ def setuppuw2017(iSample):
     lpuData_up.Divide(lpuMC)
     lpuData_down.Divide(lpuMC)
     return lpuData,lpuData_up,lpuData_down
+
+def selectTriggers(imap,triggerMap):
+    if not imap =={}:
+        version     = imap['version']
+        hltNames    = imap['names']
+        branchName  = imap['branchName'] #triggerBits or moreTriggerBits
+        #validate input
+        if version in triggerMap:
+            NameToBitMap = triggerMap[version]
+        else:
+            print "ERROR! Cannot find triggerbit map of the requested bit version =%s. Possible versions are: %s"%(version, ",".join(triggerMap.keys()))
+        tCuts = []
+        for hltName in hltNames:
+            print hltName
+            if hltName in NameToBitMap:
+                bitValue = int(2**float(NameToBitMap[hltName]))
+                tCuts.append("%s & %s"%(branchName,bitValue))
+            else:
+                print "ERROR! Cannot find the TriggerBit for %s"%hltName 
+        print "Using trigger bits = ","||".join(tCuts) 
+        return "||".join(tCuts) 
+    else:
+        return "1"
+
+def setuph2ddt(filename="data/GridOutput_v13.root",iddt="Rho2D"):
+    f_h2ddt = ROOT.TFile.Open(filename)
+    if "Rho2D" in iddt:
+        ltrans_h2ddt = f_h2ddt.Get("Rho2D");
+    else:
+        lHTmp= f_h2ddt.Get(iddt);
+        ltrans_h2ddt = getDDT(lHTmp,0.05)
+    ltrans_h2ddt.SetDirectory(0)
+    f_h2ddt.Close()
+    return ltrans_h2ddt
 
 def getDDT(iH,iWP):
     print 'Getting ddt ',iH.GetName()
@@ -234,11 +268,11 @@ def correctEff(iEff,iX,iY,iType=1,iName=""):
         lweightUp = 1
     return lweight,lweightUp,lweightDown
 
-def correctPrefiring(iPt,iEta,iType=0):
+def correctPrefiring(iJets,iPhos,iPt,iEta,iType=0):
     if iType == 0:
-        fweight = fprefire_eff_jets.GetBinContent(fprefire_eff_jets.FindBin(iEta,iPt))
+        fweight = iJets.GetBinContent(iJets.FindBin(iEta,iPt))
     elif iType == 1:
-        fweight = fprefire_eff_photons.GetBinContent(fprefire_eff_photons.FindBin(iEta,iPt))
+        fweight = iPhos.GetBinContent(iPhos.FindBin(iEta,iPt))
     else:
         fweight = 1;
     return fweight;
