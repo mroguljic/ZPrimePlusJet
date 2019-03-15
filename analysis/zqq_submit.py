@@ -45,7 +45,7 @@ def write_bash(temp = 'runjob.sh', command = '', files = [],odir=''):
              out += 'tar -xvzf data.tgz -C %s/src \n'%cmssw
     out += 'cd %s/src\n'%cmssw
     out += 'eval `scramv1 runtime -sh` # cmsenv\n'
-    out += 'cd ${CWD}\n'
+    #out += 'cd ${CWD}\n'
     out += command + '\n'
     out += 'echo "Inside $MAINDIR:"\n'
     out += 'ls -lrth \n'
@@ -146,6 +146,7 @@ if __name__ == '__main__':
     # odir
     odir = options.odir
     if options.control: odir = odir.replace('inputHists','controlHists')
+    print odir,'!!'
     lOdir = '/store/user/cmantill/%s/%s'%(odir,tag)
     exec_me('mkdir -p /eos/uscms/%s'%lOdir)
 
@@ -204,7 +205,7 @@ if __name__ == '__main__':
                         if options.sideband is not None: lcommand += ' --sideband %s'%options.sideband
                         if options.trigger is not None:  lcommand += ' --trigger %s'%options.trigger
                         if options.year=='2016':         lcommand += ' --is2016'
-                        lcommand += ' --isplit {1}' # better if this goes last?
+                        lcommand += ' --isplit ${1}' # better if this goes last?
 
                         lbase = os.getcwd()
                         ldir = '%s/%s'%(odir,tag)

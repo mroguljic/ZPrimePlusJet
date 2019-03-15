@@ -112,7 +112,7 @@ triggerNames['ht2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits"
         "HLT_AK8PFHT800_TrimMass50_v*",
         "HLT_PFJet500_v*",
         "HLT_AK8PFJet500_v*"]}
-triggerNames['muht2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits",
+triggerNames['htmu2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits",
                           "names":[
         "HLT_Mu50_v*",
         "HLT_AK8PFJet330_PFAK8BTagCSV_p17_v*",
