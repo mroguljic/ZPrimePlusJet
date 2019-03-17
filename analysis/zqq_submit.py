@@ -95,10 +95,11 @@ if __name__ == '__main__':
     parser.add_option('--jet',        dest='jet', default='AK8',                          help='jet type')
     parser.add_option("--ddt",        type=str, default='data/GridOutput_v13.root',       help="ddt")
     parser.add_option('--control',    action='store_true', dest='control', default=False, help='control hists')
-    parser.add_option('--trigger',    action='store', dest='trigger', default=None,       help='run trigger')
+    parser.add_option('--trigger',    action='store_true', dest='trigger', default=False, help='run trigger')
     parser.add_option('--trigmap',    type=str,       dest='trigmap', default='ht2017',   help='trigger tag')
 
     (options,args) = parser.parse_args()
+    print options
 
     if options.year=="2017":
         samplefiles   = open(os.path.expandvars("data/samplefiles.json"),"r")
@@ -145,7 +146,9 @@ if __name__ == '__main__':
 
     # odir
     odir = options.odir
-    if options.control: odir = odir.replace('inputHists','controlHists')
+    if options.control: 
+        print 'replace',odir
+        odir = odir.replace('inputHists','controlHists')
     print odir,'!!'
     lOdir = '/store/user/cmantill/%s/%s'%(odir,tag)
     exec_me('mkdir -p /eos/uscms/%s'%lOdir)
@@ -203,8 +206,8 @@ if __name__ == '__main__':
                         lEntries = loopOverEntries(ifilename,ltree)
                         lcommand  += ' --entries %i'%lEntries
                         if options.sideband is not None: lcommand += ' --sideband %s'%options.sideband
-                        if options.trigger is not None:  lcommand += ' --trigger %s'%options.trigger
-                        if options.year=='2016':         lcommand += ' --is2016'
+                        if options.trigger:      lcommand += ' --trigger'
+                        if options.year=='2016': lcommand += ' --is2016'
                         lcommand += ' --isplit ${1}' # better if this goes last?
 
                         lbase = os.getcwd()
@@ -216,20 +219,21 @@ if __name__ == '__main__':
                         submitByEvents(options,lcommand,ljob,options.nsplit,lOdir)
                         os.chdir(lbase)
                     else:
-                        lodir = './'
-                        nOutput = len(glob.glob("%s/%s_*.root"%(lOdir,lbasename)))
-                        if nOutput==options.split:
+                        lodir = '%s/%s'%(odir,tag)
+                        lbase = lbasename.replace('.root','')
+                        nOutput = len(glob.glob("/eos/uscms/%s/%s_*.root"%(lOdir,lbase)))
+                        if nOutput==options.nsplit:
                             print 'Found %s subjob output files'%nOutput
-                            exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,ifile,lodir,ifile),options.dryRun)
-                            exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("hadd %s/%s.root /eos/uscms/%s/%s_*.root"%(lodir,lbase,lOdir,lbase),options.dryRun)
+                            #exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
                             exec_me("rm %s/output/*"%(lodir),options.dryRun)
                             exec_me("rm %s/error/*"%(lodir),options.dryRun)
                             exec_me("rm %s/lof/*"%(lodir),options.dryRun)
                         else:
-                            lEntries = loopOverEntries(lfile,ltree)
+                            lEntries = loopOverEntries(ifilename,ltree)
                             print 'Found %s subjob output files'%nOutput
-                            exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,ifile,lodir,ifile),options.dryRun)
-                            exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,lbase,lOdir,lbase),options.dryRun)
+                            #exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
                             exec_me("rm %s/output/*"%(lodir),options.dryRun)
                             exec_me("rm %s/error/*"%(lodir),options.dryRun)
                             exec_me("rm %s/lof/*"%(lodir),options.dryRun)

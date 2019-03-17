@@ -35,7 +35,7 @@ def createInputHists(iTag,iJet):
     tags = ['h_pass',
             'h_pass_matched','h_pass_unmatched',
             'h_pass_PuUp','h_pass_PuDown',
-            'h_pass_triggerUp','h_pass_triggerDown'
+            'h_pass_triggerUp','h_pass_triggerDown',
             'h_pass_JESUp','h_pass_JESDown',
             'h_pass_JERUp','h_pass_JERDown',
             'h_pass_mutriggerUp','h_pass_mutriggerDown',
@@ -45,14 +45,14 @@ def createInputHists(iTag,iJet):
     for key in tags:
         for cat in ['pass','fail']:
             tagcat = key.replace('pass',cat)
-            hists[key]      = TH2F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
-                                   massbins,masslo,masshi,
-                                   len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
+            hists[tagcat]    = TH2F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
+                                    massbins,masslo,masshi,
+                                    len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
             tagcat = tagcat.replace(cat,cat+'_msd')
-            hists[key]      = TH1F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); N", MASSBINS[iJet], MASSLO[iJet], MASSHI[iJet])
+            hists[tagcat]    = TH1F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); N", MASSBINS[iJet], MASSLO[iJet], MASSHI[iJet])
 
-    tags_gen = {'h_pass_gen',
-                'h_pass_matched_gen','h_pass_unmatched_gen'}
+    tags_gen = ['h_pass_gen',
+                'h_pass_matched_gen','h_pass_unmatched_gen']
     for key in tags_gen:
         for cat in ['pass','fail']:
             key = key.replace('pass',cat)
@@ -139,6 +139,8 @@ def fillHist(options,iEvt0,iEvt1,iCutFormula):
         h = createControlHists(iTag,iJet,iMuon)
     else:
         h = createInputHists(iTag,iJet)
+
+    print h
 
     # read file
     infile=ROOT.TFile.Open(iFile)
