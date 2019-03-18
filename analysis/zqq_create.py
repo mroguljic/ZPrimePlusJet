@@ -588,13 +588,18 @@ def main(options,args):
         cut += "&&passJson"
         with open(os.path.expandvars("data/TriggerBitMap.json")) as triggerMapFile:
             triggerBitMaps = json.load(triggerMapFile)
-        triggerCut = zqq_utils.selectTriggers(triggerNames[options.trigmap],triggerBitMaps)
+        trigmap = options.trigmap
+        if options.trigmap=='htmu2017': trigmap = 'ht2017'
+        triggerCut = zqq_utils.selectTriggers(triggerNames[trigmap],triggerBitMaps)
         if not triggerNames=={}:
-            print "List of OR Triggers : ",triggerNames[options.trigmap]['names']
+            print "List of OR Triggers : ",triggerNames[trigmap]['names']
         if options.is2016:
             triggerCut = '(triggerBits&2)'
             if 'muon' in options.tag: triggerCut = '(triggerBits&4)'
         cut += "&&("+triggerCut+")"
+        if options.trigmap=='htmu2017': 
+            triggerCutmu = zqq_utils.selectTriggers(triggerNames['mu2017'],triggerBitMaps)
+            cut += "&&("+triggerCutmu+")"
         print "Using cuts  : ",cut
 
     # split entries
