@@ -7,6 +7,8 @@ Create json with samples defined in `zqq_files`
 
 Always compress `data/` dir to send it along with files (need to do this only when modifying input data files.
 
+```tar -zcvf data.tgz data```
+
 Make sure your prxy is intialized before submitting. Also modify eos output dir in `zqq_submit.py`
 
 `zqq_create.py` uses funtions in `zqq_utils` and configs in `zqq_config`. `zqq_submit.py` submits condor jobs in queue.

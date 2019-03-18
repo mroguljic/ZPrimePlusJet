@@ -157,22 +157,22 @@ def get2017files():
     idir_1207skim = 'root://cmseos.fnal.gov//eos/uscms/store/group/lpcbacon/dazsle/zprimebits-v12.07/sklim/'
     idir_1501skim = 'root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v15.01/skim/'
 
-    tfiles = {'zqq50': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi50Mchi3000_13TeV_*.root'],
-              'zqq75': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi75Mchi3000_13TeV_*.root'],
-              'zqq100': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi100Mchi3000_13TeV_*.root'], #!!!
-              'zqq115': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi115Mchi3000_13TeV_*.root'],
-              'zqq125': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi125Mchi3000_13TeV_*.root'],
-              'zqq150': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi150Mchi3000_13TeV_*.root'],
-              'zqq175': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi175Mchi3000_13TeV_*.root'],
-              'zqq200': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi200Mchi3000_13TeV_*.root'],
-              'zqq225': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi225Mchi3000_13TeV_*.root'],
-              'zqq250': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi250Mchi3000_13TeV_*.root'],
-              'zqq275': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi275Mchi3000_13TeV_*.root'],
-              'zqq300': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi300Mchi3000_13TeV_*.root'],
-              'zqq350': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi350Mchi3000_13TeV_*.root'],
-              'zqq400': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi400Mchi3000_13TeV_*.root'],
-              'zqq450': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi450Mchi3000_13TeV_*.root'],
-              'zqq500': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi500Mchi3000_13TeV_*.root'],
+    tfiles = {'zqq50': {'VectorDiJet1Jet_madgraph_Mphi50Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi50Mchi3000_13TeV_*.root']},
+              'zqq75': {'VectorDiJet1Jet_madgraph_Mphi75Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi75Mchi3000_13TeV_*.root']},
+              'zqq100': {'VectorDiJet1Jet_madgraph_Mphi100Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi100Mchi3000_13TeV_*.root']}, #!!!
+              'zqq115': {'VectorDiJet1Jet_madgraph_Mphi115Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi115Mchi3000_13TeV_*.root']},
+              'zqq125': {'VectorDiJet1Jet_madgraph_Mphi125Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi125Mchi3000_13TeV_*.root']},
+              'zqq150': {'VectorDiJet1Jet_madgraph_Mphi150Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi150Mchi3000_13TeV_*.root']},
+              'zqq175': {'VectorDiJet1Jet_madgraph_Mphi175Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi175Mchi3000_13TeV_*.root']},
+              'zqq200': {'VectorDiJet1Jet_madgraph_Mphi200Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi200Mchi3000_13TeV_*.root']},
+              'zqq225': {'VectorDiJet1Jet_madgraph_Mphi225Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi225Mchi3000_13TeV_*.root']},
+              'zqq250': {'VectorDiJet1Jet_madgraph_Mphi250Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi250Mchi3000_13TeV_*.root']},
+              'zqq275': {'VectorDiJet1Jet_madgraph_Mphi275Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi275Mchi3000_13TeV_*.root']},
+              'zqq300': {'VectorDiJet1Jet_madgraph_Mphi300Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi300Mchi3000_13TeV_*.root']},
+              'zqq350': {'VectorDiJet1Jet_madgraph_Mphi350Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi350Mchi3000_13TeV_*.root']},
+              'zqq400': {'VectorDiJet1Jet_madgraph_Mphi400Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi400Mchi3000_13TeV_*.root']},
+              'zqq450': {'VectorDiJet1Jet_madgraph_Mphi450Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi450Mchi3000_13TeV_*.root']},
+              'zqq500': {'VectorDiJet1Jet_madgraph_Mphi500Mchi3000_13TeV': [idir_1207skim+'VectorDiJet1Jet_madgraph_Mphi500Mchi3000_13TeV_*.root']},
               'vvqq':{'WW_TuneCP5_13TeV-pythia8':[idir_1501skim+'WW_TuneCP5_13TeV_pythia8_*.root'],
                       'WZ_TuneCP5_13TeV-pythia8':[idir_1501skim+'WZ_TuneCP5_13TeV_pythia8_*.root'],
                       'ZZ_TuneCP5_13TeV-pythia8':[idir_1501skim+'ZZ_TuneCP5_13TeV_pythia8_*.root']
