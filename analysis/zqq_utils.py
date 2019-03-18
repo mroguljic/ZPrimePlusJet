@@ -72,8 +72,7 @@ def getNentries(iSample,ifiles):
             lHNevents.Add(lTmp)
             lHNevents.SetDirectory(0)
         n += lTmp.GetBinContent(1)
-    print 'Compare n %i with nevents %i'%(n,lHNevents.GetBinContent(1))
-    return lHNevents.GetBinContent(1)
+    return n
 
 def getXSection(fDataSet,xSectionFile):
     thisXsection = 1.0

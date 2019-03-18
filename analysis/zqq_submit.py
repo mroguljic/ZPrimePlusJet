@@ -27,7 +27,6 @@ def write_condor(exe='runjob.sh', arguments = [], files = [],nqueue=1,dryRun=Tru
 
 # bash script: outdir must be in eos?
 def write_bash(temp = 'runjob.sh', command = '', files = [],odir=''):
-    print 'writing ',temp
     out = '#!/bin/bash\n'
     # add arguments
     out += 'date\n'
@@ -79,27 +78,25 @@ def submitByEvents(options,iCommand,iJob,inSplit,iOdir):
 if __name__ == '__main__':
 
     parser = OptionParser()
-    parser.add_option('-t','--tag',   dest="tag",    default = "test", help = "tag")
-    parser.add_option('--odir',       dest="odir",   default = "inputHists", help = "output dir")
-    parser.add_option('--nsplit',     dest="nsplit", type=int, default = 1000, help = "split")
-    parser.add_option('--hadd',       dest='hadd', action='store_true',default = False, help='hadd roots from subjobs', metavar='hadd')
-    parser.add_option('--dry-run',    dest="dryRun",default=False,action='store_true',help="Just print out commands to run")
-    parser.add_option('--year',       dest="year", default="2017", help='year')
-    parser.add_option('--isMc',       action='store_true', dest='isMc', default=False, help='run on mc process')
-    parser.add_option('--isQCD',      action='store_true', dest='isQCD', default=False, help='run on QCD process')
+    parser.add_option('-t','--tag',   dest="tag",      type=str, default="test",                help = "tag")
+    parser.add_option('--odir',       dest="odir",     type=str, default="inputHists",          help = "output dir")
+    parser.add_option('--nsplit',     dest="nsplit",   type=int, default= 10,                   help = "split")
+    parser.add_option('--year',       dest="year",     type=str, default="2017",                help='year')
+    parser.add_option('--sideband',   dest="sideband", type=str, default=None,                  help='sideband')
+    parser.add_option('--jet',        dest='jet',      type=str, default='AK8',                 help='jet type')
+    parser.add_option('--ddt',        dest='ddt',      type=str, default='data/Output_v4.root', help='ddt')
+    parser.add_option('--trigmap',    dest='trigmap',  type=str, default='ht2017',              help='trigger tag')
+    parser.add_option('--isMc',       action='store_true', dest='isMc',     default=False, help='run on mc process')
+    parser.add_option('--isQCD',      action='store_true', dest='isQCD',    default=False, help='run on QCD process')
     parser.add_option('--isMuonCR',   action='store_true', dest='isMuonCR', default=False, help='run on muon CR')
-    parser.add_option('--isData',     action='store_true', dest='isData', default=False, help='run on data')
-    parser.add_option('--isSig',      action='store_true', dest='isSig', default=False, help='run on signals')
-    parser.add_option('--blinded',    action='store_true', dest='blinded', default=False, help='run 10th')
-    parser.add_option("--sideband",   type=str, default=None, help="sideband")
-    parser.add_option('--jet',        dest='jet', default='AK8',                          help='jet type')
-    parser.add_option("--ddt",        type=str, default='data/GridOutput_v13.root',       help="ddt")
-    parser.add_option('--control',    action='store_true', dest='control', default=False, help='control hists')
-    parser.add_option('--trigger',    action='store_true', dest='trigger', default=False, help='run trigger')
-    parser.add_option('--trigmap',    type=str,       dest='trigmap', default='ht2017',   help='trigger tag')
-
+    parser.add_option('--isData',     action='store_true', dest='isData',   default=False, help='run on data')
+    parser.add_option('--isSig',      action='store_true', dest='isSig',    default=False, help='run on signals')
+    parser.add_option('--blinded',    action='store_true', dest='blinded',  default=False, help='run 10th')
+    parser.add_option('--control',    action='store_true', dest='control',  default=False, help='control hists')
+    parser.add_option('--trigger',    action='store_true', dest='trigger',  default=False, help='run trigger')
+    parser.add_option('--dry-run',    action='store_true', dest='dryRun',   default=False, help="Just print out commands to run")
+    parser.add_option('--hadd',       action='store_true', dest='hadd',     default=False, help='hadd roots from subjobs')
     (options,args) = parser.parse_args()
-    print options
 
     if options.year=="2017":
         samplefiles   = open(os.path.expandvars("data/samplefiles.json"),"r")
@@ -146,10 +143,7 @@ if __name__ == '__main__':
 
     # odir
     odir = options.odir
-    if options.control: 
-        print 'replace',odir
-        odir = odir.replace('inputHists','controlHists')
-    print odir,'!!'
+    if options.control:  odir = odir.replace('inputHists','controlHists')
     lOdir = '/store/user/cmantill/%s/%s'%(odir,tag)
     exec_me('mkdir -p /eos/uscms/%s'%lOdir)
 
@@ -157,8 +151,6 @@ if __name__ == '__main__':
     sf = 1
     if options.blinded: sf = 10
     lumi = lumi/sf;
-
-    print samples
 
     # iterate over samples
     for label, samplelist in samples.iteritems():
@@ -168,7 +160,6 @@ if __name__ == '__main__':
                 lFiles[sample] = tfiles[sample]
             else:
                 lFiles = tfiles[sample]
-            print 'lfiles ', lFiles
 
             mass = 0
             if 'zqq' in label: mass = 91.
@@ -179,7 +170,6 @@ if __name__ == '__main__':
                     if lmass == str(m): mass = float(lmass)
 
             for subsample,subtfiles in lFiles.iteritems():
-                print 'subbample ', subsample, 'subfiles', subtfiles
                 if not options.isData:
                     lumiweight = getLumiWeight(subsample,lumi,subtfiles)
                 else:
@@ -190,7 +180,6 @@ if __name__ == '__main__':
                         sys.exit()
                     lbasename = ifilename.split('/')[-1]
                     ltree = "otree" # I think this works in all cases
-                    print 'filename ',ifilename,' sample ',sample, ' basename ',lbasename
                     if not options.hadd:
                         lcommand  = 'python ${CMSSW_BASE}/src/zqq_create.py --odir ./ --filename %s --tag %s --tree %s --mass %.2f --jet %s --ddt %s --lumi %f --sf %i --nsplit %i'%(ifilename,label,ltree,mass,options.jet,options.ddt,lumiweight,sf,options.nsplit)
                         if options.control:  lcommand  += ' --control'
@@ -200,7 +189,6 @@ if __name__ == '__main__':
                         if options.blinded:  lcommand  += ' --blinded'
                         if options.year=='2017' and not options.isData: 
                             lPuPath = fPuPath+subsample+'.root'
-                            print 'getting pu ',subsample,lPuPath,subtfiles
                             lPuPath = getPuHistogram(sample,lPuPath,subtfiles)
                             lcommand  += ' --isPu %s'%lPuPath 
                         lEntries = loopOverEntries(ifilename,ltree)
@@ -212,7 +200,6 @@ if __name__ == '__main__':
 
                         lbase = os.getcwd()
                         ldir = '%s/%s'%(odir,tag)
-                        print 'command ',lcommand, 'base ',lbase
                         ljob = label+'_'+lbasename.replace('.root','').replace('/','_')
                         os.system('mkdir -p %s'%ldir)
                         os.chdir(ldir)
@@ -225,15 +212,15 @@ if __name__ == '__main__':
                         if nOutput==options.nsplit:
                             print 'Found %s subjob output files'%nOutput
                             exec_me("hadd %s/%s.root /eos/uscms/%s/%s_*.root"%(lodir,lbase,lOdir,lbase),options.dryRun)
-                            #exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("rm /eos/uscms/%s/%s_*.root"%(lOdir,lbase),options.dryRun)
                             exec_me("rm %s/output/*"%(lodir),options.dryRun)
                             exec_me("rm %s/error/*"%(lodir),options.dryRun)
-                            exec_me("rm %s/lof/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/log/*"%(lodir),options.dryRun)
                         else:
                             lEntries = loopOverEntries(ifilename,ltree)
                             print 'Found %s subjob output files'%nOutput
                             exec_me("hadd %s/%s.root %s/%s_*.root"%(lodir,lbase,lOdir,lbase),options.dryRun)
-                            #exec_me("rm %s/%s_*.root"%(lodir,ifile),options.dryRun)
+                            exec_me("rm /eos/uscms/%s/%s_*.root"%(lOdir,lbase),options.dryRun)
                             exec_me("rm %s/output/*"%(lodir),options.dryRun)
                             exec_me("rm %s/error/*"%(lodir),options.dryRun)
-                            exec_me("rm %s/lof/*"%(lodir),options.dryRun)
+                            exec_me("rm %s/log/*"%(lodir),options.dryRun)
