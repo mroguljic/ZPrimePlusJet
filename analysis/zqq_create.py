@@ -57,9 +57,9 @@ def createInputHists(iTag,iJet):
         for cat in ['pass','fail']:
             key = key.replace('pass',cat)
             for i0 in range(0,len(GENPTBINBOUND[iJet])-1):
-                hists[key]  = TH2F(iTag+key.replace('h_','')+str(i0),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
-                                   massbins,masslo,masshi,
-                                   len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
+                hists[key+str(i0)]  = TH2F(iTag+key.replace('h_','')+str(i0),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
+                                           massbins,masslo,masshi,
+                                           len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
     # 1D
     hists['h_pt'] = TH1F(iTag+"pt", "; p_{T}; N", 40, 400, 1000)
     hists['h_msd'] =  TH1F(iTag+"msd", "; m_{SD}^{PUPPI}; N", MASSBINS[iJet], MASSLO[iJet], MASSHI[iJet])
