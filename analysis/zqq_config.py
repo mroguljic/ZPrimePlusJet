@@ -110,5 +110,10 @@ triggerNames['ht2017'] = {"version":"zprimebit-15.01","branchName":"triggerBits"
         "HLT_AK8PFJet400_TrimMass30_v*",
         "HLT_AK8PFJet420_TrimMass30_v*",
         "HLT_AK8PFHT800_TrimMass50_v*",
+        "HLT_AK8PFHT850_TrimMass50_v*",
+        "HLT_AK8PFHT900_TrimMass50_v*",
         "HLT_PFJet500_v*",
-        "HLT_AK8PFJet500_v*"]}
+        "HLT_CaloJet500_NoJetID_v*",
+        "HLT_CaloJet550_NoJetId_v*",
+        "HLT_AK8PFJet500_v*",
+        "HLT_AK8PFJet550_v*"]}
