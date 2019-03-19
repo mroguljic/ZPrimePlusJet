@@ -208,6 +208,8 @@ if __name__ == '__main__':
                     else:
                         lodir = '%s/%s'%(odir,tag)
                         lbase = lbasename.replace('.root','')
+                        if 'nodupl' in lbasename:
+                            lbase = lbase.replace('nodupl','')
                         nOutput = len(glob.glob("/eos/uscms/%s/%s_*.root"%(lOdir,lbase)))
                         if nOutput==options.nsplit:
                             print 'Found %s subjob output files'%nOutput
