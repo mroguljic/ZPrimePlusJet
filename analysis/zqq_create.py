@@ -45,11 +45,11 @@ def createInputHists(iTag,iJet):
     for key in tags:
         for cat in ['pass','fail']:
             tagcat = key.replace('pass',cat)
-            hists[tagcat]    = TH2F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
+            hists[tagcat]    = TH2F(iTag+tagcat.replace('h',''),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
                                     massbins,masslo,masshi,
                                     len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
             tagcat = tagcat.replace(cat,cat+'_msd')
-            hists[tagcat]    = TH1F(iTag+tagcat.replace('h_',''),"; m_{SD}^{PUPPI} (GeV); N", MASSBINS[iJet], MASSLO[iJet], MASSHI[iJet])
+            hists[tagcat]    = TH1F(iTag+tagcat.replace('h',''),"; m_{SD}^{PUPPI} (GeV); N", MASSBINS[iJet], MASSLO[iJet], MASSHI[iJet])
 
     tags_gen = ['h_pass_gen',
                 'h_pass_matched_gen','h_pass_unmatched_gen']
@@ -57,7 +57,7 @@ def createInputHists(iTag,iJet):
         for cat in ['pass','fail']:
             key = key.replace('pass',cat)
             for i0 in range(0,len(GENPTBINBOUND[iJet])-1):
-                hists[key+str(i0)]  = TH2F(iTag+key.replace('h_','')+str(i0),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
+                hists[key+str(i0)]  = TH2F(iTag+key.replace('h','')+str(i0),"; m_{SD}^{PUPPI} (GeV); p_{T} (GeV)",
                                            massbins,masslo,masshi,
                                            len(PTBINBOUND[iJet])-1, array.array('d',PTBINBOUND[iJet]))
     # 1D
