@@ -27,6 +27,7 @@ parser.add_option("--onecat"  ,action='store',type=int,     dest='onecat'  ,defa
 parser.add_option('--forcomb', action='store',type='string',dest='forcomb' ,default="",             help='combine with 2016')
 parser.add_option('--odir',                                 dest='odir'    ,default='./',           help='output directory',metavar='odir')
 parser.add_option('--template',action='store_true',         dest='template',default=False,          help='template')
+parser.add_option('--multsig', action='store',type='float', dest='multsig', default=1.0,            help='multiply signal to make visible on plot')
 
 (options,args) = parser.parse_args()
 print options
@@ -58,6 +59,7 @@ def end():
             rep = raw_input( 'enter "q" to quit: ' )
             if 1 < len(rep):
                 rep = rep[0]
+
 
 def fun3(x, par):
     rho = r.TMath.Log((x[0] * x[0]) / (x[1] * x[1]))
@@ -179,7 +181,7 @@ def drawTemplates(iHists,iTags,iName,iFail,iMax):
     #lC0.SaveAs(options.odir+'/'+iName+"_templates.root")
 
 
-def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False,iB=False,iPrefit=False):
+def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False,iB=False,iPrefit=False,iMultsig=1.0):
     iData.GetXaxis().SetTitle("m_{SD} (GeV)")
     lC0 = r.TCanvas("c","c",900,800);
     p12 = r.TPad("p12","p12",0.0,0.3,1.0,1.0);
@@ -249,10 +251,11 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
 
     iData.Draw("ex0")
     for key,pHist in iHists.iteritems():
-        #print key
+        print key,pHist
         #pHist.GetXaxis().SetRangeUser(RANGE_LO[iJet],RANGE_HI[iJet])
         if pHist is None: continue
         pHist.SetLineWidth(2)
+        if key == 'zpqq': pHist.Scale(iMultsig) 
         if iFail:
             if pHist.GetName().find("fail") > -1:
             #if pHist.GetName().find("tqq") > -1: continue
@@ -280,8 +283,8 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     lLegend.AddEntry(iHists["qcd"],"Multijet pred.","lf")
     lLegend.AddEntry(iHists["tqq"],"t#bar{t}/single-t (qq)+jets","l")
     if not (iB or iPrefit) and iHists["zpqq"] != None:
-        lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%str(iMass),"lf")
-
+        if iMultsig == 1.0: lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%(str(iMass)),"lf")
+        else:               lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV (#times%.0f)"%(str(iMass),iMultsig),"lf")
     lLegend.Draw()
     
     tag1 = r.TLatex(0.64,0.92,"%.1f fb^{-1} (2017) (13 TeV)"%options.lumi)
@@ -296,7 +299,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     tag2.SetTextSize(0.07)
     tag3.SetTextSize(0.045)
     tag1.Draw()
-    #tag2.Draw()
+    tag2.Draw()
     #tag3.Draw()
     tag4 = r.TLatex(0.67,0.42,"p_{value} = %.2f"%chiScoreP)
     tag4.SetNDC()
@@ -649,9 +652,9 @@ if __name__ == "__main__":
     if options.fail:
         name += '_fail'
     if options.fitb:
-        draw(lDSum,lSumB,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit)
+        draw(lDSum,lSumB,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit,options.multsig)
     else:
-        draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit)
+        draw(lDSum,lSum,name,cat,options.mass,options.ratio,options.jet,options.lumi,options.fail,options.nowz,options.fitb,options.prefit,options.multsig)
     if options.template:
         lHists = [lSum["wqq"],lSum["zqq"]]
         lHistsB = [lSumB["wqq"],lSumB["zqq"]]
