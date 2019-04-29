@@ -255,7 +255,8 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         #pHist.GetXaxis().SetRangeUser(RANGE_LO[iJet],RANGE_HI[iJet])
         if pHist is None: continue
         pHist.SetLineWidth(2)
-        if key == 'zpqq': pHist.Scale(iMultsig) 
+        if key == 'zpqq': pHist.Scale(iMultsig)
+ 
         if iFail:
             if pHist.GetName().find("fail") > -1:
             #if pHist.GetName().find("tqq") > -1: continue
@@ -265,12 +266,12 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
                 pHist.Draw("hist sames") if "qcd" not in key else pHist.Draw("e2 sames")
     
     iData.Draw("pex0 sames")
-    #lLegend = r.TLegend(0.55, 0.5, 0.75, 0.88)
-    lLegend = r.TLegend(0.33,0.73,0.88,0.88)
+    lLegend = r.TLegend(0.38, 0.62, 0.78, 0.88)
+    #lLegend = r.TLegend(0.33,0.73,0.88,0.88)
     lLegend.SetFillColor(0)
     lLegend.SetBorderSize(0)
     lLegend.SetTextFont(42)
-    lLegend.SetTextSize(0.037)
+    lLegend.SetTextSize(0.045)
     lLegend.SetNColumns(2)
     lLegend.AddEntry(iData,"Data","px0e")
     if not iNOWZ:
@@ -290,7 +291,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     tag1 = r.TLatex(0.64,0.92,"%.1f fb^{-1} (2017) (13 TeV)"%options.lumi)
     tag1.SetNDC(); tag1.SetTextFont(42)
     tag1.SetTextSize(0.045)
-    tag2 = r.TLatex(0.2,0.8,"CMS")
+    tag2 = r.TLatex(0.2,0.82,"CMS")
     tag2.SetNDC()
     tag2.SetTextFont(62)
     tag3 = r.TLatex(0.24,0.92,"Preliminary")
@@ -309,18 +310,18 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     #tag5.SetNDC()
     #tag5.SetTextSize(0.030)
     #tag5.Draw()
-    tag6 = r.TLatex(0.705,0.422,tagpt)
+    tag6 = r.TLatex(0.7,0.55,tagpt)
     #tag6 = r.TLatex(0.695,0.422,tagpt)
     tag6.SetNDC()
     tag6.SetTextFont(42)
-    tag6.SetTextSize(0.037)
+    tag6.SetTextSize(0.043)
     tag6.Draw()
     iData.SetMaximum(iData.GetMaximum()*1.2)
 
     #lC0.cd(1).RedrawAxis()
     lC0.cd()
     p22.Draw(); p22.cd();
-    p22.SetGrid();
+    #p22.SetGrid();
 
     def getDataGraphFromHist(h_data):    
         g_data = r.TGraphAsymmErrors(h_data)    
@@ -413,7 +414,7 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         #iOneWithErrors.Draw(" sames");                                                                                                                                         
         iOneWithErrors.Draw("e2 sames");
         iOneWithErrors.SetMarkerSize(0);
-        iOneWithErrors.SetLineWidth(2);
+        iOneWithErrors.SetLineWidth(0)#2);
         iOneWithErrors.Draw(" sames");
         iRatios1.Draw("px0e sames")
     else:
