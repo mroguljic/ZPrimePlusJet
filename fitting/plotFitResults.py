@@ -4,6 +4,7 @@ from optparse import OptionParser
 from ROOT import std,RooDataHist
 #from array import array
 import array
+import numpy as np
 sys.path.insert(0, '../.')
 
 parser = OptionParser()
@@ -127,8 +128,8 @@ def drawTemplates(iHists,iTags,iName,iFail,iMax):
     iHists[0].GetYaxis().SetTitle("Events / 5 GeV")
     iHists[0].GetXaxis().SetTitleOffset(2)
     iHists[0].GetYaxis().SetTitleOffset(1.3)
-    iHists[0].GetYaxis().SetTitleSize(0.04)
-    iHists[0].GetYaxis().SetLabelSize(0.035)
+    iHists[0].GetYaxis().SetTitleSize(0.3)
+    iHists[0].GetYaxis().SetLabelSize(0.15)
     iHists[0].GetXaxis().SetLabelOffset(0.05)
     iHists[0].GetYaxis().SetRangeUser(0.,iMax)
     #iHists[0].GetYaxis().SetRangeUser(0.,iHists[0].GetMaximum()*1.2)
@@ -203,12 +204,12 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     p12.Draw(); p12.cd();
     iData.GetYaxis().SetTitle("Events / 5 GeV")
     iData.GetXaxis().SetTitleOffset(2)
-    iData.GetYaxis().SetTitleOffset(1.3)
-    iData.GetYaxis().SetTitleSize(0.04)
-    iData.GetYaxis().SetLabelSize(0.035)
-    iData.GetXaxis().SetLabelOffset(0.05)
+    iData.GetYaxis().SetTitleOffset(1.1)
+    iData.GetYaxis().SetTitleSize(0.055)
+    iData.GetYaxis().SetLabelSize(0.045)
+    iData.GetXaxis().SetLabelOffset(0.04)
 
-    iData.GetYaxis().SetRangeUser(0.,iData.GetMaximum()*0.95)
+    iData.GetYaxis().SetRangeUser(0.,iData.GetMaximum()*1.02)
     #print iData.GetXaxis().GetXmin(), iData.GetXaxis().GetXmax()
     #iData.GetXaxis().SetRangeUser(RANGE_LO[iJet],RAcchNGE_HI[iJet])
 
@@ -275,26 +276,28 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     lLegend.SetNColumns(2)
     lLegend.AddEntry(iData,"Data","px0e")
     if not iNOWZ:
-        lLegend.AddEntry(iHists["wqq"],"W(qq)+jets","l")
+        lLegend.AddEntry(iHists["wqq"],"W(q'#bar{q})+jets","l")
 
     lLegend.AddEntry(iHists["mc"],"Total SM pred.","l")
     if not iNOWZ:
-        lLegend.AddEntry(iHists["zqq"],"Z(qq)+jets","l")
+        lLegend.AddEntry(iHists["zqq"],"Z(q#bar{q})+jets","l")
 
     lLegend.AddEntry(iHists["qcd"],"Multijet pred.","lf")
-    lLegend.AddEntry(iHists["tqq"],"t#bar{t}/single-t (qq)+jets","l")
+    lLegend.AddEntry(iHists["tqq"],"t#bar{t}/single-t (q'#bar{q})+jets","l")
     if not (iB or iPrefit) and iHists["zpqq"] != None:
-        if iMultsig == 1.0: lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV"%(str(iMass)),"lf")
-        else:               lLegend.AddEntry(iHists["zpqq"],"Z'(qq), g_{q'}=1/6, m_{Z'}=%s GeV (#times%.0f)"%(str(iMass),iMultsig),"lf")
+        if iMultsig == 1.0: lLegend.AddEntry(iHists["zpqq"],"Z'(q#bar{q}), g'_{q}=1/6, m_{Z'}=%s GeV"%(str(iMass)),"lf")
+        #else:               lLegend.AddEntry(iHists["zpqq"],"Z'(q#bar{q}), g'_{q}=%s/6, m_{Z'}=%s GeV"%(str(np.sqrt(iMultsig)/6.),iMass),"lf")
+        elif iMultsig == 9.0:               lLegend.AddEntry(iHists["zpqq"],"Z'(q#bar{q}), g'_{q}=1/2, m_{Z'}=%s GeV"%(iMass),"lf")
+        else:                               lLegend.AddEntry(iHists["zpqq"],"Z'(q#bar{q}), g'_{q}=1/3, m_{Z'}=%s GeV"%(iMass),"lf")
     lLegend.Draw()
     
     tag1 = r.TLatex(0.64,0.92,"%.1f fb^{-1} (2017) (13 TeV)"%options.lumi)
     tag1.SetNDC(); tag1.SetTextFont(42)
     tag1.SetTextSize(0.045)
-    tag2 = r.TLatex(0.2,0.82,"CMS")
+    tag2 = r.TLatex(0.21,0.82,"CMS")
     tag2.SetNDC()
     tag2.SetTextFont(62)
-    tag3 = r.TLatex(0.24,0.92,"Preliminary")
+    tag3 = r.TLatex(0.21,0.77,"Preliminary")
     tag3.SetNDC()
     tag3.SetTextFont(52)
     tag2.SetTextSize(0.07)
@@ -310,11 +313,11 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
     #tag5.SetNDC()
     #tag5.SetTextSize(0.030)
     #tag5.Draw()
-    tag6 = r.TLatex(0.7,0.55,tagpt)
+    tag6 = r.TLatex(0.66,0.55,tagpt)
     #tag6 = r.TLatex(0.695,0.422,tagpt)
     tag6.SetNDC()
     tag6.SetTextFont(42)
-    tag6.SetTextSize(0.043)
+    tag6.SetTextSize(0.048)
     tag6.Draw()
     iData.SetMaximum(iData.GetMaximum()*1.2)
 
@@ -388,14 +391,14 @@ def draw(iData,iHists,iName,iCats,iMass,iRatio,iJet,iNoB,iFail=False,iNOWZ=False
         iRatios1.GetYaxis().SetRangeUser(-5, maxdata*1.5)
 
     iRatios1.GetYaxis().SetNdivisions(5)
-    iRatios1.GetYaxis().SetTitleSize(0.09)
-    iRatios1.GetXaxis().SetTitleSize(0.12)
+    iRatios1.GetYaxis().SetTitleSize(0.1)
+    iRatios1.GetXaxis().SetTitleSize(0.13)
     iRatios1.GetXaxis().SetTitleOffset(1)
     iRatios1.GetYaxis().SetTitleOffset(0.45)
     iRatios1.GetXaxis().SetLabelOffset(0.007)
-    iRatios1.GetYaxis().SetLabelSize(0.09)
-    iRatios1.GetXaxis().SetLabelSize(0.1)
-    iRatios1.GetXaxis().SetTitle("m_{SD} (GeV)")
+    iRatios1.GetYaxis().SetLabelSize(0.10)
+    iRatios1.GetXaxis().SetLabelSize(0.10)
+    iRatios1.GetXaxis().SetTitle("Jet m_{SD} (GeV)")
 
     if iRatio:
         iRatios1.Draw("px0e")

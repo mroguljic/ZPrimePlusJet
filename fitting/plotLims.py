@@ -251,16 +251,16 @@ def plotUpperLimits(options,args):
 		#print mass,len(options.box.split('_'))
 		if mass <= massSwitch or len(options.box.split('_')) == 1:
 			jet_type = options.box.split('_')[0]
-			file_name = "results/"+options.idir + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tag)
+			file_name = "/eos/uscms/store/user/jkrupa/analysis/results/"+options.idir + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tag)
 		if glob.glob(file_name):
 			limits[jet_type][str(mass)] = getLimits(file_name)
 			if len( limits[jet_type][str(mass)] )>=5:
 				masses[jet_type].append(mass)
 		if mass >= massSwitch and len(options.box.split('_')) > 1:
                         jet_type = options.box.split('_')[1]
-			file_name = "results/"+options.idir + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tag)
+			file_name = "/eos/uscms/store/user/jkrupa/analysis/results/"+options.idir + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tag)
 			if options.tagswitch != '':
-				file_name = "results/"+options.idirswitch + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tagswitch)
+				file_name = "/eos/uscms/store/user/jkrupa/analysis/results/"+options.idirswitch + "/%s/ZQQ_%s/%s.root"%(jet_type,str(mass),options.tagswitch)
 		if glob.glob(file_name):
 			limits[jet_type][str(mass)] = getLimits(file_name)
 			print limits[jet_type][str(mass)]
