@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env/python
 
 import ROOT as r,sys,math,array,os
 from optparse import OptionParser
@@ -35,19 +35,17 @@ def main(options,mode,dryRun):
     odir  = options.odir
     cats  = options.cats
     if hasattr(options,'suffix'): suffix= options.suffix
-    else:                         suffix=''
+    else: suffix=''
     if hasattr(options,'pseudo'): pseudo= options.pseudo
-    else:                         pseudo=''
+    else: pseudo=''
     if hasattr(options,'blind'): blind = options.blind
-    else:                         blind = True
+    else: blind = True
     if hasattr(options,'iloose'): iloose= options.iloose
-    else:                         iloose=''
+    else: iloose = ''
     if hasattr(options,'muonCR'): muonCR= options.muonCR
-    else:                         muonCR=''
-    if hasattr(options,'is2017'): is2017= options.is2017
-    else:                         is2017=True
+    else: muonCR = ''
     if hasattr(options,'year'): year  = options.year
-    else:                         year  =''
+    else: year = ''
     if hasattr(options,'exp'): exp  = options.exp
     else:                         exp  = False
     if hasattr(options,'pseudoPass'): pseudoPass  = options.pseudoPass
@@ -62,11 +60,12 @@ def main(options,mode,dryRun):
     else:                        MiNLO = False
     if hasattr(options,'qcdTF'): qcdTF = options.qcdTF
     else:                        qcdTF = False
+    if hasattr(options,'makedeco'): makedeco= options.makedeco
+    else: makedeco=False
     if   year=='2018':   SF = SF2018
     elif year=='2017':   SF = SF2017
     elif year=='2016':   SF = SF2016
     else:                SF = {}
-
  
     now = datetime.datetime.now()
     ifileName = ifile.split("/")[-1]
@@ -81,10 +80,6 @@ def main(options,mode,dryRun):
         outf.write("===odir  = %s ==========\n"%odir)
         outf.write("===mode  = %s ==========\n"%mode)
         outf.write("===time  = %s ==========\n"%now.strftime("%Y-%m-%d %H:%M"))
-        outf.write('===git status -uno =======\n')
-        os.system('git status -uno  >> %s\n'%logf)
-        outf.write('===git log =========== \n')
-        os.system('git log -n 1 >> %s\n'%logf)
         outf.write("=== Using SF: ==========\n")
         for key,item in sorted(SF.iteritems()): outf.write("%s       %s\n"%(key,item))
         
@@ -122,7 +117,7 @@ def main(options,mode,dryRun):
         makecard_base += " --ifile-loose %s "%iloose
     if pseudo:
         rhalph_base += " --pseudo "
-    if exp:
+    if options.exp:
         rhalph_base += " --exp "
     if pseudoPass:
         rhalph_base += " --createPassFromFail "
@@ -138,17 +133,17 @@ def main(options,mode,dryRun):
         if muonCR:
             makemuonCR_base +=" --year %s "%year
             makemuonCR_cp   = makemuonCR_base.replace(odir,options.idir+"muonCR/")
+
+    makecard_base_noqcd = makecard_base
     if qcdTF: 
         makecard_base +=" --addqcdCovMat "
-    if mode =="vbf":
-        t2ws_vbf += " %s -o %s"%(combcard_all, combcard_all.replace(".txt","_floatVBF.root"))
+
     t2ws_rz += " %s -o %s"%(combcard_all, combcard_all.replace(".txt","_floatZ.root"))
-    if hasattr(options, 'scaleLumi') and options.scaleLumi:
-        insert = 'echo -e "lumiscale rateParam * * 1 \\nnuisance edit freeze lumiscale" >> %s'%combcard_all
-        t2ws_rz += " --X-nuisance-group-function mcstat 'expr::lumisyst(\"1/sqrt(@0)\",lumiscale[1])' "
-    
 
     rhalph_base_pseudo = rhalph_base + " --pseudo"
+    if makedeco:
+        rhalph_base += '\n python make_decorrelated.py -i %s --year %s'%(odir,year)
+
     cmds = [
         rhalph_base_pseudo,
         rhalph_base,
@@ -156,13 +151,9 @@ def main(options,mode,dryRun):
         combcards_base,
         t2ws_rz
     ]
-    if mode =="vbf":
-        cmds.append(t2ws_vbf)
     if muonCR:
         cmds.insert(2,makemuonCR_base)
         cmds.insert(2,makemuonCR_cp)
-    if hasattr(options, 'scaleLumi') and options.scaleLumi:
-        cmds.insert(3,insert)
     ## skip all building commands for comb
     if mode=='comb':
         cmds = [
@@ -206,89 +197,85 @@ def loadcats(idir,odir,muonCR,suffix):
 
 def data_main(options):
     dryRun = options.dryRun
-    mode   = 'norm'
-    options.suffix = ""
-    options.iloose = ""
-    options.blind  = True 
-    options.exp    = False
-    options.pseudoPass = False
-    options.pseudo = False 
-    options.is2017 = True
-    options.scaleLumi = False 
-    idirs = [
-        #'ddb_Oct22/ddb_M2_2016/',
-        'dak8_Oct24/dak8_M2_2016/',
-    ]
+    mode   = options.mode
+    
+    # fix options with odir
+    # change TF order here?
+    # TF: order
+    # blind: blind Hbb mass window
+    # qcdTF22uncV6: fit MC qcd TF
+    # muonCRv7: include muonCR datacard
+    # SFJul8: latest from hbb
     odirs = [
-        #'TF22_MC_w2Fitv2/',
-        #'TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/',                 
-        'TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/',
-    ]
-
-    #config1  = SFJun4-0.7 GeV scale                                 ddb_Jun6_v2/ddb_M2_full/TF22_blind_muonCR_config1/   #Best fit r_z: 1.51297  -0.293166/+0.375001  (68% CL) 
-    #config2  = SFJun4-0.7 GeV scale                                 ddb_Jun6_v2/ddb_M2_full/TF22_blind_muonCR_config2/   #Best fit r_z: 1.51297  -0.293166/+0.375001  (68% CL)
-    #config3  = SFJun4-0.7 GeV scale-scaleNorm                       ddb_Apr17/ddb_M2_full/TF22_blind_muonCR_config3/     #Best fit r_z: 1.17925  -0.245345/+0.39457   (68% CL)
-    #config4  = SFJun4-0.7 GeV scale-scaleNorm - smear               ddb_Apr17/ddb_M2_full/TF22_blind_muonCR_config4/     #Best fit r_z: 1.18065  -0.243768/+0.414102  (68% CL)
-    #config5  = SFJun4-0.7 GeV scale-scaleNorm - smear - veff        ddb_Apr17/ddb_M2_full/TF22_blind_muonCR_config5/     #Best fit r_z: 1.1395   -0.241985/+0.383181  (68% CL)w/0.68 bbeff
-    #config6  = SFJun4-3% scale-scaleNorm - smear - veff             ddb_Jun16/ddb_M2_full/TF22_blind_muonCR_config6/   #Best fit r_z: 1.51297  -0.293166/+0.375001  (68% CL) 
-    #config6  = SFJun4+3% scale+ -scaleNorm - smear - veff           ddb_Jun16/ddb_M2_full/TF22_blind_muonCR_config6/   #Best fit r_z: 1.51297  -0.293166/+0.375001  (68% CL) 
-                                                                                                                                #Best fit r_z: 1.09698  -0.233341/+0.364163  (68% CL) w/0.7 bbeff
-    #Pre App                                                         ddb_Apr17/ddb_M2_full/msd47_TF22_muonCR_beffp7_blind/    #Best fit r_z: 1.07164  -0.253762/+0.332153  (68% CL)
-    #config7  = SFJun4+ x2 scaleErr                                  ddb_Jun12/ddb_M2_full/TF22_blind_muonCR_config6/   #Best fit r_z: 1.51297  -0.293166/+0.375001  (68% CL) 
-
-    paths = []
-    for idir in idirs:
-        options.idir = idir
-        if   '2018' in idir:    options.year = '2018'
-        elif '2016' in idir:    options.year = '2016'
-        else:                   options.year = '2017'
+        'TF22_MC_w2Fitv2/',
+        'TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/'
+        ]
+    for odir in odirs:
+        options.odir = odir
+        idir = options.idir
+        if '2018' in idir: 
+            options.year = '2018'
+        elif '2016' in idir:    
+            options.year = '2016'
+        else:   
+            options.year = '2017'
         options.suffix = options.year
-        for odir in odirs:
-            #if not 'MC' in odir:
-            #    if 'looserWZ' in odir and not( options.year=='2016'): continue
-            #    if '2016'     in idir and not( 'looserWZ' in odir  ): continue
-            options.odir = idir+odir
-            if not os.path.exists(options.odir): os.mkdir(options.odir)
-            options.ifile  = options.idir+"data/hist_1DZbb_pt_scalesmear.root"
-            if 'muonCR' in odir:                options.muonCR = options.idir+"muonCR/hist_1DZbb_muonCR.root"
-            else:                               options.muonCR = '' 
-            if 'blind' in odir:                 options.blind = True
-            else:                               options.blind = False
-            if 'exp'   in odir:                 options.exp = True
-            else:                               options.exp = False
-            #if 'looserWZ'   in odir:            options.iloose = options.idir+'looserWZ_%s'%odir.split("_")[-2]+"/hist_1DZbb_pt_scalesmear_looserWZ.root"
-            if 'looserWZ'   in odir:            options.iloose = options.idir+'looserWZ_%s'%odir.split("_")[-1]+"/hist_1DZbb_pt_scalesmear_looserWZ.root"
-            else:                               options.iloose = ''
-            if 'pseudoPass'   in odir:          options.pseudoPass = True
-            else:                               options.pseudoPass = False
-            if 'MC'      in odir:               options.pseudo     = True
-            else:                               options.pseudo     = False
-            if 'MiNLO'  in idir:                options.MiNLO     = True
-            else:                               options.MiNLO     = False
-            if 'qcdTF'  in odir:                options.qcdTF     = True 
-            else:                               options.qcdTF     = False
-            if idir =='ddb2016_Jun24/ddb_M2_full/': options.skipQCD = True
-            else:                                   options.skipQCD = False
-            nrho, npT  = getPolyOrder(odir)
-            options.nr     = nrho
-            options.np     = npT
-
-            options.cats = buildcats(options.ifile,options.odir,options.muonCR,options.suffix)
-            main(options, mode,dryRun)
-            paths.append( idir+odir)
-    print "==============================="
-    for p in paths: print p
+            
+        #if not 'MC' in odir:
+        #    if 'looserWZ' in odir and not( options.year=='2016'): continue
+        #    if '2016'     in idir and not( 'looserWZ' in odir  ): continue
+        options.odir = idir+odir
+        if not os.path.exists(options.odir): 
+            os.mkdir(options.odir)
+        options.ifile  = options.idir+"data/hist_1DZbb_pt_scalesmear.root"
+        if 'muonCR' in odir: options.muonCR = options.idir+"muonCR/hist_1DZbb_muonCR.root"
+        else: options.muonCR = '' 
+        if 'blind' in odir: options.blind = True
+        else:  options.blind = False
+        if 'exp'   in odir: options.exp = True
+        else: options.exp = False
+        if 'looserWZ'   in odir: options.iloose = options.idir+'looserWZ_%s'%odir.split("_")[-1]+"/hist_1DZbb_pt_scalesmear_looserWZ.root"
+        else:  options.iloose = ''
+        if 'pseudoPass'   in odir: options.pseudoPass = True
+        else:   options.pseudoPass = False
+        if 'MC' in odir: options.pseudo     = True
+        else: options.pseudo     = False
+        if 'MiNLO'  in idir: options.MiNLO     = True
+        else: options.MiNLO     = False
+        if 'qcdTF'  in odir: options.qcdTF     = True 
+        else: options.qcdTF     = False
+        if idir =='ddb2016_Jun24/ddb_M2_full/': 
+            options.skipQCD = True
+        else:
+            options.skipQCD = False
+        if 'MC' in odir: options.makedeco = True
+        else: options.makedeco = False
+        nrho, npT  = getPolyOrder(odir)
+        options.nr     = nrho
+        options.np     = npT
+    
+        options.cats = buildcats(options.ifile,options.odir,options.muonCR,options.suffix)
+        main(options, mode,dryRun)
+        print "==============================="
 
 
  
 ##-------------------------------------------------------------------------------------
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option('-i', dest='ifile', default='card_rhalphabet_muonCR_floatZ.root', help='datacard root')
-    parser.add_option('-o','--odir', dest='odir', default = '',help='directory to write cards', metavar='odir')
-    parser.add_option('-m','--mode', dest='mode', default = 'norm',help='setting of pams', metavar='mode')
+    parser.add_option('-i', dest='idir', default='', help='idir with data')
+    parser.add_option('-o','--odir', dest='odir', default='',help='directory to write cards', metavar='odir')
+    parser.add_option('-m','--mode', dest='mode', default='norm',help='setting of pams', metavar='mode')
     parser.add_option('--dryRun', dest='dryRun', action='store_true',default=False,help='dryRun', metavar='dryRun')
-
+    parser.add_option('--suffix', dest='suffix', default='', help='suffix - year?')
+    parser.add_option('--year', dest='year', default='', help='year')
+    parser.add_option('--iloose', dest='iloose', default='', help='file with loose selection hists')
+    parser.add_option('--blind', dest='blind', action='store_true',default=True,help='blind hbb mass window')
+    parser.add_option('--exp', dest='exp', action='store_true',default=False,help='exp fit')
+    parser.add_option('--pseudoPass', dest='pseudoPass', action='store_true',default=False,help='pseudo fit for pass region')
+    parser.add_option('--pseudo', dest='pseudo', default='',help='pseudo')
+    parser.add_option('--muonCR', dest='muonCR', default='',help='muonCR')
     (options, args) = parser.parse_args()
 
     data_main(options)
+
