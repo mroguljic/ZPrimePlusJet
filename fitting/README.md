@@ -1,16 +1,9 @@
-python HSR_create.py
+To buildcards, setup MuonCR, build RooFit workspace
 
-python fit_fullralph.py --xMin 50 --xMax 350 --nBins 60 --input hists_1D.root
+* Need input histograms (2016):
+  * DeepDDB: ddb/ddb_M2_2016/
+  * DeepAK8
 
-cd Cards/ggH
-
-cp ../../base.root .
-
-cp ../../ralphabase.root ralpha.root
-
-mkdir plots #if it doesn't exist
-
-combine -M MaxLikelihoodFit card_hist_ralpha_cat1.txt --saveWithUncertainties --saveShapes -v 2 --rMin -50 --rMax 50  --plots --out plots
-
-python plot.py --cats 1 --mass 125 --passfail
-
+```
+python buildcard.py -i ddb/ddb_M2_2016/data/hist_1DZbb_pt_scalesmear.root
+```
