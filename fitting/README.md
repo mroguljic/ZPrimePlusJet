@@ -1,9 +1,7 @@
 To buildcards, setup MuonCR, build RooFit workspace
 
-* Need input histograms (2016):
+* Needs input histograms (2016) for data and muonCR:
   * DeepDDB: ddb/ddb_M2_2016/
-  * DeepAK8
+  * DeepAK8: dak8/dak8_M2_2016/
 
-```
-python buildcard.py -i ddb/ddb_M2_2016/data/hist_1DZbb_pt_scalesmear.root
-```
+See instructions in `ZbbJet`
