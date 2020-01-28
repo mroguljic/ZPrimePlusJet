@@ -31,6 +31,11 @@ mv fitDiagnostics.root  ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/
 
 Plot:
 ```
+mkdir  ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/
+mkdir  ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/prefit/
+mkdir  ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/fit_s/
+mkdir  ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/fit_b/
+
 python validateMLFit.py -i ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/ --suffix 2016 --odir ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/prefit --fit prefit
 python validateMLFit.py -i ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/ --suffix 2016 --odir ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/fit_b --fit fit_b
 python validateMLFit.py -i ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/ --suffix 2016 --odir ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/mlfit/fit_s --fit fit_s
