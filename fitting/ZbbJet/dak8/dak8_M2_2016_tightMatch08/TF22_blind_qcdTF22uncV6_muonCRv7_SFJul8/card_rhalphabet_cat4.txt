@@ -1,0 +1,84 @@
+Combination of datacard.tpl
+imax 2 number of bins
+jmax * number of processes minus 1
+kmax * number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes * fail_cat4 base.root w_fail_cat4:$PROCESS_fail_cat4 w_fail_cat4:$PROCESS_fail_cat4_$SYSTEMATIC
+shapes qcd fail_cat4 qcdfit_decorrelated.root qcdfit_deco_2016:$PROCESS_fail_cat4_2016
+shapes * pass_cat4 base.root w_pass_cat4:$PROCESS_pass_cat4 w_pass_cat4:$PROCESS_pass_cat4_$SYSTEMATIC
+shapes qcd pass_cat4 qcdfit_decorrelated.root qcdfit_deco_2016:$PROCESS_pass_cat4_2016
+----------------------------------------------------------------------------------------------------------------------------------
+bin pass_cat4 fail_cat4
+observation -1.0 -1.0
+----------------------------------------------------------------------------------------------------------------------------------
+bin pass_cat4 pass_cat4 pass_cat4 pass_cat4 fail_cat4 fail_cat4 fail_cat4 fail_cat4
+process zqq wqq qcd tqq zqq wqq qcd tqq
+process 0 1 2 3 0 1 2 3
+rate -1 -1 1.0 -1 -1 -1 1.0 -1
+----------------------------------------------------------------------------------------------------------------------------------
+lumi_2016 lnN 1.025 1.025 - 1.025 1.025 1.025 - 1.025
+CMS_gghbb_veff_2016 lnN 1.043 1.043 - - 1.043 1.043 - -
+CMS_eff_bb_2016 lnN 1.230 - - - 0.990 - - -
+CMS_gghbb_znormQ lnN 1.1 1.1 - - 1.1 1.1 - -
+CMS_gghbb_znormEW lnN 1.07 1.07 - - 1.07 1.07 - -
+CMS_gghbb_wznormEW lnN - 1.06 - - - 1.06 - -
+#weff lnN - 1.00 - - - 1.00 - -
+CMS_res_j_2016 lnN 1.070 1.000 - 1.136 1.170 1.111 - 1.116
+CMS_scale_j_2016 lnN 1.070 1.000 - 1.136 1.170 1.111 - 1.116
+CMS_PU_2016 lnN 1.068 1.002 - 1.137 1.170 1.111 - 1.115
+CMS_gghbb_trigger_2016 lnN 1.02 1.02 - 1.02 1.02 1.02 - 1.02
+CMS_gghbb_m_veto lnN 1.005 1.005 - 1.005 1.005 1.005 - 1.005
+CMS_gghbb_e_veto lnN 1.005 1.005 - 1.005 1.005 1.005 - 1.005
+CMS_gghbb_scale_2016 shape 0.156 0.138 - - 0.156 0.138 - -
+CMS_gghbb_scalept_2016 shape 0.234 0.207 - - 0.234 0.207 - -
+CMS_gghbb_smear_2016 shape 0.250 0.250 - - 0.250 0.250 - -
+tqqpasscat4_2016norm rateParam pass_cat4 tqq (@0*@1) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016
+tqqfailcat4_2016norm rateParam fail_cat4 tqq (@0*(1.0-@1*0.0533)/(1.0-0.0533)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016
+CMS_gghbb_tqqnormSF_2016 extArg 1.0 [0.0,10.0]
+CMS_gghbb_tqqeffSF_2016 extArg 1.0 [0.0,10.0]
+zqqpasscat42016mcstat lnN	1.213	-	-	-	-	-	-	-
+wqqpasscat42016mcstat lnN	-	1.237	-	-	-	-	-	-
+tqqpasscat42016mcstat lnN	-	-	-	1.097	-	-	-	-
+zqqfailcat42016mcstat lnN	-	-	-	-	1.079	-	-	-
+wqqfailcat42016mcstat lnN	-	-	-	-	-	1.045	-	-
+tqqfailcat42016mcstat lnN	-	-	-	-	-	-	-	1.022
+qcd_fail_cat4_Bin2_2016 flatParam 
+qcd_fail_cat4_Bin3_2016 flatParam 
+qcd_fail_cat4_Bin4_2016 flatParam 
+qcd_fail_cat4_Bin5_2016 flatParam 
+qcd_fail_cat4_Bin6_2016 flatParam 
+qcd_fail_cat4_Bin7_2016 flatParam 
+qcd_fail_cat4_Bin8_2016 flatParam 
+qcd_fail_cat4_Bin9_2016 flatParam 
+qcd_fail_cat4_Bin10_2016 flatParam 
+qcd_fail_cat4_Bin11_2016 flatParam 
+qcd_fail_cat4_Bin12_2016 flatParam 
+qcd_fail_cat4_Bin13_2016 flatParam 
+qcd_fail_cat4_Bin14_2016 flatParam 
+qcd_fail_cat4_Bin15_2016 flatParam 
+qcd_fail_cat4_Bin16_2016 flatParam 
+qcd_fail_cat4_Bin17_2016 flatParam 
+qcd_fail_cat4_Bin18_2016 flatParam 
+qcd_fail_cat4_Bin19_2016 flatParam 
+qcd_fail_cat4_Bin20_2016 flatParam 
+qcd_fail_cat4_Bin21_2016 flatParam 
+qcd_fail_cat4_Bin22_2016 flatParam 
+qcd_fail_cat4_Bin23_2016 flatParam 
+p0r0_2016 flatParam 
+p0r1_2016 flatParam 
+p0r2_2016 flatParam 
+p1r0_2016 flatParam 
+p1r1_2016 flatParam 
+p1r2_2016 flatParam 
+qcdfit_tf_2016_deco0 param 0 1
+qcdfit_tf_2016_deco1 param 0 1
+qcdfit_tf_2016_deco2 param 0 1
+qcdfit_tf_2016_deco3 param 0 1
+qcdfit_tf_2016_deco4 param 0 1
+qcdfit_tf_2016_deco5 param 0 1
+qcdfit_tf_2016_deco6 param 0 1
+qcdfit_tf_2016_deco7 param 0 1
+qcdfit_tf_2016_deco8 param 0 1
+mcstat group = zqqpasscat42016mcstat wqqpasscat42016mcstat tqqpasscat42016mcstat zqqfailcat42016mcstat wqqfailcat42016mcstat tqqfailcat42016mcstat
+qcd group =  qcd_fail_cat4_Bin2_2016 qcd_fail_cat4_Bin3_2016 qcd_fail_cat4_Bin4_2016 qcd_fail_cat4_Bin5_2016 qcd_fail_cat4_Bin6_2016 qcd_fail_cat4_Bin7_2016 qcd_fail_cat4_Bin8_2016 qcd_fail_cat4_Bin9_2016 qcd_fail_cat4_Bin10_2016 qcd_fail_cat4_Bin11_2016 qcd_fail_cat4_Bin12_2016 qcd_fail_cat4_Bin13_2016 qcd_fail_cat4_Bin14_2016 qcd_fail_cat4_Bin15_2016 qcd_fail_cat4_Bin16_2016 qcd_fail_cat4_Bin17_2016 qcd_fail_cat4_Bin18_2016 qcd_fail_cat4_Bin19_2016 qcd_fail_cat4_Bin20_2016 qcd_fail_cat4_Bin21_2016 qcd_fail_cat4_Bin22_2016 qcd_fail_cat4_Bin23_2016
+qcdeff group = qcdfit_tf_2016_deco0 qcdfit_tf_2016_deco1 qcdfit_tf_2016_deco2 qcdfit_tf_2016_deco3 qcdfit_tf_2016_deco4 qcdfit_tf_2016_deco5 qcdfit_tf_2016_deco6 qcdfit_tf_2016_deco7 qcdfit_tf_2016_deco8 
