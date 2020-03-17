@@ -8,7 +8,7 @@ in `CMSSW_10_2_X`, e.g. `CMSSW_10_2_13`.
 Clone repo:
 ```
 cd CMSSW_10_2_13/src/
-git clone https://github.com/cmantill/ZPrimePlusJet.git
+git clone https://github.com/mroguljic/ZPrimePlusJet.git
 cd ZPrimePlusJet/
 git fetch origin 
 git checkout hbbRun2
