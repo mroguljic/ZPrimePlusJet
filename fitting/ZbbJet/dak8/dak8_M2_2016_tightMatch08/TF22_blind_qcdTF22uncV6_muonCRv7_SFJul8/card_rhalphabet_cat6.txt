@@ -18,7 +18,7 @@ rate -1 -1 1.0 -1 -1 -1 1.0 -1
 ----------------------------------------------------------------------------------------------------------------------------------
 lumi_2016 lnN 1.025 1.025 - 1.025 1.025 1.025 - 1.025
 CMS_gghbb_veff_2016 lnN 1.043 1.043 - - 1.043 1.043 - -
-CMS_eff_bb_2016 lnN 1.230 - - - 0.990 - - -
+CMS_eff_bb_2016 lnN 1.300 - - - 0.987 - - -
 CMS_gghbb_znormQ lnN 1.1 1.1 - - 1.1 1.1 - -
 CMS_gghbb_znormEW lnN 1.07 1.07 - - 1.07 1.07 - -
 CMS_gghbb_wznormEW lnN - 1.06 - - - 1.06 - -
@@ -29,8 +29,8 @@ CMS_PU_2016 lnN 1.076 1.108 - 1.053 1.133 1.084 - 1.076
 CMS_gghbb_trigger_2016 lnN 1.02 1.02 - 1.02 1.02 1.02 - 1.02
 CMS_gghbb_m_veto lnN 1.005 1.005 - 1.005 1.005 1.005 - 1.005
 CMS_gghbb_e_veto lnN 1.005 1.005 - 1.005 1.005 1.005 - 1.005
-CMS_gghbb_scale_2016 shape 0.156 0.138 - - 0.156 0.138 - -
-CMS_gghbb_scalept_2016 shape 0.547 0.483 - - 0.547 0.483 - -
+CMS_gghbb_scale_2016 shape 0.573 0.506 - - 0.573 0.506 - -
+CMS_gghbb_scalept_2016 shape 2.004 1.771 - - 2.004 1.771 - -
 CMS_gghbb_smear_2016 shape 0.250 0.250 - - 0.250 0.250 - -
 tqqpasscat6_2016norm rateParam pass_cat6 tqq (@0*@1) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016
 tqqfailcat6_2016norm rateParam fail_cat6 tqq (@0*(1.0-@1*0.0533)/(1.0-0.0533)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016

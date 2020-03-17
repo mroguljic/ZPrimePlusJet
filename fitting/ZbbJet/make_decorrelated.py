@@ -5,6 +5,7 @@ import ROOT
 rl.util.install_roofit_helpers()
 import numpy as np
 import re
+import os
 
 def createdeco(qcdfit, fbase, year, fout):
     def getconst(name):

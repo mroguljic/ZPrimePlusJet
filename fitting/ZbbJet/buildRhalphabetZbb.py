@@ -77,7 +77,7 @@ def main(options, args):
               if 'dak8' in ifile: # dak8
                   qcdTFpars ={'n_rho':2, 'n_pT':2,
                               'pars':[0.23009,0.78652,1.4017,0.8933,-0.62788,3.155,-0.60492,3.0336,0.32512,-0.7438],
-                              'fitpath':'dak8/dak8_M2_2016/TF22_MC_w2Fitv2/rhalphabase.root'}
+                              'fitpath':'dak8/dak8_M2_2016_tightMatch08/TF22_MC_w2Fitv2/rhalphabase.root'}
               else: # ddb
                   qcdTFpars = {'n_rho':2, 'n_pT':2,
                                'pars':[ 0.012287,-1.0841,2.0706, 0.82500,1.2746 ,1.8651 ,0.24751,0.43354 ,1.2328 ,-0.00224],
