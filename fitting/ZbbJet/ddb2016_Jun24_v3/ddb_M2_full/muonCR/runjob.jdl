@@ -1,0 +1,11 @@
+universe = vanilla
+Executable = runjob.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT_OR_EVICT
+Transfer_Input_Files = runjob.sh,
+Output = runjob.$(Process).$(Cluster).stdout
+Error  = runjob.$(Process).$(Cluster).stdout
+Log    = runjob.$(Process).$(Cluster).log
+Arguments = $(Process) 500
+Queue 500
+    

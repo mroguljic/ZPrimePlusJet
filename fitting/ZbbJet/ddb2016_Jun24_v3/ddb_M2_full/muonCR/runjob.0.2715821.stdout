@@ -1,0 +1,1133 @@
+Sat Aug  3 05:11:09 UTC 2019
+_condor_stdout
+condor_exec.exe
+docker_stderror
+runjob.sh
+tmp
+var
+x509up_u51467
+WARNING: In non-interactive mode release checks e.g. deprecated releases, production architectures are disabled.
+Cloning into 'ZPrimePlusJet'...
+Checking out files:  45% (198/437)   Checking out files:  46% (202/437)   Checking out files:  47% (206/437)   Checking out files:  48% (210/437)   Checking out files:  49% (215/437)   Checking out files:  50% (219/437)   Checking out files:  51% (223/437)   Checking out files:  52% (228/437)   Checking out files:  53% (232/437)   Checking out files:  54% (236/437)   Checking out files:  55% (241/437)   Checking out files:  56% (245/437)   Checking out files:  57% (250/437)   Checking out files:  58% (254/437)   Checking out files:  59% (258/437)   Checking out files:  60% (263/437)   Checking out files:  61% (267/437)   Checking out files:  62% (271/437)   Checking out files:  63% (276/437)   Checking out files:  64% (280/437)   Checking out files:  65% (285/437)   Checking out files:  66% (289/437)   Checking out files:  67% (293/437)   Checking out files:  68% (298/437)   Checking out files:  69% (302/437)   Checking out files:  70% (306/437)   Checking out files:  71% (311/437)   Checking out files:  72% (315/437)   Checking out files:  73% (320/437)   Checking out files:  74% (324/437)   Checking out files:  75% (328/437)   Checking out files:  76% (333/437)   Checking out files:  77% (337/437)   Checking out files:  78% (341/437)   Checking out files:  79% (346/437)   Checking out files:  80% (350/437)   Checking out files:  81% (354/437)   Checking out files:  82% (359/437)   Checking out files:  83% (363/437)   Checking out files:  84% (368/437)   Checking out files:  85% (372/437)   Checking out files:  86% (376/437)   Checking out files:  87% (381/437)   Checking out files:  88% (385/437)   Checking out files:  89% (389/437)   Checking out files:  90% (394/437)   Checking out files:  91% (398/437)   Checking out files:  92% (403/437)   Checking out files:  93% (407/437)   Checking out files:  94% (411/437)   Checking out files:  95% (416/437)   Checking out files:  96% (420/437)   Checking out files:  97% (424/437)   Checking out files:  98% (429/437)   Checking out files:  99% (433/437)   Checking out files: 100% (437/437)   Checking out files: 100% (437/437), done.
+Execute with git status/log:
+# On branch PerBinEff
+nothing to commit (use -u to show untracked files)
+commit 74b43e3a0a89bbbfcbbd50f58f3fbeb2d6aa908b
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Sat Aug 3 00:00:34 2019 -0500
+
+    update 2016 QCD samples
+Error in <TUnixSystem::FindDynamicLibrary>: /storage/local/data1/condor/execute/dir_7651/CMSSW_8_1_0/lib/slc6_amd64_gcc530/libHiggsAnalysisCombinedLimit.so does not exist in /storage/local/data1/condor/execute/dir_7651/CMSSW_8_1_0/src/ZPrimePlusJet/lib:/storage/local/data1/condor/execute/dir_7651/CMSSW_8_1_0/biglib/slc6_amd64_gcc530:/storage/local/data1/condor/execute/dir_7651/CMSSW_8_1_0/lib/slc6_amd64_gcc530:/storage/local/data1/condor/execute/dir_7651/CMSSW_8_1_0/external/slc6_amd64_gcc530/lib:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/biglib/slc6_amd64_gcc530:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/lib/slc6_amd64_gcc530:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/external/slc6_amd64_gcc530/lib:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/llvm/3.8.0-giojec4/lib64:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/gcc/5.3.0/lib64:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/gcc/5.3.0/lib:.:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/lcg/root/6.06.08-giojec3/lib:/lib64/tls/x86_64:/lib64/tls:/lib64/x86_64:/lib64:/usr/lib64/tls/x86_64:/usr/lib64/tls:/usr/lib64/x86_64:/usr/lib64
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Selecting doubleB pass/fail plots for this region   =  topR6_N2
+N plots = 22 
+plots =   ['h_msd_v_pt_ak8_topR6_N2_pass', 'h_msd_v_pt_ak8_topR6_N2_pass_JESUp', 'h_msd_v_pt_ak8_topR6_N2_pass_JESDown', 'h_msd_v_pt_ak8_topR6_N2_pass_JERUp', 'h_msd_v_pt_ak8_topR6_N2_pass_JERDown', 'h_msd_v_pt_ak8_topR6_N2_pass_triggerUp', 'h_msd_v_pt_ak8_topR6_N2_pass_triggerDown', 'h_msd_v_pt_ak8_topR6_N2_pass_PuUp', 'h_msd_v_pt_ak8_topR6_N2_pass_PuDown', 'h_msd_v_pt_ak8_topR6_N2_pass_matched', 'h_msd_v_pt_ak8_topR6_N2_pass_unmatched', 'h_msd_v_pt_ak8_topR6_N2_fail', 'h_msd_v_pt_ak8_topR6_N2_fail_JESUp', 'h_msd_v_pt_ak8_topR6_N2_fail_JESDown', 'h_msd_v_pt_ak8_topR6_N2_fail_JERUp', 'h_msd_v_pt_ak8_topR6_N2_fail_JERDown', 'h_msd_v_pt_ak8_topR6_N2_fail_triggerUp', 'h_msd_v_pt_ak8_topR6_N2_fail_triggerDown', 'h_msd_v_pt_ak8_topR6_N2_fail_PuUp', 'h_msd_v_pt_ak8_topR6_N2_fail_PuDown', 'h_msd_v_pt_ak8_topR6_N2_fail_matched', 'h_msd_v_pt_ak8_topR6_N2_fail_unmatched']
+Signals... 
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+hqq125
+*********************************************************************************************************************************** 
+
+134437
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 134437  total events
+0  iSplit
+500  maxSplit
+0  min event
+268  max event
+268  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.05/GluGluHToBB_M125_13TeV_powheg_pythia8_CKKW_1000pb_weighted.root") at 0x39dce50>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+tthqq125
+*********************************************************************************************************************************** 
+
+1405379
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 1405379  total events
+0  iSplit
+500  maxSplit
+0  min event
+2810  max event
+2810  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/ttHTobb_M125_13TeV_powheg_pythia8_1000pb_weighted.root") at 0x5289290>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+vbfhqq125
+*********************************************************************************************************************************** 
+
+231792
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 231792  total events
+0  iSplit
+500  maxSpTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+lit
+0  min event
+463  max event
+463  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix_all_1000pb_weighted.root") at 0x64b39c0>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+whqq125
+*********************************************************************************************************************************** 
+
+72338
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 72338  total events
+0  iSplit
+500  maxSplit
+0  min event
+144  max event
+144  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_1000pb_weighted.root") at 0x6613bb0>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+zhqq125
+*********************************************************************************************************************************** 
+
+112132
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 112132  total events
+0  iSplit
+500  maxSplit
+0  min event
+224  max event
+224  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_1000pb_weighted.root") at 0x7dea830>
+0
+
+
+Backgrounds...
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+wqq
+*********************************************************************************************************************************** 
+
+1526532
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 1526532  total events
+0  iSplit
+500  maxSplit
+0  min event
+3053  max event
+3053  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/WJetsToQQ_HT180_13TeV_1000pb_weighted_v1204.root") at 0x7d8f4a0>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+zqq
+*********************************************************************************************************************************** 
+
+723629
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 723629  total events
+0  iSplit
+500  maxSplit
+0  min event
+1447  max event
+1447  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/DYJetsToQQ_HT180_13TeV_1000pb_weighted_v1204.root") at 0x8b593e0>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+vvqq
+*********************************************************************************************************************************** 
+
+143358
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 143358  total events
+0  iSplit
+500  maxSplit
+0  min event
+286  max event
+286  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/WWTo4Q_13TeV_powheg_1000pb_weighted.root") at 0x965ec90>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+tqq
+*********************************************************************************************************************************** 
+
+10143457
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 10143457  total events
+0  iSplit
+500  maxSplit
+0  min event
+20286  max event
+20286  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/TT_powheg_1000pb_weighted_v1204.root") at 0xa164900>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+stqq
+*********************************************************************************************************************************** 
+
+619453
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 619453  total events
+0  iSplit
+500  maxSplit
+0  min event
+1238  max event
+1238  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/ST_t_channel_antitop_4f_inclusiveDecays_TuneCUETP8M2T4_13TeV_powhegV2_madspin_1000pb_weighted.root") at 0xbefef60>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+wlnu
+*********************************************************************************************************************************** 
+
+2093721
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 2093721  total events
+0  iSplit
+500  maxSplit
+0  min event
+4187  max event
+4187  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/WJetsToLNu_HT_100To200_13TeV_1000pb_weighted.root") at 0xc9262b0>
+0
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+qcd
+**********************************************************************************Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+************************************************* 
+
+79455314
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 79455314  total events
+0  iSplit
+500  maxSplit
+0  min event
+158910  max event
+158910  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/QCD_HT100to200_13TeV_1000pb_weighted.root") at 0xe205e30>
+0
+[ 0.0% doneError in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+
+
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+zll
+*********************************************************************************************************************************** 
+
+116515
+Using weights directly from analysis/ggH/puWeights_All.root to reweight MC pu 116515  total events
+0  iSplit
+500  maxSplit
+0  min event
+233  max event
+233  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/DYJetsToLL_M_50_13TeV_ext_1000pb_weighted.root") at 0xe79c0c0>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_0
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorEWK
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorQCD
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TChain::SetBranchAddress>: unknown branch -> nAK4PuppijetsTPt100dR08_0
+Error in <TChain::SetBranchAddress>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TChain::SetBranchAddress>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet1_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet1_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet2_deepdoubleb
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet2_deepdoubleb_nomasssculptpen
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_eta
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_eta
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_phi
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_phi
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_pt
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_pt
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_mass
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_mass
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_qgid
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_qgid
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_csv
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_0
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorEWK
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorQCD
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet0_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet1_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet2_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet3_deepcsvbb
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_0
+Error in <TTree::SetBranchStatus>: unknown branch -> nAK4PuppijetsTPt100dR08_1
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet1_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet2_deepdoubleb_nomasssculptpen
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+
+
+Data...
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+data_obs
+*********************************************************************************************************************************** 
+
+18874914
+18874914  total events
+0  iSplit
+500  maxSplit
+0  min event
+37749  max event
+37749  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpchbb/zprimebits-v12.04/cvernier/SingleMuonRun2016B_03Feb2017_ver1_v1_fixtrig.root") at 0x108e0390>
+0
+
+
+All done.
+
+ *** Break *** segmentation violation
+./condor_exec.exe: line 20:    78 Segmentation fault      (core dumped) python ${CMSSW_BASE}/src/ZPrimePlusJet/fitting/PbbJet/Hbb_create.py -o ${MAINDIR}/ --i-split $1 --max-split $2 --muonCR --dbtagcut 0.89 --lumi 35.9
+Inside /storage/local/data1/condor/execute/dir_7651:
+CMSSW_8_1_0
+_condor_stdout
+condor_exec.exe
+core.78
+docker_stderror
+hist_1DZbb_muonCR_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+DELETING...
+_condor_stdout
+condor_exec.exe
+docker_stderror
+hist_1DZbb_muonCR_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+Sat Aug  3 05:11:44 UTC 2019

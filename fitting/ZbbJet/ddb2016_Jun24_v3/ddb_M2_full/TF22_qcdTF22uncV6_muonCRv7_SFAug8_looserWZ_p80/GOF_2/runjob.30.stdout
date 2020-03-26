@@ -1,0 +1,135 @@
+Mon Sep 23 21:25:57 UTC 2019
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+runjob.sh
+tmp
+var
+x509up_u51467
+Resetting caches
+Done: ProjectRename
+Execute with git status/log:
+On branch deco
+Your branch is up to date with 'origin/deco'.
+
+nothing to commit (use -u to show untracked files)
+commit dc006892e1fe57e608869cd5db512c039a22a0a6
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Mon Sep 23 13:53:29 2019 -0500
+
+    Fix copy output
+ <<< Combine >>> 
+Will use saturated models to compute goodness of fit for a binned likelihood
+>>> method used is GoodnessOfFit
+>>> random number generator seed is 123456
+Set Range of Parameter r To : (-20,20)
+Set Default Value of Parameter r_z To : 1
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 134.915
+Done in 0.16 min (cpu), 0.16 min (real)
+ <<< Combine >>> 
+Will use saturated models to compute goodness of fit for a binned likelihood
+>>> method used is GoodnessOfFit
+>>> random number generator seed is 30
+Set Range of Parameter r To : (-20,20)
+Set Default Value of Parameter r_z To : 1
+Generate toy 1/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 91.707
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 2/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 106.261
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 3/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 107.98
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 4/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 104.232
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 5/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 132.324
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 6/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 124.056
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 7/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 120.212
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 8/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 145.149
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 9/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 107.149
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 10/10
+
+ --- GoodnessOfFit --- 
+Best fit test statistic: 105.662
+Done in 0.21 min (cpu), 0.21 min (real)
+mean   expected limit: r < 114.473 +/- 4.99831 @ 95%CL (10 toyMC)
+median expected limit: r < 107.565 @ 95%CL (10 toyMC)
+   68% expected band : 104.232 < r < 145.149
+   95% expected band : 91.707 < r < 145.149
+combine -M GoodnessOfFit /storage/local/data1/condor/execute/dir_19880/card_rhalphabet_all_2016_floatZ.root  --setParameterRange r=-20,20 --setParameters r_z=1 --algorithm saturated -n card_rhalphabet_all_2016_floatZ --freezeParameters r_z --redefineSignalPOIs r
+cp higgsCombinecard_rhalphabet_all_2016_floatZ.GoodnessOfFit.mH120.root /storage/local/data1/condor/execute/dir_19880//goodbase_30.root
+combine -M GoodnessOfFit /storage/local/data1/condor/execute/dir_19880/card_rhalphabet_all_2016_floatZ.root  --setParameterRange r=-20,20 --setParameters r_z=1 -s 30 -t 10 --toysFrequentist --algorithm saturated -n card_rhalphabet_all_2016_floatZ --freezeParameters r_z --redefineSignalPOIs r
+cp higgsCombinecard_rhalphabet_all_2016_floatZ.GoodnessOfFit.mH120.30.root /storage/local/data1/condor/execute/dir_19880//goodtoys_30.root
+GoodnessOfFit p-value 0.9
+ FCN=10.9037 FROM MINOS     STATUS=SUCCESSFUL     25 CALLS         272 TOTAL
+                     EDM=8.85163e-11    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           3.50212e+01   1.10747e+01   5.25723e-06  -4.98042e-08
+   2  p1           1.14597e+02   4.76655e+00   4.76655e+00   1.15759e-10
+                               ERR DEF= 0.5
+Inside /storage/local/data1/condor/execute/dir_19880:
+CMSSW_10_2_13
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+goodbase_30.root
+goodness_saturated_card_rhalphabet_all_2016_floatZ.C
+goodness_saturated_card_rhalphabet_all_2016_floatZ.pdf
+goodtoys_30.root
+runjob.sh
+tmp
+var
+x509up_u51467
+DELETING...
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+goodbase_30.root
+goodtoys_30.root
+runjob.sh
+tmp
+var
+x509up_u51467
+Mon Sep 23 21:28:46 UTC 2019

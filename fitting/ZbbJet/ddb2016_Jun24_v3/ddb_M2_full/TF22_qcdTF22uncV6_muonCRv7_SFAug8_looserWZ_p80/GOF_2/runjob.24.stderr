@@ -1,0 +1,18 @@
+Cloning into 'ZPrimePlusJet'...
+Checking out files:  93% (412/442)   Checking out files:  94% (416/442)   Checking out files:  95% (420/442)   Checking out files:  96% (425/442)   Checking out files:  97% (429/442)   Checking out files:  98% (434/442)   Checking out files:  99% (438/442)   Checking out files: 100% (442/442)   Checking out files: 100% (442/442), done.
+ModelConfig 'ModelConfig' defines more than one parameter of interest. This is not supported in some statistical methods.
+RooSimultaneousOpt: number of channel masks must equal number of channels
+ModelConfig 'ModelConfig' defines more than one parameter of interest. This is not supported in some statistical methods.
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+RooSimultaneousOpt: number of channel masks must equal number of channels
+TROOT::Append:0: RuntimeWarning: Replacing existing TH1: goodness_saturated_card_rhalphabet_all_2016_floatZhist (Potential memory leak).
+Info in <TCanvas::Print>: pdf file /storage/local/data1/condor/execute/dir_28312//goodness_saturated_card_rhalphabet_all_2016_floatZ.pdf has been created
+Info in <TCanvas::SaveSource>: C++ Macro file: /storage/local/data1/condor/execute/dir_28312//goodness_saturated_card_rhalphabet_all_2016_floatZ.C has been generated

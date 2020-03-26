@@ -1,0 +1,204 @@
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r2p1_muonCR/toys/  --nr1 1 --np1 1 --nr2 2 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r1p2_muonCR/toys/  --nr1 1 --np1 1 --nr2 1 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r2p2_muonCR/toys/  --nr1 1 --np1 2 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r1p3_muonCR/toys/  --nr1 1 --np1 2 --nr2 1 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r2p2_muonCR/toys/  --nr1 2 --np1 1 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r3p1_muonCR/toys/  --nr1 2 --np1 1 --nr2 3 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r2p3_muonCR/toys/  --nr1 2 --np1 2 --nr2 2 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-16 19:55 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r3p2_muonCR/toys/  --nr1 2 --np1 2 --nr2 3 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r2p1_muonCR/toys/  --nr1 1 --np1 1 --nr2 2 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r1p2_muonCR/toys/  --nr1 1 --np1 1 --nr2 1 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r2p2_muonCR/toys/  --nr1 1 --np1 2 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r1p3_muonCR/toys/  --nr1 1 --np1 2 --nr2 1 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r2p2_muonCR/toys/  --nr1 2 --np1 1 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r3p1_muonCR/toys/  --nr1 2 --np1 1 --nr2 3 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:45 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r2p3_muonCR/toys/  --nr1 2 --np1 2 --nr2 2 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:46 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r3p2_muonCR/toys/  --nr1 2 --np1 2 --nr2 3 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:47 ==========
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r2p1_muonCR/toys/  --nr1 1 --np1 1 --nr2 2 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r1p2_muonCR/toys/  --nr1 1 --np1 1 --nr2 1 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r2p2_muonCR/toys/  --nr1 1 --np1 2 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r1p3_muonCR/toys/  --nr1 1 --np1 2 --nr2 1 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r2p2_muonCR/toys/  --nr1 2 --np1 1 --nr2 2 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r3p1_muonCR/toys/  --nr1 2 --np1 1 --nr2 3 --np2 1   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r2p3_muonCR/toys/  --nr1 2 --np1 2 --nr2 2 --np2 3   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 09:48 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r3p2_muonCR/toys/  --nr1 2 --np1 2 --nr2 3 --np2 2   -r 1  -t 100  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:14 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r2p1_muonCR/toys/  --nr1 1 --np1 1 --nr2 2 --np2 1   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r1p2_muonCR/toys/  --nr1 1 --np1 1 --nr2 1 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r2p2_muonCR/toys/  --nr1 1 --np1 2 --nr2 2 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r1p3_muonCR/toys/  --nr1 1 --np1 2 --nr2 1 --np2 3   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r2p2_muonCR/toys/  --nr1 2 --np1 1 --nr2 2 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r3p1_muonCR/toys/  --nr1 2 --np1 1 --nr2 3 --np2 1   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r2p3_muonCR/toys/  --nr1 2 --np1 2 --nr2 2 --np2 3   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:15 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r3p2_muonCR/toys/  --nr1 2 --np1 2 --nr2 3 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:43 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r2p1_muonCR/toys/  --nr1 1 --np1 1 --nr2 2 --np2 1   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:43 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p1_r1p2_muonCR/toys/  --nr1 1 --np1 1 --nr2 1 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r2p2_muonCR/toys/  --nr1 1 --np1 2 --nr2 2 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r1p2_r1p3_muonCR/toys/  --nr1 1 --np1 2 --nr2 1 --np2 3   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r2p2_muonCR/toys/  --nr1 2 --np1 1 --nr2 2 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p1_r3p1_muonCR/toys/  --nr1 2 --np1 1 --nr2 3 --np2 1   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r2p3_muonCR/toys/  --nr1 2 --np1 2 --nr2 2 --np2 3   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 
+=======ftest.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/ftest/ ==========
+===time  = 2019-09-17 10:44 ==========
+python submitJob_Ftest.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root  --ifile-muon ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/ftest/ftest_r2p2_r3p2_muonCR/toys/  --nr1 2 --np1 2 --nr2 3 --np2 2   -r 1  -t 200  --freezeNuisances r_z  --setParameters r_z=1  --year 2016  --suffix 2016  --hadd --clean -n 125  --lumi  35.9 

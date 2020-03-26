@@ -1,0 +1,128 @@
+Thu Sep 26 17:48:43 UTC 2019
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+runjob.sh
+tmp
+var
+x509up_u51467
+Resetting caches
+Done: ProjectRename
+Execute with git status/log:
+On branch deco
+Your branch is up to date with 'origin/deco'.
+
+nothing to commit (use -u to show untracked files)
+commit 12e72f7a2b0f7e602d97c8f6c954d85c88f462de
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Wed Sep 25 13:13:36 2019 -0500
+
+    Allow AD test
+ <<< Combine >>> 
+Will use the Kolmogorov-Smirnov test to compute goodness of fit for a binned likelihood
+>>> method used is GoodnessOfFit
+>>> random number generator seed is 123456
+Set Range of Parameter r To : (-20,20)
+Set Default Value of Parameter r_z To : 1
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0454344
+Done in 0.13 min (cpu), 0.13 min (real)
+ <<< Combine >>> 
+Will use the Kolmogorov-Smirnov test to compute goodness of fit for a binned likelihood
+>>> method used is GoodnessOfFit
+>>> random number generator seed is 0
+Set Range of Parameter r To : (-20,20)
+Set Default Value of Parameter r_z To : 1
+Generate toy 1/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0303286
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 2/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0448785
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 3/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0407212
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 4/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0408937
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 5/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0300076
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 6/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0296809
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 7/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0407899
+Done in 0.11 min (cpu), 0.11 min (real)
+Generate toy 8/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0400738
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 9/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0406875
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 10/10
+
+ --- GoodnessOfFit --- 
+Kolmogorov-Smirnov test statistic: 0.0423985
+Done in 0.10 min (cpu), 0.10 min (real)
+mean   expected limit: r < 0.038046 +/- 0.00180635 @ 95%CL (10 toyMC)
+median expected limit: r < 0.0407044 @ 95%CL (10 toyMC)
+   68% expected band : 0.0300076 < r < 0.0448785
+   95% expected band : 0.0296809 < r < 0.0448785
+combine -M GoodnessOfFit /storage/local/data1/condor/execute/dir_29587/card_rhalphabet_all_2016_floatZ.root  --setParameterRange r=-20,20  --setParameters r_z=1 --algorithm KS -n card_rhalphabet_all_2016_floatZ --freezeParameters r_z --redefineSignalPOIs r
+cp higgsCombinecard_rhalphabet_all_2016_floatZ.GoodnessOfFit.mH120.root /storage/local/data1/condor/execute/dir_29587//goodbase_0.root
+combine -M GoodnessOfFit /storage/local/data1/condor/execute/dir_29587/card_rhalphabet_all_2016_floatZ.root  --setParameterRange r=-20,20 --setParameters r_z=1 -s 0 -t 10  --algorithm KS -n card_rhalphabet_all_2016_floatZ --freezeParameters r_z --redefineSignalPOIs r
+cp higgsCombinecard_rhalphabet_all_2016_floatZ.GoodnessOfFit.mH120.0.root /storage/local/data1/condor/execute/dir_29587//goodtoys_0.root
+GoodnessOfFit p-value 1.0
+Inside /storage/local/data1/condor/execute/dir_29587:
+CMSSW_10_2_13
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+goodbase_0.root
+goodness_KS_card_rhalphabet_all_2016_floatZ.C
+goodness_KS_card_rhalphabet_all_2016_floatZ.pdf
+goodtoys_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+DELETING...
+CMSSW_10_2_13.tgz
+_condor_stderr
+_condor_stdout
+card_rhalphabet_all_2016_floatZ.root
+condor_exec.exe
+docker_stderror
+goodbase_0.root
+goodtoys_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+Thu Sep 26 17:50:55 UTC 2019

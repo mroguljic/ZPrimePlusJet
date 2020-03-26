@@ -1,0 +1,11 @@
+universe = vanilla
+Executable = runjob.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT_OR_EVICT
+Transfer_Input_Files = runjob.sh,card_rhalphabet_all_2016_floatZ.root,/uscms/home/kkwok/work/Hbb/CMSSW_10_2_13/src/ZPrimePlusJet/CMSSW_10_2_13.tgz
+Output = runjob.$(Process).stdout
+Error  = runjob.$(Process).stderr
+Log    = runjob.$(Process).log
+Arguments =  $(Process) 10 card_rhalphabet_all_2016_floatZ.root /uscms/home/kkwok/work/Hbb/CMSSW_10_2_13/src/ZPrimePlusJet/CMSSW_10_2_13.tgz
+Queue 50
+    

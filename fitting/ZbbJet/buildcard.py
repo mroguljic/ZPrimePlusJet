@@ -99,6 +99,8 @@ def main(options,mode,dryRun):
     combcards_base = "combineCards.py "
 
     t2ws_rz      ="text2workspace.py  -m 125  --PO verbose"
+    t2ws_sf      ="text2workspace.py  -m 125 -P HiggsAnalysis.CombinedLimit.TagAndProbeExtended:tagAndProbe --PO categories=zqq"
+
     for cat in cats:
         combcards_base += " %s=%s "%(cat['name'],cat['card'])
            
@@ -139,17 +141,19 @@ def main(options,mode,dryRun):
         makecard_base +=" --addqcdCovMat "
 
     t2ws_rz += " %s -o %s"%(combcard_all, combcard_all.replace(".txt","_floatZ.root"))
+    t2ws_sf += " %s -o %s"%(combcard_all, combcard_all.replace(".txt","_floatZ_TNP.root"))
 
-    rhalph_base_pseudo = rhalph_base + " --pseudo"
+    #rhalph_base_pseudo = rhalph_base + " --pseudo"
     if makedeco:
-        rhalph_base += '\n python make_decorrelated.py -i %s --year %s'%(odir,year)
+        rhalph_base += '\n python make_decorrelated.py -i %s --year %s --np %i --nr %i'%(odir,year,np,nr)
 
     cmds = [
-        rhalph_base_pseudo,
+        #rhalph_base_pseudo,
         rhalph_base,
         makecard_base,
         combcards_base,
-        t2ws_rz
+        t2ws_rz,
+        t2ws_sf
     ]
     if muonCR:
         cmds.insert(2,makemuonCR_base)
@@ -157,11 +161,19 @@ def main(options,mode,dryRun):
     ## skip all building commands for comb
     if mode=='comb':
         cmds = [
-           combcards_base,
-           t2ws_rz
+            combcards_base,
+            t2ws_rz,
+            t2ws_sf
         ]
     for cmd in cmds:
         exec_me(cmd,outf, dryRun)
+    os.system('mkdir -p %s/mlfit/'%odir)
+    os.system('mkdir -p %s/mlfit/prefit'%odir)
+    os.system('mkdir -p %s/mlfit/fit_s'%odir)
+    os.system('mkdir -p %s/mlfit/fit_b'%odir)
+
+    combine1 = "combine -M FitDiagnostics %s --setRobustFitTolerance  0.001 --setRobustFitStrategy 2 --robustFit 1  --setRobustFitAlgo Minuit2,Migrad --saveShapes --saveWithUncertainties"%(combcard_all.replace(".txt","_floatZ_TNP.root"))
+    combine2 = "combine -M FitDiagnostics %s --setRobustFitTolerance  0.001 --setRobustFitStrategy 2 --robustFit 1  --setRobustFitAlgo Minuit2,Migrad --saveShapes --saveWithUncertainties --setParameterRanges r=0,3 --setParameters r=1 "%(combcard_all.replace(".txt","_floatZ.root"))
     if not dryRun:
         print "=========== Summary ============="
         for cmd in cmds:
@@ -171,6 +183,10 @@ def main(options,mode,dryRun):
                 print cmd
         print "Using SF:"
         for key,item in sorted(SF.iteritems()): print("%s       %s"%(key,item))
+        print "Now execute: "
+        print combine1
+        print combine2
+
 
 #buildcats from ifile
 def buildcats(ifile,odir,muonCR,suffix):
@@ -205,11 +221,14 @@ def data_main(options):
     # blind: blind Hbb mass window
     # qcdTF22uncV6: fit MC qcd TF
     # muonCRv7: include muonCR datacard
-    # SFJul8: latest from hbb
-    odirs = [
-        'TF22_MC_w2Fitv2/',
-        'TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/'
-        ]
+    # SFAug8: latest from hbb
+    odirs = options.odirs.split(',')
+    #'TF21_MC_w2Fitv2/',
+    #'TF22_MC_w2Fitv2/',
+    #'TF21_blind_qcdTF22uncV6_muonCRv7_SFAug8/',
+    #'TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8/',
+    #'TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/'
+
     for odir in odirs:
         options.odir = odir
         idir = options.idir
@@ -221,9 +240,6 @@ def data_main(options):
             options.year = '2017'
         options.suffix = options.year
             
-        #if not 'MC' in odir:
-        #    if 'looserWZ' in odir and not( options.year=='2016'): continue
-        #    if '2016'     in idir and not( 'looserWZ' in odir  ): continue
         options.odir = idir+odir
         if not os.path.exists(options.odir): 
             os.mkdir(options.odir)
@@ -258,7 +274,6 @@ def data_main(options):
         main(options, mode,dryRun)
         print "==============================="
 
-
  
 ##-------------------------------------------------------------------------------------
 if __name__ == '__main__':
@@ -275,6 +290,7 @@ if __name__ == '__main__':
     parser.add_option('--pseudoPass', dest='pseudoPass', action='store_true',default=False,help='pseudo fit for pass region')
     parser.add_option('--pseudo', dest='pseudo', default='',help='pseudo')
     parser.add_option('--muonCR', dest='muonCR', default='',help='muonCR')
+    parser.add_option('--odirs', dest='odirs', default='',help='odir')
     (options, args) = parser.parse_args()
 
     data_main(options)

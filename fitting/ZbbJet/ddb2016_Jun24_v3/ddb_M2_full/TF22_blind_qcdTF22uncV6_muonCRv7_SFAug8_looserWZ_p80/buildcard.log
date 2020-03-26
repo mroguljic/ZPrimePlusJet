@@ -1,0 +1,484 @@
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 4d61781e2a44e10f000ad380046770ed412dc76d
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Tue Sep 3 19:27:19 2019 -0500
+
+    update qcd deco fit pam writing
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-04 10:45 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_looserWZ/hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_looserWZ/hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*hqq125:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 4d61781e2a44e10f000ad380046770ed412dc76d
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Tue Sep 3 19:27:19 2019 -0500
+
+    update qcd deco fit pam writing
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-04 10:58 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_looserWZ/hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_looserWZ/hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*hqq125:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 4d61781e2a44e10f000ad380046770ed412dc76d
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Tue Sep 3 19:27:19 2019 -0500
+
+    update qcd deco fit pam writing
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-04 11:03 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*hqq125:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+	modified:   plot_systematics.py
+	modified:   writeMuonCRDatacard.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit d47ad245c4557a108c3adfd6ddcb5fc2fae66264
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Thu Sep 5 15:55:34 2019 -0500
+
+    update lumi/bbeff name
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-05 19:42 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+	modified:   plot_systematics.py
+	modified:   writeMuonCRDatacard.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit d47ad245c4557a108c3adfd6ddcb5fc2fae66264
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Thu Sep 5 15:55:34 2019 -0500
+
+    update lumi/bbeff name
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-05 19:47 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   buildcard.py
+	modified:   datacard.tpl
+	modified:   makeCardsHbb.py
+	modified:   plot_systematics.py
+	modified:   writeMuonCRDatacard.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit d47ad245c4557a108c3adfd6ddcb5fc2fae66264
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Thu Sep 5 15:55:34 2019 -0500
+
+    update lumi/bbeff name
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-05 20:03 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   buildcard.py
+	modified:   makeCardsHbb.py
+	modified:   plot_systematics.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit c4a7b6fbfe1e8c112baa4b37bdd38c376cd02824
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Thu Sep 5 20:30:15 2019 -0500
+
+    rename signal processes
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-06 11:58 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   buildcard.py
+	modified:   plot_systematics.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit cff8e2e564ce023672f2f91ec930817f199243aa
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Fri Sep 6 12:24:07 2019 -0500
+
+    fix 2018 smear template
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-06 12:37 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   bernstein.py
+	modified:   buildcard.py
+	modified:   plotDeltaLL2D.py
+	modified:   plot_systematics.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 8076ec92607e68f311dbd1faa0cd9d1c79433a32
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Fri Sep 20 11:46:05 2019 -0500
+
+    good F-test code
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-20 17:46 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   bernstein.py
+	modified:   buildcard.py
+	modified:   plotDeltaLL2D.py
+	modified:   plot_systematics.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 8076ec92607e68f311dbd1faa0cd9d1c79433a32
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Fri Sep 20 11:46:05 2019 -0500
+
+    good F-test code
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-20 17:48 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   bernstein.py
+	modified:   buildcard.py
+	modified:   plotDeltaLL2D.py
+	modified:   plot_systematics.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 8076ec92607e68f311dbd1faa0cd9d1c79433a32
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Fri Sep 20 11:46:05 2019 -0500
+
+    good F-test code
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-20 17:59 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 
+On branch deco
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   base.root
+	modified:   bernstein.py
+	modified:   buildcard.py
+	modified:   plotDeltaLL2D.py
+	modified:   plot_systematics.py
+	modified:   submitJob_Ftest.py
+	modified:   validateMLFit.py
+	modified:   ../rhalphabet_builder.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+commit c67016d22ed5ca9cdf9e4de91a27e341ee1cdb23
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Tue Sep 24 13:55:32 2019 -0500
+
+    Do not use toysFreq for KS GOF
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ ==========
+===mode  = norm ==========
+===time  = 2019-09-24 14:00 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.23
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --ifile-loose ddb2016_Jun24_v3/ddb_M2_full/looserWZ_p80//hist_1DZbb_pt_scalesmear_looserWZ.root  --blind  --year 2016  --addqcdCovMat 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/muonCR/ --no-mcstat-shape  --suffix 2016 --year 2016 
+python writeMuonCRDatacard.py       -i ddb2016_Jun24_v3/ddb_M2_full/muonCR/hist_1DZbb_muonCR.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/ --no-mcstat-shape  --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_cat6.txt  muonCR_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/datacard_muonCR.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*_hbb:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ.root 

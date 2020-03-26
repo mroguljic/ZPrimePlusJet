@@ -1,0 +1,1116 @@
+Sun Aug  4 06:24:47 UTC 2019
+_condor_stdout
+condor_exec.exe
+docker_stderror
+runjob.sh
+tmp
+var
+x509up_u51467
+WARNING: In non-interactive mode release checks e.g. deprecated releases, production architectures are disabled.
+Cloning into 'ZPrimePlusJet'...
+Execute with git status/log:
+# On branch PerBinEff
+nothing to commit (use -u to show untracked files)
+commit 74b43e3a0a89bbbfcbbd50f58f3fbeb2d6aa908b
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Sat Aug 3 00:00:34 2019 -0500
+
+    update 2016 QCD samples
+Error in <TUnixSystem::FindDynamicLibrary>: /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/lib/slc6_amd64_gcc530/libHiggsAnalysisCombinedLimit.so does not exist in /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/lib:/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/biglib/slc6_amd64_gcc530:/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/lib/slc6_amd64_gcc530:/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/external/slc6_amd64_gcc530/lib:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/biglib/slc6_amd64_gcc530:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/lib/slc6_amd64_gcc530:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_1_0/external/slc6_amd64_gcc530/lib:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/llvm/3.8.0-giojec4/lib64:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/gcc/5.3.0/lib64:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/gcc/5.3.0/lib:.:/cvmfs/cms.cern.ch/slc6_amd64_gcc530/lcg/root/6.06.08-giojec3/lib:/lib64/tls/x86_64:/lib64/tls:/lib64/x86_64:/lib64:/usr/lib64/tls/x86_64:/usr/lib64/tls:/usr/lib64/x86_64:/usr/lib64
+TClass::Init:0: RuntimeWarning: no dictionary for class ROOT::TIOFeatures is available
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Selecting doubleB pass/fail plots for this region   =  topR6_N2
+N plots = 22 
+plots =   ['h_msd_v_pt_ak8_topR6_N2_pass', 'h_msd_v_pt_ak8_topR6_N2_pass_JESUp', 'h_msd_v_pt_ak8_topR6_N2_pass_JESDown', 'h_msd_v_pt_ak8_topR6_N2_pass_JERUp', 'h_msd_v_pt_ak8_topR6_N2_pass_JERDown', 'h_msd_v_pt_ak8_topR6_N2_pass_triggerUp', 'h_msd_v_pt_ak8_topR6_N2_pass_triggerDown', 'h_msd_v_pt_ak8_topR6_N2_pass_PuUp', 'h_msd_v_pt_ak8_topR6_N2_pass_PuDown', 'h_msd_v_pt_ak8_topR6_N2_pass_matched', 'h_msd_v_pt_ak8_topR6_N2_pass_unmatched', 'h_msd_v_pt_ak8_topR6_N2_fail', 'h_msd_v_pt_ak8_topR6_N2_fail_JESUp', 'h_msd_v_pt_ak8_topR6_N2_fail_JESDown', 'h_msd_v_pt_ak8_topR6_N2_fail_JERUp', 'h_msd_v_pt_ak8_topR6_N2_fail_JERDown', 'h_msd_v_pt_ak8_topR6_N2_fail_triggerUp', 'h_msd_v_pt_ak8_topR6_N2_fail_triggerDown', 'h_msd_v_pt_ak8_topR6_N2_fail_PuUp', 'h_msd_v_pt_ak8_topR6_N2_fail_PuDown', 'h_msd_v_pt_ak8_topR6_N2_fail_matched', 'h_msd_v_pt_ak8_topR6_N2_fail_unmatched']
+Signals... 
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = GluGluHToBB_M125_13TeV_powheg_pythia8 , Nfiles = 4 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/GluGluHToBB_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_hqq125_GluGluHToBB_M125_13TeV_powheg_pythia8_pu") at 0x40e4ed0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample hqq125, subsample GluGluHToBB_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 28.450 pb, nEvent = 9737753.0, weight = 0.10489, Nfiles=4
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+GluGluHToBB_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+34974
+ Using input histogram reweight MC pu: h_hqq125_GluGluHToBB_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+34974  total events
+0  iSplit
+500  maxSplit
+0  min event
+69  max event
+69  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/GluGluHToBB_M125_13TeV_powheg_pythia8_0.root") at 0x445c1c0>
+0
+
+
+mSD > 40:  63.6363636364
+tight jet ID:  63.6363636364
+electron veto:  63.6363636364
+muon veto:  63.6363636364
+tau veto: 63.6363636364
+(0.040029736375593296, 6.0, 6.0, 4.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = ttHTobb_M125_TuneCP5_13TeV_powheg_pythia8 , Nfiles = 2 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v15.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v15.03/skim/ttHTobb_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_tthqq125_ttHTobb_M125_TuneCP5_13TeV_powheg_pythia8_pu") at 0x49466a0>, 'norm': '/storage/local/data1/cTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_eta
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_eta
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_phi
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_phi
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_pt
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_pt
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_mass
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_mass
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_qgid
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_qgid
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet4_csv
+Error in <TChain::SetBranchAddress>: unknown branch -> AK4Puppijet5_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_eta
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_phi
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_pt
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_mass
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_qgid
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet4_csv
+Error in <TTree::SetBranchStatus>: unknown branch -> AK4Puppijet5_csv
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+ondor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample tthqq125, subsample ttHTobb_M125_TuneCP5_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.295 pb, nEvent = 3861106.0, weight = 0.00275, Nfiles=2
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+ttHTobb_M125_TuneCP5_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+780947
+ Using input histogram reweight MC pu: h_tthqq125_ttHTobb_M125_TuneCP5_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+780947  total events
+0  iSplit
+500  maxSplit
+0  min event
+1561  max event
+1561  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v15.03/skim/ttHTobb_M125_13TeV_powheg_pythia8_0.root") at 0x497c560>
+0
+
+
+mSD > 40:  77.800407332
+tight jet ID:  77.800407332
+electron veto:  67.8207739308
+muon veto:  57.433808554
+tau veto: 50.3054989817
+(0.04264053770614395, 10.0, 10.0, 3.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix , Nfiles = 3 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_vbfhqq125_VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix_pu") at 0x58d47e0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample vbfhqq125, subsample VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix] lumi = 35.9 fb-1, xSection = 2.203 pb, nEvent = 17767246.0, weight = 0.00445, Nfiles=3
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix
+*********************************************************************************************************************************** 
+
+53777
+ Using input histogram reweight MC pu: h_vbfhqq125_VBFHToBB_M_125_13TeV_powheg_pythia8_weightfix_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+53777  total events
+0  iSplit
+500  maxSplit
+0  min event
+107  max event
+107  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/VBFHToBB_M_125_13TeTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+V_powheg_pythia8_weightfix_0.root") at 0x5499130>
+0
+
+
+mSD > 40:  58.3333333333
+tight jet ID:  58.3333333333
+electron veto:  58.3333333333
+muon veto:  58.3333333333
+tau veto: 54.1666666667
+(0.026033434367852427, 8.0, 8.0, 4.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8 , Nfiles = 1 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_whqq125_WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_pu") at 0x5c2d590>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample whqq125, subsample WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.209 pb, nEvent = 137453.984375, weight = 0.05466, Nfiles=1
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+7508
+ Using input histogram reweight MC pu: h_whqq125_WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+7508  total events
+0  iSplit
+500  maxSplit
+0  min event
+15  max event
+15  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_0.root") at 0x5bd8060>
+0
+
+
+mSD > 40:  100.0
+tight jet ID:  100.0
+electron veto:  100.0
+muon veto:  100.0
+tau veto: 100.0
+(0.02663825253063399, 1.0, 1.0, 1.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8 , Nfiles = 1 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_whqq125_WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_pu") at 0x6135420>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample whqq125, subsample WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.330 pb, nEvent = 217215.578125, weight = 0.05453, Nfiles=1
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+9074
+ Using input histogram reweight MC pu: h_whqq125_WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+9074  total events
+0  iSplit
+500  maxSplit
+0  min event
+18  max event
+18  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8_0.root") at 0x6134fe0>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  75.0
+tight jet ID:  75.0
+electron veto:  75.0
+muon veto:  75.0
+tau veto: 75.0
+(0.033061494379545954, 1.0, 1.0, 0.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8 , Nfiles = 1 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_zhqq125_ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_pu") at 0x67394d0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample zhqq125, subsample ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.359 pb, nEvent = 200300.71875, weight = 0.06442, Nfiles=1
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+8561
+ Using input histogram reweight MC pu: h_zhqq125_ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+8561  total events
+0  iSplit
+500  maxSplit
+0  min event
+17  max event
+17  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_0.root") at 0x61366c0>
+0
+
+
+mSD > 40:  100.0
+tight jet ID:  100.0
+electron veto:  100.0
+muon veto:  100.0
+tau veto: 100.0
+(0.04672351360822334, 1.0, 1.0, 0.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8 , Nfiles = 1 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_zhqq125_ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8_pu") at 0x6741c20>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample zhqq125, subsample ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.014 pb, nEvent = 190593.0, weight = 0.00271, Nfiles=1
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+************************************************
+ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+15037
+ Using input histogram reweight MC pu: h_zhqq125_ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+15037  total events
+0  iSplit
+500  maxSplit
+0  min event
+30  max event
+30  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8_0.root") at 0x67418c0>
+0
+
+
+mSD > 40:  30.0
+tight jet ID:  30.0
+electron veto:  30.0
+muon veto:  30.0
+tau veto: 20.0
+(0.019950788056128217, 0.0, 0.0, 0.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8 , Nfiles = 1 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_zhqq125_ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_pu") at 0x7383f60>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample zhqq125, subsample ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 0.050 pb, nEvent = 379435.0, weight = 0.00472, Nfiles=1
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+36741
+ Using input histogram reweight MC pu: h_zhqq125_ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+36741  total events
+0  iSplit
+500  maxSplit
+0  min event
+73  max event
+73  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/ggZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8_0.root") at 0x7383b20>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  62.5
+tight jet ID:  62.5
+electron veto:  62.5
+muon veto:  62.5
+tau veto: 62.5
+(0.04082632481424022, 7.0, 7.0, 2.0)
+Backgrounds...
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8 , Nfiles = 5 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WJetsToQQ_HT180_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_wqq_WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8_pu") at 0x7913610>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample wqq, subsample WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 2788.000 pb, nEvent = 22368606.0, weight = 4.47454, Nfiles=5
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+370765
+ Using input histogram reweight MC pu: h_wqq_WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+370765  total events
+0  iSplit
+500  maxSplit
+0  min event
+741  max event
+741  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/WJetsToQQ_HT180_13TeV_0.root") at 0x61dc0c0>
+0
+
+
+mSD > 40:  52.6041666667
+tight jet ID:  52.6041666667
+electron veto:  52.6041666667
+muon veto:  52.6041666667
+tau veto: 51.0416666667
+(0.027240974741413026, 45.0, 50.0, 0.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8 , Nfiles = 4 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/DYJetsToQQ_HT180_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_zqq_DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8_pu") at 0x624e020>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample zqq, subsample DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 1187.000 pb, nEvent = 11885481.0, weight = 3.58532, Nfiles=4
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+************************************
+DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+194984
+ Using input histogram reweight MC pu: h_zqq_DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+194984  total events
+0  iSplit
+500  maxSplit
+0  min event
+389  max event
+389  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/DYJetsToQQ_HT180_13TeV_0.root") at 0x624d680>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  49.0196078431
+tight jet ID:  49.0196078431
+electron veto:  49.0196078431
+muon veto:  49.0196078431
+tau veto: 49.0196078431
+(0.025643129692692734, 17.0, 17.0, 1.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = TT_TuneCUETP8M2T4_13TeV_powheg_pythia8 , Nfiles = 13 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/TT_TuneCUETP8M2T4_13TeV_powheg_pythia8_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_tqq_TT_TuneCUETP8M2T4_13TeV_powheg_pythia8_pu") at 0x83e79f0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample tqq, subsample TT_TuneCUETP8M2T4_13TeV_powheg_pythia8] lumi = 35.9 fb-1, xSection = 831.760 pb, nEvent = 76746032.0, weight = 0.38908, Nfiles=13
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+TT_TuneCUETP8M2T4_13TeV_powheg_pythia8
+*********************************************************************************************************************************** 
+
+3518413
+ Using input histogram reweight MC pu: h_tqq_TT_TuneCUETP8M2T4_13TeV_powheg_pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+3518413  total events
+0  iSplit
+500  maxSplit
+0  min event
+7036  max event
+7036  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.03/skim/TT_TuneCUETP8M2T4_13TeV_powheg_pythia8_0.root") at 0x84b8e10>
+0
+
+
+mSD > 40:  74.0139211137
+tight jet ID:  74.0139211137
+electron veto:  64.7911832947
+muon veto:  56.3805104408
+tau veto: 50.9860788863
+(0.03174726787332812, 93.0, 95.0, 7.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 , Nfiles = 7 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT500to700_TuneCUETP8M1_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_qcd_QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu") at 0x8a030b0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample qcd, subsample QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 32100.000 pb, nEvent = 56339704.0, weight = 20.45431, Nfiles=7
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0,Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+ 201.0]
+
+***********************************************************************************************************************************
+QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+5232085
+ Using input histogram reweight MC pu: h_qcd_QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+5232085  total events
+0  iSplit
+500  maxSplit
+0  min event
+10464  max event
+10464  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT500to700_TuneCUETP8M1_13TeV_0.root") at 0x74257f0>
+0
+
+
+mSD > 40:  45.3125
+tight jet ID:  45.3125
+electron veto:  43.75
+muon veto:  43.75
+tau veto: 42.1875
+(0.0005351595014224731, 4.0, 5.0, 0.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 , Nfiles = 2 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT1500to2000_TuneCUETP8M1_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_qcd_QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu") at 0x9112bc0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample qcd, subsample QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 119.900 pb, nEvent = 5176585.0, weight = 0.83152, Nfiles=2
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+11716491
+ Using input histogram reweight MC pu: h_qcd_QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+11716491  total events
+0  iSplit
+500  maxSplit
+0  min event
+23432  max event
+23432  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT1500to2000_TuneCUETP8M1_13TeV_0.root") at 0x9112770>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  43.3600961745
+tight jet ID:  43.3600961745
+electron veto:  43.2785195998
+muon veto:  43.149714482
+tau veto: 42.0720449959
+(0.08603258432921597, 1905.0, 2061.0, 30.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 , Nfiles = 3 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT1000to1500_TuneCUETP8M1_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_qcd_QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu") at 0x9a86110>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample qcd, subsample QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 1207.000 pb, nEvent = 14908295.0, weight = 2.90652, Nfiles=3
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+14767067
+ Using input histogram reweight MC pu: h_qcd_QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+14767067  total events
+0  iSplit
+500  maxSplit
+0  min event
+29534  max event
+29534  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT1000to1500_TuneCUETP8M1_13TeV_0.root") at 0xa2ad7e0>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  41.8900667131
+tight jet ID:  41.8900667131
+electron veto:  41.7795604306
+muon veto:  41.6567756722
+tau veto: 40.649940654
+(0.069126794102038, 2046.0, 2189.0, 29.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 , Nfiles = 2 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT2000toInf_TuneCUETP8M1_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_qcd_QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu") at 0xd2b06d0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample qcd, subsample QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 25.240 pb, nEvent = 5959209.0, weight = 0.15205, Nfiles=2
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+5955457
+ Using input histogram reweight MC pu: h_qcd_QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+5955457  total events
+0  iSplit
+500  maxSplit
+0  min event
+11910  max event
+11910  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT2000toInf_TuneCUETP8M1_13TeV_0.root") at 0xc839b50>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+trigweights are 0.000000, 1.000000, 0.000000, setting all to 1 for massForTrig=251.683012, ptForTrig=208.629715
+
+
+mSD > 40:  43.6885865457
+tight jet ID:  43.6885865457
+electron veto:  43.5458133871
+muon veto:  43.4618291761
+tau veto: 42.412026539
+(0.0870630079270155, 838.0, 986.0, 11.0)
+NormSampleContainer:: using xsection files from :  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/xSections.dat
+normSampleContainer:: subSample = QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 , Nfiles = 5 , basePath = root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/
+Trying to get tree with file= root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT700to1000_TuneCUETP8M1_13TeV_0.root
+Found tree= otree
+puOpt =  {'data': '2016legacy', 'MC': <ROOT.TH1F object ("h_qcd_QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu") at 0xeea20a0>, 'norm': '/storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/norm_Hbb_create_2016legacy.root'}
+normSampleContainer:: [sample qcd, subsample QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8] lumi = 35.9 fb-1, xSection = 6831.000 pb, nEvent = 45234180.0, weight = 5.42141, Nfiles=5
+constructing with tree name =  otree
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+*********************************************************************************************************************************** 
+
+34537620
+ Using input histogram reweight MC pu: h_qcd_QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_pu
+Using 2016 data PU  /storage/local/data1/condor/execute/dir_10829/CMSSW_8_1_0/src/ZPrimePlusJet/analysis/ggH/pileUp_Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.root
+34537620  total events
+0  iSplit
+500  maxSplit
+0  min event
+69075  max event
+69075  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v16.031/skim/QCD_HT700to1000_TuneCUETP8M1_13TeV_0.root") at 0xeea1d10>
+0
+[ 0.0% doneTH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+TH2F::Sumw2:0: RuntimeWarning: Sum of squares of weights structure already created
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_down
+Error in <TChain::SetBranchAddress>: unknown branch -> puWeight_up
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactor
+Error in <TChain::SetBranchAddress>: unknown branch -> kfactorNLO
+Error in <TChain::SetBranchAddress>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_down
+Error in <TTree::SetBranchStatus>: unknown branch -> puWeight_up
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactor
+Error in <TTree::SetBranchStatus>: unknown branch -> kfactorNLO
+Error in <TTree::SetBranchStatus>: unknown branch -> AK8Puppijet0_ratioCA15_04
+
+
+mSD > 40:  39.8478320653
+tight jet ID:  39.8478320653
+electron veto:  39.7469978916
+muon veto:  39.6736639472
+tau veto: 38.8761573013
+(0.012554426159069446, 985.0, 1064.0, 7.0)
+Data...
+constructing with tree name =  otree
+HLT_PFHT800_v*
+HLT_PFHT900_v*
+HLT_AK8PFJet360_TrimMass30_v*
+HLT_AK8PFHT700_TrimR0p1PT0p03Mass50_v*
+HLT_PFHT650_WideJetMJJ950DEtaJJ1p5_v*
+HLT_PFHT650_WideJetMJJ900DEtaJJ1p5_v*
+HLT_AK8DiPFJet280_200_TrimMass30_BTagCSV_p20_v*
+HLT_PFJet450_v*
+Using trigger bits =  triggerBits & 16||triggerBits & 32||triggerBits & 16384||triggerBits & 262144||triggerBits & 128||triggerBits & 256||triggerBits & 8192||triggerBits & 512
+List of OR Triggers :  ['HLT_PFHT800_v*', 'HLT_PFHT900_v*', 'HLT_AK8PFJet360_TrimMass30_v*', 'HLT_AK8PFHT700_TrimR0p1PT0p03Mass50_v*', 'HLT_PFHT650_WideJetMJJ950DEtaJJ1p5_v*', 'HLT_PFHT650_WideJetMJJ900DEtaJJ1p5_v*', 'HLT_AK8DiPFJet280_200_TrimMass30_BTagCSV_p20_v*', 'HLT_PFJet450_v*']
+Using trigger cuts  :  triggerBits & 16||triggerBits & 32||triggerBits & 16384||triggerBits & 262144||triggerBits & 128||triggerBits & 256||triggerBits & 8192||triggerBits & 512
+Using triggerEff file =  $ZPRIMEPLUSJET_BASE/analysis/ggH/RUNTriggerEfficiencies_SingleMuon_Run2016_V2p1_v03.root
+Using SF {'shift_SF_ERR': 0.012, 'smear_SF': 1.084, 'smear_SF_ERR': 0.0905, 'shift_SF': 1.001, 'V_SF_ERR': 0.043, 'BB_SF': 1.0, 'V_SF': 0.993, 'BB_SF_ERR': 0.3}
+[40.0, 47.0, 54.0, 61.0, 68.0, 75.0, 82.0, 89.0, 96.0, 103.0, 110.0, 117.0, 124.0, 131.0, 138.0, 145.0, 152.0, 159.0, 166.0, 173.0, 180.0, 187.0, 194.0, 201.0]
+
+***********************************************************************************************************************************
+data_obs
+*********************************************************************************************************************************** 
+
+212084255
+212084255  total events
+0  iSplit
+500  maxSplit
+0  min event
+424168  max event
+424168  nentPerJob
+load tree 0
+get entry 0
+<ROOT.TNetXNGFile object ("root://cmseos.fnal.gov//eos/uscms/store/user/lpcbacon/dazsle/zprimebits-v15.03/skim/JetHTRun2016B_07Aug17_ver1_v1_withPF_0_0.root") at 0xf1fea00>
+0
+
+
+All done.
+
+ *** Break *** segmentation violation
+./condor_exec.exe: line 20:    78 Segmentation fault      (core dumped) python ${CMSSW_BASE}/src/ZPrimePlusJet/fitting/PbbJet/Hbb_create.py -o ${MAINDIR}/ --i-split $1 --max-split $2 --dbtagcut 0.89 --lumi 35.9 --year 2016legacy
+Inside /storage/local/data1/condor/execute/dir_10829:
+CMSSW_8_1_0
+_condor_stdout
+condor_exec.exe
+core.78
+docker_stderror
+hist_1DZbb_pt_scalesmear_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+DELETING...
+_condor_stdout
+condor_exec.exe
+docker_stderror
+hist_1DZbb_pt_scalesmear_0.root
+runjob.sh
+tmp
+var
+x509up_u51467
+Sun Aug  4 06:29:14 UTC 2019

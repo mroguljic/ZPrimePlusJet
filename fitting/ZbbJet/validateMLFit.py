@@ -22,7 +22,7 @@ for i in range(1, 24): msd_binBoundaries.append(40 + i * 7)
 pt_binBoundaries = [450, 500, 550, 600, 675, 800, 1200]
 #pt_binBoundaries = [450, 500, 550, 600, 1200]
 
-from buildRhalphabetHbb import BLIND_LO, BLIND_HI, RHO_LO, RHO_HI
+from buildRhalphabetZbb import BLIND_LO, BLIND_HI, RHO_LO, RHO_HI
 BIN_WIDTH = 7
 
 ##-------------------------------------------------------------------------------------
@@ -41,11 +41,11 @@ def main(options, args):
     sigshapes=[] #'hqq125', 'zhqq125', 'whqq125', 'tthqq125', 'vbfhqq125']
   
     qcdTFpars_2017={'n_rho':2, 'n_pT':2,
-                'pars':[ 0.0151 , -1.0359, 2.3953 , 0.7093 , 1.0947 , 1.6930 , -0.1745, 0.1980 , 1.4567 , -0.0427]}
+                    'pars':[ 0.0151 , -1.0359, 2.3953 , 0.7093 , 1.0947 , 1.6930 , -0.1745, 0.1980 , 1.4567 , -0.0427]}
     qcdTFpars_2016={'n_rho':2, 'n_pT':2,
-                'pars':[ 0.0144,-1.0856,2.4440 ,0.6407 ,1.3394 ,1.8660 ,-0.4000,0.1670 ,1.7287 ,-0.1297]} ## v2
+                    'pars':[ 0.0144,-1.0856,2.4440 ,0.6407 ,1.3394 ,1.8660 ,-0.4000,0.1670 ,1.7287 ,-0.1297]} ## v2
     qcdTFpars_2018={'n_rho':2, 'n_pT':2,
-                'pars':[0.0139,-0.9680,2.3695 ,0.6775 ,1.0759 ,1.4427 ,0.1826 ,0.2077 ,1.8612 ,-0.8737]} 
+                    'pars':[0.0139,-0.9680,2.3695 ,0.6775 ,1.0759 ,1.4427 ,0.1826 ,0.2077 ,1.8612 ,-0.8737]} 
     suffixes = options.suffix.split(":")
 
     for suffix in suffixes:
@@ -265,7 +265,10 @@ def getFitPars(fml,fitType,suffix,qcdeff=0.01):
                 print p, "not found"
                 pars.append(0)
         if fitType == 'fit_s':
-            rBestFit = rfr.floatParsFinal().find('r').getVal()
+            try:
+                rBestFit = rfr.floatParsFinal().find('r').getVal()
+            except:
+                rBestFit = rfr.floatParsFinal().find('SF_zqq').getVal()
         else:
             rBestFit = 0
 
@@ -282,7 +285,10 @@ def plotCategory(fml, fd, index, fittype,suffix="",qcdTFpars={}):
     if fittype == "fit_b" or fittype == "fit_s":
         rfr = r.RooFitResult(fml.Get(options.fit))
         if options.fit == 'fit_s':
-            rBestFit = rfr.floatParsFinal().find('r').getVal()
+            try:
+                rBestFit = rfr.floatParsFinal().find('r').getVal()
+            except:
+                rBestFit = rfr.floatParsFinal().find('SF_zqq').getVal()
         else:
             rBestFit = 0
        
@@ -841,7 +847,7 @@ def makeMLFitCanvas(bkgs, data, hsigs, leg, tag, odir='cards', rBestFit=1, sOver
     p22.RedrawAxis()
     htot.SetMinimum(0)
     c.SaveAs(odir + "/mlfit_" + tag + ".pdf")
-    #c.SaveAs(odir + "/mlfit_" + tag + ".png")
+    c.SaveAs(odir + "/mlfit_" + tag + ".png")
     #c.SaveAs(odir + "/mlfit_" + tag + ".C")
 
     #p12.SetLogy()

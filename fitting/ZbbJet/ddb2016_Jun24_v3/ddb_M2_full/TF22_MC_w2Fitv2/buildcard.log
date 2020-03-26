@@ -1,0 +1,48 @@
+# On branch PerBinEff
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   ../../analysis/submitJob_controlPlot.py
+#	modified:   ../../analysis/writeFilejson.py
+#	modified:   bernstein.py
+#	modified:   buildRhalphabetHbb.py
+#	modified:   buildcard.py
+#	modified:   covMatrixToys.py
+#	modified:   datacard_muonCR.root
+#	modified:   makeCardsHbb.py
+#	modified:   plotMuonCR.py
+#	modified:   submitJob_Ftest.py
+#	modified:   submitJob_Hbb_create.py
+#	modified:   validateInputs.py
+#	modified:   validateMLFit.py
+#	modified:   writeMuonCRDatacard.py
+#	modified:   ../hist.py
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+commit 7862b0ab7f8d3813baa1f08cb97a8e5c701f7f54
+Author: Martin <ka_hei_martin_kwok@brown.edu>
+Date:   Mon Aug 5 04:51:10 2019 -0500
+
+    more missing sample"
+=======buildcard.py==========
+===ifile = ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root ==========
+===odir  = ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/ ==========
+===mode  = norm ==========
+===time  = 2019-08-06 18:48 ==========
+===git status -uno =======
+===git log =========== 
+=== Using SF: ==========
+BB_SF       1.0
+BB_SF_ERR       0.3
+V_SF       0.993
+V_SF_ERR       0.043
+shift_SF       1.001
+shift_SF_ERR       0.012
+smear_SF       1.084
+smear_SF_ERR       0.0905
+git log -n 1 
+python buildRhalphabetHbb.py -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/ --nr 2 --np 2 --remove-unmatched --prefit  --addHptShape --suffix 2016 --pseudo  --year 2016 
+python makeCardsHbb.py       -i ddb2016_Jun24_v3/ddb_M2_full/data/hist_1DZbb_pt_scalesmear.root -o ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/ --remove-unmatched --no-mcstat-shape  --addHptShape --suffix 2016 --year 2016 
+combineCards.py  cat1_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat1.txt  cat2_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat2.txt  cat3_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat3.txt  cat4_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat4.txt  cat5_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat5.txt  cat6_2016=ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_cat6.txt  > ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_all_2016.txt 
+text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel -m 125  --PO verbose --PO 'map=.*/*hqq125:r[1,0,20]' --PO 'map=.*/zqq:r_z[1,0,20]' ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_all_2016.txt  -o ddb2016_Jun24_v3/ddb_M2_full/TF22_MC_w2Fitv2/card_rhalphabet_all_2016_floatZ.root 
