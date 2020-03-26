@@ -39,8 +39,10 @@ SF2017={
 SF2016={
             'BB_SF'     : 1.0,             'BB_SF_ERR' : 0.23,     ## M2 SF
             'V_SF'      : 0.993,            'V_SF_ERR'  : 0.043,
-            'shift_SF'  : 1.014,             'shift_SF_ERR': 0.006, # tau21ddt 0.43
-            'smear_SF'  : 1.086,             'smear_SF_ERR': 0.086, # tau21ddt 0.43
+            #'shift_SF'  : 1.014,             'shift_SF_ERR': 0.006, # tau21ddt 0.43
+            #'smear_SF'  : 1.086,             'smear_SF_ERR': 0.086, # tau21ddt 0.43
+            'shift_SF'  : 1.001,            'shift_SF_ERR' : 0.012   , # m_data/m_mc, sqrt((m_data_err/m_data)**2+(m_mc_err/m_mc)**2)                                           
+            'smear_SF'  : 1.084,            'smear_SF_ERR' : 0.0905  ,
         }
 
 def main(options, args):
@@ -71,18 +73,23 @@ def main(options, args):
               qcdTFpars = {'n_rho':2, 'n_pT':2,
                            'pars':[ 0.0151 , -1.0359, 2.3953 , 0.7093 , 1.0947 , 1.6930 , -0.1745, 0.1980 , 1.4567 , -0.0427],
                            'fitpath':'ddb_Jun24_v2/ddb_M2_full/TF22_MC_w2Fit/rhalphabase.root'}
+
     elif options.year =='2016':
           sf=SF2016
           if not options.pseudo:  
               if 'dak8' in ifile: # dak8
-                  qcdTFpars ={'n_rho':2, 'n_pT':2,
-                              'pars':[0.23009,0.78652,1.4017,0.8933,-0.62788,3.155,-0.60492,3.0336,0.32512,-0.7438],
-                              'fitpath':'dak8/dak8_M2_2016/TF22_MC_w2Fitv2/rhalphabase.root'}
+                  #qcdTFpars ={'n_rho':2, 'n_pT':2,
+                  #            'pars':[0.0053,-0.6291,1.7345,0.8998,0.9977,2.0318,0.4615,0.8688,1.0347,-0.3260],
+                  #            'fitpath':'dak8/dak8_M2_2016/TF22_MC_w2Fitv2/rhalphabase.root'}
+                  qcdTFpars ={'n_rho':2, 'n_pT':2,                                                                                                                                
+                              #'pars':[1.7914,0.0060,1.4139,-0.6543,2.0425,1.3397,2.5851,0.5730,0.7028],
+                              'pars':[ 0.01270,  1.7807, 0.0127, 1.4103,-0.6054, 2.00438, 1.3546, 2.47630, 0.691304, 0.58238],
+                              'fitpath':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_MC_w2Fitv2/rhalphabase.root'} 
               else: # ddb
                   qcdTFpars = {'n_rho':2, 'n_pT':2,
                                'pars':[ 0.012287,-1.0841,2.0706, 0.82500,1.2746 ,1.8651 ,0.24751,0.43354 ,1.2328 ,-0.00224],
                                'fitpath':'ddb/ddb_M2_2016/TF22_MC_w2Fitv2/rhalphabase.root'}
-              
+
 
     (pass_hists,fail_hists) = LoadHistograms(f, options.pseudo, options.blind, options.useQCD, scale=options.scale, r_signal=options.r, mass_range=[MASS_HIST_LO, MASS_HIST_HI], blind_range=[BLIND_LO, BLIND_HI], rho_range=[RHO_LO,RHO_HI], fLoose=fLoose,sf_dict=sf,createPassFromFail=options.createPassFromFail,skipQCD=options.skipQCD)
 
