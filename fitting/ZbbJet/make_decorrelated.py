@@ -5,12 +5,17 @@ import ROOT
 rl.util.install_roofit_helpers()
 import numpy as np
 import re
+import os
 
-def createdeco(qcdfit, fbase, year, fout):
+def createdeco(qcdfit, fbase, year, fout, ptmax=2, rhomax=2):
+    print(qcdfit.constPars().Print('v'))
+
     def getconst(name):
         p = qcdfit.constPars().find(name)
+        print(p)
         if p == None:
             raise ValueError(name)
+        print(p.getVal())
         return p.getVal()
 
     rhalphabase = ROOT.TFile.Open(fbase + 'rhalphabase.root')
@@ -32,15 +37,20 @@ def createdeco(qcdfit, fbase, year, fout):
     # validbins[:, 10:13] = False  # blind
     rhoscaled[~validbins] = 1  # we will mask these out later
 
-    tf_MCtempl = rl.BernsteinPoly("qcdfit_tf_%s" % year, (2, 2), ['pt', 'rho'], limits=(-10, 10))
-    param_names = ['p%dr%d_%s' % (ipt, irho, year) for ipt in range(3) for irho in range(3)]
+    print(ptmax,rhomax)
+    tf_MCtempl = rl.BernsteinPoly("qcdfit_tf_%s" % year, (ptmax, rhomax), ['pt', 'rho'], limits=(-10, 10))
+    param_names = ['p%dr%d_%s' % (ipt, irho, year) for ipt in range(0,ptmax+1) for irho in range(0,rhomax+1)]
+    print(param_names)
+
     print(tf_MCtempl.name + '_deco', qcdfit, param_names)
     decoVector = rl.DecorrelatedNuisanceVector.fromRooFitResult(tf_MCtempl.name + '_deco', qcdfit, param_names)
+    print(decoVector.correlated_params.shape)
+    print(tf_MCtempl.parameters.shape)
     tf_MCtempl.parameters = decoVector.correlated_params.reshape(tf_MCtempl.parameters.shape)
     qcdeff = getconst("qcdeff_%s" % year)
     tf_MCtempl_params_final = tf_MCtempl(ptscaled, rhoscaled)
 
-    tf_dataResidual = rl.BernsteinPoly("dataResidual_%s" % year, (2, 2), ['pt', 'rho'], limits=(-10, 10), coefficient_transform=None)
+    tf_dataResidual = rl.BernsteinPoly("dataResidual_%s" % year, (ptmax, rhomax), ['pt', 'rho'], limits=(-10, 10), coefficient_transform=None)
     tf_dataResidual_params = tf_dataResidual(ptscaled, rhoscaled)
     tf_params = qcdeff * tf_MCtempl_params_final * tf_dataResidual_params
 
@@ -104,13 +114,16 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-i', dest='idir', help='input directory with rhalphabase', default='')
     parser.add_option('--year',dest='year', help='year', default='2016')
+    parser.add_option('--nr', dest='NR', default=2, type='int', help='order of rho (or mass) polynomial')
+    parser.add_option('--np', dest='NP', default=1, type='int', help='order of pt polynomial')
 
     (options, args) = parser.parse_args()
 
     file_qcdfit = options.idir
     fit = ROOT.TFile.Open(file_qcdfit+'/rhalphabase.root').Get("w_pass_cat1").obj("fitresult_simPdf_s_data_obs")
+    print(fit)
     fbase = options.idir
 
     fout = ROOT.TFile.Open(options.idir+"/qcdfit_decorrelated.root", "recreate")
-    ws = createdeco(fit, fbase, options.year, fout)
+    ws = createdeco(fit, fbase, options.year, fout,options.NP,options.NR)
     os.remove('card_rhalphabet_all_2016.txt')
