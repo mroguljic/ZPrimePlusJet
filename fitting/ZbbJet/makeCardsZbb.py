@@ -14,7 +14,7 @@ import array
 sys.path.insert(0, '../.')
 from tools import *
 
-from buildRhalphabetHbb import MASS_BINS,MASS_LO,MASS_HI,BLIND_LO,BLIND_HI,RHO_LO,RHO_HI,SF2018,SF2017,SF2016,MASS_HIST_HI,MASS_HIST_LO
+from buildRhalphabetZbb import MASS_BINS,MASS_LO,MASS_HI,BLIND_LO,BLIND_HI,RHO_LO,RHO_HI,SF2018,SF2017,SF2016,MASS_HIST_HI,MASS_HIST_LO
 
 ##-------------------------------------------------------------------------------------
 def main(options,args):

@@ -150,7 +150,7 @@ def getParsfromMLfit(ws_path,fml_path,pamNames,qcdeff=0,setTFto1=False,fit_type 
     try:
         ws_tf = r.TFile(ws_path)
         ws    = ws_tf.Get("w")
-        qcdeff = ws.var('qcdeff').getVal()
+        qcdeff = ws.var('qcdeff_2016').getVal()
     except:
         ## for per-bin-eff where no qcdeff is in the ws
         qcdeff = -999
@@ -161,6 +161,7 @@ def getParsfromMLfit(ws_path,fml_path,pamNames,qcdeff=0,setTFto1=False,fit_type 
     # {pName:Value,'arr':[]}, initialize with input value
     pars    = {'qcdeff':qcdeff}
     parsArr = [qcdeff]
+    print('pars')
     ## generic way to find many parameters, not sure how to enforce orders
     fitpams = rfr.floatParsFinal().selectByName("p*r*")
     ## sort the fitparameters in accending x and y, where pam = pxry
@@ -170,7 +171,7 @@ def getParsfromMLfit(ws_path,fml_path,pamNames,qcdeff=0,setTFto1=False,fit_type 
         pars[p] = rfr.floatParsFinal().find(p).getVal()
         parsArr.append( rfr.floatParsFinal().find(p).getVal())
     pars['arr'] = parsArr
-    print pars
+    print(pars)
     return pars
 
 def getParsfromWS(ws_path,pamNames):
@@ -179,7 +180,9 @@ def getParsfromWS(ws_path,pamNames):
     pars   = {}
     parsArr = [] 
     print "="*20+" "+ws_path+" "+"="*20
+    print(pamNames)
     for pamName in pamNames:
+        print(pamName)
         p = ws.var(pamName)
         try:
             print "%s =  %.4f +/- %.4f "%(p.GetName(), p.getVal(),  p.getError())
@@ -197,6 +200,7 @@ def getParsfromWS(ws_path,pamNames):
             #print "%s is not present in ws"%pamName
             pass
     pars['arr'] = parsArr
+    print(pars)
     return pars
 
 def getPaveText(MsdOrRho):
@@ -251,7 +255,7 @@ def getPaveText(MsdOrRho):
     return pave_param,pave_param2
 
 
-def drawOpt(f2,colz,MsdOrRho,ofname):
+def drawOpt(f2,colz,MsdOrRho,ofname,orange=[]):
     c1 = r.TCanvas("c1","c1",800,800)
     c1.SetBottomMargin(0.15)
     #fun_mass_pT_str =  genBernsteinTFstring(nrho,npT,f2)
@@ -326,6 +330,9 @@ def drawOpt(f2,colz,MsdOrRho,ofname):
     f2.GetZaxis().SetTitleOffset(2)
     f2.SetMaximum(1.0)
     f2.SetMinimum(0.0)
+    if len(orange)>0:
+        f2.SetMaximum(orange[1])
+        f2.SetMinimum(orange[0])
     f2.SetTitle("")
 
     #drawCMS()
@@ -385,7 +392,7 @@ def drawBasisMaps(nrho,npT,odir,exp=False):
             ipos +=1 
    
 # Exp = exponential function
-def makeTFs(pars,nrho,npT,odir,exp=False):
+def makeTFs(pars,nrho,npT,odir,orange=[0.0,1.0],exp=False):
     if not pars['qcdeff'] ==-999:
         f2params = array.array('d', pars['arr'])
     else:
@@ -406,11 +413,11 @@ def makeTFs(pars,nrho,npT,odir,exp=False):
         fun_mass_pT =  genBernsteinTF(nrho,npT,boundaries,IsMsdPt=True,qcdeff=True,rescale=True,exp=exp)
         f2 = r.TF2("f2", fun_mass_pT, 40,201,450,1200,npar)
         f2.SetParameters(f2params)
-        drawOpt(f2,colz,'msd',odir+"f2.pdf")
+        drawOpt(f2,colz,'msd',odir+"f2.pdf",orange)
         fun_rho_pT =  genBernsteinTF(nrho,npT,boundaries,IsMsdPt=False,qcdeff=True,rescale=True,exp=exp)
         f2 = r.TF2("f2", fun_rho_pT, -6,-2.1,450,1200,npar)
         f2.SetParameters(f2params)
-        drawOpt(f2,colz,'rho',odir+"f2_rho.pdf")
+        drawOpt(f2,colz,'rho',odir+"f2_rho.pdf",orange)
         # Transfer-factor in mSD-pT plane
         fun_mass_pT =  genBernsteinTF(nrho,npT,boundaries,IsMsdPt=True,qcdeff=False,rescale=True,exp=exp)
         f2 = r.TF2("f2", fun_mass_pT, 40,201,450,1200,npar)
@@ -421,22 +428,25 @@ def makeTFs(pars,nrho,npT,odir,exp=False):
         #        arr.append("%.3f"%f2.Eval(msd,pT))
         #    print arr
 
-        drawOpt(f2,colz,'msd',odir+"f2_noqcdeff.pdf")
+        drawOpt(f2,colz,'msd',odir+"f2_noqcdeff.pdf",orange)
         # Transfer-factor in rho-pT plane
         fun_rho_pT =  genBernsteinTF(nrho,npT,boundaries,IsMsdPt=False,qcdeff=False,rescale=True,exp=exp)
         f2 = r.TF2("f2", fun_rho_pT,  -6,-2.1,450,1200,npar)
         f2.SetParameters(f2params)
-        drawOpt(f2,colz,'rho',odir+"f2_noqcdeff_rho.pdf")
+        drawOpt(f2,colz,'rho',odir+"f2_noqcdeff_rho.pdf",orange)
         # Pass-to-Fail ratio in rho-pT unit plane
         fun2 =  genBernsteinTF(nrho,npT,boundaries,IsMsdPt=False,qcdeff=True,rescale=False,exp=exp)
         f2 = r.TF2("f_unit", fun2, 0,1,0,1,npar)
         f2.SetParameters(f2params)
-        drawOpt(f2,colz,'rho',odir+"f2_unit.pdf")
+        drawOpt(f2,colz,'rho',odir+"f2_unit.pdf",orange)
         
 if __name__ == '__main__':
 
     parser = OptionParser()
     parser.add_option('-o', '--odir', dest='odir', default='./', help='directory to write histograms/job output', metavar='odir')
+    parser.add_option('--icard', dest='icard', default='', help='input card')
+    parser.add_option('--nr', dest='NR', default=2, type='int', help='order of rho (or mass) polynomial')
+    parser.add_option('--np', dest='NP', default=1, type='int', help='order of pt polynomial')
 
     (options, args) = parser.parse_args()
     r.gStyle.SetPadTopMargin(0.1)
@@ -450,22 +460,37 @@ if __name__ == '__main__':
     lParams = []
     lParams.append("qcdeff")
     pt_max  = 2
-    rho_max = 5
+    rho_max = 2
     # for r2p1 polynomial
     print ("Will look for these parameters:")  
     for i_pt in range(0,pt_max+1):
         for i_rho in range(0,rho_max+1):
             print ("p%ir%i"%(i_pt,i_rho))  
-            lParams.append("p%ir%i"%(i_pt,i_rho))  
+            lParams.append("p%ir%i_2016"%(i_pt,i_rho))  
 
    
     setTFto1 = False 
     pars = []
 
-    cards =[
-        #{'card':'ddb_Apr17/ddb_M2_full/msd47_TF21_muonCR_blind/card_rhalphabet_all_floatZ.root','n_rho':2,'n_pT':1},
-        {'card':'ddb_Apr17/ddb_M2_full/msd47_TF21_pbeff_blind/card_rhalphabet_all_floatZ.root','n_rho':2,'n_pT':1}
-    ]
+    if options.icard!='':
+        cards = []
+        icards = options.icard.split(',')
+        for card in icards:
+            cards.append({
+                'card': card,
+                'n_rho': options.NR,
+                'n_pT': options.NP,
+            })
+    else:
+        cards =[
+            #{'card':'ddb/ddb_M2_2016/TF22_MC_w2Fitv2/card_rhalphabet_all_2016_floatZ.root','n_rho':2,'n_pT':2},
+            #{'card':'ddb/ddb_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/card_rhalphabet_all_2016_floatZ.root','n_rho':2,'n_pT':2},
+            #{'card':'dak8/dak8_M2_2016/TF22_MC_w2Fitv2/card_rhalphabet_all_2016_floatZ.root','n_rho':2,'n_pT':2},
+            #{'card':'dak8/dak8_M2_2016/TF22_blind_qcdTF22uncV6_muonCRv7_SFJul8/card_rhalphabet_all_2016_floatZ.root','n_rho':2,'n_pT':2},
+            {'card':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_MC_w2Fitv2/card_rhalphabet_all_2016_floatZ_TNP.root','n_rho':2,'n_pT':2},
+            {'card':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8/card_rhalphabet_all_2016_floatZ_TNP.root','n_rho':2,'n_pT':2},
+            #{'card':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_blind_qcdTF22uncV6_muonCRv7_SFAug8_looserWZ_p80/card_rhalphabet_all_2016_floatZ_TNP.root','n_rho':2,'n_pT':2},
+        ]
     for card in cards:
         card_path = card['card']
         (nr,npT)  = (card['n_rho'],card['n_pT'])
@@ -475,5 +500,5 @@ if __name__ == '__main__':
         mlfit_path = card_path.replace(card_path.split("/")[-1],"")+"mlfit.root"
         if os.path.exists(mlfit_path):
             pars = getParsfromMLfit(card_path,mlfit_path,lParams)
-            makeTFs(pars,nr,npT,  card_path.replace(card_path.split("/")[-1],"mlfit/"))
+            makeTFs(pars,nr,npT,  card_path.replace(card_path.split("/")[-1],"mlfit/"),orange=[0.0,2.5])
 
