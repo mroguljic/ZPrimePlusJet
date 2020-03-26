@@ -197,7 +197,7 @@ def getParsfromWS(ws_path,pamNames):
                 parsArr.append(-999.)
             else:
                 pars[pamName] = -999. 
-            #print "%s is not present in ws"%pamName
+            print "%s is not present in ws"%pamName
             pass
     pars['arr'] = parsArr
     print(pars)
@@ -446,9 +446,10 @@ if __name__ == '__main__':
     parser.add_option('-o', '--odir', dest='odir', default='./', help='directory to write histograms/job output', metavar='odir')
     parser.add_option('--icard', dest='icard', default='', help='input card')
     parser.add_option('--nr', dest='NR', default=2, type='int', help='order of rho (or mass) polynomial')
-    parser.add_option('--np', dest='NP', default=1, type='int', help='order of pt polynomial')
-
+    parser.add_option('--np', dest='NP', default=2, type='int', help='order of pt polynomial')
     (options, args) = parser.parse_args()
+    print(options)
+
     r.gStyle.SetPadTopMargin(0.1)
     r.gStyle.SetPadBottomMargin(0.02)
     r.gStyle.SetPadLeftMargin(0.15)
@@ -457,8 +458,9 @@ if __name__ == '__main__':
     r.gStyle.SetOptFit(0000)
     r.gStyle.SetPaintTextFormat("1.1f")
     r.gROOT.SetBatch()
+
     lParams = []
-    lParams.append("qcdeff")
+    lParams.append("qcdeff_2016")
     pt_max  = 2
     rho_max = 2
     # for r2p1 polynomial
