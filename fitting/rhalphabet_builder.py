@@ -508,8 +508,9 @@ class RhalphabetBuilder():
             
             fr = m2.save()
         else:
-            fr = simPdf_s.fitTo(combData,r.RooFit.Extended(True),r.RooFit.SumW2Error(True),r.RooFit.Strategy(2),r.RooFit.Save(),r.RooFit.Minimizer('Minuit2','migradimproved'))
-        fr.Print('v')
+            fr = simPdf_s.fitTo(combData,r.RooFit.Extended(True),r.RooFit.Offset(True),r.RooFit.Strategy(2),r.RooFit.Save(),r.RooFit.Minimizer('Minuit2','migradimproved'))
+            #fr = simPdf_s.fitTo(combData,r.RooFit.Extended(True),r.RooFit.SumW2Error(True),r.RooFit.Strategy(2),r.RooFit.Save(),r.RooFit.Minimizer('Minuit2','migradimproved'))
+            fr.Print('v')
 
         if self._multi:
             pdf_index = w.cat('pdf_index')
@@ -728,7 +729,11 @@ class RhalphabetBuilder():
             qcd_fail_bin_content = fail_histograms['qcd'].GetBinContent(mass_bin)
             qcd_pass_bin_content = pass_histograms['qcd'].GetBinContent(mass_bin)
             if not self._qcdTFpars=={}:
-                qcd_bin_ratio = self._tf2.Eval(self._lMSD.getVal(),pt)
+                try:
+                    qcd_bin_ratio = self._tf2.Eval(self._lMSD.getVal(),pt)
+                except:
+                    qcd_bin_ratio = 1
+                    print "WARNING EVAL",self._lMSD.getVal()
                 if qcd_fail_bin_content>0:
                     print "Evaluating TF2 at : msd = %.3f, pT = %.3f"%(self._lMSD.getVal(),pt)
                     print "qcd fail =%.3f , pass = %.3f, qcd P/F = %.3f, qcdTF eff = %.3f, qcd_incl. eff = %.3f "%(
@@ -1197,6 +1202,15 @@ class RhalphabetBuilder():
         # get the pT bin
         iPt = category[-1:]
 
+        def removeMass(iHists,iMass):
+            for lH in iHists:
+                for i0 in range(1, lH.GetNbinsX()+1):
+                    lmass = lH.GetXaxis().GetBinCenter(i0)
+                    if lmass < iMass-30 or lmass > iMass+30:
+                        print('Removing ',lmass,iMass,iMass-30,iMass+30)
+                        lH.SetBinContent(i0, 0);
+                lH.SetDirectory(0);
+
         for import_object in import_objects:
             import_object.Print()
             process = import_object.GetName().split('_')[0]
@@ -1235,6 +1249,7 @@ class RhalphabetBuilder():
                             tmph.Scale(GetSF(process, cat, self._inputfile,sf_dict=self._sf_dict))
                             tmph_up.Scale(GetSF(process, cat, self._inputfile,sf_dict=self._sf_dict))
                             tmph_down.Scale(GetSF(process, cat, self._inputfile,sf_dict=self._sf_dict))
+
                         tmph_mass = tools.proj('cat', str(iPt), tmph, self._mass_nbins, self._mass_lo, self._mass_hi)
                         tmph_mass_up = tools.proj('cat', str(iPt), tmph_up, self._mass_nbins, self._mass_lo,
                                                   self._mass_hi)
@@ -1272,6 +1287,7 @@ class RhalphabetBuilder():
                         tmph_mass_norm = tools.proj('cat', str(iPt), tmph_norm, self._mass_nbins, self._mass_lo,self._mass_hi)
                         tmph_mass_up   = tools.proj('cat', str(iPt), tmph_up, self._mass_nbins, self._mass_lo,self._mass_hi)
                         tmph_mass_down = tools.proj('cat', str(iPt), tmph_down, self._mass_nbins, self._mass_lo,self._mass_hi)
+
                         print "SF = ",SF
                         print "tmph_mass_norm integral = ",tmph_mass_norm.Integral()
                         print "tmph_mass_up integral   = ",tmph_mass_up.Integral()
@@ -1310,7 +1326,6 @@ class RhalphabetBuilder():
                     mass = float(process.split('_')[-1])  # Pbb_75 -> 75
 
                 # get the matched and unmatched hist
-
                 if self._inputfile_loose is not None and ('wqq' in process or 'zqq' in process) and 'pass' in cat:
                     tmph_matched = self._inputfile_loose.Get(process + '_' + cat + '_matched').Clone()
                     tmph_unmatched = self._inputfile_loose.Get(process + '_' + cat + '_unmatched').Clone()
@@ -1329,6 +1344,8 @@ class RhalphabetBuilder():
                 tmph_mass_matched = tools.proj('cat', str(iPt), tmph_matched, self._mass_nbins, self._mass_lo,self._mass_hi)
                 tmph_mass_unmatched = tools.proj('cat', str(iPt), tmph_unmatched, self._mass_nbins, self._mass_lo,self._mass_hi)
                 print "tmph_mass_matched integral = ",tmph_mass_matched.Integral()
+
+                #removeMass([tmph_mass_matched],mass)
             
                 # smear/shift the matched
                 hist_container = hist([mass], [tmph_mass_matched])
@@ -1497,8 +1514,8 @@ def LoadHistograms(f, pseudo, blind, useQCD, scale, r_signal, mass_range, blind_
     fail_hists = {}
     f.ls()
 
-    qcdkfactor =0.7
-    #qcdkfactor  =1.0
+    #qcdkfactor = 0.7
+    qcdkfactor  =1.0
     # backgrounds
     pass_hists_bkg = {}
     fail_hists_bkg = {}
@@ -1680,10 +1697,10 @@ def GetSF(process, cat, f, fLoose=None, removeUnmatched=False, iPt=-1,sf_dict={}
         SF *= passInt / passIntLoose
         if 'zqq' in process:
             print passInt / passIntLoose
-    if 'qcd' in process:
-        qcdkfactor =0.78
-        print "Applying qcdkfactor = %s"%qcdkfactor
-        SF *= qcdkfactor
+    #if 'qcd' in process:
+    #    qcdkfactor =0.78
+    #    print "Applying qcdkfactor = %s"%qcdkfactor
+    #    SF *= qcdkfactor
 
     return SF
 
