@@ -188,7 +188,7 @@ class RhalphabetBuilder():
             all_int_rescale_Up += myint * (1 + (ipt-iptlo) * (total_unc-1.) / (ipthi-iptlo))
             all_int_rescale_Down += myint / (1 + (ipt-iptlo) * (total_unc-1.) / (ipthi-iptlo))
             all_int += myint
-            print cat, (1 + (ipt-iptlo) * (total_unc-1.) / (ipthi-iptlo))
+            #print cat, (1 + (ipt-iptlo) * (total_unc-1.) / (ipthi-iptlo))
 
         for cat in self._categories:           
             iptbin = int(cat[-1])-1 # returns 0 for cat1, 1 for cat2, etc.
@@ -230,12 +230,12 @@ class RhalphabetBuilder():
             nom  += datahist['%s_%s' % (proc, cat)].sumEntries()
             up += hptpdfUp_s[cat].sumEntries()
             down += hptpdfDown_s[cat].sumEntries()
-            print cat, datahist['%s_%s' % (proc, cat)].sumEntries()
-            print cat, hptpdfUp_s[cat].sumEntries()
-            print cat, hptpdfDown_s[cat].sumEntries()
-        print "total", nom
-        print "total", up
-        print "total", down
+            #print cat, datahist['%s_%s' % (proc, cat)].sumEntries()
+            #print cat, hptpdfUp_s[cat].sumEntries()
+            #print cat, hptpdfDown_s[cat].sumEntries()
+        #print "total", nom
+        #print "total", up
+        #print "total", down
         
         icat = 0
         for cat in self._categories:
@@ -249,11 +249,11 @@ class RhalphabetBuilder():
         qcdralpha = self._qcdTFpars['fitpath']
         qcdfit    = r.TFile.Open(qcdralpha).Get("w_pass_cat1").obj("fitresult_simPdf_s_data_obs")
 
-        print(qcdfit)
+        #print(qcdfit)
         year = self._suffix.replace("_",'') 
-        print('opening fout ',self._qcd_deco_output_path)
+        #print('opening fout ',self._qcd_deco_output_path)
         fout = r.TFile.Open(self._qcd_deco_output_path, "recreate")
-        print('opening rhalp ',self._rhalphabet_output_path)
+        # print('opening rhalp ',self._rhalphabet_output_path)
         fralphabase = r.TFile.Open(self._rhalphabet_output_path, 'READ')
         ws = r.RooWorkspace("qcdfit_deco_%s" % year)
 
@@ -298,7 +298,7 @@ class RhalphabetBuilder():
                 raise Exception("can't find %s in rhalphabase! maybe wrong TF order?" % param.name)
             param.value = oldvar.getVal()
             param.error = oldvar.getError()
-            print("setting %r to %f" % (param, param.value))
+            # print("setting %r to %f" % (param, param.value))
 
         fout.cd()
         for ipt in range(npt):
@@ -457,7 +457,7 @@ class RhalphabetBuilder():
         getattr(w, 'import')(simPdf_s, r.RooFit.RecycleConflictNodes())
         getattr(w, 'import')(combData, r.RooFit.RecycleConflictNodes())
 
-        w.Print('v')
+        #w.Print('v')
         simPdf_b = w.pdf('simPdf_b')
         simPdf_s = w.pdf('simPdf_s')
         combData = w.data('data_obs')
@@ -479,7 +479,7 @@ class RhalphabetBuilder():
 
         if self._multi:
             pdf_index = w.cat('pdf_index')
-            pdf_index.Print('V')
+            #pdf_index.Print('V')
             pdf_index.setIndex(0)
             pdf_index.setConstant(True)
             for i in range(0,self._poly_degree_rho_exp+1):
@@ -540,17 +540,17 @@ class RhalphabetBuilder():
             hesse_status = m2.minimize('Minuit2', 'hesse')
             
             fr = m2.save()
-            fr.Print('v')
+            #fr.Print('v')
 
             pdf_index.setConstant(False)
             for i in range(0,self._poly_degree_rho_exp+1):
                 for j in range(0,self._poly_degree_pt_exp+1):
                     w.var('expp'+str(j)+'r'+str(i)+self._suffix).setConstant(False)
-                    w.var('expp'+str(j)+'r'+str(i)+self._suffix).Print('v')
+                    #w.var('expp'+str(j)+'r'+str(i)+self._suffix).Print('v')
             for i in range(0,self._poly_degree_rho+1):
                 for j in range(0,self._poly_degree_pt+1):
                     w.var('p'+str(j)+'r'+str(i)+self._suffix).setConstant(False)
-                    w.var('p'+str(j)+'r'+str(i)+self._suffix).Print('v')
+                    #w.var('p'+str(j)+'r'+str(i)+self._suffix).Print('v')
 
         icat = 0
         for cat in self._categories:
@@ -631,15 +631,15 @@ class RhalphabetBuilder():
 
             # #Write to file
             print "pass_rhps = "
-            print pass_rhps
+            #print pass_rhps
             self.MakeWorkspace(self._output_path, [data_pass_rdh] + pass_rhps.values(), "pass_cat" + str(pt_bin), True,
                                True, this_pt)
             self.MakeWorkspace(self._output_path, [data_fail_rdh] + fail_rhps.values(), "fail_cat" + str(pt_bin), True,
                                True, this_pt)
 
-        for pt_bin in range(1, self._nptbins + 1):
-            for mass_bin in range(1, self._mass_nbins + 1):
-                print "qcd_fail_cat%i_Bin%i flatParam" % (pt_bin, mass_bin)
+        #for pt_bin in range(1, self._nptbins + 1):
+        #    for mass_bin in range(1, self._mass_nbins + 1):
+        #        print "qcd_fail_cat%i_Bin%i flatParam" % (pt_bin, mass_bin)
 
     # iHs = dict of fail histograms
     def MakeRhalphabet(self, samples, fail_histograms,pass_histograms,  pt, category):
