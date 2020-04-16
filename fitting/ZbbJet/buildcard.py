@@ -30,7 +30,7 @@ def getPolyOrder(s):
     return o1,o2
     
 
-def main(options,mode,dryRun):
+def main(options,dryRun):
     ifile = options.ifile
     odir  = options.odir
     cats  = options.cats
@@ -78,7 +78,6 @@ def main(options,mode,dryRun):
         outf.write("=======buildcard.py==========\n")
         outf.write("===ifile = %s ==========\n"%ifile)
         outf.write("===odir  = %s ==========\n"%odir)
-        outf.write("===mode  = %s ==========\n"%mode)
         outf.write("===time  = %s ==========\n"%now.strftime("%Y-%m-%d %H:%M"))
         outf.write("=== Using SF: ==========\n")
         for key,item in sorted(SF.iteritems()): outf.write("%s       %s\n"%(key,item))
@@ -86,7 +85,6 @@ def main(options,mode,dryRun):
     print "=======buildcard.py=========="
     print "====  ifile   = %s =========="%ifile
     print "====  odir    = %s =========="%odir
-    print "====  mode    = %s =========="%mode
     print "====  time    = %s =========="%now.strftime("%Y-%m-%d %H:%M")
     print "====  logfile = %s =========="%logf
     print " Using SF:"
@@ -144,27 +142,22 @@ def main(options,mode,dryRun):
     t2ws_sf += " %s -o %s"%(combcard_all, combcard_all.replace(".txt","_floatZ_TNP.root"))
 
     #rhalph_base_pseudo = rhalph_base + " --pseudo"
-    if makedeco:
-        rhalph_base += '\n python make_decorrelated.py -i %s --year %s --np %i --nr %i'%(odir,year,np,nr)
+    #if makedeco:
+    #    rhalph_base += '\npython make_decorrelated.py -i %s --year %s --np %i --nr %i'%(odir,year,np,nr)
 
     cmds = [
         #rhalph_base_pseudo,
         rhalph_base,
         makecard_base,
         combcards_base,
-        t2ws_rz,
-        t2ws_sf
     ]
+    if not pseudo:
+        cmds.append(t2ws_rz)
+        cmds.append(t2ws_sf)
     if muonCR:
         cmds.insert(2,makemuonCR_base)
         cmds.insert(2,makemuonCR_cp)
-    ## skip all building commands for comb
-    if mode=='comb':
-        cmds = [
-            combcards_base,
-            t2ws_rz,
-            t2ws_sf
-        ]
+
     for cmd in cmds:
         exec_me(cmd,outf, dryRun)
     os.system('mkdir -p %s/mlfit/'%odir)
@@ -183,6 +176,7 @@ def main(options,mode,dryRun):
                 print cmd
         print "Using SF:"
         for key,item in sorted(SF.iteritems()): print("%s       %s"%(key,item))
+    if not pseudo:
         print "Now execute: "
         print combine1
         print combine2
@@ -213,7 +207,7 @@ def loadcats(idir,odir,muonCR,suffix):
 
 def data_main(options):
     dryRun = options.dryRun
-    mode   = options.mode
+
     
     # fix options with odir
     # change TF order here?
@@ -271,7 +265,7 @@ def data_main(options):
         options.np     = npT
     
         options.cats = buildcats(options.ifile,options.odir,options.muonCR,options.suffix)
-        main(options, mode,dryRun)
+        main(options, dryRun)
         print "==============================="
 
  
@@ -280,7 +274,6 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-i', dest='idir', default='', help='idir with data')
     parser.add_option('-o','--odir', dest='odir', default='',help='directory to write cards', metavar='odir')
-    parser.add_option('-m','--mode', dest='mode', default='norm',help='setting of pams', metavar='mode')
     parser.add_option('--dryRun', dest='dryRun', action='store_true',default=False,help='dryRun', metavar='dryRun')
     parser.add_option('--suffix', dest='suffix', default='', help='suffix - year?')
     parser.add_option('--year', dest='year', default='', help='year')
