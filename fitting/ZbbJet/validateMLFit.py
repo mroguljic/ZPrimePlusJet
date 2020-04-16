@@ -265,7 +265,8 @@ def getFitPars(fml,fitType,suffix,qcdeff=0.01):
                 print p, "not found"
                 pars.append(0)
         if fitType == 'fit_s':
-            rBestFit = rfr.floatParsFinal().find('r').getVal()
+            #rBestFit = rfr.floatParsFinal().find('r').getVal()
+            rBestFit = rfr.floatParsFinal().find('SF_zqq').getVal()   
         else:
             rBestFit = 0
 
@@ -282,7 +283,8 @@ def plotCategory(fml, fd, index, fittype,suffix="",qcdTFpars={}):
     if fittype == "fit_b" or fittype == "fit_s":
         rfr = r.RooFitResult(fml.Get(options.fit))
         if options.fit == 'fit_s':
-            rBestFit = rfr.floatParsFinal().find('r').getVal()
+            #rBestFit = rfr.floatParsFinal().find('r').getVal()
+            rBestFit = rfr.floatParsFinal().find('SF_zqq').getVal()
         else:
             rBestFit = 0
        
