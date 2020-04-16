@@ -83,8 +83,10 @@ def main(options, args):
                   #            'fitpath':'dak8/dak8_M2_2016/TF22_MC_w2Fitv2/rhalphabase.root'}
                   qcdTFpars ={'n_rho':2, 'n_pT':2,                                                                                                                                
                               #'pars':[1.7914,0.0060,1.4139,-0.6543,2.0425,1.3397,2.5851,0.5730,0.7028],
-                              'pars':[ 0.01270,  1.7807, 0.0127, 1.4103,-0.6054, 2.00438, 1.3546, 2.47630, 0.691304, 0.58238],
-                              'fitpath':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_MC_w2Fitv2/rhalphabase.root'} 
+                              ##'pars':[ 0.01270,  1.7807, 0.0127, 1.4103,-0.6054, 2.00438, 1.3546, 2.47630, 0.691304, 0.58238],
+                              ##'fitpath':'dak8/dak8_M2_2016_Feb26_tightMatch_ttvetoT_withDDT/TF22_MC_w2Fitv2/rhalphabase.root'} 
+                              'pars':[0.020122168239502677, 0.38112978719457047, 1.8493237587961104, 0.7285856838418248, -0.4517927327288014, 3.779697562244934, -1.393937860245007, 3.0742854675930147, 0.15761645878317054, -1.6113936238170368],
+                              'fitpath':'dak8/dak8_M2_2016_Apr10_tightMatch_ttvetoT_withDDT/TF22_MC_w2Fitv2/rhalphabase.root'}
               else: # ddb
                   qcdTFpars = {'n_rho':2, 'n_pT':2,
                                'pars':[ 0.012287,-1.0841,2.0706, 0.82500,1.2746 ,1.8651 ,0.24751,0.43354 ,1.2328 ,-0.00224],
