@@ -22,7 +22,7 @@ for i in range(1, 24): msd_binBoundaries.append(40 + i * 7)
 pt_binBoundaries = [450, 500, 550, 600, 675, 800, 1200]
 #pt_binBoundaries = [450, 500, 550, 600, 1200]
 
-from buildRhalphabetHbb import BLIND_LO, BLIND_HI, RHO_LO, RHO_HI
+from buildRhalphabetZbb import BLIND_LO, BLIND_HI, RHO_LO, RHO_HI
 BIN_WIDTH = 7
 
 ##-------------------------------------------------------------------------------------
