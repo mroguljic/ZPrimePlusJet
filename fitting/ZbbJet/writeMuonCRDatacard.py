@@ -274,11 +274,7 @@ def writeDataCard(boxes,txtfileName,sigs,bkgs,histoDict,options):
     # now top rate params
     tqqeff = histoDict['tqq_pass'].Integral()/(histoDict['tqq_pass'].Integral()+histoDict['tqq_fail'].Integral())
 
-    
-    #datacard+='tqqpassmuonCR%snorm rateParam pass_muonCR tqq (@0*@1) CMS_gghbb_tqqnormSF_%s,CMS_gghbb_tqqeffSF_%s\n'%(options.year,options.year,options.year) + \
-    #    'tqqfailmuonCR%snorm rateParam fail_muonCR tqq (@0*(1.0-@1*%.4f)/(1.0-%.4f)) CMS_gghbb_tqqnormSF_%s,CMS_gghbb_tqqeffSF_%s\n'%(options.year,tqqeff,tqqeff,options.year,options.year) + \
-    #    'CMS_gghbb_tqqnormSF_%s extArg 1.0 [0.0,10.0]\n'%options.year + \
-    #    'CMS_gghbb_tqqeffSF_%s extArg 1.0 [0.0,10.0]\n'%options.year
+    datacard+='tqqpassmuonCR%snorm rateParam pass_muonCR tqq (@0*@1) CMS_gghbb_tqqnormSF_%s,CMS_gghbb_tqqeffSF_%s\n'%(options.year,options.year,options.year) + 'tqqfailmuonCR%snorm rateParam fail_muonCR tqq (@0*(1.0-@1*%.4f)/(1.0-%.4f)) CMS_gghbb_tqqnormSF_%s,CMS_gghbb_tqqeffSF_%s\n'%(options.year,tqqeff,tqqeff,options.year,options.year) + 'CMS_gghbb_tqqnormSF_%s extArg 1.0 [0.0,10.0]\n'%options.year + 'CMS_gghbb_tqqeffSF_%s extArg 1.0 [0.0,10.0]\n'%options.year
     
     txtfile = open(options.odir+'/'+txtfileName,'w')
     txtfile.write(datacard)
