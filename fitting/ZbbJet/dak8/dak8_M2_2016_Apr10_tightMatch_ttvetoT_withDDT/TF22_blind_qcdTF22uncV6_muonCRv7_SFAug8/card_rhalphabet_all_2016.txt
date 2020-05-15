@@ -245,6 +245,8 @@ qcd_fail_cat5_Bin3_2016  flatParam
 qcd_fail_cat1_Bin12_2016  flatParam
 qcd_fail_cat4_Bin21_2016  flatParam
 tqqfailcat4_2016norm  rateParam cat4_2016_fail_cat4 tqq (@0*(1.0-@1*0.1357)/(1.0-0.1357)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  
+tqqpassmuonCR2016norm  rateParam muonCR_2016_pass_muonCR tqq (@0*@1) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  
+tqqfailmuonCR2016norm  rateParam muonCR_2016_fail_muonCR tqq (@0*(1.0-@1*0.1186)/(1.0-0.1186)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  
 tqqfailcat6_2016norm  rateParam cat6_2016_fail_cat6 tqq (@0*(1.0-@1*0.1357)/(1.0-0.1357)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  
 tqqfailcat1_2016norm  rateParam cat1_2016_fail_cat1 tqq (@0*(1.0-@1*0.1357)/(1.0-0.1357)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  
 tqqpasscat1_2016norm  rateParam cat1_2016_pass_cat1 tqq (@0*@1) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016  

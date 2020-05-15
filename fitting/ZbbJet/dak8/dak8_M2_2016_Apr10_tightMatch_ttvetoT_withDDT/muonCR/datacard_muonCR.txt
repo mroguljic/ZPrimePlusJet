@@ -37,3 +37,7 @@ tqqpassmuonCR2016mcstat	lnN	-	-	1.027	-	-	-	-	-
 tqqfailmuonCR2016mcstat	lnN	-	-	-	-	-	-	1.010	-
 stqqpassmuonCR2016mcstat	lnN	-	-	-	1.075	-	-	-	-
 stqqfailmuonCR2016mcstat	lnN	-	-	-	-	-	-	-	1.022
+tqqpassmuonCR2016norm rateParam pass_muonCR tqq (@0*@1) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016
+tqqfailmuonCR2016norm rateParam fail_muonCR tqq (@0*(1.0-@1*0.1186)/(1.0-0.1186)) CMS_gghbb_tqqnormSF_2016,CMS_gghbb_tqqeffSF_2016
+CMS_gghbb_tqqnormSF_2016 extArg 1.0 [0.0,10.0]
+CMS_gghbb_tqqeffSF_2016 extArg 1.0 [0.0,10.0]
