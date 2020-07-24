@@ -91,9 +91,9 @@ def main(options,dryRun):
     for key,item in sorted(SF.iteritems()): print("%s       %s"%(key,item))
     exec_me('git log -n 1 ',outf,dryRun)
 
-    rhalph_base    = "python buildRhalphabetZbb.py -i %s -o %s --nr %i --np %i --remove-unmatched --prefit "%(ifile,odir,nr,np)
-    makecard_base  = "python makeCardsZbb.py       -i %s -o %s --remove-unmatched --no-mcstat-shape "%(ifile,odir)
-    makemuonCR_base = "python writeMuonCRDatacard.py       -i %s -o %s --no-mcstat-shape "%(muonCR,odir)
+    rhalph_base    = "python buildRhalphabetZbb.py -i %s -o %s/ --nr %i --np %i --remove-unmatched --prefit "%(ifile,odir,nr,np)
+    makecard_base  = "python makeCardsZbb.py       -i %s -o %s/ --remove-unmatched --no-mcstat-shape "%(ifile,odir)
+    makemuonCR_base = "python writeMuonCRDatacard.py       -i %s -o %s/ --no-mcstat-shape "%(muonCR,odir)
     combcards_base = "combineCards.py "
 
     t2ws_rz      ="text2workspace.py  -m 125  --PO verbose"
@@ -106,11 +106,11 @@ def main(options,dryRun):
         rhalph_base += " --suffix %s"%suffix
         makecard_base += " --suffix %s"%suffix
         makemuonCR_base += " --suffix %s"%suffix
-        combcard_all = "%scard_rhalphabet_all_%s.txt "%(odir,suffix)
+        combcard_all = "%s/card_rhalphabet_all_%s.txt "%(odir,suffix)
         combcards_base += " > %s"%(combcard_all)
         
     else:
-        combcard_all = "%scard_rhalphabet_all.txt "%(odir)
+        combcard_all = "%s/card_rhalphabet_all.txt "%(odir)
         combcards_base += " > %s"%(combcard_all)
     if iloose:
         rhalph_base   += " --ifile-loose %s "%iloose
@@ -132,7 +132,7 @@ def main(options,dryRun):
         makecard_base +=" --year %s "%year
         if muonCR:
             makemuonCR_base +=" --year %s "%year
-            makemuonCR_cp   = makemuonCR_base.replace(odir,options.idir+"muonCR/")
+            makemuonCR_cp   = makemuonCR_base.replace(odir,options.idir+"/muonCR/")
 
     makecard_base_noqcd = makecard_base
     if qcdTF: 
@@ -237,8 +237,8 @@ def data_main(options):
         options.odir = idir+odir
         if not os.path.exists(options.odir): 
             os.mkdir(options.odir)
-        options.ifile  = options.idir+"data/hist_1DZbb_pt_scalesmear.root"
-        if 'muonCR' in odir: options.muonCR = options.idir+"muonCR/hist_1DZbb_muonCR.root"
+        options.ifile  = options.idir+"/data/hist_1DZbb_pt_scalesmear.root"
+        if 'muonCR' in odir: options.muonCR = options.idir+"/muonCR/hist_1DZbb_muonCR.root"
         else: options.muonCR = '' 
         if 'blind' in odir: options.blind = True
         else:  options.blind = False
