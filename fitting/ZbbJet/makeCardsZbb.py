@@ -475,7 +475,7 @@ def main(options,args):
         for im in masshistbins:
             dctmp.write("qcd_fail_%s_Bin%i%s flatParam \n" % (tag,im,options.suffix))
             qcdGroupString += ' qcd_fail_%s_Bin%i%s'%(tag,im,options.suffix)
-            flatPars = ['p0r0','p0r1', 'p0r2', 'p1r0', 'p1r1', 'p1r2']
+            flatPars = ['p0r0','p0r1', 'p0r2', 'p1r0', 'p1r1', 'p1r2','p2r0','p2r1','p2r2']
         for flatPar in flatPars:
             dctmp.write('%s%s flatParam \n'%(flatPar,options.suffix))
         if options.addqcdCovMat:
