@@ -56,19 +56,17 @@ def createCanvasPads():
     return c, pad1, pad2
 
 
-def getChiSquare(h1,h2):
-    chiSquare = h1.Chi2Test(h2,"WWCHI2/NDF")
-    return chiSquare
-
 templatesFile = r.TFile.Open("dak8/dak8_2016_0.2_0.9//data/hist_1DZbb_pt_scalesmear.root")
 rhalphabaseFile = r.TFile.Open("dak8/dak8_2016_0.2_0.9//TF43_MC_w2Fitv2/rhalphabase.root")
 datacardPath = "dak8/dak8_2016_0.2_0.9//TF43_MC_w2Fitv2/card_rhalphabet_all_2016.root"
+n_rho = 4
+n_pT = 3
+
 pT_bin_centers = [475, 525, 575, 637, 738, 1000]
 pt_binBoundaries = [450, 500, 550, 600, 675, 800, 1200]
-TFparams = getTFParams(datacardPath,n_pT=3,n_rho=4)
 
 for i in range(1,7):
-    #------QCD fail and pass------#
+    #QCD fail and pass from templates
     hQCDFail = templatesFile.Get("qcd_fail").ProjectionX("fail_{0}".format(i),i,i)
     hQCDPass = templatesFile.Get("qcd_pass").ProjectionX("pass_{0}".format(i),i,i)
     hQCDFail.SetDirectory(0)
@@ -79,21 +77,22 @@ for i in range(1,7):
     hQCDFail.SetLineWidth(2)
     hQCDPass.SetBinContent(1,0)
     hQCDFail.SetBinContent(1,0)    
-    #-----------------------------#
 
-    #-----Fail x Rpf and Rpf------#
+    #Fail x Rpf, Rpf, Fail from rhalphabase
     hQCDfromRpf = hQCDFail.Clone("hQCDfromRpf_{0}".format(i))#we want the binning to match
-    hQCDfromRpf.Reset()
-    hFailFromRhalphabase = hQCDFail.Clone("hFailFromRhalphabase_{0}".format(i))
-    hFailFromRhalphabase.Reset()
+    hFailFromRhalphabase = hQCDFail.Clone("hFailFromRhalphabase_{0}".format(i))#Fail histogram from rhalphabase
     hRpfValue   = hQCDFail.Clone("hRpf_{0}".format(i))#control plot, divides QCD from Rpf with QCD to extract Rpf
+    hQCDfromRpf.Reset()
+    hFailFromRhalphabase.Reset()
     hRpfValue.Reset()
     hQCDfromRpf.SetDirectory(0)
-    hQCDfromRpf.SetLineColor(r.kRed)
-    hQCDfromRpf.SetLineWidth(2)
     hFailFromRhalphabase.SetDirectory(0)
+    hQCDfromRpf.SetLineColor(r.kRed)
     hFailFromRhalphabase.SetLineColor(r.kViolet)
-    hFailFromRhalphabase.SetLineWidth(5)
+    hQCDfromRpf.SetLineWidth(2)
+    hFailFromRhalphabase.SetLineWidth(3)
+
+    #Reading from rhalphabase
     wSpaceName = 'w_pass_cat{0}'.format(i)
     wspace = rhalphabaseFile.Get(wSpaceName)
     nBins = hQCDFail.GetNbinsX()
@@ -103,7 +102,7 @@ for i in range(1,7):
             continue
         try:
             nPass = r.RooFormulaVar(wspace.obj("qcd_pass_cat{0}_2016_Bin{1}".format(i,nBin))).evaluate()#fail x Rpf
-            nFail = r.RooFormulaVar(wspace.obj("qcd_fail_cat{0}_2016_Bin{1}_func".format(i,nBin))).evaluate()#fail x Rpf
+            nFail = r.RooFormulaVar(wspace.obj("qcd_fail_cat{0}_2016_Bin{1}_func".format(i,nBin))).evaluate()#fail
         except:
             nPass = 0.
             nFail = 0
@@ -111,36 +110,34 @@ for i in range(1,7):
         hFailFromRhalphabase.SetBinContent(nBin,nFail)
 
 
-    #---------Normalize----------#
+    #normalize everything
     hQCDPass.Scale(1/hQCDPass.Integral())
     hQCDFail.Scale(1/hQCDFail.Integral())
     hQCDfromRpf.Scale(1/hQCDfromRpf.Integral())
     hFailFromRhalphabase.Scale(1/hFailFromRhalphabase.Integral())
-    #----------------------------#
+
+
+    #calculate Rpf value by dividing hPass with hFail
     for nBin in range(1,nBins+1):
         if(nBin==1):#comment if you don't want to skip the first bin
-            hQCDfromRpf.SetBinContent(1,0)
+            hRpfValue.SetBinContent(1,0)
             continue
         if(hQCDFail.GetBinContent(nBin)==0):
             hRpfValue.SetBinContent(nBin,0.)
         else:
             hRpfValue.SetBinContent(nBin,hQCDfromRpf.GetBinContent(nBin)/hQCDFail.GetBinContent(nBin))
 
-
-    n = 100
-    mass_HI = 200.
-    mass_LO = 40.
+    #calculate Rpf from the fitted function
+    TFparams = getTFParams(datacardPath,n_pT=n_pT,n_rho=n_rho)
     TFx, TFy = array( 'd' ), array( 'd' )
-    hTF = hQCDPass.Clone("hTF")
-    bernstein1D = getBernstein1D(pT_bin_centers[i-1],n_pT=3,n_rho=4)#returns 2dBernstein function evaluated at the center of the pT bin (aka 1d function)
-    for n in range(hTF.GetNbinsX()):
-        massPoint = hTF.GetBinCenter(n+1)
+    bernstein1D = getBernstein1D(pT_bin_centers[i-1],n_pT=n_pT,n_rho=n_rho)#returns 2dBernstein function evaluated at the center of the pT bin (1d function)
+    for n in range(1,hQCDPass.GetNbinsX()):#skipping first bin
+        massPoint = hQCDPass.GetBinCenter(n+1)#because bin counting starts from 1
         TFvalue = bernstein1D([massPoint],TFparams)#evaluates the 1dBernstein function at given mass
         TFx.append(massPoint)
         TFy.append(TFvalue)#value of the Rpf transfer function
-        hTF.SetBinContent(n+1,TFvalue)
 
-    gr = r.TGraph( n, TFx, TFy )
+    gr = r.TGraph( hQCDPass.GetNbinsX()-1, TFx, TFy )
     gr.SetLineColor(r.kRed)
     gr.SetLineWidth(2)
 
