@@ -57,9 +57,3 @@ python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/
 python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/fit_b --fit fit_b
 python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/fit_s --fit fit_s
 ```
-
-
-To build cards,workspace from input hists print all commands, (replace IDIR with the input dir, e.g. ddb/ddb_M2_2016/):
-```
-python buildcard.py -i $IDIR --odirs $ODIR --dryRun
-```
