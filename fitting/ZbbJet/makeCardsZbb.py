@@ -475,8 +475,9 @@ def main(options,args):
         for im in masshistbins:
             dctmp.write("qcd_fail_%s_Bin%i%s flatParam \n" % (tag,im,options.suffix))
             qcdGroupString += ' qcd_fail_%s_Bin%i%s'%(tag,im,options.suffix)
-            npT = 2
-            nRho = 2
+            flatPars=[]
+            npT = 3
+            nRho = 4
             for pT_i in range(npT+1):
                 for rho_i in range(nRho+1):
                     flatPars.append('p{0}r{1}'.format(pT_i,rho_i))
