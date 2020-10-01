@@ -57,3 +57,11 @@ python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/
 python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/fit_b --fit fit_b
 python validateMLFit.py -i  $IDIR/$ODIR/ --suffix 2016 --odir $IDIR/$ODIR/mlfit/fit_s --fit fit_s
 ```
+
+If one wants to check the Rpf from the MC fit:
+```
+text2workspace.py $IDIR$ODIR/card_rhalphabet_all_2016.txt
+python bernstein.py --icard $IDIR$ODIR/card_rhalphabet_all_2016.root --nr 4 --np 3
+```
+Of course, if you're working with another polynomial, changes the --nr and --np accordingly.
+
