@@ -461,8 +461,8 @@ if __name__ == '__main__':
 
     lParams = []
     lParams.append("qcdeff_2016")
-    pt_max  = 2
-    rho_max = 2
+    pt_max  = options.NP
+    rho_max = options.NR
     # for r2p1 polynomial
     print ("Will look for these parameters:")  
     for i_pt in range(0,pt_max+1):
