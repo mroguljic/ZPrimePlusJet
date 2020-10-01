@@ -14,7 +14,7 @@ IDIR=dak8/dak8_2016_0.2_0.9/
 Defines the input directory where the templates are stored in $IDIR/data and $IDIR/muonCR. Input directory should have the tagger in its name (dak8) and the year correcsponding to data. To perform the fit, first we need to do the MC fit and then the data fit.  
 
 
-MC fit
+MC fit:
 ```
 ODIR=TF43_MC_w2Fitv2/
 ```
@@ -29,7 +29,7 @@ The first command will print out the commands that will be executed and create $
 
 To do so, one can have a look at the $IDIR$ODIR/buildcard.out. The first parameter we're interested is the qcdeff_2016. Open the buildcard.out and search for the last instance of it. Below it, are the fitted values for other parameters - pXrY, where X and Y start from 0 and end with n_pT and n_rho (3,4 in our case). The values should be copied into buildRhalphabetZbb.py, in the "qcdTFpars_2016_dak8" dictionary, under "pars" key. qcdeff is the first parameter, followed by p0r0, p0r1,... Other values in the dictionary need to be updated as well: n_rho, n_pT and fitpath.  
 
-Running the data fit
+Data fit:
 ```
 ODIR=TF22_blind_qcdTF43uncV6_muonCRv7/
 ```
