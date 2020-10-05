@@ -275,6 +275,7 @@ class RhalphabetBuilder():
         rhoscaled = (rhopts - (-6)) / ((-2.1) - (-6))
         validbins = (rhoscaled >= 0) & (rhoscaled <= 1)
         validbins[:, 0] = False  # cut msd 40-47
+        validbins[:, 1] = False  # cut msd 47-54
         if self._blind:
             validbins[:, 10:13] = False  # blind
         rhoscaled[~validbins] = 1  # we will mask these out later

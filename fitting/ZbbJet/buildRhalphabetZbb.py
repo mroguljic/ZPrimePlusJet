@@ -17,7 +17,7 @@ from hist import *
 MASS_BINS = 23
 MASS_LO = 40       # mass range for RooVar
 MASS_HI = 201
-MASS_HIST_LO = 47   # mass range for histograms
+MASS_HIST_LO = 54   # mass range for histograms
 MASS_HIST_HI = 201
 BLIND_LO = 110
 BLIND_HI = 131
