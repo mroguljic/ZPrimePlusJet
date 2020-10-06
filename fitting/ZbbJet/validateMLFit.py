@@ -18,7 +18,7 @@ from tools import *
 
 msd_binBoundaries = []
 #for i in range(0, 24): msd_binBoundaries.append(40 + i * 7)
-for i in range(1, 24): msd_binBoundaries.append(40 + i * 7)
+for i in range(2, 24): msd_binBoundaries.append(40 + i * 7)
 pt_binBoundaries = [450, 500, 550, 600, 675, 800, 1200]
 #pt_binBoundaries = [450, 500, 550, 600, 1200]
 
