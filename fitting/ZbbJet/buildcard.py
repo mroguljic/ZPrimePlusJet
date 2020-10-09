@@ -117,6 +117,7 @@ def main(options,dryRun):
         makecard_base += " --ifile-loose %s "%iloose
     if pseudo:
         rhalph_base += " --pseudo "
+        makecard_base += " --pseudo "
     if options.exp:
         rhalph_base += " --exp "
     if pseudoPass:
@@ -151,9 +152,9 @@ def main(options,dryRun):
         makecard_base,
         combcards_base,
     ]
-    if not pseudo:
-        cmds.append(t2ws_rz)
-        cmds.append(t2ws_sf)
+    #if not pseudo:
+    cmds.append(t2ws_rz)
+    cmds.append(t2ws_sf)
     if muonCR:
         cmds.insert(2,makemuonCR_base)
         cmds.insert(2,makemuonCR_cp)

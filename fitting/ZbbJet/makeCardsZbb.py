@@ -55,8 +55,8 @@ def main(options,args):
         
     boxes = ['pass', 'fail']
     #Has to follow the ordering in template datacard
-    sigs = [] #'tthqq125','whqq125','hqq125','zhqq125','vbfhqq125']
-    histToCard = {'tthqq125':'ttH_hbb','whqq125':'WH_hbb','hqq125':'ggH_hbb','zhqq125':'ZH_hbb','vbfhqq125':'qqH_hbb','zqq':'zqq','wqq':'wqq','qcd':'qcd','tqq':'tqq'}
+    sigs = [] 
+    histToCard = {'zqq':'zqq','wqq':'wqq','qcd':'qcd','tqq':'tqq'}
     bkgs = ['zqq','wqq','qcd','tqq']
     systs = ['JER','JES','Pu']
 
@@ -100,7 +100,11 @@ def main(options,args):
                 print 'getting histogram for process: %s_%s_%sDown'%(proc,box,syst)
                 histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('%s_%s_%sDown'%(proc,box,syst))
 
-    dctpl = open("datacard.tpl")
+    if options.pseudo:
+        dctpl = open("datacard_nozunc.tpl")
+    else:
+        dctpl = open("datacard.tpl")
+
     linel = []
     for line in dctpl: 
         print line.strip().split()
@@ -143,9 +147,9 @@ def main(options,args):
                         rateJERDown = histoDict['%s_%s_JERDown'%(proc,box)].Integral(masshistbins[0], masshistbins[-1], i, i)
                         ratePuUp    = histoDict['%s_%s_PuUp'   %(proc,box)].Integral(masshistbins[0], masshistbins[-1], i, i)
                         ratePuDown  = histoDict['%s_%s_PuDown' %(proc,box)].Integral(masshistbins[0], masshistbins[-1], i, i)
-                        jesErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJESUp-rate)+abs(rateJESDown-rate))/(2.*rate)   
-                        jerErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJERUp-rate)+abs(rateJERDown-rate))/(2.*rate) 
-                        puErrs['%s_%s'%(proc,box)] =  1.0+(abs(ratePuUp-rate)+abs(ratePuDown-rate))/(2.*rate)
+                        jesErrs['%s_%s'%(proc,box)] =  min(1.0+(abs(rateJESUp-rate)+abs(rateJESDown-rate))/(2.*rate),1.1) # temp fix for norm
+                        jerErrs['%s_%s'%(proc,box)] =  min(1.0+(abs(rateJERUp-rate)+abs(rateJERDown-rate))/(2.*rate),1.1)
+                        puErrs['%s_%s'%(proc,box)] =  min(1.0+(abs(ratePuUp-rate)+abs(ratePuDown-rate))/(2.*rate),1.1)
                     else:
                         jesErrs['%s_%s'%(proc,box)] =  1.0
                         jerErrs['%s_%s'%(proc,box)] =  1.0
@@ -248,9 +252,8 @@ def main(options,args):
 
         jesString = 'CMS_scale_j%s lnN'%options.suffix
         jerString = 'CMS_res_j%s lnN'%options.suffix
-        puString = 'CMS_PU%s lnN'%options.suffix
         bbString = 'CMS_eff_bb%s lnN'%options.suffix
-        hqq125ptString = 'CMS_gghbb_ggHpt lnN'
+        puString = 'CMS_PU%s lnN'%options.suffix
         weffString = 'weff%s lnN'%options.suffix            ### this is not used ##
         vString = 'CMS_gghbb_veff%s lnN'%options.suffix
         ### Normal scale/scale pt
@@ -289,7 +292,12 @@ def main(options,args):
                     
         for box in boxes:
             for proc in sigs+bkgs:
-                if proc=='qcd' :
+                if proc=='qcd':
+                    jesString += ' -'
+                    jerString += ' -'
+                    puString += ' -'
+                    lumiString += ' -'
+                elif(proc=='zqq' and options.pseudo):
                     jesString += ' -'
                     jerString += ' -'
                     puString += ' -'
@@ -308,6 +316,11 @@ def main(options,args):
                         scaleptString += ' -'
                         #scalepassptString += ' -'
                         #scalefailptString += ' -'
+                elif(proc=='zqq' and options.pseudo):
+                    scaleString += ' -'
+                    smearString += ' -'
+                    if i > 1:
+                        scaleptString += ' -'
                 else:
                     scaleString += ' %.3f'%scaleErrs['%s_%s'%(proc,box)]
                     smearString += ' %.3f'%smearErrs['%s_%s'%(proc,box)]
@@ -330,14 +343,6 @@ def main(options,args):
                     bbString += ' -'
                 else:
                     bbString += ' %.3f'%bbErrs['%s_%s'%(proc,box)]
-                if proc in ['hqq125']:
-                    if not options.addHptShape:
-                        hqq125ptString += ' 1.20'
-                    else:
-                        hqq125ptString += ' 1.30'
-                else:
-                    hqq125ptString += ' -'
-
                 if proc in ['wqq']:
                     weffString += ' %.3f'%weffErrs['%s_%s'%(proc,box)]
                 else:
@@ -345,12 +350,15 @@ def main(options,args):
 
                 if proc in ['qcd','tqq']:
                     vString += ' -'
+                elif(proc=='zqq' and options.pseudo):
+                    vString += ' -'
                 else:
                     vString += ' %.3f'%vErrs['%s_%s'%(proc,box)]
                 #for j in range(1,numberOfMassBins+1):
                 for j in masshistbins:
                     for box1 in boxes:                    
-                        for proc1 in sigs+bkgs:                            
+                        for proc1 in sigs+bkgs:                           
+                            if(proc1=='zqq' and options.pseudo): continue 
                             if proc1==proc and box1==box and proc!='qcd' :
                                 mcStatStrings['%s_%s'%(proc1,box1),i,j] += '\t%.3f'% mcstatErrs['%s_%s'%(proc,box),i,j]
                             else:                        
@@ -381,8 +389,8 @@ def main(options,args):
                 newline = jerString
             elif 'CMS_PU' in l:
                 newline = puString
-            elif 'CMS_eff_bb' in l:
-                newline = bbString
+            #elif 'CMS_eff_bb' in l:
+            #    newline = bbString
             #elif 'weff' in l:
             #    newline = weffString
             #    pass
@@ -439,6 +447,8 @@ def main(options,args):
             dctmp.write(newline + "\n")
         for box in boxes:
             for proc in sigs+bkgs:
+                if(proc=='zqq' and options.pseudo): continue
+
                 if options.noMcStatShape and proc!='qcd' :
                     if (proc, 'cat%i'%i, box,histToCard[proc]) not in procsToRemove:
                         print 'include %s%scat%i%smcstat'%(proc,box,i,mcstatsuffix)
@@ -475,11 +485,16 @@ def main(options,args):
         for im in masshistbins:
             dctmp.write("qcd_fail_%s_Bin%i%s flatParam \n" % (tag,im,options.suffix))
             qcdGroupString += ' qcd_fail_%s_Bin%i%s'%(tag,im,options.suffix)
-            flatPars = ['p0r0','p0r1', 'p0r2', 'p1r0', 'p1r1', 'p1r2']
+            flatPars=[]
+            npT = 2
+            nRho = 2
+            for pT_i in range(npT+1):
+                for rho_i in range(nRho+1):
+                    flatPars.append('p{0}r{1}'.format(pT_i,rho_i))
         for flatPar in flatPars:
             dctmp.write('%s%s flatParam \n'%(flatPar,options.suffix))
         if options.addqcdCovMat:
-            qcdfit_deco = r.TFile.Open(options.odir+'qcdfit_decorrelated.root')
+            qcdfit_deco = r.TFile.Open(options.odir+'/qcdfit_decorrelated.root')
             ws          = qcdfit_deco.Get("qcdfit_deco_%s"%options.year)
             decoVars    = ws.allVars().selectByName("qcdfit_tf_%s_deco*"%options.year)
             decoVars.Print()
@@ -529,8 +544,8 @@ def main(options,args):
         removeProc(cardProc, tag, box)
 
     def Renamebase():
-        fin = r.TFile.Open(options.odir+'base.root')
-        fout = r.TFile(options.odir+'base_new.root','recreate')
+        fin = r.TFile.Open(options.odir+'/base.root')
+        fout = r.TFile(options.odir+'/base_new.root','recreate')
         boxes = ['pass', 'fail']
         for box in boxes:
             for i in range(1,numberOfPtBins+1):
@@ -545,8 +560,8 @@ def main(options,args):
                     getattr(wout, 'import')(h)
                 fout.cd()
                 wout.Write()
-        os.system('mv %sbase.root %sbase_old.root'%(options.odir,options.odir))
-        os.system('mv %sbase_new.root %sbase.root'%(options.odir,options.odir))
+        os.system('mv %s/base.root %s/base_old.root'%(options.odir,options.odir))
+        os.system('mv %s/base_new.root %s/base.root'%(options.odir,options.odir))
     Renamebase()
         
 ###############################################################
