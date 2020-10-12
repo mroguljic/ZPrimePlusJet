@@ -486,20 +486,14 @@ def main(options,args):
             dctmp.write("qcd_fail_%s_Bin%i%s flatParam \n" % (tag,im,options.suffix))
             qcdGroupString += ' qcd_fail_%s_Bin%i%s'%(tag,im,options.suffix)
             flatPars=[]
-<<<<<<< HEAD
+
             npT = 3
             nRho = 4
             for pT_i in range(npT+1):
                 for rho_i in range(nRho+1):
                     flatPars.append('p{0}r{1}'.format(pT_i,rho_i))
             #flatPars = ['p0r0','p0r1', 'p0r2', 'p1r0', 'p1r1', 'p1r2']
-=======
-            npT = 2
-            nRho = 2
-            for pT_i in range(npT+1):
-                for rho_i in range(nRho+1):
-                    flatPars.append('p{0}r{1}'.format(pT_i,rho_i))
->>>>>>> 37a45e1ff52ca44979c185ce94913f475440e22f
+
         for flatPar in flatPars:
             dctmp.write('%s%s flatParam \n'%(flatPar,options.suffix))
         if options.addqcdCovMat:
