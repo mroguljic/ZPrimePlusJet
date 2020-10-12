@@ -257,15 +257,15 @@ def ftest(base,alt,ntoys,iLabel,options):
     if not options.justPlot:
         baseName = base.split('/')[-1].replace('.root','')
         altName  = alt.split('/')[-1].replace('.root','')
-        exec_me('combine -M GoodnessOfFit %s  --rMax %s --rMin %s --algorithm saturated -n %s --freezeParameters %s --setParameters %s'% (base, options.rMax,options.rMin,baseName, options.freezeNuisances,options.setParameters),options.dryRun)
+        exec_me('combine -M GoodnessOfFit --expected-signal=1 %s  --rMax %s --rMin %s --algorithm saturated -n %s --freezeParameters %s --setParameters %s'% (base, options.rMax,options.rMin,baseName, options.freezeNuisances,options.setParameters),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.root %s/base1.root'%(baseName,options.odir),options.dryRun)
-        exec_me('combine -M GoodnessOfFit %s --rMax %s --rMin %s --algorithm saturated  -n %s --freezeParameters %s --setParameters %s' % (alt,options.rMax,options.rMin,altName, options.freezeNuisances,options.setParameters),options.dryRun)
+        exec_me('combine -M GoodnessOfFit --expected-signal=1 %s --rMax %s --rMin %s --algorithm saturated  -n %s --freezeParameters %s --setParameters %s' % (alt,options.rMax,options.rMin,altName, options.freezeNuisances,options.setParameters),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.root %s/base2.root'%(altName,options.odir),options.dryRun)
         exec_me('combine -M GenerateOnly %s --rMax %s --rMin %s --toysFrequentist -t %i  --saveToys -n %s --freezeParameters %s -s %s --setParameters %s' % (base,options.rMax,options.rMin,ntoys,baseName,options.freezeNuisances,options.seed,options.setParameters),options.dryRun)
         exec_me('cp higgsCombine%s.GenerateOnly.mH120.%s.root %s/'%(baseName,options.seed,options.odir))
-        exec_me('combine -M GoodnessOfFit %s --rMax %s --rMin %s -t %i --toysFile %s/higgsCombine%s.GenerateOnly.mH120.%s.root --algorithm saturated -n %s --freezeParameters %s -s %s --setParameters %s' % (base,options.rMax,options.rMin,ntoys,options.odir,baseName,options.seed,baseName, options.freezeNuisances,options.seed,options.setParameters),options.dryRun)
+        exec_me('combine -M GoodnessOfFit --expected-signal=1 %s --rMax %s --rMin %s -t %i --toysFile %s/higgsCombine%s.GenerateOnly.mH120.%s.root --algorithm saturated -n %s --freezeParameters %s -s %s --setParameters %s' % (base,options.rMax,options.rMin,ntoys,options.odir,baseName,options.seed,baseName, options.freezeNuisances,options.seed,options.setParameters),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.%s.root %s/toys1_%s.root'%(baseName,options.seed,options.odir,options.seed),options.dryRun)
-        exec_me('combine -M GoodnessOfFit %s --rMax %s --rMin %s -t %i --toysFile %s/higgsCombine%s.GenerateOnly.mH120.%s.root --algorithm saturated -n %s --freezeParameters %s -s %s --setParameters %s' % (alt,options.rMax,options.rMin,ntoys,options.odir,baseName,options.seed,altName, options.freezeNuisances,options.seed,options.setParameters),options.dryRun)
+        exec_me('combine -M GoodnessOfFit --expected-signal=1 %s --rMax %s --rMin %s -t %i --toysFile %s/higgsCombine%s.GenerateOnly.mH120.%s.root --algorithm saturated -n %s --freezeParameters %s -s %s --setParameters %s' % (alt,options.rMax,options.rMin,ntoys,options.odir,baseName,options.seed,altName, options.freezeNuisances,options.seed,options.setParameters),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.%s.root %s/toys2_%s.root'%(altName,options.seed,options.odir,options.seed),options.dryRun)
     if options.dryRun: sys.exit()
     nllBase=fStat("%s/base1.root"%options.odir,"%s/base2.root"%options.odir,options.p1,options.p2,options.n)
@@ -316,7 +316,7 @@ def ftest(base,alt,ntoys,iLabel,options):
 def goodness(base,ntoys,iLabel,options):
     if not options.justPlot:
         # --fixedSignalStrength %f  --freezeParameters tqqnormSF,tqqeffSF 
-        exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20  --setParameters %s --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs r'% (base,options.setParameters,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
+        exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20  --setParameters %s --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs SF_zqq'% (base,options.setParameters,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.root %s/goodbase_%s.root'%(base.split('/')[-1].replace('.root',''),options.odir,options.seed),options.dryRun)
         #exec_me('combine -M GenerateOnly %s --setParameterRange r=-20,20  --setParameters r_z=1 --toysFrequentist -t %i --redefineSignalPOIs r --saveToys -n %s --freezeParameters %s' % (base,ntoys,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
         #exec_me('cp higgsCombine%s.GenerateOnly.mH120.123456.root %s/'%(base.split('/')[-1].replace('.root',''),options.odir),options.dryRun)        
@@ -325,9 +325,9 @@ def goodness(base,ntoys,iLabel,options):
         ### ToysFreq recommended for saturated, https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/part3/commonstatsmethods/#goodness-of-fit-tests
         ### Default toys for other algos
         if options.algo =='saturated':
-             exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20  --setParameters %s -s %i -t %i --toysFrequentist --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs r'% (base,options.setParameters,options.seed,ntoys,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
+             exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20  --setParameters %s -s %i -t %i --toysFrequentist --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs SF_zqq'% (base,options.setParameters,options.seed,ntoys,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
         else:
-             exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20 --setParameters %s -s %i -t %i  --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs r'% (base,options.setParameters,options.seed,ntoys,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
+             exec_me('combine -M GoodnessOfFit %s  --setParameterRange r=-20,20 --setParameters %s -s %i -t %i  --algorithm %s -n %s --freezeParameters %s --redefineSignalPOIs SF_zqq'% (base,options.setParameters,options.seed,ntoys,options.algo,base.split('/')[-1].replace('.root',''),options.freezeNuisances),options.dryRun)
         exec_me('cp higgsCombine%s.GoodnessOfFit.mH120.%s.root %s/goodtoys_%s.root'%(base.split('/')[-1].replace('.root',''),options.seed,options.odir,options.seed),options.dryRun)        
     if options.dryRun: sys.exit()
     nllBase=goodnessVals('%s/goodbase_%s.root'%(options.odir,options.seed))
