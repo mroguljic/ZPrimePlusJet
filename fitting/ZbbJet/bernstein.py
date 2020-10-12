@@ -328,11 +328,11 @@ def drawOpt(f2,colz,MsdOrRho,ofname,orange=[]):
     f2.GetYaxis().SetTitle("p_{T} [GeV]")
     f2.GetZaxis().SetTitle("Pass-to-fail Ratio")
     f2.GetZaxis().SetTitleOffset(2)
-    f2.SetMaximum(1.0)
+    f2.SetMaximum(2.0)
     f2.SetMinimum(0.0)
-    if len(orange)>0:
-        f2.SetMaximum(orange[1])
-        f2.SetMinimum(orange[0])
+    # if len(orange)>0:
+    #     f2.SetMaximum(orange[1])
+    #     f2.SetMinimum(orange[0])
     f2.SetTitle("")
 
     #drawCMS()
@@ -354,8 +354,10 @@ def drawOpt(f2,colz,MsdOrRho,ofname,orange=[]):
 
     if colz:
         c1.SaveAs(ofname.replace(".pdf","_colz.pdf"))
+        c1.SaveAs(ofname.replace(".pdf","_colz.root"))
     else:
         c1.SaveAs(ofname)
+        c1.SaveAs(ofname.replace(".pdf",".root"))
 
 def drawBasisMaps(nrho,npT,odir,exp=False):
     boundaries={}
