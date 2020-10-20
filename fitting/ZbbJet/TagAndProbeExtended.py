@@ -29,7 +29,7 @@ class TagAndProbeExtended(PhysicsModel):
             print(cat)
             self.modelBuilder.doVar("SF_%s[1,0.,5]" % cat)
             pois.append('SF_%s' % cat)
-            self.modelBuilder.doVar("%s_norm[%d,%d,%d]"%(cat,1.0,0.5,2.0 ))
+            self.modelBuilder.doVar("%s_norm[%d,%d,%d]"%(cat,1.0,0.,10.0 ))
         
         self.modelBuilder.doSet("POI", ','.join(pois))
         exp_pass = {}
@@ -46,7 +46,7 @@ class TagAndProbeExtended(PhysicsModel):
 
         for cat in self._categories:
             self.modelBuilder.factory_('expr::fail_scale_{cat}("max(0.,({pass_exp}+{fail_exp}-({pass_exp}*@0))/{fail_exp})", SF_{cat})'.format(cat=cat, pass_exp=exp_pass[cat], fail_exp=exp_fail[cat]))
-            self.modelBuilder.out.var("{0}_norm".format(cat)).setVal(exp_pass['zqq']+exp_fail['zqq'])#/prefit_pass['zqq']+prefit_pass['zqq'] 
+            self.modelBuilder.out.var("{0}_norm".format(cat)).setVal(exp_pass[cat]+exp_fail[cat]) 
 
 
     def getYieldScale(self, bin, process):
