@@ -45,8 +45,8 @@ class TagAndProbeExtended(PhysicsModel):
                     exp_fail[cat] = self.DC.exp[b][p]
 
         for cat in self._categories:
-            self.modelBuilder.factory_('expr::fail_scale_{cat}("max(0.,({pass_exp}+{fail_exp}-({pass_exp}*@0))/{fail_exp})", SF_{cat})'.format(cat=cat, pass_exp=exp_pass[cat], fail_exp=exp_fail[cat]))
-            self.modelBuilder.out.var("{0}_norm".format(cat)).setVal(exp_pass[cat]+exp_fail[cat]) 
+            self.modelBuilder.out.var("{0}_norm".format(cat)).setVal(exp_pass[cat]+exp_fail[cat])
+            self.modelBuilder.factory_('expr::fail_scale_{cat}("max(0.,(@1-({pass_exp}*@0))/{fail_exp})", SF_{cat},{cat}_norm)'.format(cat=cat, pass_exp=exp_pass[cat], fail_exp=exp_fail[cat]))
 
 
     def getYieldScale(self, bin, process):
