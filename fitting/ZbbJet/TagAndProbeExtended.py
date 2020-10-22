@@ -25,13 +25,11 @@ class TagAndProbeExtended(PhysicsModel):
     def doParametersOfInterest(self):
         """Create POI and other parameters, and define the POI set."""
         pois = []
-        for cat in self._categories:#cat is zqq here
-            print(cat)
+        for cat in self._categories:
             self.modelBuilder.doVar("SF_%s[1,0.,5]" % cat)
             pois.append('SF_%s' % cat)
-            self.modelBuilder.doVar("%s_norm[%d,%d,%d]"%(cat,1.0,0.,10.0 ))
-        
         self.modelBuilder.doSet("POI", ','.join(pois))
+
         exp_pass = {}
         exp_fail = {}
         for b in self.DC.bins:
@@ -45,8 +43,7 @@ class TagAndProbeExtended(PhysicsModel):
                     exp_fail[cat] = self.DC.exp[b][p]
 
         for cat in self._categories:
-            self.modelBuilder.out.var("{0}_norm".format(cat)).setVal(exp_pass[cat]+exp_fail[cat])
-            self.modelBuilder.factory_('expr::fail_scale_{cat}("max(0.,(@1-({pass_exp}*@0))/{fail_exp})", SF_{cat},{cat}_norm)'.format(cat=cat, pass_exp=exp_pass[cat], fail_exp=exp_fail[cat]))
+            self.modelBuilder.factory_('expr::fail_scale_{cat}("max(0.,({pass_exp}+{fail_exp}-({pass_exp}*@0))/{fail_exp})", SF_{cat})'.format(cat=cat, pass_exp=exp_pass[cat], fail_exp=exp_fail[cat]))
 
 
     def getYieldScale(self, bin, process):
